@@ -22,6 +22,7 @@ figures
 *.out
 *.blg
 *.tex
+!preamble.tex
 !after_body.tex
 *.log
 Rplots.pdf
