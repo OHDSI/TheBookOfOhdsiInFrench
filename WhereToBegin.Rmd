@@ -32,6 +32,7 @@ Pour commencer à poster vos propres sujets, vous devrez vous inscrire pour un c
 
 ```{block2, type='rmdimportant'}
 Vous pouvez sélectionner des sujets à "suivre". Cela signifie que chaque fois qu'un nouveau post est ajouté dans un sujet que vous suivez, vous recevrez un e-mail et pourrez répondre directement au post via votre e-mail. Suivez le fil général pour recevoir des détails sur les prochains ordres du jour des réunions, les opportunités de collaboration et recevez le digest hebdomadaire OHDSI directement dans votre boîte de réception!
+
 ```
 
 ### Événements OHDSI
@@ -108,4 +109,5 @@ De nombreux collaborateurs OHDSI sont intéressés par la conversion de leurs do
 ```{block2, type='rmdsummary'}
 - Démarrer dans la communauté OHDSI est aussi simple que de dire bonjour ! Postez sur le **forum OHDSI** et rejoignez un appel communautaire.
 - Postez vos questions de recherche ou ETL sur le forum OHDSI.
+
 ```

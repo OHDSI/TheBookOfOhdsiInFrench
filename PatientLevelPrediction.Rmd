@@ -214,6 +214,7 @@ Nous pouvons évaluer un modèle de prédiction en mesurant l'accord entre la pr
 
 ```{block2, type='rmdimportant'}
 Pour l'évaluation, nous devons utiliser un ensemble de données différent de celui utilisé pour développer le modèle, sinon nous risquons de favoriser les modèles qui sont surajustés (voir Section \@ref(modelFitting)) et peuvent mal fonctionner pour de nouveaux patients.
+
 ```
 
 Nous distinguons entre
@@ -824,6 +825,7 @@ La table en Figure \@ref(fig:shinyModelTable) affiche le nom, la valeur (coeffic
 
 ```{block2, type='rmdimportant'}
 Les modèles prédictifs ne sont pas des modèles causaux, et les prédicteurs ne doivent pas être confondus avec les causes. Il n'y a aucune garantie que la modification de l'une des variables de la Figure \@ref(fig:shinyModelTable) aura un effet sur le risque de l'issue.
+
 ```
 ## Fonctionnalités Additionnelles de Prédiction au Niveau du Patient
 
@@ -862,6 +864,7 @@ Pour plus de détails, consultez la page d'aide de la fonction.
 - La diffusion du modèle et de ses mesures de performance est mise en œuvre à travers des tableaux de bord interactifs.
 
 - Le cadre de prédiction de l'OHDSI permet une validation externe à grande échelle des modèles de prédiction, ce qui est une condition préalable à l'adoption clinique.
+
 
 ```
 

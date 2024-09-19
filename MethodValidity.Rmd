@@ -321,4 +321,5 @@ Notre évaluation des conceptions dans la bibliothèque des méthodes montre ég
 
 - Les diagnostics d'étude peuvent être utilisés pour guider les choix de conception analytique et adapter le protocole, tant que le chercheur reste aveugle à l'effet d'intérêt pour éviter le p-hacking.
 
+
 ```

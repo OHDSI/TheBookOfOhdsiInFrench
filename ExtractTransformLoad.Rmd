@@ -5,7 +5,7 @@
 
 ## Introduction
 
-Pour convertir les données natives/brutes au Modèle de Données Commun OMOP (CDM), nous devons créer un processus d'extraction, transformation et chargement (ETL). Ce processus doit restructurer les données selon le CDM, ajouter des correspondances aux Vocabularies Standardisés, et il est généralement implémenté sous forme de scripts automatisés, par exemple des scripts SQL. Il est important que ce processus ETL soit répétable, afin qu'il puisse être relancé à chaque fois que les données sources sont actualisées. \index{ETL|voir {extraction, transformation et chargement (ETL)}} \index{données brutes} \index{données natives|voir {données brutes}} \index{données sources|voir{données brutes}}
+Pour convertir les données natives/brutes au Modèle de Données Commun OMOP (CDM), nous devons créer un processus d'extraction, transformation et chargement (ETL). Ce processus doit restructurer les données selon le CDM, ajouter des correspondances aux Vocabularies Standardisés, et il est généralement implémenté sous forme de scripts automatisés, par exemple des scripts SQL. Il est important que ce processus ETL soit répétable, afin qu'il puisse être relancé à chaque fois que les données sources sont actualisées. \index{ETL|see {extraction, transformation et chargement (ETL)}} \index{données brutes} \index{données natives|see {données brutes}} \index{données sources|see{données brutes}}
 
 La création d'un ETL est généralement une entreprise de grande envergure. Au fil des années, nous avons développé des meilleures pratiques, consistant en quatre étapes principales :
 
@@ -23,7 +23,7 @@ Deux outils étroitement intégrés ont été développés pour soutenir le proc
 
 ### White Rabbit
 
-Pour initier un processus ETL sur une base de données, vous devez comprendre vos données, y compris les tables, les champs et le contenu. C'est là que l'outil [White Rabbit](https://github.com/OHDSI/WhiteRabbit) entre en jeu. White Rabbit est un logiciel destiné à aider à préparer les ETL des bases de données longitudinales de soins de santé pour les transformer en [OMOP CDM](https://github.com/OHDSI/CommonDataModel). White Rabbit scanne vos données et crée un rapport contenant toutes les informations nécessaires pour commencer à concevoir l'ETL. Tout le code source et les instructions d'installation, ainsi qu'un lien vers le manuel, sont disponibles sur GitHub.[^whiteRabbitGithubUrl] \index{White Rabbit} \index{profilage de données|voir {White Rabbit}}
+Pour initier un processus ETL sur une base de données, vous devez comprendre vos données, y compris les tables, les champs et le contenu. C'est là que l'outil [White Rabbit](https://github.com/OHDSI/WhiteRabbit) entre en jeu. White Rabbit est un logiciel destiné à aider à préparer les ETL des bases de données longitudinales de soins de santé pour les transformer en [OMOP CDM](https://github.com/OHDSI/CommonDataModel). White Rabbit scanne vos données et crée un rapport contenant toutes les informations nécessaires pour commencer à concevoir l'ETL. Tout le code source et les instructions d'installation, ainsi qu'un lien vers le manuel, sont disponibles sur GitHub.[^whiteRabbitGithubUrl] \index{White Rabbit} \index{profilage de données|see {White Rabbit}}
 
 [^whiteRabbitGithubUrl]: https://github.com/OHDSI/WhiteRabbit.
 
@@ -86,7 +86,7 @@ Le rapport est puissant pour comprendre vos données sources en mettant en évid
 
 ### Rabbit-In-a-Hat
 
-Avec le scan de White Rabbit en main, nous avons une image claire des données sources. Nous connaissons également la spécification complète du CDM. Maintenant, nous devons définir la logique pour passer de l'un à l'autre. Cette activité de conception nécessite une connaissance approfondie à la fois des données sources et du CDM. Les outils Rabbit-in-a-Hat qui accompagnent le logiciel White Rabbit sont spécialement conçus pour soutenir une équipe d'experts dans ces domaines. Dans un cadre typique, l'équipe de conception de l'ETL se réunit dans une salle, tandis que Rabbit-in-a-Hat est projeté sur un écran. Lors d'un premier tour, les mappages tables-à-tables peuvent être décidés collaborativement, après quoi les mappages de champ-à-champ peuvent être conçus, tout en définissant la logique par laquelle les valeurs seront transformées. \index{Rabbit-In-A-Hat} \index{conception d'ETL|voir {Rabbit-In-A-Hat}}
+Avec le scan de White Rabbit en main, nous avons une image claire des données sources. Nous connaissons également la spécification complète du CDM. Maintenant, nous devons définir la logique pour passer de l'un à l'autre. Cette activité de conception nécessite une connaissance approfondie à la fois des données sources et du CDM. Les outils Rabbit-in-a-Hat qui accompagnent le logiciel White Rabbit sont spécialement conçus pour soutenir une équipe d'experts dans ces domaines. Dans un cadre typique, l'équipe de conception de l'ETL se réunit dans une salle, tandis que Rabbit-in-a-Hat est projeté sur un écran. Lors d'un premier tour, les mappages tables-à-tables peuvent être décidés collaborativement, après quoi les mappages de champ-à-champ peuvent être conçus, tout en définissant la logique par laquelle les valeurs seront transformées. \index{Rabbit-In-A-Hat} \index{conception d'ETL|see {Rabbit-In-A-Hat}}
 
 #### Portée et objectif {-}
 
@@ -179,7 +179,7 @@ Malheureusement, parfois, les données source utilisent des systèmes de codage 
 
 ### Usagi
 
-Usagi est un outil pour aider au processus manuel de création d'un mapping de codes. Il peut faire des suggestions de mappings basées sur la similarité textuelle des descriptions de codes. Si les codes source ne sont disponibles que dans une langue étrangère, nous avons constaté que Google Translate[^GoogleTranslateUrl] fournit souvent une traduction étonnamment bonne des termes en anglais. Usagi permet à l'utilisateur de rechercher les concepts cibles appropriés si la suggestion automatisée n'est pas correcte. Enfin, l'utilisateur peut indiquer quels mappings sont approuvés pour être utilisés dans l'ETL. Usagi est disponible sur GitHub.[^UsagiUrl] \index{Usagi} \index{cartographie de code source|voir {Usagi}}
+Usagi est un outil pour aider au processus manuel de création d'un mapping de codes. Il peut faire des suggestions de mappings basées sur la similarité textuelle des descriptions de codes. Si les codes source ne sont disponibles que dans une langue étrangère, nous avons constaté que Google Translate[^GoogleTranslateUrl] fournit souvent une traduction étonnamment bonne des termes en anglais. Usagi permet à l'utilisateur de rechercher les concepts cibles appropriés si la suggestion automatisée n'est pas correcte. Enfin, l'utilisateur peut indiquer quels mappings sont approuvés pour être utilisés dans l'ETL. Usagi est disponible sur GitHub.[^UsagiUrl] \index{Usagi} \index{cartographie de code source|see {Usagi}}
 
 [^GoogleTranslateUrl]: https://translate.google.com/
 [^UsagiUrl]: https://github.com/OHDSI/Usagi
@@ -377,6 +377,7 @@ Le processus ETL est difficile pour de nombreuses raisons, dont la moindre n'est
 - Des outils ont été développés par la communauté OHDSI pour faciliter ces étapes et sont disponibles gratuitement
 
 - Il existe de nombreux exemples d'ETL et des conventions acceptées que vous pouvez utiliser comme guide
+
 
 ```
 

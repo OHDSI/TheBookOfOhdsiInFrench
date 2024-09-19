@@ -168,6 +168,7 @@ Ci-dessous, nous décrivons comment installer chacun de ces éléments dans un e
 
 ```{block2, type='rmdimportant'}
 Sous Windows, R et Java existent en versions 32 bits et 64 bits. Si vous installez R dans les deux architectures, vous **devez** également installer Java dans les deux architectures. Il est recommandé de n'installer que la version 64 bits de R.
+
 ```
 
 #### Installer R {-}
@@ -287,5 +288,6 @@ knitr::include_graphics("images/OhdsiAnalyticsTools/OHDSIonAWSDiagram.png")
     - Les packages R de la Méthode Bibliothèque OHDSI
 
 - Plusieurs stratégies existent pour faciliter le déploiement des outils OHDSI.
+
 
 ```

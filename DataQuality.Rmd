@@ -80,6 +80,7 @@ Dans l'outil, les vérifications sont organisées de plusieurs manières, l'une 
 
 ```{block2, type='rmdimportant'}
 ACHILLES et DQD sont exécutés contre les données dans le CDM. Les problèmes de qualité des données identifiés de cette manière peuvent être dus à la conversion au CDM, mais peuvent également refléter des problèmes de qualité des données déjà présents dans les données sources. Si la conversion est en cause, il est généralement sous notre contrôle de remédier au problème, mais si les données sous-jacentes sont en cause, la seule solution peut être de supprimer les enregistrements problématiques.
+
 ```
 
 ### Tests unitaires ETL {#etlUnitTests}
@@ -304,6 +305,7 @@ Le seul orphelin potentiel trouvé qui est effectivement utilisé dans les donn�
 - Certains aspects de la qualité des données peuvent être évalués automatiquement grâce à de grands ensembles de règles prédéfinies, par exemple celles du Tableau de Bord de Qualité des Données.
 
 - D'autres outils existent pour évaluer la cartographie des codes pertinents pour une étude particulière.
+
 
 ```
 

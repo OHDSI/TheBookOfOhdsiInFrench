@@ -100,4 +100,5 @@ Puisque OHDSI est une communauté visant à favoriser la collaboration pour gén
 - Notre vision est un monde dans lequel la recherche observationnelle produit une compréhension globale de la santé et des maladies, ce qui sera atteint par nos objectifs d’innovation, de reproductibilité, de communauté, de collaboration, d’ouverture et de bienfaisance.
 
 - Les collaborateurs de l'OHDSI sont concentrés sur les normes de données de la communauté ouverte, la recherche méthodologique, le développement d'analyses open-source, et les applications cliniques pour améliorer le parcours allant des données aux preuves.
+
 ```

@@ -313,6 +313,7 @@ De nombreux vocabulaires contiennent des codes concernant l'absence d'informatio
 - Les concepts au sein d'un domaine sont organisés en hiérarchies. La qualité de la hiérarchie diffère entre les domaines, et l'achèvement du système hiérarchique est une tâche en cours.
 - Vous êtes vivement encouragé à contacter la communauté si vous pensez avoir trouvé une erreur ou une inexactitude.
 
+
 ```
 
 ## Exercices

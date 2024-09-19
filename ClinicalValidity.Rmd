@@ -242,4 +242,5 @@ Bien qu'une cohorte puisse être bien définie et pleinement évaluée dans le c
 - L'adjudication clinique par vérification des dossiers sources et PheValuator représentent deux approches alternatives pour estimer la validation de la définition de la cohorte.
 - Les études du réseau OHDSI fournissent un mécanisme pour examiner l'hétérogénéité des sources de données et étendre la généralisabilité des résultats pour améliorer la validité clinique des preuves du monde réel.
 
+
 ```

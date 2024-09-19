@@ -71,4 +71,5 @@ Un aspect important de la qualité des preuves est la capacité d'exprimer l'inc
 
 - Lors de la communication des preuves, nous devons exprimer l'incertitude découlant des différents défis liés à la qualité des preuves.
 
+
 ```

@@ -81,6 +81,7 @@ La licence des données est un sujet compliqué, surtout entre juridictions, et 
 
 - Elle plaide également pour un changement de paradigme allant d'une recherche médicale monétude et mono-estimation à une génération de preuves systématiques à grande échelle, où des faits tels que l'occurrence de base sont connus et où les preuves se concentrent sur l'estimation statistique des effets des interventions et des traitements à partir de sources de soins de santé du monde réel.
 
+
 ```
 
 [^1]: https://www.ohdsi.org/wp-content/uploads/2014/07/ARM-OHDSI_Duke.pdf

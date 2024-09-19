@@ -9,7 +9,7 @@ require(DatabaseConnector)
 
 Le Common Data Model (CDM) est un modèle de base de données relationnelle (toutes les données sont représentées sous forme d'enregistrements dans des tables qui ont des champs), ce qui signifie que les données seront normalement stockées dans une base de données relationnelle utilisant une plateforme logicielle comme PostgreSQL, Oracle ou Microsoft SQL Server. Les divers outils OHDSI tels que ATLAS et la Methods Library fonctionnent en interrogeant la base de données en coulisse, mais nous pouvons également interroger directement la base de données nous-mêmes si nous disposons des droits d'accès appropriés. La principale raison de le faire est d'effectuer des analyses qui ne sont actuellement pas supportées par des outils existants. Cependant, interroger directement la base de données comporte également un risque accru de faire des erreurs, car les outils OHDSI sont souvent conçus pour aider à guider l'utilisateur vers une analyse appropriée des données. Les requêtes directes ne fournissent pas une telle guidance.
 
-Le langage standard pour interroger les bases de données relationnelles est le SQL (Structured Query Language), qui peut être utilisé à la fois pour interroger la base de données ainsi que pour apporter des modifications aux données. Bien que les commandes de base en SQL soient en effet standard, c'est-à-dire les mêmes sur toutes les plateformes logicielles, chaque plateforme a son propre dialecte, avec des différences subtiles. Par exemple, pour récupérer les 10 premières lignes de la table PERSON sur SQL Server, on écrirait : \index{SQL} \index{structured query language|voir {SQL}}
+Le langage standard pour interroger les bases de données relationnelles est le SQL (Structured Query Language), qui peut être utilisé à la fois pour interroger la base de données ainsi que pour apporter des modifications aux données. Bien que les commandes de base en SQL soient en effet standard, c'est-à-dire les mêmes sur toutes les plateformes logicielles, chaque plateforme a son propre dialecte, avec des différences subtiles. Par exemple, pour récupérer les 10 premières lignes de la table PERSON sur SQL Server, on écrirait : \index{SQL} \index{structured query language|see {SQL}}
 
 ```{sql,eval=FALSE}
 SELECT TOP 10 * FROM person;
@@ -21,13 +21,13 @@ Tandis que la même requête sur PostgreSQL serait :
 SELECT * FROM person LIMIT 10;
 ```
 
-Dans OHDSI, nous aimerions être agnostiques vis-à-vis du dialecte spécifique qu'une plateforme utilise ; nous aimerions 'parler' le même langage SQL sur toutes les bases de données OHDSI. Pour cette raison, OHDSI a développé le package [SqlRender](https://ohdsi.github.io/SqlRender/), un package R qui peut traduire d'un dialecte standard vers n'importe lequel des dialectes supportés qui seront discutés plus tard dans ce chapitre. Ce dialecte standard - **OHDSI SQL** - est principalement un sous-ensemble du dialecte SQL Server SQL. Les exemples de déclarations SQL fournis tout au long de ce chapitre utiliseront tous l'OHDSI SQL. \index{SqlRender} \index{agnostic SQL|voir {SqlRender}} \index{Standard SQL Dialect|voir {SqlRender}} \index{OHDSI SQL|voir {SqlRender}}
+Dans OHDSI, nous aimerions être agnostiques vis-à-vis du dialecte spécifique qu'une plateforme utilise ; nous aimerions 'parler' le même langage SQL sur toutes les bases de données OHDSI. Pour cette raison, OHDSI a développé le package [SqlRender](https://ohdsi.github.io/SqlRender/), un package R qui peut traduire d'un dialecte standard vers n'importe lequel des dialectes supportés qui seront discutés plus tard dans ce chapitre. Ce dialecte standard - **OHDSI SQL** - est principalement un sous-ensemble du dialecte SQL Server SQL. Les exemples de déclarations SQL fournis tout au long de ce chapitre utiliseront tous l'OHDSI SQL. \index{SqlRender} \index{agnostic SQL|see {SqlRender}} \index{Standard SQL Dialect|see {SqlRender}} \index{OHDSI SQL|see {SqlRender}}
 
 Chaque plateforme de base de données dispose également de ses propres outils logiciels pour interroger la base de données en utilisant SQL. Dans OHDSI, nous avons développé le package [DatabaseConnector](https://ohdsi.github.io/DatabaseConnector/), un package R qui peut se connecter à de nombreuses plateformes de base de données. DatabaseConnector sera également discuté plus tard dans ce chapitre. \index{DatabaseConnector}
 
 Ainsi, bien que l'on puisse interroger une base de données conforme au CDM sans utiliser d'outils OHDSI, le chemin recommandé est d'utiliser les packages DatabaseConnector et SqlRender. Cela permet aux requêtes développées sur un site d'être utilisées sur n'importe quel autre site sans modification. R lui-même offre également immédiatement des fonctionnalités pour analyser davantage les données extraites de la base de données, telles que la réalisation d'analyses statistiques et la génération de graphiques (interactifs). \index{R}
 
-Dans ce chapitre, nous supposons que le lecteur a une compréhension de base de SQL. Nous passons d'abord en revue comment utiliser SqlRender et DatabaseConnector. Si le lecteur n'a pas l'intention d'utiliser ces packages, ces sections peuvent être omises. Dans la Section \@ref(QueryTheCdm), nous discutons de la manière d'utiliser SQL (dans ce cas OHDSI SQL) pour interroger le CDM. La section suivante met en lumière comment utiliser le Vocabulaire Standardisé OHDSI lors de l'interrogation du CDM. Nous mettons en avant la QueryLibrary, une collection de requêtes couramment utilisées contre le CDM qui est publiquement disponible. Nous clôturons ce chapitre avec une étude exemple estimant les taux d'incidence, et implémentons cette étude en utilisant SqlRender et DatabaseConnector. \index{Query Library} \index{SQL Query Library|voir {Query Library}}
+Dans ce chapitre, nous supposons que le lecteur a une compréhension de base de SQL. Nous passons d'abord en revue comment utiliser SqlRender et DatabaseConnector. Si le lecteur n'a pas l'intention d'utiliser ces packages, ces sections peuvent être omises. Dans la Section \@ref(QueryTheCdm), nous discutons de la manière d'utiliser SQL (dans ce cas OHDSI SQL) pour interroger le CDM. La section suivante met en lumière comment utiliser le Vocabulaire Standardisé OHDSI lors de l'interrogation du CDM. Nous mettons en avant la QueryLibrary, une collection de requêtes couramment utilisées contre le CDM qui est publiquement disponible. Nous clôturons ce chapitre avec une étude exemple estimant les taux d'incidence, et implémentons cette étude en utilisant SqlRender et DatabaseConnector. \index{Query Library} \index{SQL Query Library|see {Query Library}}
 
 ## SqlRender {#SqlRender}
 
@@ -104,6 +104,7 @@ Le paramètre `targetDialect` peut avoir les valeurs suivantes : "oracle", "post
 
 ```{block2, type='rmdimportant'}
 Il existe des limites quant à ce que les fonctions et constructions SQL peuvent être traduites correctement, à la fois parce qu'un ensemble limité de règles de traduction ont été implémentées dans le package, mais aussi parce que certaines fonctionnalités SQL n'ont pas d'équivalent dans tous les dialectes. Ceci est la raison principale pour laquelle le SQL OHDSI a été développé en tant que nouveau dialecte SQL à part entière. Cependant, chaque fois que possible, nous avons gardé la syntaxe SQL Server pour éviter de réinventer la roue.
+
 ```
 
 Malgré nos meilleurs efforts, il y a beaucoup de considérations à prendre en compte lors de l'écriture de SQL OHDSI qui s'exécutera sans erreur sur toutes les plateformes prises en charge. Ce qui suit discute de ces considérations en détail.
@@ -868,6 +869,7 @@ Notez que, à des fins de démonstration, nous avons choisi de créer nos cohort
 - En utilisant R et SQL ensemble, nous pouvons mettre en œuvre des analyses personnalisées qui ne sont pas prises en charge par les outils OHDSI.
 
 - La **QueryLibrary** fournit une collection de requêtes SQL réutilisables pour le CDM.
+
 
 ```
 ## Exercices

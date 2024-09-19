@@ -92,3 +92,43 @@ for (i in 1:length(rmdFiles)) {
   translation <- paste(translation, sep = "\n")
   writeLines(translation, rmdFile)
 }
+
+
+# Fix summary blocks -------------------------------------------------------------------------------
+# The summary and important blocks require an empty line at the end or the PDF won't build.
+add_empty_line_before_final_backticks <- function(fileName) {
+  lines <- readLines(fileName)
+  inBlock <- FALSE
+  i <- 1
+  while (i <= length(lines)) {
+    if (grepl("^```\\{block2, type='.*'\\}", lines[i])) {
+      inBlock <- TRUE
+    }
+    if (inBlock && grepl("^```$", lines[i])) {
+      lines <- append(lines, "", after = i - 1)
+      inBlock <- FALSE
+      i <- i + 1
+    }
+    i <- i + 1
+  }
+  writeLines(lines, fileName)
+}
+
+rmdFiles <- list.files(pattern = "*.Rmd")
+for (rmdFile in rmdFiles) {
+  writeLines(sprintf("Fixing %s", rmdFile))
+  add_empty_line_before_final_backticks(rmdFile)
+}
+
+# Fix |see link for back of the book index ----------------------------------------------
+fixSeeLink <- function(fileName) {
+  lines <- paste(readLines(fileName), collapse = "\n")
+  lines <- gsub("\\|voir", "|see", lines)
+  writeLines(lines, fileName)
+}
+
+rmdFiles <- list.files(pattern = "*.Rmd")
+for (rmdFile in rmdFiles) {
+  writeLines(sprintf("Fixing %s", rmdFile))
+  fixSeeLink(rmdFile)
+}

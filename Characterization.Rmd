@@ -11,7 +11,7 @@ Les bases de données observationnelles sur les soins de santé fournissent une 
 
 À l'exception de la caractérisation au niveau de la base de données, ces méthodes visent à décrire une population par rapport à un événement désigné sous le nom de date d'index. Cette population d'intérêt est définie comme une cohorte, comme décrit au chapitre \@ref(Cohorts). La cohorte définit la date d'index pour chaque personne de la population d'intérêt. En utilisant la date d'index comme point d'ancrage, nous définissons le temps précédant la date d'index comme le temps de **base**. La date d'index et tout le temps après est appelé le temps **post-index**.
 
-Les cas d'utilisation de la caractérisation incluent l'histoire naturelle des maladies, l'utilisation des traitements et l'amélioration de la qualité. Dans ce chapitre, nous décrirons les méthodes de caractérisation. Nous utiliserons une population de personnes hypertendues pour démontrer comment utiliser ATLAS et R pour effectuer ces tâches de caractérisation.\index{caractérisation} \index{caractérisation de cohorte|voir {caractérisation!cohorte}} \index{temps de base} \index{temps post-index} \index{date d'index} \index{histoire naturelle des maladies|voir {caractérisation}} \index{utilisation des traitements|voir {caractérisation}} \index{amélioration de la qualité|voir {caractérisation}}
+Les cas d'utilisation de la caractérisation incluent l'histoire naturelle des maladies, l'utilisation des traitements et l'amélioration de la qualité. Dans ce chapitre, nous décrirons les méthodes de caractérisation. Nous utiliserons une population de personnes hypertendues pour démontrer comment utiliser ATLAS et R pour effectuer ces tâches de caractérisation.\index{caractérisation} \index{caractérisation de cohorte|see {caractérisation!cohorte}} \index{temps de base} \index{temps post-index} \index{date d'index} \index{histoire naturelle des maladies|see {caractérisation}} \index{utilisation des traitements|see {caractérisation}} \index{amélioration de la qualité|see {caractérisation}}
 
 
 ## Caractérisation au Niveau de la Base de Données
@@ -30,12 +30,12 @@ Ces statistiques descriptives au niveau de la base de données aident également
 
 La caractérisation de la cohorte décrit les caractéristiques de base et post-index des personnes dans une cohorte. OHDSI aborde la caractérisation par le biais de statistiques descriptives de toutes les conditions, expositions aux médicaments et dispositifs, procédures et d'autres observations cliniques présentes dans l'historique de la personne. Nous résumons également les socio-démographiques des membres de la cohorte à la date d'index. Cette approche fournit un résumé complet de la cohorte d'intérêt. Il est important de noter que cela permet une exploration complète de la cohorte en vue de la variation des données, tout en permettant également l'identification de valeurs potentiellement manquantes.
 
-Les méthodes de caractérisation des cohortes peuvent être utilisées pour les études d'utilisation de médicaments (DUS) au niveau de la personne pour estimer la prévalence des indications et des contre-indications parmi les utilisateurs d'un traitement donné. La diffusion de cette caractérisation de cohorte est une pratique recommandée pour les études observationnelles, comme détaillé dans les directives STROBE (Strengthening the Reporting of Observational Studies in Epidemiology). [@VONELM2008344] \index{caractérisation!cohorte} \index{statistiques descriptives|voir {caractérisation}} \index{utilisation des médicaments}
+Les méthodes de caractérisation des cohortes peuvent être utilisées pour les études d'utilisation de médicaments (DUS) au niveau de la personne pour estimer la prévalence des indications et des contre-indications parmi les utilisateurs d'un traitement donné. La diffusion de cette caractérisation de cohorte est une pratique recommandée pour les études observationnelles, comme détaillé dans les directives STROBE (Strengthening the Reporting of Observational Studies in Epidemiology). [@VONELM2008344] \index{caractérisation!cohorte} \index{statistiques descriptives|see {caractérisation}} \index{utilisation des médicaments}
 
 
 ## Chemins de Traitement
 
-Une autre méthode pour caractériser une population est de décrire la séquence de traitement pendant la période post-index. Par exemple, @Hripcsak7329 a utilisé les standards de données communs d'OHDSI pour créer des statistiques descriptives afin de caractériser les chemins de traitement pour le diabète de type 2, l'hypertension et la dépression. En standardisant cette approche analytique, Hripcsak et ses collègues ont pu exécuter la même analyse à travers le réseau OHDSI pour décrire les caractéristiques de ces populations d'intérêt. \index{caractérisation!chemins de traitement} \index{chemins de traitement|voir {caractérisation!chemins de traitement}} \index{chemins de cohorte|voir {caractérisation!chemins de traitement}}
+Une autre méthode pour caractériser une population est de décrire la séquence de traitement pendant la période post-index. Par exemple, @Hripcsak7329 a utilisé les standards de données communs d'OHDSI pour créer des statistiques descriptives afin de caractériser les chemins de traitement pour le diabète de type 2, l'hypertension et la dépression. En standardisant cette approche analytique, Hripcsak et ses collègues ont pu exécuter la même analyse à travers le réseau OHDSI pour décrire les caractéristiques de ces populations d'intérêt. \index{caractérisation!chemins de traitement} \index{chemins de traitement|see {caractérisation!chemins de traitement}} \index{chemins de cohorte|see {caractérisation!chemins de traitement}}
 
 L'analyse des chemins vise à résumer les traitements (événements) reçus par des personnes diagnostiquées avec une condition spécifique depuis la première prescription/délivrance de médicament. Dans cette étude, les traitements ont été décrits après le diagnostic de diabète de type 2, d'hypertension et de dépression respectivement. Les événements pour chaque personne ont ensuite été agrégés en un ensemble de statistiques sommaires et visualisés pour chaque condition et pour chaque base de données.
 
@@ -148,6 +148,7 @@ knitr::include_graphics("images/Characterization/atlasCharacterizationSubgroup.p
 
 ```{block2, type='rmdimportant'}
 Les analyses de sous-groupes dans ATLAS ne sont pas les mêmes que les strates. Les strates sont mutuellement exclusives tandis que les sous-groupes peuvent inclure les mêmes personnes en fonction des critères choisis.
+
 ```
 
 ### Exécutions
@@ -294,6 +295,7 @@ settings <- createCovariateSettings(useConditionEraLongTerm = TRUE,
 
 ```{block2, type='rmdimportant'}
 L'utilisation de `aggregated = TRUE` pour tous les exemples ci-dessus indique à FeatureExtraction de fournir des statistiques sommaires. Exclure ce drapeau calculera les covariables pour chaque personne dans la cohorte.
+
 ```
 
 ### Création de Covariables Agrégées
@@ -466,6 +468,7 @@ Comme montré, les métriques calculées sont les mêmes mais l'interprétation 
 - Le module de caractérisation d'ATLAS et la bibliothèque de méthodes d'OHDSI permettent de calculer les caractéristiques de baseline pour plusieurs fenêtres temporelles.
 
 - Les modules de parcours et de taux d'incidence d'ATLAS offrent des statistiques descriptives pendant la période post-index.
+
 
 ```
 

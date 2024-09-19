@@ -16,6 +16,7 @@ Dans les recherches OHDSI, nous définissons une cohorte comme un ensemble de pe
 ```{block2, type='rmdimportant'}
 Une cohorte est un ensemble de personnes qui satisfont un ou plusieurs critères d'inclusion pendant une durée de temps.
 
+
 ```
 
 \index{cohorte} \index{définition de cohorte}
@@ -70,6 +71,7 @@ Lors de la création d'une définition de cohorte, vous devez vous poser les que
 
 ```{block2, type='rmdimportant'}
 Dans les outils OHDSI, il n'y a pas de distinction entre les critères d'inclusion et d'exclusion. Tous les critères sont formulés comme des critères d'inclusion. Par exemple, le critère d'exclusion « Exclure les personnes ayant une hypertension antérieure » peut être formulé comme le critère d'inclusion « Inclure les personnes ayant 0 occurrences d'hypertension antérieure ».
+
 ```
 
 ## Ensembles de Concepts {#conceptSets}
@@ -143,6 +145,7 @@ Avant de faire autre chose, il est recommandé de changer le nom de la cohorte d
 
 ```{block2, type='rmdimportant'}
 ATLAS ne permet pas à deux cohortes d'avoir exactement les mêmes noms. ATLAS vous donnera un message d'erreur en pop-up si vous choisissez un nom déjà utilisé par une autre cohorte ATLAS.
+
 ```
 
 Une fois que vous avez choisi un nom, vous pouvez enregistrer la cohorte en cliquant sur ![](images/Cohorts/save.png).
@@ -196,6 +199,7 @@ De là, la fenêtre se fermera automatiquement. Une fois sélectionné, cet attr
 
 ```{block2, type='rmdimportant'}
 La conception actuelle d'ATLAS peut en tromper certains. Malgré son apparence, le ![](images/Cohorts/redX.png) n'est pas destiné à signifier "Non". C'est une fonctionnalité actionnable qui permet à l'utilisateur de supprimer le critère. Si vous cliquez sur ![](images/Cohorts/redX.png), ce critère disparaitra. Ainsi, vous devez laisser le critère avec le ![](images/Cohorts/redX.png) pour garder le critère actif.
+
 ```
 
 Maintenant que vous avez construit un événement de qualification initial. Pour vous assurer que vous capturez la première exposition médicamenteuse observée, vous voudrez ajouter une fenêtre de rétro-observation pour savoir que vous regardez suffisamment de l'historique du patient pour savoir ce qui vient en premier. Il est possible qu'un patient avec une période d'observation courte ait reçu une exposition ailleurs que nous ne voyons pas. Nous ne pouvons pas contrôler cela mais nous pouvons mandater une durée minimale de temps pendant laquelle le patient doit être dans les données avant la date d'index. Vous pouvez le faire en ajustant les listes déroulantes d'observation continue. Vous pouvez également cliquer sur la boîte et taper une valeur pour ces fenêtres. Nous exigerons 365 jours d'observation continue avant l'événement initial. Vous mettrez à jour votre période d'observation à : *avec observation continue de 365 jours avant*, comme montré dans la Figure \@ref(fig:initialEventAce). Cette fenêtre de rétro-observation est à la discrétion de votre équipe d'étude. Vous pouvez choisir différemment pour d'autres cohortes. Cela crée, autant que nous le pouvons, une période minimale de temps où nous voyons le patient pour s'assurer que nous capturons le premier enregistrement. Ce critère concerne l'historique préalable et n'implique pas de temps après l'événement d'index. Par conséquent, nous exigeons 0 jours après l'événement d'index. Notre événement de qualification est l'utilisation pour la première fois des inhibiteurs de l'ECA. Ainsi, nous limitons les événements initiaux au "premier événement" par personne.
@@ -561,6 +565,7 @@ disconnect(conn)
 - Il existe deux approches principales pour construire une cohorte : basée sur des règles et probabilistique.
 
 - Les définitions de cohortes basées sur des règles peuvent être créées dans ATLAS, ou en utilisant SQL.
+
 
 ```
 

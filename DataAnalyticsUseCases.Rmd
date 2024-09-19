@@ -129,6 +129,7 @@ L'estimation au niveau de la population et la prédiction au niveau du patient s
 
 ```{block2, type='rmdimportant'}
 Les gens ont une tendance naturelle à interpréter à tort les modèles prédictifs comme s'ils étaient des modèles causaux. Mais un modèle prédictif ne peut montrer que la corrélation, jamais la causalité. Par exemple, l'utilisation de médicaments pour diabétiques pourrait être un fort prédicteur de l'infarctus du myocarde (IM) parce que le diabète est un fort facteur de risque pour l'IM. Cependant, cela ne signifie pas que l'arrêt des médicaments pour diabétiques empêchera l'IM !
+
 ```
 
 
@@ -182,6 +183,7 @@ L'absence de données dans les bases de données OHDSI présente des défis subt
 - Les modèles de prédiction ne sont pas des modèles causaux ; Il n'y a aucune raison de croire qu'intervenir sur un fort prédicteur impactera le résultat.
 
 - Il y a des questions qui ne peuvent pas être résolues en utilisant des données de santé observationnelles.
+
 
 ```
 

@@ -16,6 +16,7 @@ Le réseau de recherche OHDSI est une collaboration internationale de chercheurs
 - **Accès à des outils gratuits :** OHDSI publie des outils gratuits et open source pour la caractérisation des données et les analyses standardisées (par ex. parcourir les concepts cliniques, définir et caractériser des cohortes, mener des études d'Estimation au Niveau de la Population et de Prédiction au Niveau des Patients).
 - **Participer à une communauté de recherche de premier plan :** Rédiger et publier des recherches en réseau, collaborer avec des leaders de divers disciplines et groupes de parties prenantes.
 - **Opportunité de comparer les soins :** Les études de réseau peuvent permettre des benchmarks de caractérisation clinique et d'amélioration de la qualité entre partenaires de données.
+
 ```
 
 ## Études en réseau OHDSI
@@ -36,6 +37,7 @@ Les études en réseau offrent donc l'opportunité d'enquêter sur les effets de
 
 ```{block2, type='rmdimportant'}
 **Quand une étude est-elle considérée comme une étude en *réseau*?** Une étude OHDSI devient une étude en réseau OHDSI lorsqu'elle est menée sur plusieurs CDM dans différentes institutions.
+
 ```
 L'approche OHDSI pour la recherche en réseau utilise le CDM OMOP et des outils et paquets d'étude standardisés qui spécifient entièrement tous les paramètres pour mener une étude. Les analyses standardisées OHDSI sont conçues spécifiquement pour réduire les artefacts et améliorer l'efficacité et l'évolutivité des études en réseau.
 
@@ -80,6 +82,7 @@ Pour chaque étude, les activités de démarrage sur site peuvent inclure :
 
 ```{block2, type='rmdimportant'}
 **Qualité des données et études en réseau :** Comme discuté dans le chapitre \@ref(ExtractTransformLoad), le contrôle de qualité est une pièce fondamentale et itérative du processus ETL. Cela doit être fait régulièrement en dehors du processus d'étude en réseau. Pour une étude en réseau, un responsable d'étude peut demander à examiner les rapports de qualité des données des sites participants ou concevoir des requêtes SQL personnalisées pour comprendre les variations potentielles dans les sources de données contributrices. Pour plus de détails sur les efforts de qualité des données en cours au sein d’OHDSI, veuillez consulter le chapitre \@ref(DataQuality).
+
 ```
 
 Chaque site aura un analyste de données local qui exécute le paquet d'étude. Cet individu doit examiner les résultats du paquet d'étude pour s'assurer qu'aucune information sensible n'est transmise, bien que toutes les données dans le CDM aient déjà été anonymisées. Lorsque vous utilisez des méthodes OHDSI préconstruites telles que l'estimation d'effet à niveau de population (PLE) et la prédiction à niveau de patient (PLP), il existe des paramètres configurables pour le nombre de cellules minimal pour une analyse donnée. L'analyste de données est tenu de revoir ces seuils et de s'assurer qu'ils suivent les politiques locales de gouvernance.
@@ -131,6 +134,7 @@ Lors de la phase de diffusion et de publication des résultats, le responsable d
 ```{block2, type='rmdimportant'}
 Vous ne savez pas où publier votre étude en réseau OHDSI ? Consultez JANE (Journal/Author Name Estimator), un outil qui prend votre résumé et scanne les publications pour pertinence et adéquation.[^janeUrl]
 
+
 ```
 
 [^janeUrl]: http://jane.biosemantics.org/
@@ -177,5 +181,6 @@ Lorsque vous menez une étude en réseau, la communauté OHDSI est disponible po
 - Les études en réseau OHDSI sont ouvertes à tous. N'importe qui peut diriger une étude en réseau. Toute personne possédant une base de données conforme au CDM OMOP peut choisir d'y participer et de contribuer aux résultats.
 - Besoin d'aide pour mener une étude en réseau ? Consultez le comité d'encadrement des études OHDSI pour vous aider à concevoir et exécuter votre étude.
 - **Partager c'est se soucier.** Toute la documentation de l'étude, le code et les résultats sont publiés sur le GitHub d'OHDSI ou dans une application R Shiny. Les responsables des études sont invités à présenter leur recherche lors des événements OHDSI.
+
 
 ```

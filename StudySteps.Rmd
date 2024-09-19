@@ -121,4 +121,5 @@ Il est important à cette étape de faire examiner votre protocole finalisé par
 - L'étude doit être enregistrée et approuvée (si nécessaire) avant l'exécution de l'étude.
 - Le rapport final ou le manuscrit doit être revu par des experts cliniques et d'autres parties prenantes.
 
+
 ```
