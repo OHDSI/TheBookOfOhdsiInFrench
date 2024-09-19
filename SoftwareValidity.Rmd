@@ -1,0 +1,127 @@
+# Validité du logiciel {#SoftwareValidity}
+
+*Responsable du chapitre : Martijn Schuemie*
+
+La question centrale de la validité du logiciel est la suivante :
+
+> Le logiciel fait-il ce qu’il est censé faire ?
+
+La validité du logiciel est une composante essentielle de la qualité des preuves : ce n'est que si notre logiciel d'analyse fait ce qu'il est censé faire que nous pouvons produire des preuves fiables. Comme décrit dans la section \@ref(automation), il est essentiel de considérer chaque étude comme un exercice de développement de logiciel, créant un script automatisé qui exécute l'analyse complète, des données dans le Common Data Model (CDM) aux résultats tels que des estimations, des figures et des tableaux. C'est ce script, ainsi que tout logiciel utilisé dans ce script, qui doit être validé. Comme décrit dans la section \@ref(analysisImplementation), nous pouvons écrire toute l’analyse sous forme de code personnalisé, ou nous pouvons utiliser les fonctionnalités disponibles dans la [OHDSI Methods Library](https://ohdsi.github.io/MethodsLibrary/). L'avantage d'utiliser la Methods Library est qu'une grande attention a déjà été accordée pour garantir sa validité, donc établir la validité de l’ensemble de l’analyse devient moins contraignant. \index{validité du logiciel} \index{modèle de données commun}
+
+Dans ce chapitre, nous décrivons d'abord les meilleures pratiques pour écrire un code d'analyse valide. Ensuite, nous discutons de la manière dont la Methods Library est validée via son processus de développement logiciel et ses tests. \index{processus de développement logiciel}
+
+## Validité du code d’étude
+
+### L’automatisation comme exigence pour la reproductibilité {#automation}
+
+Traditionnellement, les études observationnelles sont souvent considérées comme un voyage plutôt qu'un processus : un expert en base de données peut extraire un ensemble de données de la base de données et le remettre à l'analyste de données, qui peut l’ouvrir dans un éditeur de tableurs ou un autre outil interactif, et commencer à travailler sur l'analyse. À la fin, un résultat est produit, mais peu de choses sont conservées sur la manière dont il a été obtenu. La destination du voyage a été atteinte, mais il n'est pas possible de retracer les étapes exactes suivies pour y arriver. Cette pratique est totalement inacceptable, à la fois parce qu'elle n'est pas reproductible, mais aussi parce qu'elle manque de transparence ; nous ne savons pas exactement ce qui a été fait pour produire le résultat, donc nous ne pouvons pas non plus vérifier qu'aucune erreur n’a été commise. \index{validité du code d’étude}
+
+Chaque analyse générant des preuves doit donc être entièrement automatisée. Par automatisée, nous entendons que l'analyse doit être mise en œuvre sous la forme d'un script unique, et que nous devrions être en mesure de refaire toute l’analyse à partir de la base de données au format CDM jusqu'aux résultats, y compris les tableaux et les figures, avec une seule commande. L’analyse peut être d'une complexité arbitraire, peut-être ne produisant qu'un seul décompte, ou générant des estimations calibrées empiriquement pour des millions de questions de recherche, mais le même principe s'applique. Le script peut invoquer d'autres scripts, qui peuvent à leur tour invoquer des processus d’analyse de plus bas niveau.
+
+Le script d’analyse peut être implanté dans n’importe quel langage informatique, bien que dans OHDSI, le langage préféré soit R. Grâce au package R [DatabaseConnector](https://ohdsi.github.io/DatabaseConnector/), nous pouvons nous connecter directement aux données au format CDM, et de nombreuses analyses avancées sont disponibles via les autres packages R dans la [OHDSI Methods Library](https://ohdsi.github.io/MethodsLibrary/).
+
+### Meilleures pratiques de programmation
+
+Les analyses observationnelles peuvent devenir très complexes, avec de nombreuses étapes nécessaires pour produire les résultats finaux. Cette complexité peut rendre le code d'analyse plus difficile à maintenir et augmenter la probabilité de commettre des erreurs, ainsi que rendre plus difficile la détection des erreurs. Heureusement, les programmeurs informatiques ont développé au fil des années des meilleures pratiques pour écrire du code capable de gérer la complexité, qui sont faciles à lire, réutiliser, adapter et vérifier. [@Martin_2008] Une discussion complète de ces meilleures pratiques pourrait remplir plusieurs livres. Ici, nous mettons en avant ces quatre principes importants : \index{meilleures pratiques de programmation}
+
+- **Abstraction** : Plutôt que d’écrire un seul grand script qui fait tout, conduisant à ce qu’on appelle du "code spaghetti" où les dépendances entre les lignes de code peuvent aller de n'importe où à n'importe où (par exemple, une valeur définie à la ligne 10 est utilisée à la ligne 1 000), nous pouvons organiser notre code en unités appelées "fonctions". Une fonction devrait avoir un objectif clair, par exemple "prendre un échantillon aléatoire", et une fois créée, nous pouvons alors utiliser cette fonction dans notre script principal sans avoir à réfléchir aux détails de ce que fait la fonction ; nous pouvons abstraire la fonction en un concept facile à comprendre.
+- **Encapsulation** : Pour que l'abstraction fonctionne, nous devrions nous assurer que les dépendances d'une fonction sont minimisées et clairement définies. Notre exemple de fonction d’échantillonnage devrait avoir quelques arguments (par exemple, un ensemble de données et une taille d'échantillon), et une sortie (par exemple, l'échantillon). Rien d’autre ne devrait influencer ce que fait la fonction. Les soi-disant "variables globales", variables définies en dehors d'une fonction, ne sont pas des arguments d'une fonction, mais sont néanmoins utilisées dans la fonction, devraient être évitées.
+- **Noms clairs** : Les variables et les fonctions devraient avoir des noms clairs, rendant le code presque aussi lisible que le langage naturel. Par exemple, au lieu de `x <- spl(y, 100)`, nous pouvons écrire du code qui se lit `sampledPatients <- takeSample(patients, sampleSize = 100)`. Essayez de résister à la tentation d'abréger. Les langages modernes n’ont pas de limites sur la longueur des noms de variables et de fonctions.
+- **Réutilisation** : Un avantage d’écrire des fonctions claires et bien encapsulées est qu'elles peuvent souvent être réutilisées. Cela permet non seulement de gagner du temps, mais signifie également qu'il y aura moins de code, donc moins de complexité et moins de possibilités d'erreurs.
+
+### Validation du code
+
+Plusieurs approches existent pour vérifier la validité du code logiciel, mais deux sont particulièrement pertinentes pour le code mettant en œuvre une étude observationnelle :
+
+- **Revue de code** : Une personne écrit le code et une autre personne examine le code.
+- **Double codage** : Deux personnes écrivent toutes deux indépendamment le code d'analyse, puis les résultats des deux scripts sont comparés.
+
+La revue de code a l'avantage d'être généralement moins laborieuse, mais l'inconvénient est que l'examinateur pourrait manquer certaines erreurs. Le double codage, en revanche, est généralement très laborieux, mais il est moins probable, bien que non impossible, que des erreurs soient manquées. Un autre inconvénient du double codage est que les deux implémentations distinctes produisent *presque toujours* des résultats différents, en raison des nombreux choix arbitraires mineurs à effectuer (par exemple, "jusqu'à la fin de l’exposition" doit-il être interprété comme incluant la date de fin d'exposition, ou pas ?). En conséquence, les deux programmeurs supposément indépendants doivent souvent travailler ensemble pour aligner leurs analyses, brisant ainsi leur indépendance.
+
+D'autres pratiques de validation de logiciel telles que les tests unitaires sont moins pertinentes ici car une étude est typiquement une activité ponctuelle avec des relations hautement complexes entre les entrées (les données dans le CDM) et les sorties (les résultats de l'étude), rendant ces pratiques moins utilisables. Notez que ces pratiques sont appliquées dans la Methods Library.
+
+### Utilisation de la Methods Library
+
+La [OHDSI Methods Library](https://ohdsi.github.io/MethodsLibrary/) fournit un large ensemble de fonctions, permettant que la plupart des études observationnelles soient mises en œuvre en utilisant seulement quelques lignes de code. L’utilisation de la Methods Library transfère donc la majeure partie de la charge d’établissement de la validité du code de votre étude à la Library. La validité de la Methods Library est assurée par son processus de développement logiciel et par des tests approfondis.
+
+## Processus de Développement de Logiciels de la Bibliothèque de Méthodes
+
+La Bibliothèque de Méthodes OHDSI est développée par la communauté OHDSI. Les changements proposés à la Bibliothèque sont discutés dans deux endroits : les trackers de problèmes GitHub (par exemple, le tracker de problèmes CohortMethod[^issueTrackerUrl]) et les Forums OHDSI.[^forumsUrl] Les deux sont ouverts au public. Tout membre de la communauté peut contribuer au code logiciel de la Bibliothèque, cependant, l'approbation finale de tout changement incorporé dans les versions publiées du logiciel est effectuée uniquement par les dirigeants du Groupe de Travail OHDSI sur l'Estimation au Niveau de la Population (Drs. Marc Suchard et Martijn Schuemie) et les dirigeants du Groupe de Travail OHDSI sur la Prédiction au Niveau du Patient (Drs. Peter Rijnbeek et Jenna Reps).
+
+[^issueTrackerUrl]: https://github.com/OHDSI/CohortMethod/issues
+[^forumsUrl]: http://forums.ohdsi.org/
+
+Les utilisateurs peuvent installer la Bibliothèque de Méthodes dans R directement à partir des branches principales dans les dépôts GitHub, ou via un système connu sous le nom de "drat" qui est toujours à jour avec les branches principales. Un certain nombre de paquets de la Bibliothèque de Méthodes sont disponibles via le Réseau Compréhensif des Archives R (CRAN), et ce nombre devrait augmenter au fil du temps.
+
+Des méthodologies raisonnables de développement et de test de logiciels sont employées par OHDSI pour maximiser l'exactitude, la fiabilité et la cohérence des performances de la Bibliothèque de Méthodes. Important à noter, comme la Bibliothèque de Méthodes est publiée sous les termes de la Licence Apache V2, tout le code source sous-jacent de la Bibliothèque de Méthodes, qu'il soit en R, C++, SQL ou Java, est disponible pour un examen par les pairs par tous les membres de la communauté OHDSI, et le public en général. Ainsi, toute la fonctionnalité incarnée dans la Bibliothèque de Méthodes est sujette à une critique continue et une amélioration par rapport à son exactitude, sa fiabilité et sa cohérence.
+
+### Gestion du Code Source
+
+Tout le code source de la Bibliothèque de Méthodes est géré dans le système de contrôle de version de code source "git" accessible publiquement via GitHub. Les dépôts de la Bibliothèque de Méthodes OHDSI sont contrôlés par accès. N'importe qui dans le monde peut consulter le code source, et tout membre de la communauté OHDSI peut soumettre des modifications via ce que l'on appelle des demandes de tirage. Seuls les dirigeants du Groupe de Travail OHDSI sur l'Estimation au Niveau de la Population et du Groupe de Travail OHDSI sur la Prédiction au Niveau du Patient peuvent approuver ces demandes, apporter des modifications aux branches principales et publier de nouvelles versions. Des journaux continus des modifications du code sont maintenus dans les dépôts GitHub et reflètent tous les aspects des modifications dans le code et la documentation. Ces journaux de commits sont disponibles pour examen public.
+
+De nouvelles versions sont publiées par les dirigeants du Groupe de Travail OHDSI sur l'Estimation au Niveau de la Population et du Groupe de Travail OHDSI sur la Prédiction au Niveau du Patient selon les besoins. Une nouvelle version commence par pousser des changements vers une branche principale avec un numéro de version de paquet (tel que défini dans le fichier DESCRIPTION à l'intérieur du paquet) supérieur au numéro de version de la version précédente. Cela déclenche automatiquement la vérification et le test du paquet. Si tous les tests réussissent, la nouvelle version est automatiquement marquée dans le système de contrôle de version et le paquet est automatiquement téléchargé dans le dépôt drat OHDSI. Les nouvelles versions sont numérotées en utilisant un numéro de version à trois composants :
+
+- Les **micro versions** nouvelles (par exemple de 4.3.2 à 4.3.3) indiquent uniquement des corrections de bogues. Aucune nouvelle fonctionnalité, et la compatibilité avant et arrière est garantie
+- Les **versions mineures** nouvelles (par exemple de 4.3.3 à 4.4.0) indiquent des fonctionnalités ajoutées. Seule la compatibilité arrière est garantie
+- Les **versions majeures** nouvelles (par exemple de 4.4.0 à 5.0.0) indiquent des révisions majeures. Aucune garantie n'est faite en termes de compatibilité
+
+### Documentation
+
+Tous les paquets de la Bibliothèque de Méthodes sont documentés via le cadre de documentation interne de R. Chaque paquet possède un manuel de paquet qui décrit chaque fonction disponible dans le paquet. Pour promouvoir l'alignement entre la documentation de la fonction et l'implémentation de la fonction, le logiciel [roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) est utilisé pour combiner la documentation de la fonction et le code source dans un seul fichier. Le manuel de paquet est disponible à la demande via l'interface en ligne de commande de R, en tant que PDF dans les dépôts de paquets, et en tant que page web. De plus, de nombreux paquets ont également des vignettes qui mettent en évidence des cas d'utilisation spécifiques d'un paquet. Toute la documentation peut être consultée sur le site web de la Bibliothèque de Méthodes.[^methodsLibrarySiteUrl]
+
+[^methodsLibrarySiteUrl]: https://ohdsi.github.io/MethodsLibrary/
+
+Tout le code source de la Bibliothèque de Méthodes est disponible pour les utilisateurs finaux. Les retours de la communauté sont facilités grâce au système de suivi des problèmes de GitHub et aux forums OHDSI.
+
+### Disponibilité des Versions Actuelles et Historiques
+
+Les versions actuelles et historiques des paquets de la Bibliothèque de Méthodes sont disponibles à deux endroits. Tout d'abord, le système de contrôle de version GitHub contient l'historique complet du développement de chaque paquet, et l'état d'un paquet à chaque point dans le temps peut être reconstruit et récupéré. Plus important encore, chaque version publiée est marquée dans GitHub. Deuxièmement, les paquets source R publiés sont stockés dans le dépôt drat GitHub OHDSI.
+
+### Maintenance, Support et Retraite
+
+Chaque version actuelle de la Bibliothèque de Méthodes est activement soutenue par OHDSI en ce qui concerne les rapports de bugs, les corrections et les patchs. Les problèmes peuvent être signalés via le système de suivi des problèmes de GitHub, et via les forums OHDSI. Chaque paquet dispose d'un manuel de paquet, et zéro, un ou plusieurs vignettes. Des tutoriels vidéo en ligne sont disponibles, et des tutoriels en personne sont proposés de temps à autre.
+
+### Personnel Qualifié
+
+Les membres de la communauté OHDSI représentent plusieurs disciplines statistiques et sont basés dans des institutions académiques, à but non lucratif et affiliées à l'industrie sur plusieurs continents.
+
+Tous les dirigeants du Groupe de Travail OHDSI sur l'Estimation au Niveau de la Population et du Groupe de Travail OHDSI sur la Prédiction au Niveau du Patient détiennent des doctorats d'institutions académiques accréditées et ont publié abondamment dans des revues à comité de lecture.
+
+### Sécurité Physique et Logique
+
+La Bibliothèque de Méthodes OHDSI est hébergée sur le système GitHub[^githubUrl]. Les mesures de sécurité de GitHub sont décrites sur [https://github.com/security](https://github.com/security). Des noms d'utilisateur et des mots de passe sont nécessaires pour tous les membres de la communauté OHDSI afin de contribuer à des modifications à la Bibliothèque de Méthodes, et seuls les dirigeants des Groupes de Travail sur l'Estimation au Niveau de la Population et de la Prédiction au Niveau du Patient peuvent apporter des modifications aux branches principales. Les comptes d'utilisateurs sont limités dans l'accès basé sur des politiques de sécurité standard et des exigences fonctionnelles.
+
+[^githubUrl]: https://github.com/
+
+### Reprise Après Sinistre
+
+La Bibliothèque de Méthodes OHDSI est hébergée sur le système GitHub. Les installations de reprise après sinistre de GitHub sont décrites sur [https://github.com/security](https://github.com/security).
+
+## Tests de la Bibliothèque de Méthodes
+
+Nous distinguons deux types de tests effectués sur la Bibliothèque de Méthodes : Les tests des fonctions individuelles dans les paquets (appelés "tests unitaires"), et les tests de fonctionnalités plus complexes à l'aide de simulations.
+
+### Test Unitaire
+
+Un large ensemble de tests de validation automatisés est maintenu et mis à jour par OHDSI pour permettre le test du code source par rapport aux données connues et aux résultats connus. Chaque test commence par spécifier des données d'entrée simples, puis exécute une fonction dans l'un des paquets sur cette entrée, et évalue si la sortie est exactement ce qui serait attendu. Pour des fonctions simples, le résultat attendu est souvent évident (par exemple lorsqu'on effectue une correspondance des scores de propension sur des données d'exemple contenant seulement quelques sujets); pour des fonctions plus complexes, le résultat attendu peut être généré en utilisant des combinaisons d'autres fonctions disponibles dans R (par exemple, Cyclops, notre moteur de régression à grande échelle, est testé entre autres en comparant les résultats sur des problèmes simples avec d'autres routines de régression dans R). Nous visons à ce que ces tests couvrent en total 100% des lignes de code source exécutable.
+
+Ces tests sont automatiquement effectués lorsque des changements sont apportés à un paquet (spécifiquement, lorsque des changements sont poussés vers le dépôt du paquet). Toute erreur notée pendant le test déclenche automatiquement des emails aux dirigeants des Groupes de Travail, et doit être résolue avant la publication d'une nouvelle version d'un paquet. Le code source et les résultats attendus de ces tests sont disponibles pour examen et utilisation dans d'autres applications selon les besoins. Ces tests sont également disponibles pour les utilisateurs finaux et/ou les administrateurs système et peuvent être exécutés dans le cadre de leur processus d'installation pour fournir une documentation supplémentaire et des preuves objectives quant à l'exactitude, la fiabilité et la cohérence de leur installation de la Bibliothèque de Méthodes.
+
+### Simulation
+
+Pour des fonctionnalités plus complexes, il n'est pas toujours évident quel devrait être le résultat attendu étant donné l'entrée. Dans ces cas, des simulations sont parfois utilisées, générant des entrées selon un modèle statistique spécifique, et établissant si la fonctionnalité produit des résultats en ligne avec ce modèle connu. Par exemple, dans le paquet [SelfControlledCaseSeries](https://ohdsi.github.io/SelfControlledCaseSeries/), des simulations sont utilisées pour vérifier si la méthode est capable de détecter et de modéliser de manière appropriée les tendances temporelles dans les données simulées.
+
+## Résumé
+
+```{block2, type='rmdsummary'}
+- Une étude observationnelle doit être implémentée comme un script automatisé qui exécute l'analyse complète, des données dans le CDM jusqu'aux résultats, pour garantir la reproductibilité et la transparence.
+
+- Le code d'étude personnalisé doit adhérer aux meilleures pratiques de programmation, y compris l'abstraction, l'encapsulation, la dénomination claire et la réutilisation du code.
+
+- Le code d'étude personnalisé peut être validé à l'aide d'une revue de code ou d'un double codage.
+
+- La Bibliothèque de Méthodes fournit des fonctionnalités validées qui peuvent être utilisées dans les études observationnelles.
+
+- La Bibliothèque de Méthodes est validée en utilisant un processus de développement de logiciels visant à créer des logiciels valides, et par des tests.
+
+```

@@ -1,0 +1,60 @@
+book_filename: "TheBookOfOhdsi"
+language:
+  label:
+    fig: "Figure "
+    tab: "Table "
+    eq: "Équation "
+    thm: "Théorème "
+    lem: "Lemme "
+    cor: "Corollaire "
+    prp: "Proposition "
+    cnj: "Conjecture "
+    def: "Définition "
+    exm: "Exemple "
+    exr: "Exercice "
+    proof: "Preuve. "
+    remark: "Remarque. "
+    solution: 'Solution. '
+  ui:
+    edit: "Modifier"
+    chapter_name: "Chapitre "
+delete_merged_file: true
+new_session: true
+
+
+rmd_files: [
+  "index.Rmd",
+
+  "OhdsiCommunity.Rmd",
+  "WhereToBegin.Rmd",
+  "OpenScience.Rmd",
+
+  "CommonDataModel.Rmd",
+  "StandardizedVocabularies.Rmd",
+  "ExtractTransformLoad.Rmd",
+
+  "DataAnalyticsUseCases.Rmd",
+  "OhdsiAnalyticsTools.Rmd",
+  "SqlAndR.Rmd",
+  "Cohorts.Rmd",
+  "Characterization.Rmd",
+  "PopulationLevelEstimation.Rmd",
+  "PatientLevelPrediction.Rmd",
+
+  "EvidenceQuality.Rmd",
+  "DataQuality.Rmd",
+  "ClinicalValidity.Rmd",
+  "SoftwareValidity.Rmd",
+  "MethodValidity.Rmd",
+
+  "StudySteps.Rmd",
+  "NetworkResearch.Rmd",
+
+  "Glossary.Rmd",
+  "CohortDefinitions.Rmd",
+  "NegativeControls.Rmd",
+  "ProtocolTemplate.Rmd",
+  "SuggestedAnswers.Rmd",
+
+  "References.Rmd"
+]
