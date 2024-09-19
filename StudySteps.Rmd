@@ -1,4 +1,4 @@
-# (PARTIE) Études OHDSI {-}
+# (PART) Études OHDSI {-}
 
 # Étapes de l'étude {#StudySteps}
 

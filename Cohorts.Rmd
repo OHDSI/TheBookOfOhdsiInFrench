@@ -1,4 +1,4 @@
-# Définir des Cohortes {#Cohortes}
+# Définir des Cohortes {#Cohorts}
 
 *Chef de chapitre : Kristin Kostka*
 
