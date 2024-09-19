@@ -29,10 +29,14 @@ Pour chaque plan d'étude, il existe des diagnostics spécifiques à ce plan. Be
 
 D'autres plans d'étude nécessitent des diagnostics différents pour tester les différentes hypothèses de ces plans. Par exemple, pour le plan d'étude des séries de cas auto-contrôlés (SCCS), nous pouvons vérifier l'hypothèse nécessaire que la fin de l'observation est indépendante du résultat. Cette hypothèse est souvent violée dans le cas d'événements graves, potentiellement mortels, tels que l'infarctus du myocarde. Nous pouvons évaluer si l'hypothèse tient en générant le graphique montré à la Figure \@ref(fig:timeToObsEnd), qui montre des histogrammes du temps jusqu'à la fin de la période d'observation pour ceux qui sont censurés et ceux qui ne le sont pas. Dans nos données, nous considérons que ceux dont la période d'observation se termine à la date de fin de capture des données (la date à laquelle l'observation s'est arrêtée pour l'ensemble de la base de données, par exemple la date d'extraction ou la date de fin de l'étude) ne sont pas censurés, et tous les autres sont censurés. Dans la Figure \@ref(fig:timeToObsEnd), nous ne voyons que des différences mineures entre les deux distributions, ce qui suggère que notre hypothèse tient.
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/timeToObsEnd.png" alt="Time to observation end for those that are censored, and those that are uncensored." width="100%" />
-<p class="caption">(\#fig:timeToObsEnd)Time to observation end for those that are censored, and those that are uncensored.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/MethodValidity/timeToObsEnd} 
+
+}
+
+\caption{Time to observation end for those that are censored, and those that are uncensored.}(\#fig:timeToObsEnd)
+\end{figure}
 
 ## Diagnostics for All Estimation
 
@@ -70,10 +74,14 @@ Un point important est la préservation de la confusion. Les contrôles négatif
 
 La Figure \@ref(fig:posControlSynth) illustre ce processus. Notez que bien que cette procédure simule plusieurs sources importantes de biais, elle ne capture pas toutes. Par exemple, certains effets de l’erreur de mesure ne sont pas présents. Les contrôles positifs synthétiques impliquent une valeur prédictive positive et une sensibilité constantes, ce qui peut ne pas être vrai dans la réalité.
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/posControlSynth.png" alt="Synthèse de contrôles positifs à partir de contrôles négatifs." width="90%" />
-<p class="caption">(\#fig:posControlSynth)Synthèse de contrôles positifs à partir de contrôles négatifs.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/MethodValidity/posControlSynth} 
+
+}
+
+\caption{Synthèse de contrôles positifs à partir de contrôles négatifs.}(\#fig:posControlSynth)
+\end{figure}
 
 Bien que nous fassions référence à une seule « taille de l’effet » vraie pour chaque contrôle, différentes méthodes estiment des statistiques différentes de l’effet du traitement. Pour les contrôles négatifs, où nous croyons qu’aucun effet causal n’existe, toutes ces statistiques, y compris le risque relatif, le rapport de hasard, le rapport des cotes, le rapport de taux d’incidence, à la fois conditionnel et marginal, ainsi que l’effet moyen du traitement chez les traités (ATT) et l’effet moyen général du traitement (ATE) seront identiques à 1. Notre processus de création de contrôles positifs synthétise des résultats avec un rapport de taux d’incidence constant au fil du temps et entre les patients, utilisant un modèle conditionné sur le patient où ce ratio est maintenu constant, jusqu’à ce que l’effet marginal soit atteint. La taille de l'effet vrai est donc garantie comme le rapport marginal de taux d'incidence chez les traités. Sous l'hypothèse que notre modèle de résultat utilisé pendant la synthèse est correct, cela vaut également pour la taille de l’effet conditionnel et l’ATE. Comme tous les résultats sont rares, les rapports de cotes sont identiques au risque relatif.
 
@@ -136,17 +144,25 @@ Nous devons sélectionner des contrôles négatifs, des paires exposition-résul
 
 Pour générer une liste de candidats de contrôles négatifs, nous devons d'abord créer un ensemble de concepts contenant toutes les expositions d'intérêt. Dans ce cas, nous sélectionnons tous les ingrédients dans les classes ACEi et THZ, comme indiqué dans la Figure \@ref(fig:exposuresConceptSet).
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/exposuresConceptSet.png" alt="A concept set containing the concepts defining the target and comparator exposures." width="100%" />
-<p class="caption">(\#fig:exposuresConceptSet)A concept set containing the concepts defining the target and comparator exposures.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/MethodValidity/exposuresConceptSet} 
+
+}
+
+\caption{A concept set containing the concepts defining the target and comparator exposures.}(\#fig:exposuresConceptSet)
+\end{figure}
 
 Ensuite, nous allons à l'onglet "Explore Evidence" et cliquons sur le bouton ![](images/MethodValidity/generate.png). La génération de l'aperçu des preuves prendra quelques minutes, après quoi vous pouvez cliquer sur le bouton ![](images/MethodValidity/viewEvidence.png). Cela ouvrira la liste des résultats comme montré dans la Figure \@ref(fig:candidateNcs).
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/candidateNcs.png" alt="Candidate control outcomes with an overview of the evidence found in literature, product labels, and spontaneous reports." width="100%" />
-<p class="caption">(\#fig:candidateNcs)Candidate control outcomes with an overview of the evidence found in literature, product labels, and spontaneous reports.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/MethodValidity/candidateNcs} 
+
+}
+
+\caption{Candidate control outcomes with an overview of the evidence found in literature, product labels, and spontaneous reports.}(\#fig:candidateNcs)
+\end{figure}
 
 Cette liste montre les concepts de condition, ainsi qu'un aperçu des preuves liant la condition à l'une des expositions que nous avons définies. Par exemple, nous voyons le nombre de publications qui lient les expositions aux résultats trouvés dans PubMed en utilisant diverses stratégies, le nombre d'étiquettes de produits de nos expositions d'intérêt qui listent la condition comme un effet indésirable possible, et le nombre de rapports spontanés. Par défaut, la liste est triée pour afficher d'abord les contrôles négatifs candidats. Elle est ensuite triée par l'“Ordre de tri”, qui représente la prévalence de la condition dans une collection de bases de données observationnelles. Plus l'Ordre de tri est élevé, plus la prévalence est élevée. Bien que la prévalence dans ces bases de données ne corresponde pas nécessairement à la prévalence dans la base de données où nous souhaitons exécuter l'étude, il est probable que cela constitue une bonne approximation.
 
@@ -200,10 +216,14 @@ Ensuite, nous devons exécuter la même étude utilisée pour estimer l'effet d'
 
 La Figure \@ref(fig:controls) montre les tailles d'effet estimées pour les contrôles négatifs et positifs inclus dans notre étude d'exemple, stratifiées par taille d'effet réelle. Ce graphique est inclus dans l'application Shiny qui accompagne le package R de l'étude généré par ATLAS, et peut être généré en utilisant la fonction `plotControls` du package [MethodEvaluation](https://ohdsi.github.io/MethodEvaluation/). Notez que le nombre de contrôles est souvent inférieur à celui qui a été défini car il n'y avait pas assez de données pour soit produire une estimation soit créer un contrôle positif.
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/controls.png" alt="Estimates for the negative (true hazard ratio = 1) and positive controls (true hazard ratio &gt; 1). Each dot represents a control. Estimates below the dashed line have a confidence interval that doesn't include the true effect size." width="100%" />
-<p class="caption">(\#fig:controls)Estimates for the negative (true hazard ratio = 1) and positive controls (true hazard ratio > 1). Each dot represents a control. Estimates below the dashed line have a confidence interval that doesn't include the true effect size.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/MethodValidity/controls} 
+
+}
+
+\caption{Estimates for the negative (true hazard ratio = 1) and positive controls (true hazard ratio > 1). Each dot represents a control. Estimates below the dashed line have a confidence interval that doesn't include the true effect size.}(\#fig:controls)
+\end{figure}
 
 Sur la base de ces estimations, nous pouvons calculer les métriques montrées dans le Tableau \@ref(tab:exampleMetrics) en utilisant la fonction `computeMetrics` du package [MethodEvaluation](https://ohdsi.github.io/MethodEvaluation/).
 
@@ -240,10 +260,14 @@ plotCalibrationEffect(logRrNegatives = ncEstimates$logRr,
                       seLogRrPositives = oiEstimates$seLogRr,
                       showCis = TRUE)
 ```
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/pValueCal.png" alt="P-value calibration: estimates below the dashed line have a conventional p &lt; 0.05. Estimates in the shaded area have calibrated p &lt; 0.05. The narrow band around the edge of the shaded area denotes the 95% credible interval. Dots indicate negative controls. Diamonds indicate outcomes of interest." width="70%" />
-<p class="caption">(\#fig:pValueCal)P-value calibration: estimates below the dashed line have a conventional p < 0.05. Estimates in the shaded area have calibrated p < 0.05. The narrow band around the edge of the shaded area denotes the 95% credible interval. Dots indicate negative controls. Diamonds indicate outcomes of interest.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/MethodValidity/pValueCal} 
+
+}
+
+\caption{P-value calibration: estimates below the dashed line have a conventional p < 0.05. Estimates in the shaded area have calibrated p < 0.05. The narrow band around the edge of the shaded area denotes the 95\% credible interval. Dots indicate negative controls. Diamonds indicate outcomes of interest.}(\#fig:pValueCal)
+\end{figure}
 
 Dans la Figure \@ref(fig:pValueCal), nous voyons que la zone ombrée se chevauche presque exactement avec la zone délimitée par les lignes pointillées, indiquant que peu ou pas de biais a été observé pour les contrôles négatifs. L'un des résultats d'intérêt (IAM) se trouve au-dessus de la ligne pointillée et de la zone ombrée, indiquant que nous ne pouvons pas rejeter l'hypothèse nulle selon les valeurs p non calibrées et calibrées. L'autre résultat (angio-œdème) se démarque clairement du contrôle négatif et se situe bien dans la zone où les valeurs p non calibrées et calibrées sont inférieures à 0.05.
 
@@ -285,17 +309,25 @@ Avant la calibration, les ratios de risque estimés (intervalle de confiance à 
 
 Tout comme nous avons exécuté notre analyse sur une base de données, dans ce cas la base de données IBM MarketScan Medicaid (MDCD), nous pouvons également exécuter le même code d'analyse sur d'autres bases de données conformes au modèle de données commun (CDM). La Figure \@ref(fig:forest) montre le diagramme en forêt et les estimations méta-analytiques (en supposant des effets aléatoires) [@dersimonian_1986] sur un total de cinq bases de données pour le résultat de l'angio-œdème. Cette figure a été générée à l'aide de la fonction `plotMetaAnalysisForest` du package [EvidenceSynthesis](https://ohdsi.github.io/EvidenceSynthesis/).
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/forest.png" alt="Effect size estimates and 95% confidence intervals (CI) from five different databases and a meta-analytic estimate when comparing ACE inhibitors to thiazides and thiazide-like diuretics for the risk of angioedema." width="90%" />
-<p class="caption">(\#fig:forest)Effect size estimates and 95% confidence intervals (CI) from five different databases and a meta-analytic estimate when comparing ACE inhibitors to thiazides and thiazide-like diuretics for the risk of angioedema.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/MethodValidity/forest} 
+
+}
+
+\caption{Effect size estimates and 95\% confidence intervals (CI) from five different databases and a meta-analytic estimate when comparing ACE inhibitors to thiazides and thiazide-like diuretics for the risk of angioedema.}(\#fig:forest)
+\end{figure}
 
 Bien que tous les intervalles de confiance soient au-dessus de un, suggérant un accord sur le fait qu'il y a un effet, le $I^2$ suggère une hétérogénéité entre les bases de données. Cependant, si nous calculons le $I^2$ en utilisant les intervalles de confiance calibrés comme montré dans la Figure \@ref(fig:forestCal), nous voyons que cette hétérogénéité peut être expliquée par le biais mesuré dans chaque base de données à travers les contrôles négatifs et positifs. La calibration empirique semble correctement prendre en compte ce biais.
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/forestCal.png" alt="Calibrated Effect size estimates and 95% confidence intervals (CI) from five different databases and a meta-analytic estimate for the hazard ratio of angioedema when comparing ACE inhibitors to thiazides and thiazide-like diuretics." width="90%" />
-<p class="caption">(\#fig:forestCal)Calibrated Effect size estimates and 95% confidence intervals (CI) from five different databases and a meta-analytic estimate for the hazard ratio of angioedema when comparing ACE inhibitors to thiazides and thiazide-like diuretics.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/MethodValidity/forestCal} 
+
+}
+
+\caption{Calibrated Effect size estimates and 95\% confidence intervals (CI) from five different databases and a meta-analytic estimate for the hazard ratio of angioedema when comparing ACE inhibitors to thiazides and thiazide-like diuretics.}(\#fig:forestCal)
+\end{figure}
 
 ### Analyses de sensibilité
 
@@ -310,10 +342,14 @@ Nous avons testé toutes les méthodes de la bibliothèque des méthodes OHDSI a
 
 [^methodEvalViewerUrl]: http://data.ohdsi.org/MethodEvalViewer/
 
-<div class="figure" style="text-align: center">
-<img src="images/MethodValidity/methodEval.png" alt="Couverture de l'intervalle de confiance à 95\% pour les méthodes de la bibliothèque des méthodes. Chaque point représente la performance d'un ensemble spécifique de choix d'analyse. La ligne en pointillés indique la performance nominale (couverture de 95\%). SCCS = Séries de Cas Auto-Contrôlées, GI = Gastrointestinal, IBD = maladie inflammatoire de l'intestin." width="100%" />
-<p class="caption">(\#fig:methodEval)Couverture de l'intervalle de confiance à 95\% pour les méthodes de la bibliothèque des méthodes. Chaque point représente la performance d'un ensemble spécifique de choix d'analyse. La ligne en pointillés indique la performance nominale (couverture de 95\%). SCCS = Séries de Cas Auto-Contrôlées, GI = Gastrointestinal, IBD = maladie inflammatoire de l'intestin.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/MethodValidity/methodEval} 
+
+}
+
+\caption{Couverture de l'intervalle de confiance à 95\% pour les méthodes de la bibliothèque des méthodes. Chaque point représente la performance d'un ensemble spécifique de choix d'analyse. La ligne en pointillés indique la performance nominale (couverture de 95\%). SCCS = Séries de Cas Auto-Contrôlées, GI = Gastrointestinal, IBD = maladie inflammatoire de l'intestin.}(\#fig:methodEval)
+\end{figure}
 
 Cela souligne la nécessité d'une évaluation et d'une calibration empiriques : si aucune évaluation empirique n'est réalisée, ce qui est vrai pour presque toutes les études observationnelles publiées, nous devons supposer une croyance a priori informée par les résultats de la Figure \@ref(fig:methodEval), et conclure qu'il est probable que la taille réelle de l'effet ne soit pas contenue dans l'intervalle de confiance à 95% !
 
@@ -322,7 +358,8 @@ Notre évaluation des conceptions dans la bibliothèque des méthodes montre ég
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La validité d'une méthode dépend de la satisfaction des hypothèses sous-jacentes de la méthode.
+\BeginKnitrBlock{rmdsummary}
+- La validité d'une méthode dépend de la satisfaction des hypothèses sous-jacentes de la méthode.
 
 - Dans la mesure du possible, ces hypothèses devraient être testées empiriquement à l'aide de diagnostics d'étude.
 
@@ -334,4 +371,5 @@ Notre évaluation des conceptions dans la bibliothèque des méthodes montre ég
 
 - Les diagnostics d'étude peuvent être utilisés pour guider les choix de conception analytique et adapter le protocole, tant que le chercheur reste aveugle à l'effet d'intérêt pour éviter le p-hacking.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

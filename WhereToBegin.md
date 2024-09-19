@@ -8,10 +8,14 @@ La communauté OHDSI représente une mosaïque de parties prenantes à travers l
 ## Rejoignez le voyage
 Tout le monde est invité à participer activement à OHDSI, que vous soyez patient, professionnel de la santé, chercheur ou simplement quelqu'un qui croit en notre cause. OHDSI maintient un modèle d'adhésion inclusif. Devenir collaborateur OHDSI ne nécessite aucun frais d'adhésion. La collaboration est aussi simple que lever la main pour être inclus dans le décompte annuel des membres d'OHDSI. L'engagement est totalement volontaire. Un collaborateur peut avoir n'importe quel niveau de contribution au sein de la communauté, allant de la participation aux appels hebdomadaires de la communauté à la direction d'études de réseau ou de groupes de travail OHDSI. Les collaborateurs n'ont pas besoin d'être détenteurs de données pour être considérés comme des membres actifs de la communauté. La communauté OHDSI vise à servir les détenteurs de données, les chercheurs, les prestataires de soins de santé ainsi que les patients et consommateurs. Un registre des profils des collaborateurs est maintenu et périodiquement mis à jour sur le site web d'OHDSI. L'adhésion est encouragée via les appels communautaires OHDSI, les groupes de travail et les chapitres régionaux.\index{join the journey} \index{workgroups} \index{chapters}
 
-<div class="figure" style="text-align: center">
-<img src="images/WhereToBegin/joinTheJourney.png" alt="Rejoignez le voyage - Comment devenir collaborateur OHDSI." width="90%" />
-<p class="caption">(\#fig:jointhejourney)Rejoignez le voyage - Comment devenir collaborateur OHDSI.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/WhereToBegin/joinTheJourney} 
+
+}
+
+\caption{Rejoignez le voyage - Comment devenir collaborateur OHDSI.}(\#fig:jointhejourney)
+\end{figure}
 
 
 ### Forums OHDSI
@@ -31,8 +35,10 @@ Dans les forums OHDSI, vous pouvez trouver des catégories de contenu incluant :
 
 Pour commencer à poster vos propres sujets, vous devrez vous inscrire pour un compte. Une fois que vous avez un compte sur le forum, il est encouragé de vous présenter dans le Sujet Général sous le fil de discussion appelé "Bienvenue chez OHDSI! - Merci de vous présenter". Vous êtes invités à répondre et 1) À vous présenter et nous dire un peu ce que vous faites et 2) À nous faire savoir comment vous aimeriez aider dans la communauté (ex. développement de logiciels, exécution d'études, rédaction de documents de recherche, etc.). Maintenant, vous êtes sur votre chemin OHDSI! À partir de là, vous êtes encouragés à participer aux discussions. La Communauté OHDSI encourage l'utilisation des Forums comme moyen de poser des questions, de discuter de nouvelles idées et de collaborer. \index{forum}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Vous pouvez sélectionner des sujets à "suivre". Cela signifie que chaque fois qu'un nouveau post est ajouté dans un sujet que vous suivez, vous recevrez un e-mail et pourrez répondre directement au post via votre e-mail. Suivez le fil général pour recevoir des détails sur les prochains ordres du jour des réunions, les opportunités de collaboration et recevez le digest hebdomadaire OHDSI directement dans votre boîte de réception!
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Vous pouvez sélectionner des sujets à "suivre". Cela signifie que chaque fois qu'un nouveau post est ajouté dans un sujet que vous suivez, vous recevrez un e-mail et pourrez répondre directement au post via votre e-mail. Suivez le fil général pour recevoir des détails sur les prochains ordres du jour des réunions, les opportunités de collaboration et recevez le digest hebdomadaire OHDSI directement dans votre boîte de réception!
+
+\EndKnitrBlock{rmdimportant}
 
 ### Événements OHDSI
 OHDSI organise régulièrement des événements en personne pour offrir aux collaborateurs des opportunités d'apprendre les uns des autres et de se connecter pour favoriser de futures collaborations. Ces événements sont communiqués sur le site Web d'OHDSI et sont gratuits pour toute personne intéressée à y assister.
@@ -105,6 +111,8 @@ De nombreux collaborateurs OHDSI sont intéressés par la conversion de leurs do
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Démarrer dans la communauté OHDSI est aussi simple que de dire bonjour ! Postez sur le **forum OHDSI** et rejoignez un appel communautaire.
+\BeginKnitrBlock{rmdsummary}
+- Démarrer dans la communauté OHDSI est aussi simple que de dire bonjour ! Postez sur le **forum OHDSI** et rejoignez un appel communautaire.
 - Postez vos questions de recherche ou ETL sur le forum OHDSI.
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

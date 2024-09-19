@@ -18,12 +18,12 @@ bibliography:
 description: Un livre sur les sciences et l'informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source.
 documentclass: book
 favicon: images/favicon.ico
-github-repo: OHDSI/TheBookOfOhdsi
+github-repo: OHDSI/TheBookOfOhdsiInFrench
 link-citations: yes
 cover-image: images/Cover/Cover.png
 site: bookdown::bookdown_site
 biblio-style: apalike
-url: https://ohdsi.github.io/TheBookOfOhdsi/
+url: https://ohdsi.github.io/TheBookOfOhdsiInFrench/
 ---
 
 
@@ -56,27 +56,47 @@ Chaque section comporte plusieurs chapitres et, le cas échéant, chaque chapitr
 Chaque chapitre liste un ou plusieurs responsables de chapitre. Ce sont les personnes qui dirigent la rédaction du chapitre. Cependant, il y a beaucoup d'autres personnes qui ont contribué au livre, que nous aimerions reconnaître ici :
 
 
-|                  |                 |                     |
-|:-----------------|:----------------|:--------------------|
-|Hamed Abedtash    |Mustafa Ascha    |Mark Beno            |
-|Clair Blacketer   |David Blatt      |Brian Christian      |
-|Gino Cloft        |Frank DeFalco    |Sara Dempster        |
-|Jon Duke          |Sergio Eslava    |Clark Evans          |
-|Thomas Falconer   |George Hripcsak  |Vojtech Huser        |
-|Mark Khayter      |Greg Klebanov    |Kristin Kostka       |
-|Bob Lanese        |Wanda Lattimore  |Chun Li              |
-|David Madigan     |Sindhoosha Malay |Harry Menegay        |
-|Akihiko Nishimura |Ellen Palmer     |Nirav Patil          |
-|Jose Posada       |Nicole Pratt     |Dani Prieto-Alhambra |
-|Christian Reich   |Jenna Reps       |Peter Rijnbeek       |
-|Patrick Ryan      |Craig Sachson    |Izzy Saridakis       |
-|Paola Saroufim    |Martijn Schuemie |Sarah Seager         |
-|Anthony Sena      |Sunah Song       |Matt Spotnitz        |
-|Marc Suchard      |Joel Swerdel     |Devin Tian           |
-|Don Torok         |Kees van Bochove |Mui Van Zandt        |
-|Erica Voss        |Kristin Waite    |Mike Warfe           |
-|Jamie Weaver      |James Wiggins    |Andrew Williams      |
-|Seng Chan You     |                 |                     |
+\begin{tabular}{l|l|l}
+\hline
+Hamed Abedtash & Mustafa Ascha & Mark Beno\\
+\hline
+Clair Blacketer & David Blatt & Brian Christian\\
+\hline
+Gino Cloft & Frank DeFalco & Sara Dempster\\
+\hline
+Jon Duke & Sergio Eslava & Clark Evans\\
+\hline
+Thomas Falconer & George Hripcsak & Vojtech Huser\\
+\hline
+Mark Khayter & Greg Klebanov & Kristin Kostka\\
+\hline
+Bob Lanese & Wanda Lattimore & Chun Li\\
+\hline
+David Madigan & Sindhoosha Malay & Harry Menegay\\
+\hline
+Akihiko Nishimura & Ellen Palmer & Nirav Patil\\
+\hline
+Jose Posada & Nicole Pratt & Dani Prieto-Alhambra\\
+\hline
+Christian Reich & Jenna Reps & Peter Rijnbeek\\
+\hline
+Patrick Ryan & Craig Sachson & Izzy Saridakis\\
+\hline
+Paola Saroufim & Martijn Schuemie & Sarah Seager\\
+\hline
+Anthony Sena & Sunah Song & Matt Spotnitz\\
+\hline
+Marc Suchard & Joel Swerdel & Devin Tian\\
+\hline
+Don Torok & Kees van Bochove & Mui Van Zandt\\
+\hline
+Erica Voss & Kristin Waite & Mike Warfe\\
+\hline
+Jamie Weaver & James Wiggins & Andrew Williams\\
+\hline
+Seng Chan You &  & \\
+\hline
+\end{tabular}
 
 
 ## Versions des Logiciels {-}
@@ -88,25 +108,33 @@ Une grande partie de ce livre concerne les logiciels open-source d'OHDSI, et ces
 - EUNOMIA : version 1.0.0
 - Packages de la Methods Library : voir le Tableau \@ref(tab:packageVersions)
 
+\begin{table}
 
-Table: (\#tab:packageVersions)Versions des packages dans la Methods Library utilisés dans ce livre.
-
-|Package                  |Version |
-|:------------------------|:-------|
-|CaseControl              |1.6.0   |
-|CaseCrossover            |1.1.0   |
-|CohortMethod             |3.1.0   |
-|Cyclops                  |2.0.2   |
-|DatabaseConnector        |2.4.1   |
-|EmpiricalCalibration     |2.0.0   |
-|EvidenceSynthesis        |0.0.4   |
-|FeatureExtraction        |2.2.4   |
-|MethodEvaluation         |1.1.0   |
-|ParallelLogger           |1.1.0   |
-|PatientLevelPrediction   |3.0.6   |
-|SelfControlledCaseSeries |1.4.0   |
-|SelfControlledCohort     |1.5.0   |
-|SqlRender                |1.6.2   |
+\caption{(\#tab:packageVersions)Versions des packages dans la Methods Library utilisés dans ce livre.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+Package & Version\\
+\midrule
+CaseControl & 1.6.0\\
+CaseCrossover & 1.1.0\\
+CohortMethod & 3.1.0\\
+Cyclops & 2.0.2\\
+DatabaseConnector & 2.4.1\\
+\addlinespace
+EmpiricalCalibration & 2.0.0\\
+EvidenceSynthesis & 0.0.4\\
+FeatureExtraction & 2.2.4\\
+MethodEvaluation & 1.1.0\\
+ParallelLogger & 1.1.0\\
+\addlinespace
+PatientLevelPrediction & 3.0.6\\
+SelfControlledCaseSeries & 1.4.0\\
+SelfControlledCohort & 1.5.0\\
+SqlRender & 1.6.2\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 ## Licence {-}

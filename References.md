@@ -1,5 +1,3 @@
 ## 
-# Références {-}
-
 
 ## Non disponible

@@ -21,10 +21,9 @@ Dans ce chapitre, nous décrivons le cadre standardisé d'OHDSI pour la prédict
 
 La Figure \@ref(fig:figure1) illustre le problème de prédiction que nous abordons. Parmi une population à risque, nous visons à prédire quels patients à un moment défini dans le temps (t = 0) connaîtront un certain résultat durant une période de temps à risque. La prédiction se fait en utilisant uniquement les informations sur les patients dans une fenêtre d'observation avant ce moment donné.
 
-<div class="figure">
-<img src="images/PatientLevelPrediction/Figure1.png" alt="The prediction problem." width="100%" />
-<p class="caption">(\#fig:figure1)The prediction problem.</p>
-</div>
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/PatientLevelPrediction/Figure1} \caption{The prediction problem.}(\#fig:figure1)
+\end{figure}
 
 Comme indiqué dans le Tableau \@ref(tab:plpDesign), pour définir un problème de prédiction, nous devons définir t=0 par une cohorte cible, le résultat que nous souhaitons prédire par une cohorte de résultat et le temps à risque. Nous définissons la question standard de prédiction comme suit : \index{cohorte cible} \index{cohorte de résultat} \index{temps à risque}
 
@@ -100,10 +99,14 @@ Lors de l'ajustement d'un modèle de prédiction, nous essayons d'apprendre la r
 
 Un modèle d'apprentissage supervisé tentera de trouver une frontière de décision qui sépare de manière optimale les deux classes d'issues. Différentes techniques d'apprentissage supervisé produisent différentes frontières de décision, et il existe souvent des hyper-paramètres qui peuvent influencer la complexité de la frontière de décision. \index{frontière de décision}
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/decisionBoundary.png" alt="Decision boundary." width="80%" />
-<p class="caption">(\#fig:decisionBoundary)Decision boundary.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/PatientLevelPrediction/decisionBoundary} 
+
+}
+
+\caption{Decision boundary.}(\#fig:decisionBoundary)
+\end{figure}
 
 Dans la Figure \@ref(fig:decisionBoundary), nous pouvons voir trois frontières de décision différentes. Les frontières sont utilisées pour inférer l'état de l'issue pour tout nouveau point de données. Si un nouveau point de données tombe dans la zone ombrée, alors le modèle prédira "a l'issue", sinon il prédira "pas d'issue". Idéalement, une frontière de décision devrait parfaitement partitionner les deux classes. Cependant, il existe un risque que des modèles trop complexes "surajustent" les données. Cela peut nuire à la généralisation du modèle pour des données non vues. Par exemple, si les données contiennent du bruit, avec des points de données mal étiquetés ou incorrectement positionnés, nous ne voudrions pas ajuster notre modèle à ce bruit. Nous préférons donc définir une frontière de décision qui ne discrimine pas parfaitement dans nos données d'entraînement, mais qui capture la complexité "réelle". Des techniques comme la régularisation visent à maximiser la performance du modèle tout en minimisant la complexité.
 
@@ -214,8 +217,10 @@ D'autres algorithmes peuvent être ajoutés au cadre de prédiction au niveau de
 
 Nous pouvons évaluer un modèle de prédiction en mesurant l'accord entre la prédiction du modèle et le statut observé de l'issue, ce qui signifie que nous avons besoin de données où le statut de l'issue est connu. \index{evaluating prediction models}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Pour l'évaluation, nous devons utiliser un ensemble de données différent de celui utilisé pour développer le modèle, sinon nous risquons de favoriser les modèles qui sont surajustés (voir Section \@ref(modelFitting)) et peuvent mal fonctionner pour de nouveaux patients.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Pour l'évaluation, nous devons utiliser un ensemble de données différent de celui utilisé pour développer le modèle, sinon nous risquons de favoriser les modèles qui sont surajustés (voir Section \@ref(modelFitting)) et peuvent mal fonctionner pour de nouveaux patients.
+
+\EndKnitrBlock{rmdimportant}
 
 Nous distinguons entre
 
@@ -269,10 +274,9 @@ La discrimination est la capacité d'attribuer un risque plus élevé aux patien
 
 L'AUC fournit un moyen de déterminer dans quelle mesure les distributions de risques prédites diffèrent entre les patients qui subissent l'issue pendant la période de risque et ceux qui ne le font pas. Si l'AUC est élevée, les distributions seront principalement disjointes, tandis que lorsqu'il y a beaucoup de chevauchement, l'AUC sera plus proche de 0.5, comme montré à la Figure \@ref(fig:figuretheoryroctheory).
 
-<div class="figure">
-<img src="images/PatientLevelPrediction/theory/roctheory.png" alt="Comment les tracés ROC sont liés à la discrimination. Si les deux classes ont des distributions similaires de risque prédit, le ROC sera proche de la diagonale, avec une AUC proche de 0.5." width="100%" />
-<p class="caption">(\#fig:figuretheoryroctheory)Comment les tracés ROC sont liés à la discrimination. Si les deux classes ont des distributions similaires de risque prédit, le ROC sera proche de la diagonale, avec une AUC proche de 0.5.</p>
-</div>
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/PatientLevelPrediction/theory/roctheory} \caption{Comment les tracés ROC sont liés à la discrimination. Si les deux classes ont des distributions similaires de risque prédit, le ROC sera proche de la diagonale, avec une AUC proche de 0.5.}(\#fig:figuretheoryroctheory)
+\end{figure}
 
 Pour des issues rares, même un modèle avec une AUC élevée peut ne pas être pratique, car pour chaque positif au-dessus d'un seuil donné, il peut également y avoir de nombreux négatifs (c'est-à-dire que la valeur prédictive positive sera faible). En fonction de la gravité de l'issue et du coût (risque pour la santé et/ou monétaire) de certaines interventions, un taux élevé de faux positifs peut être indésirable. Lorsqu'une issue est rare, une autre mesure connue sous le nom de surface sous la courbe précision-rappel (AUPRC) est donc recommandée. L'AUPRC est la surface sous la ligne générée en traçant la sensibilité sur l'axe des x (également connue sous le nom de rappel) et la valeur prédictive positive (également connue sous le nom de précision) sur l'axe des y. \index{area under the precision-recall curve}
 
@@ -340,10 +344,14 @@ Ici, nous sélectionnons les cohortes de la population cible et les cohortes de 
 
 Pour sélectionner une cohorte de la population cible, nous devons l'avoir définie préalablement dans ATLAS. L'instanciation des cohortes est décrite au Chapitre \@ref(Cohorts). L'Annexe fournit les définitions complètes des cohortes cibles (Annexe \@ref(AceInhibitors)) et des cohortes de résultats (Annexe \@ref(Angioedema)) utilisées dans cet exemple. Pour ajouter une cohorte de population cible, cliquez sur le bouton "Ajouter une cohorte cible". L'ajout de cohortes de résultats fonctionne de manière similaire en cliquant sur le bouton "Ajouter une cohorte de résultats". Une fois terminé, le dialogue devrait ressembler à la Figure \@ref(fig:problemSettings).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/problemSettings.png" alt="Paramètres du problème de prédiction." width="100%" />
-<p class="caption">(\#fig:problemSettings)Paramètres du problème de prédiction.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/problemSettings} 
+
+}
+
+\caption{Paramètres du problème de prédiction.}(\#fig:problemSettings)
+\end{figure}
 
 ### Paramètres d'analyse
 
@@ -355,10 +363,14 @@ Nous pouvons choisir un ou plusieurs algorithmes d'apprentissage supervisé pour
 
 Pour notre exemple, nous sélectionnons les gradient boosting machines et définissons les hyperparamètres comme spécifié dans la Figure \@ref(fig:gbmSettings).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/gbmSettings.png" alt="Paramètres des gradient boosting machines." width="100%" />
-<p class="caption">(\#fig:gbmSettings)Paramètres des gradient boosting machines.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/gbmSettings} 
+
+}
+
+\caption{Paramètres des gradient boosting machines.}(\#fig:gbmSettings)
+\end{figure}
 
 #### Paramètres des covariables {-}
 
@@ -368,10 +380,14 @@ Pour ajouter un paramètre de covariable à l'étude, cliquez sur le bouton "Ajo
 
 La première partie de la vue des paramètres des covariables est l'option d'exclusion/inclusion. Les covariables sont généralement construites pour tout concept. Cependant, nous pouvons vouloir inclure ou exclure des concepts spécifiques, par exemple si un concept est lié à la définition de la cohorte cible. Pour n'inclure que certains concepts, créez un ensemble de concepts dans ATLAS puis, sous la question "**Quels concepts voulez-vous inclure dans les covariables de base du modèle de prédiction au niveau des patients ? (Laissez vide si vous voulez inclure tout)**", sélectionnez l'ensemble de concepts en cliquant sur ![](images/PopulationLevelEstimation/open.png). Nous pouvons automatiquement ajouter tous les concepts descendants aux concepts dans l'ensemble de concepts en répondant "oui" à la question "**Les concepts descendants doivent-ils être ajoutés à la liste des concepts inclus ?**" Le même processus peut être répété pour la question "**Quels concepts voulez-vous exclure dans les covariables de base du modèle de prédiction au niveau des patients ? (Laissez vide si vous voulez tout inclure)**", ce qui permet de supprimer les covariables correspondant aux concepts sélectionnés. L'option finale "**Une liste de covariables séparées par des virgules qui devraient être restreintes à**" nous permet d'ajouter un ensemble d'ID de covariable (plutôt que des ID de concepts) séparés par des virgules qui seront uniquement incluses dans le modèle. Cette option est destinée aux utilisateurs avancés. Une fois terminé, les paramètres d'inclusion et d'exclusion devraient ressembler à la Figure \@ref(fig:covariateSettings1).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings1.png" alt="Paramètres d'inclusion et d'exclusion des covariables." width="100%" />
-<p class="caption">(\#fig:covariateSettings1)Paramètres d'inclusion et d'exclusion des covariables.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings1} 
+
+}
+
+\caption{Paramètres d'inclusion et d'exclusion des covariables.}(\#fig:covariateSettings1)
+\end{figure}
 
 La section suivante permet la sélection de variables non temporelles.
 
@@ -389,10 +405,14 @@ La section suivante permet la sélection de variables non temporelles.
 
 Une fois terminé, cette section devrait ressembler à la Figure \@ref(fig:covariateSettings2).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings2.png" alt="Sélectionner les covariables." width="100%" />
-<p class="caption">(\#fig:covariateSettings2)Sélectionner les covariables.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings2} 
+
+}
+
+\caption{Sélectionner les covariables.}(\#fig:covariateSettings2)
+\end{figure}
 
 Les covariables standard permettent trois intervalles de temps flexibles pour les covariables :
 
@@ -403,10 +423,14 @@ Les covariables standard permettent trois intervalles de temps flexibles pour le
 
 Une fois terminé, cette section devrait ressembler à la Figure \@ref(fig:covariateSettings3).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings3.png" alt="Covariables liées au temps." width="100%" />
-<p class="caption">(\#fig:covariateSettings3)Covariables liées au temps.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings3} 
+
+}
+
+\caption{Covariables liées au temps.}(\#fig:covariateSettings3)
+\end{figure}
 
 L'option suivante est les covariables extraites des tables d'ère :
 
@@ -419,10 +443,14 @@ La définition de l'intervalle de temps chevauchant signifie que l'ère du médi
 
 Une fois terminé, cette section devrait ressembler à la Figure \@ref(fig:covariateSettings4).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings4.png" alt="Covariables liées aux ères de temps." width="100%" />
-<p class="caption">(\#fig:covariateSettings4)Covariables liées aux ères de temps.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings4} 
+
+}
+
+\caption{Covariables liées aux ères de temps.}(\#fig:covariateSettings4)
+\end{figure}
 
 L'option suivante sélectionne les covariables correspondant aux ID de concept dans chaque domaine pour les différents intervalles de temps :
 
@@ -442,17 +470,25 @@ L'option de comptage distinct compte le nombre de concepts ID distincts par doma
 
 Une fois terminé, cette section devrait ressembler à la Figure \@ref(fig:covariateSettings5).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings5.png" alt="Covariables liées au temps." width="100%" />
-<p class="caption">(\#fig:covariateSettings5)Covariables liées au temps.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings5} 
+
+}
+
+\caption{Covariables liées au temps.}(\#fig:covariateSettings5)
+\end{figure}
 
 L'option finale est de savoir si inclure des scores de risque couramment utilisés comme covariables. Une fois terminé, les paramètres de score de risque devraient ressembler à la Figure \@ref(fig:covariateSettings6).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/covariateSettings6.png" alt="Paramètres de score de risque covariable." width="100%" />
-<p class="caption">(\#fig:covariateSettings6)Paramètres de score de risque covariable.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/covariateSettings6} 
+
+}
+
+\caption{Paramètres de score de risque covariable.}(\#fig:covariateSettings6)
+\end{figure}
 
 #### Paramètres de population {-}
 
@@ -755,34 +791,49 @@ viewPlp(plpResult)
 
 L'application Shiny s'ouvre avec un résumé des métriques de performance sur les ensembles de test et d'entraînement (voir Figure \@ref(fig:shinySummary)). Les résultats montrent que l'AUC sur l'ensemble d'entraînement était de 0.78 et cela est tombé à 0.74 sur l'ensemble de test. L'AUC de l'ensemble de test est la mesure la plus précise. Globalement, le modèle semble pouvoir discriminer ceux qui développeront l'issue parmi les nouveaux utilisateurs d'inhibiteurs de l'enzyme de conversion de l'angiotensine (IEC) mais il a légèrement surajusté car la performance sur l'ensemble d'entraînement est plus élevée que sur l'ensemble de test. Le graphique ROC est présenté en Figure \@ref(fig:shinyROC).
 
-<div class="figure">
-<img src="images/PatientLevelPrediction/shinysummary.png" alt="Summary evaluation statistics in the Shiny app." width="100%" />
-<p class="caption">(\#fig:shinySummary)Summary evaluation statistics in the Shiny app.</p>
-</div>
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shinysummary} \caption{Summary evaluation statistics in the Shiny app.}(\#fig:shinySummary)
+\end{figure}
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/singleShiny/singleShinyRoc.png" alt="The ROC plot." width="100%" />
-<p class="caption">(\#fig:shinyROC)The ROC plot.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/singleShiny/singleShinyRoc} 
+
+}
+
+\caption{The ROC plot.}(\#fig:shinyROC)
+\end{figure}
 
 Le graphique de calibration en Figure \@ref(fig:shinyCal) montre que généralement le risque observé correspond au risque prédit puisque les points sont autour de la ligne diagonale. Le graphique de calibration démographique en Figure \@ref(fig:shinyDemo) montre cependant que le modèle n'est pas bien calibré pour les patients plus jeunes, car la ligne bleue (le risque prédit) diffère de la ligne rouge (le risque observé) pour ceux âgés de moins de 40 ans. Cela peut indiquer que nous devons retirer les moins de 40 ans de la population cible (car le risque observé pour les patients plus jeunes est presque nul).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/singleShiny/singleShinyCal.png" alt="The calibration of the model" width="100%" />
-<p class="caption">(\#fig:shinyCal)The calibration of the model</p>
-</div>
+\begin{figure}
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/singleShiny/singleShinyDemo.png" alt="The demographic calibration of the model" width="100%" />
-<p class="caption">(\#fig:shinyDemo)The demographic calibration of the model</p>
-</div>
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/singleShiny/singleShinyCal} 
+
+}
+
+\caption{The calibration of the model}(\#fig:shinyCal)
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/singleShiny/singleShinyDemo} 
+
+}
+
+\caption{The demographic calibration of the model}(\#fig:shinyDemo)
+\end{figure}
 
 Enfin, le graphique d'attrition montre la perte de patients des données étiquetées en fonction des critères d'inclusion/exclusion (voir Figure \@ref(fig:shinyAtt)). Le graphique montre que nous avons perdu une grande partie de la population cible en raison de leur observation incomplète pendant toute la période de risque (1 an de suivi). Fait intéressant, pas autant de patients avec l'issue manquaient de temps de risque complet.
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/singleShiny/singleShinyAtt.png" alt="The attrition plot for the prediction problem" width="100%" />
-<p class="caption">(\#fig:shinyAtt)The attrition plot for the prediction problem</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/singleShiny/singleShinyAtt} 
+
+}
+
+\caption{The attrition plot for the prediction problem}(\#fig:shinyAtt)
+\end{figure}
 
 
 ### Comparaison des Modèles
@@ -793,10 +844,14 @@ Le package d'étude généré par ATLAS permet de générer et d'évaluer de nom
 
 L'application Shiny interactive démarrera sur la page de résumé comme montrée en Figure \@ref(fig:multiShinySummary).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyFilter.png" alt="The shiny summary page containing key hold out set performance metrics for each model trained" width="100%" />
-<p class="caption">(\#fig:multiShinySummary)The shiny summary page containing key hold out set performance metrics for each model trained</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyFilter} 
+
+}
+
+\caption{The shiny summary page containing key hold out set performance metrics for each model trained}(\#fig:multiShinySummary)
+\end{figure}
 
 Cette table de la page de résumé contient :
 
@@ -808,10 +863,14 @@ Cette table de la page de résumé contient :
 
 Pour explorer un modèle, cliquez sur la ligne correspondante, une ligne sélectionnée sera surlignée. Avec une ligne sélectionnée, nous pouvons maintenant explorer les paramètres du modèle utilisés lors du développement en cliquant sur l'onglet *Model Settings* :
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyModel.png" alt="To view the model settings used when developing the model." width="100%" />
-<p class="caption">(\#fig:shinyModel)To view the model settings used when developing the model.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyModel} 
+
+}
+
+\caption{To view the model settings used when developing the model.}(\#fig:shinyModel)
+\end{figure}
 
 De même, nous pouvons explorer les paramètres de la population et des covariables utilisés pour générer le modèle dans les autres onglets.
 
@@ -819,33 +878,49 @@ De même, nous pouvons explorer les paramètres de la population et des covariab
 
 Une fois une ligne de modèle sélectionnée, nous pouvons également visualiser la performance du modèle. Cliquez sur ![](images/PatientLevelPrediction/performance.png) pour ouvrir le résumé de performance de seuil montré en Figure \@ref(fig:shinyPerformanceSum).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyPerformanceSum.png" alt="The summary performance measures at a set threshold." width="100%" />
-<p class="caption">(\#fig:shinyPerformanceSum)The summary performance measures at a set threshold.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyPerformanceSum} 
+
+}
+
+\caption{The summary performance measures at a set threshold.}(\#fig:shinyPerformanceSum)
+\end{figure}
 
 Cette vue de résumé montre la question de prédiction sélectionnée dans le format standard, un sélecteur de seuil et un tableau de bord contenant des métriques clés basées sur le seuil comme la valeur prédictive positive (PPV), la valeur prédictive négative (NPV), la sensibilité et la spécificité (voir Section \@ref(performance)). En Figure \@ref(fig:shinyPerformanceSum) nous voyons qu'à un seuil de 0.00482, la sensibilité est de 83.4% (83.4% des patients avec l'issue dans l'année suivante ont un risque supérieur ou égal à 0.00482) et la PPV est de 1.2% (1.2% des patients avec un risque supérieur ou égal à 0.00482 ont l'issue dans l'année suivante). Comme l'incidence de l'issue dans l'année est de 0.741%, identifier les patients avec un risque supérieur ou égal à 0.00482 trouverait un sous-groupe de patients présentant presque le double du risque du risque moyen de la population. Nous pouvons ajuster le seuil à l'aide du curseur pour voir la performance à d'autres valeurs.
 
 Pour examiner la discrimination globale du modèle, cliquez sur l'onglet "Discrimination" pour visualiser le graphique ROC, le graphique de précision-rappel et les graphiques de distribution. La ligne sur les graphiques correspond au point de seuil sélectionné. La Figure \@ref(fig:shinyPerformanceDisc) montre les graphiques ROC et de précision-rappel. Le graphique ROC montre que le modèle pouvait discriminer entre ceux qui auront l'issue dans l'année et ceux qui ne l'auront pas. Cependant, la performance semble moins impressionnante lorsqu'on voit le graphique de précision-rappel, car la faible incidence de l'issue signifie qu'il y a un taux élevé de faux positifs.
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyPerformanceDisc.png" alt="The ROC and precision-recall plots used to access the overall discrimination ability of the model." width="100%" />
-<p class="caption">(\#fig:shinyPerformanceDisc)The ROC and precision-recall plots used to access the overall discrimination ability of the model.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyPerformanceDisc} 
+
+}
+
+\caption{The ROC and precision-recall plots used to access the overall discrimination ability of the model.}(\#fig:shinyPerformanceDisc)
+\end{figure}
 
 La Figure \@ref(fig:shinyPerformanceDist) montre les distributions des scores de prédiction et de préférence.
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyPerformanceDist.png" alt="The predicted risk distribution for those with and without the outcome. The more these overlap the worse the discrimination" width="100%" />
-<p class="caption">(\#fig:shinyPerformanceDist)The predicted risk distribution for those with and without the outcome. The more these overlap the worse the discrimination</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyPerformanceDist} 
+
+}
+
+\caption{The predicted risk distribution for those with and without the outcome. The more these overlap the worse the discrimination}(\#fig:shinyPerformanceDist)
+\end{figure}
 
 Enfin, nous pouvons également inspecter la calibration du modèle en cliquant sur l'onglet "Calibration". Cela affiche le graphique de calibration et la calibration démographique illustrés en Figure \@ref(fig:shinyPerformanceCal).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyPerformanceCal.png" alt="The risk stratified calibration and demographic calibration" width="100%" />
-<p class="caption">(\#fig:shinyPerformanceCal)The risk stratified calibration and demographic calibration</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyPerformanceCal} 
+
+}
+
+\caption{The risk stratified calibration and demographic calibration}(\#fig:shinyPerformanceCal)
+\end{figure}
 
 Nous voyons que le risque prédit moyen semble correspondre à la fraction observée qui a connu l'issue dans l'année, donc le modèle est bien calibré. Fait intéressant, la calibration démographique montre que les jeunes patients ont une ligne attendue plus élevée que la ligne observée, donc nous prévoyons un risque plus élevé pour les jeunes groupes d'âge. Inversement, pour les patients de plus de 80 ans, le modèle prévoit un risque inférieur au risque observé. Cela peut nous inciter à développer des modèles séparés pour les patients plus jeunes ou plus âgés.
 
@@ -854,20 +929,30 @@ Nous voyons que le risque prédit moyen semble correspondre à la fraction obser
 
 Pour inspecter le modèle final, sélectionnez l'option ![](images/PatientLevelPrediction/modelButton.png) dans le menu de gauche. Cela ouvrira une vue contenant des graphiques pour chaque variable du modèle, montré en Figure \@ref(fig:shinyModelPlots), et une table résumant toutes les covariables candidates, montrée en Figure \@ref(fig:shinyModelTable). Les graphiques des variables sont séparés en variables binaires et continues. L'axe des x est la prévalence/moyenne chez les patients sans l'issue et l'axe des y est la prévalence/moyenne chez les patients avec l'issue. Par conséquent, tout point de variable au-dessus de la diagonale est plus courant chez les patients avec l'issue et tout point de variable en dessous de la diagonale est moins courant chez les patients avec l'issue.
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyModelPlots.png" alt="Model summary plots. Each dot corresponds to a variable included in the model." width="100%" />
-<p class="caption">(\#fig:shinyModelPlots)Model summary plots. Each dot corresponds to a variable included in the model.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyModelPlots} 
+
+}
+
+\caption{Model summary plots. Each dot corresponds to a variable included in the model.}(\#fig:shinyModelPlots)
+\end{figure}
 
 La table en Figure \@ref(fig:shinyModelTable) affiche le nom, la valeur (coefficient si utilisant un modèle linéaire général, ou importance de la variable sinon) pour toutes les covariables candidates, la moyenne de l'issue (la valeur moyenne pour ceux qui ont l'issue) et la moyenne des non-issus (la valeur moyenne pour ceux qui n'ont pas l'issue).
 
-<div class="figure" style="text-align: center">
-<img src="images/PatientLevelPrediction/shiny/shinyModelTable.png" alt="Model details table." width="100%" />
-<p class="caption">(\#fig:shinyModelTable)Model details table.</p>
-</div>
+\begin{figure}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Les modèles prédictifs ne sont pas des modèles causaux, et les prédicteurs ne doivent pas être confondus avec les causes. Il n'y a aucune garantie que la modification de l'une des variables de la Figure \@ref(fig:shinyModelTable) aura un effet sur le risque de l'issue.
-</div>\EndKnitrBlock{rmdimportant}
+{\centering \includegraphics[width=1\linewidth]{images/PatientLevelPrediction/shiny/shinyModelTable} 
+
+}
+
+\caption{Model details table.}(\#fig:shinyModelTable)
+\end{figure}
+
+\BeginKnitrBlock{rmdimportant}
+Les modèles prédictifs ne sont pas des modèles causaux, et les prédicteurs ne doivent pas être confondus avec les causes. Il n'y a aucune garantie que la modification de l'une des variables de la Figure \@ref(fig:shinyModelTable) aura un effet sur le risque de l'issue.
+
+\EndKnitrBlock{rmdimportant}
 ## Fonctionnalités Additionnelles de Prédiction au Niveau du Patient
 
 ### Génération d'Article de Journal
@@ -895,7 +980,8 @@ Pour plus de détails, consultez la page d'aide de la fonction.
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La prédiction au niveau du patient vise à développer un modèle qui prédit les événements futurs en utilisant les données passées.
+\BeginKnitrBlock{rmdsummary}
+- La prédiction au niveau du patient vise à développer un modèle qui prédit les événements futurs en utilisant les données passées.
 
 - La sélection du meilleur algorithme de machine learning pour le développement du modèle est une question empirique, c'est-à-dire qu'elle doit être guidée par le problème et les données disponibles.
 
@@ -905,7 +991,8 @@ Pour plus de détails, consultez la page d'aide de la fonction.
 
 - Le cadre de prédiction de l'OHDSI permet une validation externe à grande échelle des modèles de prédiction, ce qui est une condition préalable à l'adoption clinique.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 
 ## Exercices

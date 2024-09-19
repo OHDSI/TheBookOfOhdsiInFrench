@@ -76,11 +76,13 @@ Les principes FAIR autour de la réutilisabilité se concentrent sur des questio
 La licence des données est un sujet compliqué, surtout entre juridictions, et il serait hors de portée de ce livre de le couvrir de manière exhaustive. Cependant, il est important de dire que si vous envisagez que vos données (par exemple, les résultats d'analyse) soient librement utilisées par d'autres, il est de bonne pratique de fournir explicitement ces autorisations via une licence de données. Ce n'est pas encore une pratique courante pour la plupart des données que l'on peut trouver sur Internet, et la communauté OHDSI n'est malheureusement pas une exception ici.
  En ce qui concerne la provenance des données des bases de données OMOP, des améliorations potentielles existent pour rendre les méta-données disponibles de manière automatisée, y compris, par exemple, la version du CDM, la version des vocabulaires standardisés, les listes de codes personnalisées, etc. Les outils ETL OHDSI ne produisent pas actuellement cette information automatiquement, mais des groupes de travail tels que le Groupe de travail sur la qualité des données et le Groupe de travail sur les méta-données y travaillent activement. Un autre aspect important est la provenance des bases de données sous-jacentes elles-mêmes; il est important de savoir si un hôpital ou un système d'information de GP a été remplacé ou modifié, et quand des omissions de données connues ou d'autres problèmes de données ont eu lieu historiquement. Explorer les moyens d'attacher systématiquement ces métadonnées dans le OMOP CDM est le domaine du Groupe de travail sur les méta-données.
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La communauté OHDSI peut être vue comme une communauté scientifique ouverte qui poursuit activement l'interopérabilité et la reproductibilité de la génération de preuves médicales.
+\BeginKnitrBlock{rmdsummary}
+- La communauté OHDSI peut être vue comme une communauté scientifique ouverte qui poursuit activement l'interopérabilité et la reproductibilité de la génération de preuves médicales.
 
 - Elle plaide également pour un changement de paradigme allant d'une recherche médicale monétude et mono-estimation à une génération de preuves systématiques à grande échelle, où des faits tels que l'occurrence de base sont connus et où les preuves se concentrent sur l'estimation statistique des effets des interventions et des traitements à partir de sources de soins de santé du monde réel.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 [^1]: https://www.ohdsi.org/wp-content/uploads/2014/07/ARM-OHDSI_Duke.pdf
 [^2]: https://www.ehden.eu/webinars/

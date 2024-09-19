@@ -78,8 +78,10 @@ Tableau : (\#tab:dqdExamples) Exemples de règles de qualité des données dans 
 
 Dans l'outil, les vérifications sont organisées de plusieurs manières, l'une d'elles étant en vérifications de niveau table, champ et concept. Les vérifications au niveau table sont effectuées à un niveau élevé dans le CDM, par exemple pour déterminer si toutes les tables requises sont présentes. Les vérifications au niveau champ sont effectuées de manière à évaluer chaque champ dans chaque table pour leur conformité aux spécifications CDM. Cela inclut de s'assurer que toutes les clés primaires sont vraiment uniques et que tous les champs de concepts standards contiennent des identifiants de concepts dans le domaine correct, parmi beaucoup d'autres. Les vérifications au niveau concept vont un peu plus loin pour examiner les identifiants de concepts individuels. Beaucoup d'entre elles appartiennent à la catégorie de la plausibilité du cadre de Kahn, comme s'assurer que les concepts spécifiques au genre ne sont pas attribués à des personnes du mauvais genre (par exemple, le cancer de la prostate chez une patiente).
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">ACHILLES et DQD sont exécutés contre les données dans le CDM. Les problèmes de qualité des données identifiés de cette manière peuvent être dus à la conversion au CDM, mais peuvent également refléter des problèmes de qualité des données déjà présents dans les données sources. Si la conversion est en cause, il est généralement sous notre contrôle de remédier au problème, mais si les données sous-jacentes sont en cause, la seule solution peut être de supprimer les enregistrements problématiques.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+ACHILLES et DQD sont exécutés contre les données dans le CDM. Les problèmes de qualité des données identifiés de cette manière peuvent être dus à la conversion au CDM, mais peuvent également refléter des problèmes de qualité des données déjà présents dans les données sources. Si la conversion est en cause, il est généralement sous notre contrôle de remédier au problème, mais si les données sous-jacentes sont en cause, la seule solution peut être de supprimer les enregistrements problématiques.
+
+\EndKnitrBlock{rmdimportant}
 
 ### Tests unitaires ETL {#etlUnitTests}
 
@@ -113,10 +115,14 @@ testSql <- generateTestSql(databaseSchema = "cdm_test_schema")
 
 Le processus global est illustré dans la figure \@ref(fig:testFramework).
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/testFramework.png" alt="Unit testing an ETL (Extract-Transform-Load) process using the Rabbit-in-a-Hat testing framework." width="90%" />
-<p class="caption">(\#fig:testFramework)Unit testing an ETL (Extract-Transform-Load) process using the Rabbit-in-a-Hat testing framework.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/DataQuality/testFramework} 
+
+}
+
+\caption{Unit testing an ETL (Extract-Transform-Load) process using the Rabbit-in-a-Hat testing framework.}(\#fig:testFramework)
+\end{figure}
 
 Le test SQL retourne un tableau qui ressemblera à celui du tableau \@ref(tab:exampleTestResults). Dans ce tableau, nous voyons que nous avons réussi les deux tests que nous avions définis plus tôt.
 
@@ -149,17 +155,25 @@ Une source possible d'erreur qui relève entièrement de notre contrôle est le 
 
 Une façon de passer en revue les codes sources qui se mappent est d'utiliser la fonction `checkCohortSourceCodes` dans le package R [MethodEvaluation](https://ohdsi.github.io/MethodEvaluation/). Cette fonction utilise une définition de cohorte telle que créée par ATLAS comme entrée, et pour chaque ensemble de concepts utilisé dans la définition de cohorte, elle vérifie quels codes sources se mappent aux concepts de l'ensemble. Elle calcule également la prévalence de ces codes dans le temps pour aider à identifier les problèmes temporels associés à des codes sources spécifiques. La sortie d'exemple dans la Figure \@ref(fig:sourceCodes) montre une décomposition partielle d'un ensemble de concepts appelé "Trouble dépressif." Le concept le plus prévalent dans cet ensemble de concepts dans la base de données d'intérêt est le concept [440383](http://athena.ohdsi.org/search-terms/terms/440383) ("Trouble dépressif"). Nous voyons que trois codes sources dans la base de données se mappent à ce concept : le code CIM-9 3.11, et les codes CIM-10 F32.8 et F32.89. À gauche, nous voyons que le concept dans son ensemble montre d'abord une augmentation graduelle dans le temps, mais ensuite montre une chute brutale. Si nous regardons les codes individuels, nous voyons que cette chute peut être expliquée par le fait que le code CIM-9 cesse d'être utilisé au moment de la chute. Bien que ce soit le même moment où les codes CIM-10 commencent à être utilisés, la prévalence combinée des codes CIM-10 est bien plus faible que celle du code CIM-9. Cet exemple spécifique était dû au fait que le code CIM-10 F32.9 ("Trouble dépressif majeur, épisode unique, non spécifié") aurait également dû se mapper au concept. Ce problème a depuis été résolu dans le Vocabulaire.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/sourceCodes.png" alt="Example output of the checkCohortSourceCodes function. " width="100%" />
-<p class="caption">(\#fig:sourceCodes)Example output of the checkCohortSourceCodes function. </p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/sourceCodes} 
+
+}
+
+\caption{Example output of the checkCohortSourceCodes function. }(\#fig:sourceCodes)
+\end{figure}
 
 Bien que l'exemple précédent démontre une découverte fortuite d'un code source qui n'était pas mappé, en général l'identification des mappings manquants est plus difficile que la vérification des mappings présents. Cela nécessite de savoir quels codes sources devraient se mapper mais ne le font pas. Une façon semi-automatisée de réaliser cette évaluation est d'utiliser la fonction `findOrphanSourceCodes` dans le package R [MethodEvaluation](https://ohdsi.github.io/MethodEvaluation/). Cette fonction permet de rechercher le vocabulaire pour des codes sources en utilisant une recherche de texte simple, et elle vérifie si ces codes sources se mappent à un concept spécifique ou à l'un des descendants de ce concept. L'ensemble de codes sources résultant est ensuite restreint à uniquement ceux qui apparaissent dans la base de données CDM en question. Par exemple, dans une étude le concept "Trouble gangreneux" ([439928](http://athena.ohdsi.org/search-terms/terms/439928)) et tous ses descendants ont été utilisés pour trouver toutes les occurrences de gangrène. Pour évaluer si cela inclut vraiment tous les codes sources indiquant la gangrène, plusieurs termes (par exemple, "gangrène") ont été utilisés pour rechercher les descriptions dans les tables CONCEPT et SOURCE_TO_CONCEPT_MAP pour identifier des codes sources. Une recherche automatisée est alors utilisée pour évaluer si chaque code source de gangrène apparaissant dans les données se mappe effectivement directement ou indirectement (via l'ascendance) au concept "Trouble gangreneux." Le résultat de cette évaluation est montré dans la Figure \@ref(fig:missingMapping), révélant que le code CIM-10 J85.0 ("Gangrène et nécrose des poumons") n'était mappé qu'au concept [4324261](http://athena.ohdsi.org/search-terms/terms/4324261) ("Nécrose pulmonaire"), qui n'est pas un descendant de "Trouble gangreneux."  \index{orphan codes}
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/missingMapping.png" alt="Example orphan source code. " width="70%" />
-<p class="caption">(\#fig:missingMapping)Example orphan source code. </p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/DataQuality/missingMapping} 
+
+}
+
+\caption{Example orphan source code. }(\#fig:missingMapping)
+\end{figure}
 
 ## ACHILLES en Pratique {#achillesInPractice}
 
@@ -206,17 +220,25 @@ exportToJson(connectionDetails,
 
 Les fichiers JSON seront écrits dans le sous-dossier achillesOut, et peuvent être utilisés avec l'application web AchillesWeb pour explorer les résultats. Par exemple, la Figure \@ref(fig:achillesDataDensity) montre le graphique de densité des données ACHILLES. Ce graphique montre que la majorité des données commence en 2005. Cependant, il semble aussi y avoir quelques enregistrements datant de 1961, ce qui est probablement une erreur dans les données.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/achillesDataDensity.png" alt="The data density plot in the ACHILLES web viewer." width="100%" />
-<p class="caption">(\#fig:achillesDataDensity)The data density plot in the ACHILLES web viewer.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/achillesDataDensity} 
+
+}
+
+\caption{The data density plot in the ACHILLES web viewer.}(\#fig:achillesDataDensity)
+\end{figure}
 
 Un autre exemple est montré dans la Figure \@ref(fig:achillesCodeChange), révélant un changement soudain dans la prévalence d'un code de diagnostic de diabète. Ce changement coïncide avec des modifications des règles de remboursement dans ce pays spécifique, entraînant plus de diagnostics mais probablement pas une véritable augmentation de la prévalence dans la population sous-jacente.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/achillesCodeChange.png" alt="Monthly rate of diabetes coded in the ACHILLES web viewer." width="100%" />
-<p class="caption">(\#fig:achillesCodeChange)Monthly rate of diabetes coded in the ACHILLES web viewer.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/achillesCodeChange} 
+
+}
+
+\caption{Monthly rate of diabetes coded in the ACHILLES web viewer.}(\#fig:achillesCodeChange)
+\end{figure}
 ## Tableau de Bord de Qualité des Données en Pratique {#dqdInPractice}
 
 Ici, nous allons démontrer comment exécuter le Tableau de Bord de Qualité des Données sur une base de données au format CDM. Nous le faisons en exécutant un grand ensemble de vérifications sur la connexion CDM décrite dans la Section \@ref(achillesInPractice). Pour l'instant, le DQD ne prend en charge que la version CDM v5.3.1, donc avant de vous connecter, assurez-vous que votre base de données est dans la bonne version. Comme avec ACHILLES, nous devons créer la variable `cdmDbSchema` pour indiquer à R où chercher les données.
@@ -248,17 +270,25 @@ La variable `jsonPath` doit être le chemin vers le fichier JSON contenant les r
 
 Lorsque vous ouvrez pour la première fois le Tableau de Bord, vous serez présenté(e) avec la table d'aperçu, comme illustré dans la Figure \@ref(fig:dqdOverview). Cela vous montrera le nombre total de vérifications effectuées dans chaque catégorie Kahn, réparties par contexte, le nombre et le pourcentage de succès dans chacune, ainsi que le taux global de réussite.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/dqdOverview.png" alt="Overview of Data Quality Checks in the Data Quality Dashboard." width="100%" />
-<p class="caption">(\#fig:dqdOverview)Overview of Data Quality Checks in the Data Quality Dashboard.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/dqdOverview} 
+
+}
+
+\caption{Overview of Data Quality Checks in the Data Quality Dashboard.}(\#fig:dqdOverview)
+\end{figure}
 
 Cliquer sur *Results* dans le menu de gauche vous amènera aux résultats détaillés de chaque vérification effectuée (Figure \@ref(fig:dqdResults)). Dans cet exemple, la table montre une vérification effectuée pour déterminer la complétude des tables individuelles du CDM, ou, le nombre et le pourcentage de personnes dans le CDM avec au moins un enregistrement dans la table spécifiée. Dans ce cas, les cinq tables listées sont toutes vides, ce que le Tableau de Bord considère comme un échec. Cliquer sur l'icône ![](images/DataQuality/plusIcon.png) ouvrira une fenêtre affichant la requête exacte qui a été exécutée sur vos données pour produire les résultats listés. Cela permet d'identifier facilement les lignes considérées comme des échecs par le Tableau de Bord.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/dqdResults.png" alt="Drilldown into Data Quality Checks in the Data Quality Dashboard." width="100%" />
-<p class="caption">(\#fig:dqdResults)Drilldown into Data Quality Checks in the Data Quality Dashboard.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/dqdResults} 
+
+}
+
+\caption{Drilldown into Data Quality Checks in the Data Quality Dashboard.}(\#fig:dqdResults)
+\end{figure}
 
 
 ## Vérifications Spécifiques à l'Étude en Pratique
@@ -279,10 +309,14 @@ checkCohortSourceCodes(connectionDetails,
 
 Nous pouvons ouvrir le fichier de sortie dans un navigateur web comme illustré dans la Figure \@ref(fig:sourceCodesAngioedema). Ici, nous voyons que la définition de la cohorte angioedème a deux ensembles de concepts : "Visite en hospitalisation ou aux urgences" et "Angioedème". Dans cet exemple de base de données, les visites ont été trouvées par des codes sources spécifiques à la base de données "ER" et "IP", qui ne sont pas dans le Vocabulaire, bien qu'elles aient été mappées lors de l'ETL à des concepts standard. Nous voyons également que l'angioedème est détecté par un code ICD-9 et deux codes ICD-10. Nous voyons clairement le point dans le temps de la transition entre les deux systèmes de codage lorsque nous regardons les mini-graphes pour les codes individuels, mais pour l'ensemble de concepts dans son ensemble, il n'y a pas de discontinuité à ce moment-là.
 
-<div class="figure" style="text-align: center">
-<img src="images/DataQuality/sourceCodesAngioedema.png" alt="Source codes used in the angioedema cohort definition." width="100%" />
-<p class="caption">(\#fig:sourceCodesAngioedema)Source codes used in the angioedema cohort definition.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/DataQuality/sourceCodesAngioedema} 
+
+}
+
+\caption{Source codes used in the angioedema cohort definition.}(\#fig:sourceCodesAngioedema)
+\end{figure}
 
 Ensuite, nous pouvons rechercher des codes sources orphelins, ce qui sont des codes sources qui ne sont pas mappés à des codes de concepts standard. Ici, nous recherchons le Concept Standard "Angioedème", puis nous recherchons tous les codes et concepts qui ont "Angioedème" ou l'un des synonymes que nous fournissons dans leur nom :
 
@@ -311,7 +345,8 @@ Le seul orphelin potentiel trouvé qui est effectivement utilisé dans les donn�
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La plupart des données de soins de santé observationnelles n'ont pas été collectées à des fins de recherche.
+\BeginKnitrBlock{rmdsummary}
+- La plupart des données de soins de santé observationnelles n'ont pas été collectées à des fins de recherche.
 
 - Les contrôles de qualité des données sont une partie intégrante de la recherche. La qualité des données doit être évaluée pour déterminer si les données sont de qualité suffisante pour les besoins de la recherche.
 
@@ -321,7 +356,8 @@ Le seul orphelin potentiel trouvé qui est effectivement utilisé dans les donn�
 
 - D'autres outils existent pour évaluer la cartographie des codes pertinents pour une étude particulière.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 
 ## Exercices

@@ -108,7 +108,7 @@ Les comparaisons simples sont également prises en charge :
 
 ``` r
 sql <- "SELECT * FROM cohort {@x == 1} ? {WHERE subject_id = 1};"
-render(sql,x = 1)
+render(sql, x = 1)
 ```
 
 ```
@@ -116,7 +116,7 @@ render(sql,x = 1)
 ```
 
 ``` r
-render(sql,x = 2)
+render(sql, x = 2)
 ```
 
 ```
@@ -128,7 +128,7 @@ Ainsi que l'opérateur `IN` :
 
 ``` r
 sql <- "SELECT * FROM cohort {@x IN (1,2,3)} ? {WHERE subject_id = 1};"
-render(sql,x = 2)
+render(sql, x = 2)
 ```
 
 ```
@@ -153,8 +153,10 @@ translate(sql, targetDialect = "postgresql")
 
 Le paramètre `targetDialect` peut avoir les valeurs suivantes : "oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sqlite" et "sql server". \index{SqlRender!translation}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Il existe des limites quant à ce que les fonctions et constructions SQL peuvent être traduites correctement, à la fois parce qu'un ensemble limité de règles de traduction ont été implémentées dans le package, mais aussi parce que certaines fonctionnalités SQL n'ont pas d'équivalent dans tous les dialectes. Ceci est la raison principale pour laquelle le SQL OHDSI a été développé en tant que nouveau dialecte SQL à part entière. Cependant, chaque fois que possible, nous avons gardé la syntaxe SQL Server pour éviter de réinventer la roue.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Il existe des limites quant à ce que les fonctions et constructions SQL peuvent être traduites correctement, à la fois parce qu'un ensemble limité de règles de traduction ont été implémentées dans le package, mais aussi parce que certaines fonctionnalités SQL n'ont pas d'équivalent dans tous les dialectes. Ceci est la raison principale pour laquelle le SQL OHDSI a été développé en tant que nouveau dialecte SQL à part entière. Cependant, chaque fois que possible, nous avons gardé la syntaxe SQL Server pour éviter de réinventer la roue.
+
+\EndKnitrBlock{rmdimportant}
 
 Malgré nos meilleurs efforts, il y a beaucoup de considérations à prendre en compte lors de l'écriture de SQL OHDSI qui s'exécutera sans erreur sur toutes les plateformes prises en charge. Ce qui suit discute de ces considérations en détail.
 
@@ -293,7 +295,7 @@ translate(sql, targetDialect = "oracle", oracleTempSchema = "temp_schema")
 ```
 
 ```
-## [1] "SELECT * FROM temp_schema.a9c8fjrkchildren ;"
+## [1] "SELECT * FROM temp_schema.qtde687uchildren ;"
 ## attr(,"sqlDialect")
 ## [1] "oracle"
 ```
@@ -369,10 +371,14 @@ launchSqlRenderDeveloper()
 
 Cela ouvrira le navigateur par défaut avec l'application montrée sur la Figure \@ref(fig:sqlDeveloper). L'application est également disponible publiquement sur le web.[^sqlDeveloperUrl]
 
-<div class="figure" style="text-align: center">
-<img src="images/SqlAndR/sqlDeveloper.png" alt="The SqlDeveloper Shiny app." width="100%" />
-<p class="caption">(\#fig:sqlDeveloper)The SqlDeveloper Shiny app.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/SqlAndR/sqlDeveloper} 
+
+}
+
+\caption{The SqlDeveloper Shiny app.}(\#fig:sqlDeveloper)
+\end{figure}
 
 Dans l'application, vous pouvez entrer du SQL OHDSI, sélectionner le dialecte cible ainsi que fournir des valeurs pour les paramètres qui apparaissent dans votre SQL, et la traduction apparaîtra automatiquement en bas.
 
@@ -679,10 +685,14 @@ QueryLibrary est une bibliothèque de requêtes SQL couramment utilisées pour l
 
 [^queryLibraryPackageUrl]: https://github.com/OHDSI/QueryLibrary
 
-<div class="figure" style="text-align: center">
-<img src="images/SqlAndR/queryLibrary.png" alt="QueryLibrary : une bibliothèque de requêtes SQL contre le CDM." width="100%" />
-<p class="caption">(\#fig:queryLibrary)QueryLibrary : une bibliothèque de requêtes SQL contre le CDM.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/SqlAndR/queryLibrary} 
+
+}
+
+\caption{QueryLibrary : une bibliothèque de requêtes SQL contre le CDM.}(\#fig:queryLibrary)
+\end{figure}
 
 L'objectif de la bibliothèque est d'aider les nouveaux utilisateurs à apprendre à interroger le CDM. Les requêtes dans la bibliothèque ont été examinées et approuvées par la communauté OHDSI. La bibliothèque de requêtes est principalement destinée à des fins de formation, mais elle est également une ressource précieuse pour les utilisateurs expérimentés.
 
@@ -918,7 +928,8 @@ ggplot(results, aes(x = age, y = ir, group = gender, color = gender)) +
   xlab("Âge") +
   ylab("Incidence (pour 1 000 patients-semaines)")
 ```
-<img src="images/SqlAndR/ir.png" width="80%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.8\linewidth]{images/SqlAndR/ir} \end{center}
 
 ### Nettoyage
 
@@ -945,7 +956,8 @@ Notez que, à des fins de démonstration, nous avons choisi de créer nos cohort
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- **SQL** (Structured Query Language) est un langage standard pour interroger les bases de données, y compris celles qui sont conformes au Common Data Model (CDM).
+\BeginKnitrBlock{rmdsummary}
+- **SQL** (Structured Query Language) est un langage standard pour interroger les bases de données, y compris celles qui sont conformes au Common Data Model (CDM).
 
 - Différentes plateformes de bases de données ont des dialectes SQL différents et nécessitent des outils différents pour les interroger.
 
@@ -955,7 +967,8 @@ Notez que, à des fins de démonstration, nous avons choisi de créer nos cohort
 
 - La **QueryLibrary** fournit une collection de requêtes SQL réutilisables pour le CDM.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 ## Exercices
 
 #### Prérequis {-}

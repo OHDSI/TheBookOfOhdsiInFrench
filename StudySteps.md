@@ -112,7 +112,8 @@ Il est important à cette étape de faire examiner votre protocole finalisé par
 ```{r studyProcess, fig.cap="Diagram of the study process.", echo=FALSE, out.width='90%', fig.align
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- L'étude doit examiner une question bien définie.
+\BeginKnitrBlock{rmdsummary}
+- L'étude doit examiner une question bien définie.
 - Effectuer des vérifications appropriées de la qualité, de l'exhaustivité et de la pertinence des données à l'avance.
 - Recommander d'inclure un expert de la base de données source dans le processus de développement du protocole si possible.
 - Documenter l'étude proposée dans un protocole à l'avance.
@@ -120,4 +121,5 @@ Il est important à cette étape de faire examiner votre protocole finalisé par
 - L'étude doit être enregistrée et approuvée (si nécessaire) avant l'exécution de l'étude.
 - Le rapport final ou le manuscrit doit être revu par des experts cliniques et d'autres parties prenantes.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

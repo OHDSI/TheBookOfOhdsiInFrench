@@ -127,8 +127,10 @@ Et la sortie désirée est :
 
 L'estimation au niveau de la population et la prédiction au niveau du patient se chevauchent dans une certaine mesure. Par exemple, un cas d'utilisation important pour la prédiction est de prédire un résultat pour un patient spécifique si le médicament A avait été prescrit et également prédire le même résultat si le médicament B avait été prescrit. Supposons qu'en réalité, l'un de ces médicaments est prescrit (disons le médicament A) donc nous voyons si le résultat après le traitement avec A se produit effectivement. Puisque le médicament B n'a pas été prescrit, le résultat après le traitement B, bien que prévisible, est "contrefactuel" car il n'est jamais observé. Chacune de ces tâches de prédiction relève de la prédiction au niveau du patient. Cependant, la différence (ou le ratio) entre les deux résultats est un effet *causal* au niveau de l'unité, et doit être estimé en utilisant des méthodes d'estimation des effets causaux à la place.
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Les gens ont une tendance naturelle à interpréter à tort les modèles prédictifs comme s'ils étaient des modèles causaux. Mais un modèle prédictif ne peut montrer que la corrélation, jamais la causalité. Par exemple, l'utilisation de médicaments pour diabétiques pourrait être un fort prédicteur de l'infarctus du myocarde (IM) parce que le diabète est un fort facteur de risque pour l'IM. Cependant, cela ne signifie pas que l'arrêt des médicaments pour diabétiques empêchera l'IM !
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Les gens ont une tendance naturelle à interpréter à tort les modèles prédictifs comme s'ils étaient des modèles causaux. Mais un modèle prédictif ne peut montrer que la corrélation, jamais la causalité. Par exemple, l'utilisation de médicaments pour diabétiques pourrait être un fort prédicteur de l'infarctus du myocarde (IM) parce que le diabète est un fort facteur de risque pour l'IM. Cependant, cela ne signifie pas que l'arrêt des médicaments pour diabétiques empêchera l'IM !
+
+\EndKnitrBlock{rmdimportant}
 
 
 ## Exemples De Cas D'utilisation Dans L'Hypertension
@@ -169,7 +171,8 @@ L'absence de données dans les bases de données OHDSI présente des défis subt
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Dans la recherche observationnelle, nous distinguons trois grandes catégories d'études de cas.
+\BeginKnitrBlock{rmdsummary}
+- Dans la recherche observationnelle, nous distinguons trois grandes catégories d'études de cas.
 
 - **Caractérisation** vise à répondre à la question "Que leur est-il arrivé ?"
 
@@ -181,7 +184,8 @@ L'absence de données dans les bases de données OHDSI présente des défis subt
 
 - Il y a des questions qui ne peuvent pas être résolues en utilisant des données de santé observationnelles.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 ## Exercices
 

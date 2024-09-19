@@ -14,10 +14,9 @@ Cette norme est fournie par le Modèle de Données Commun (CDM). Le CDM, combin�
 
 Un aperçu de toutes les tables du CDM est fourni dans la Figure \@ref(fig:cdmDiagram). \index{Common Data Model!schéma du modèle de données}
 
-<div class="figure">
-<img src="images/CommonDataModel/cdmDiagram.png" alt="Aperçu de toutes les tables dans le CDM version 6.0. Notez que toutes les relations entre les tables ne sont pas montrées." width="100%" />
-<p class="caption">(\#fig:cdmDiagram)Aperçu de toutes les tables dans le CDM version 6.0. Notez que toutes les relations entre les tables ne sont pas montrées.</p>
-</div>
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/CommonDataModel/cdmDiagram} \caption{Aperçu de toutes les tables dans le CDM version 6.0. Notez que toutes les relations entre les tables ne sont pas montrées.}(\#fig:cdmDiagram)
+\end{figure}
 
 ## Principes de Conception
 
@@ -113,17 +112,20 @@ De nombreuses tables contiennent des informations équivalentes à plusieurs end
 
 Les valeurs sources ne sont fournies que pour des raisons de commodité et de garantie de qualité (QA). Elles peuvent contenir des informations qui ne sont significatives que dans le contexte d'une source de données spécifique. L'utilisation des valeurs sources et des concepts de source est facultative, bien que **fortement recommandée** si les données sources utilisent des systèmes de codage. Cependant, les concepts standards **sont obligatoires**. Cette utilisation obligatoire de concepts standards est ce qui permet à toutes les instances de CDM de parler le même langage. Par exemple, la condition "Tuberculose pulmonaire" (TB, Figure \@ref(fig:pulmTubICD9)) montre que le code ICD9CM pour la TB est 011.
 
-<div class="figure" style="text-align: center">
-<img src="images/CommonDataModel/pulmTubICD9.png" alt="ICD9CM code for Pulmonary Tuberculosis" width="75%" />
-<p class="caption">(\#fig:pulmTubICD9)ICD9CM code for Pulmonary Tuberculosis</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.75\linewidth]{images/CommonDataModel/pulmTubICD9} 
+
+}
+
+\caption{ICD9CM code for Pulmonary Tuberculosis}(\#fig:pulmTubICD9)
+\end{figure}
 
 Sans contexte, le code 011 pourrait être interprété comme "Hospital Inpatient (Including Medicare Part A)" du vocabulaire UB04, ou comme "Nervous System Neoplasms without Complications, Comorbidities" du vocabulaire DRG. C'est ici que les identifiants de concepts, qu'ils soient de source ou standards, sont précieux. La valeur CONCEPT_ID qui représente le code 011 ICD9CM est [44828631](http://athena.ohdsi.org/search-terms/terms/44828631). Cela différencie l'ICD9CM du UBO4 et du DRG. Le concept de source ICD9CM TB se mappe sur le concept standard [253954](http://athena.ohdsi.org/search-terms/terms/253954) du vocabulaire SNOMED à travers la relation "Non-standard to Standard map (OMOP)" comme montré dans la figure \@ref(fig:pulmTubMap). Cette même relation de mappage existe pour les codes Read, ICD10, CIEL et MeSH, entre autres, de sorte que toute recherche qui se réfère au concept standard SNOMED est sûre d'inclure tous les codes sources supportés.
 
-<div class="figure">
-<img src="images/CommonDataModel/pulmTubMap.png" alt="SNOMED code for Pulmonary Tuberculosis" width="100%" />
-<p class="caption">(\#fig:pulmTubMap)SNOMED code for Pulmonary Tuberculosis</p>
-</div>
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/CommonDataModel/pulmTubMap} \caption{SNOMED code for Pulmonary Tuberculosis}(\#fig:pulmTubMap)
+\end{figure}
 
 Un exemple de la manière dont la relation entre concept standard et concept de source est représentée est montré dans le tableau \@ref(tab:conditionOccurrence).
 ## Tables standardisées CDM
@@ -140,7 +142,8 @@ Pour illustrer comment ces tableaux sont utilisés en pratique, les données d'u
 
 L'endométriose est une condition douloureuse dans laquelle des cellules normalement présentes dans la paroi de l'utérus d'une femme se trouvent ailleurs dans le corps. Les cas sévères peuvent entraîner l'infertilité, ainsi que des problèmes intestinaux et urinaires. Les sections suivantes détailleront l'expérience d'une patiente avec cette maladie et comment elle pourrait être représentée dans le Modèle de Données Commun.
 
-<img src="images/CommonDataModel/Lauren.jpg" width="50%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.5\linewidth]{images/CommonDataModel/Lauren} \end{center}
 
 > Chaque étape de ce douloureux parcours, j'ai dû convaincre tout le monde de la douleur que je ressentais.
 
@@ -283,14 +286,16 @@ Ce chapitre couvre seulement une partie des tables disponibles dans le CDM comme
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Le CDM est conçu pour soutenir un large éventail d'activités de recherche observationnelle.
+\BeginKnitrBlock{rmdsummary}
+- Le CDM est conçu pour soutenir un large éventail d'activités de recherche observationnelle.
 
 - Le CDM est un modèle centré sur la personne.
 
 - Le CDM standardise non seulement la structure des données, mais grâce aux Vocabularies Standardisés, il standardise également la représentation du contenu.
 
 - Les codes sources sont maintenus dans le CDM pour une traçabilité complète.
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 
 ## Exercices

@@ -19,10 +19,14 @@ Dans ce chapitre, nous décrivons d'abord divers designs d'études d'estimation 
 
 \index{méthode cohorte}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/cohortMethod.png" alt="Le design de la cohorte de nouveaux utilisateurs. Les sujets observés pour initier le traitement cible sont comparés à ceux initiant le traitement comparateur. Pour ajuster les différences entre les deux groupes de traitement, plusieurs stratégies d'ajustement peuvent être utilisées, telles que la stratification, l'appairage ou la pondération par le score de propension, ou en ajoutant des caractéristiques initiales au modèle de résultat. Les caractéristiques incluses dans le modèle de propension ou le modèle de résultat sont capturées avant l'initiation du traitement." width="90%" />
-<p class="caption">(\#fig:cohortMethod)Le design de la cohorte de nouveaux utilisateurs. Les sujets observés pour initier le traitement cible sont comparés à ceux initiant le traitement comparateur. Pour ajuster les différences entre les deux groupes de traitement, plusieurs stratégies d'ajustement peuvent être utilisées, telles que la stratification, l'appairage ou la pondération par le score de propension, ou en ajoutant des caractéristiques initiales au modèle de résultat. Les caractéristiques incluses dans le modèle de propension ou le modèle de résultat sont capturées avant l'initiation du traitement.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/cohortMethod} 
+
+}
+
+\caption{Le design de la cohorte de nouveaux utilisateurs. Les sujets observés pour initier le traitement cible sont comparés à ceux initiant le traitement comparateur. Pour ajuster les différences entre les deux groupes de traitement, plusieurs stratégies d'ajustement peuvent être utilisées, telles que la stratification, l'appairage ou la pondération par le score de propension, ou en ajoutant des caractéristiques initiales au modèle de résultat. Les caractéristiques incluses dans le modèle de propension ou le modèle de résultat sont capturées avant l'initiation du traitement.}(\#fig:cohortMethod)
+\end{figure}
 
 La méthode de cohorte tente d'émuler un essai clinique randomisé. [@hernan_2016] Les sujets observés pour initier un traitement (le cible) sont comparés aux sujets initiant un autre traitement (le comparateur) et sont suivis pendant une période spécifique après l'initiation du traitement, par exemple le temps qu'ils restent sous traitement. Nous pouvons spécifier les questions auxquelles nous souhaitons répondre dans une étude de cohorte en faisant les cinq choix mis en évidence dans le Tableau \@ref(tab:cmChoices). \index{cohorte cible!méthode cohorte} \index{cohorte comparatrice} \index{cohorte résultat!méthode cohorte}
 
@@ -38,8 +42,10 @@ Tableau: (\#tab:cmChoices) Principaux choix de conception dans un design de coho
 
 Le choix du modèle spécifie, entre autres, le type de modèle de résultat. Par exemple, nous pourrions utiliser une régression logistique, qui évalue si le résultat s'est produit ou non, et produit un odds ratio. Une régression logistique suppose que le temps à risque est de la même durée pour les deux groupes cible et comparateur, ou est sans importance. Alternativement, nous pourrions choisir une régression de Poisson qui estime le ratio de taux d'incidence, en supposant un taux d'incidence constant. Souvent, une régression de Cox est utilisée, qui considère le temps jusqu'au premier résultat pour estimer le rapport de risques, en supposant des risques proportionnels entre le groupe cible et le comparateur. \index{régression logistique} \index{régression de Poisson} \index{régression de Cox} \index{modèle des risques proportionnels de Cox|see {régression de Cox}}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">La méthode de cohorte de nouveaux utilisateurs est intrinsèquement une méthode d'estimation de l'effet comparatif, comparant un traitement à un autre. Il est difficile d'utiliser cette méthode pour comparer un traitement à l'absence de traitement, car il est difficile de définir un groupe de personnes non exposées comparable au groupe exposé. Si l'on veut utiliser ce design pour une estimation directe de l'effet, la manière préférée est de sélectionner un traitement comparateur pour la même indication que l'exposition d'intérêt, où le traitement comparateur est censé n'avoir aucun effet sur le résultat. Malheureusement, un tel comparateur peut ne pas toujours être disponible.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+La méthode de cohorte de nouveaux utilisateurs est intrinsèquement une méthode d'estimation de l'effet comparatif, comparant un traitement à un autre. Il est difficile d'utiliser cette méthode pour comparer un traitement à l'absence de traitement, car il est difficile de définir un groupe de personnes non exposées comparable au groupe exposé. Si l'on veut utiliser ce design pour une estimation directe de l'effet, la manière préférée est de sélectionner un traitement comparateur pour la même indication que l'exposition d'intérêt, où le traitement comparateur est censé n'avoir aucun effet sur le résultat. Malheureusement, un tel comparateur peut ne pas toujours être disponible.
+
+\EndKnitrBlock{rmdimportant}
 
 Une préoccupation majeure est que les patients recevant le traitement cible peuvent systématiquement différer de ceux recevant le traitement comparateur. Par exemple, supposons que la cohorte cible ait en moyenne 60 ans, tandis que la cohorte comparatrice ait en moyenne 40 ans. Comparer la cohorte cible à la cohorte comparatrice par rapport à tout résultat de santé lié à l'âge (par exemple, un AVC) pourrait alors montrer des différences substantielles entre les cohortes. Un enquêteur non informé pourrait conclure qu'il existe une association causale entre le traitement cible et l'AVC par rapport au comparateur. Plus prosaïquement ou couramment, l'enquêteur pourrait conclure qu'il existe des patients cibles ayant subi un AVC qui ne l'auraient pas fait s'ils avaient reçu le comparateur. Cette conclusion pourrait bien être entièrement incorrecte ! Peut-être que ces patients cibles ont disproportionnellement subi un AVC simplement parce qu'ils sont plus âgés ; peut-être que les patients cibles qui ont subi un AVC l'auraient bien fait même s'ils avaient reçu le comparateur. Dans ce contexte, l'âge est un "facteur de confusion". Un mécanisme pour gérer les facteurs de confusion dans les études observationnelles est à travers les scores de propension. \index{facteur de confusion}
 
@@ -59,8 +65,10 @@ Le scoring par propension contrôle les facteurs de confusion mesurés. En fait,
 
 Dans le passé, les PS étaient calculés sur la base de caractéristiques sélectionnées manuellement, et bien que les outils OHDSI puissent prendre en charge de telles pratiques, nous préférons utiliser de nombreuses caractéristiques génériques (c'est-à-dire des caractéristiques qui ne sont pas sélectionnées en fonction des expositions et résultats spécifiques de l'étude). [@tian_2018] Ces caractéristiques incluent les données démographiques, ainsi que tous les diagnostics, expositions aux médicaments, mesures et procédures médicales observées avant et le jour de l'initiation du traitement. Un modèle implique généralement de 10 000 à 100 000 caractéristiques uniques, que nous ajustons à l'aide de la régression régularisée à grande échelle [@suchard_2013] implémentée dans le package [Cyclops](https://ohdsi.github.io/Cyclops/). Essentiellement, nous laissons les données décider quelles caractéristiques sont prédictives de l'affectation au traitement et doivent être incluses dans le modèle.
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Nous incluons généralement le jour de l'initiation du traitement dans la fenêtre de capture des covariables, car de nombreux points de données pertinents, tels que le diagnostic conduisant au traitement, sont enregistrés à cette date. Ce jour-là, les traitements cible et comparateur eux-mêmes sont également enregistrés, mais ceux-ci ne doivent *pas* être inclus dans le modèle de propension, car ils sont précisément ce que nous essayons de prédire. Nous devons donc explicitement exclure les traitements cible et comparateur de l'ensemble des covariables
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Nous incluons généralement le jour de l'initiation du traitement dans la fenêtre de capture des covariables, car de nombreux points de données pertinents, tels que le diagnostic conduisant au traitement, sont enregistrés à cette date. Ce jour-là, les traitements cible et comparateur eux-mêmes sont également enregistrés, mais ceux-ci ne doivent *pas* être inclus dans le modèle de propension, car ils sont précisément ce que nous essayons de prédire. Nous devons donc explicitement exclure les traitements cible et comparateur de l'ensemble des covariables
+
+\EndKnitrBlock{rmdimportant}
 
 Certains ont soutenu qu'une approche de sélection des covariables fondée sur les données, qui ne dépend pas de l'expertise clinique pour spécifier la "bonne" structure causale, court le risque d'inclure par erreur des variables instrumentales et des colliders, augmentant ainsi la variance et potentiellement introduisant un biais. [@hernan_2002] Cependant, ces préoccupations sont peu susceptibles d'avoir un impact important dans des scénarios du monde réel. [@schneeweiss_2018] De plus, en médecine, la véritable structure causale est rarement connue, et lorsqu'on demande à différents chercheurs d'identifier les « bonnes » covariables à inclure pour une question de recherche spécifique, chaque chercheur viendra invariablement avec une liste différente, rendant ainsi le processus irréprochable. Plus important encore, nos diagnostics tels que l'inspection du modèle de propension, l'évaluation de l'équilibre sur toutes les covariables, et l'inclusion de contrôles négatifs identifieraient la plupart des problèmes liés aux colliders et aux variables instrumentales. \index{variables instrumentales} \index{colliders}
 
@@ -91,22 +99,32 @@ Une bonne pratique vérifie toujours que l'ajustement du PS réussit à créer d
 
 \index{self-controlled cohort design}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/selfControlledCohort.png" alt="Le design de cohorte auto-contrôlée. Le taux d'événements pendant l'exposition à l'élément cible est comparé au taux d'événements dans le temps précédent l'exposition." width="90%" />
-<p class="caption">(\#fig:scc)Le design de cohorte auto-contrôlée. Le taux d'événements pendant l'exposition à l'élément cible est comparé au taux d'événements dans le temps précédent l'exposition.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/selfControlledCohort} 
+
+}
+
+\caption{Le design de cohorte auto-contrôlée. Le taux d'événements pendant l'exposition à l'élément cible est comparé au taux d'événements dans le temps précédent l'exposition.}(\#fig:scc)
+\end{figure}
 
 Le design de cohorte auto-contrôlée (SCC) [@ryan_2013] compare le taux d'événements pendant l'exposition au taux d'événements dans le temps juste avant l'exposition. Les quatre choix montrés dans le Tableau \@ref(tab:sccChoices) définissent une question de cohorte auto-contrôlée. \index{target cohort!self-controlled cohort design} \index{outcome cohort!self-controlled cohort design}
 
-
-Table: (\#tab:sccChoices)Principaux choix de conception dans un design de cohorte auto-contrôlée.
-
-|Choix                |Description                                                                                                                                                                                                                      |
-|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Cohorte cible        |Une cohorte représentant le traitement                                                                                                                                                                                           |
-|Cohorte de résultats |Une cohorte représentant le résultat dintérêt            &#124;
-&#124; Temps à risque      &#124; À quel moment (souvent par rapport aux dates de début et de fin de la cohorte cible) considérons-nous le risque de lévénement ? |
-|Temps de contrôle    |La période utilisée comme temps de contrôle                                                                                                                                                                                      |
+\begin{table}
+\centering
+\caption{(\#tab:sccChoices)Principaux choix de conception dans un design de cohorte auto-contrôlée.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{9cm}}
+\toprule
+Choix & Description\\
+\midrule
+Cohorte cible & Une cohorte représentant le traitement\\
+Cohorte de résultats & Une cohorte représentant le résultat dintérêt            |
+| Temps à risque      | À quel moment (souvent par rapport aux dates de début et de fin de la cohorte cible) considérons-nous le risque de lévénement ?\\
+Temps de contrôle & La période utilisée comme temps de contrôle\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Parce que les mêmes sujets qui composent le groupe exposé sont également utilisés comme groupe de contrôle, aucun ajustement des différences entre les personnes n'est nécessaire. Cependant, la méthode est vulnérable à d'autres différences, telles que les différences dans le risque de base de l'événement entre différentes périodes.
 
@@ -115,23 +133,33 @@ Parce que les mêmes sujets qui composent le groupe exposé sont également util
 
 \index{case-control design}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/caseControl.png" alt="Le design cas-témoin. Les sujets avec l'événement (‘cas’) sont comparés aux sujets sans l'événement (‘témoins’) en termes de leur statut d'exposition. Souvent, les cas et les témoins sont appariés sur diverses caractéristiques telles que l'âge et le sexe." width="90%" />
-<p class="caption">(\#fig:caseControl)Le design cas-témoin. Les sujets avec l'événement (‘cas’) sont comparés aux sujets sans l'événement (‘témoins’) en termes de leur statut d'exposition. Souvent, les cas et les témoins sont appariés sur diverses caractéristiques telles que l'âge et le sexe.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/caseControl} 
+
+}
+
+\caption{Le design cas-témoin. Les sujets avec l'événement (‘cas’) sont comparés aux sujets sans l'événement (‘témoins’) en termes de leur statut d'exposition. Souvent, les cas et les témoins sont appariés sur diverses caractéristiques telles que l'âge et le sexe.}(\#fig:caseControl)
+\end{figure}
 
 Les études cas-témoins [@vandenbroucke_2012] considèrent la question "les personnes ayant un résultat spécifique de maladie sont-elles exposées plus fréquemment à un agent spécifique que celles sans la maladie?" Ainsi, l'idée centrale est de comparer les "cas", c'est-à-dire les sujets qui éprouvent le résultat d'intérêt, avec les "témoins", c'est-à-dire les sujets qui n'ont pas éprouvé le résultat d'intérêt. Les choix dans le Tableau \@ref(tab:ccChoices) définissent une question de cas-témoin. \index{outcome cohort!case-control design} \index{target cohort!case-control design} \index{nesting cohort!case-control design}
 
-
-Table: (\#tab:ccChoices)Principaux choix de conception dans un design cas-témoin.
-
-|Choix                |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Cohorte de résultats |Une cohorte représentant les cas (le résultat dintérêt) &#124;
-&#124; Cohorte de témoins    &#124; Une cohorte représentant les témoins. Typiquement, la cohorte de témoins est dérivée automatiquement de la cohorte de résultats en utilisant une certaine logique de sélection &#124;
-&#124; Cohorte cible     &#124; Une cohorte représentant le traitement                       &#124;
-&#124; Cohorte de nidification  &#124; Optionnellement, une cohorte définissant la sous-population doù sont tirés les cas et les témoins |
-|Temps à risque       |À quel moment (souvent par rapport à la date dindexation) considérons-nous le statut dexposition ?                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+\begin{table}
+\centering
+\caption{(\#tab:ccChoices)Principaux choix de conception dans un design cas-témoin.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{9cm}}
+\toprule
+Choix & Description\\
+\midrule
+Cohorte de résultats & Une cohorte représentant les cas (le résultat dintérêt) |
+| Cohorte de témoins    | Une cohorte représentant les témoins. Typiquement, la cohorte de témoins est dérivée automatiquement de la cohorte de résultats en utilisant une certaine logique de sélection |
+| Cohorte cible     | Une cohorte représentant le traitement                       |
+| Cohorte de nidification  | Optionnellement, une cohorte définissant la sous-population doù sont tirés les cas et les témoins\\
+Temps à risque & À quel moment (souvent par rapport à la date dindexation) considérons-nous le statut dexposition ?\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Souvent, on choisit des témoins pour correspondre aux cas en fonction de caractéristiques telles que l'âge et le sexe afin de les rendre plus comparables. Une autre pratique courante est de nicher l'analyse dans un sous-groupe spécifique de personnes, par exemple des personnes ayant toutes été diagnostiquées avec une des indications de l'exposition d'intérêt.
 
@@ -140,44 +168,64 @@ Souvent, on choisit des témoins pour correspondre aux cas en fonction de caract
 
 \index{case-crossover design}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/caseCrossover.png" alt="Le design de cas-croisés. Le temps autour de l'événement est comparé à une date de contrôle fixée à un intervalle prédéfini avant la date de l'événement." width="90%" />
-<p class="caption">(\#fig:caseCrossover)Le design de cas-croisés. Le temps autour de l'événement est comparé à une date de contrôle fixée à un intervalle prédéfini avant la date de l'événement.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/caseCrossover} 
+
+}
+
+\caption{Le design de cas-croisés. Le temps autour de l'événement est comparé à une date de contrôle fixée à un intervalle prédéfini avant la date de l'événement.}(\#fig:caseCrossover)
+\end{figure}
 
 Le design de cas-croisés [@maclure_1991] évalue si le taux d'exposition est différent au moment de l'événement qu'à un certain nombre de jours prédéfinis avant l'événement. Il cherche à déterminer s'il y a quelque chose de spécial à propos du jour où l'événement s'est produit. Le Tableau \@ref(tab:ccrChoices) montre les choix qui définissent une question de cas-croisés. \index{outcome cohort!case-crossover design} \index{target cohort!case-crossover design}
 
-
-Table: (\#tab:ccrChoices)Principaux choix de conception dans un design de cas-croisés.
-
-|Choix                |Description                                                                                          |
-|:--------------------|:----------------------------------------------------------------------------------------------------|
-|Cohorte de résultats |Une cohorte représentant les cas (le résultat d'intérêt)                                             |
-|Cohorte cible        |Une cohorte représentant le traitement                                                               |
-|Temps à risque       |À quel moment (souvent par rapport à la date d'indexation) considérons-nous le statut d'exposition ? |
-|Temps de contrôle    |La période utilisée comme temps de contrôle                                                          |
+\begin{table}
+\centering
+\caption{(\#tab:ccrChoices)Principaux choix de conception dans un design de cas-croisés.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{9cm}}
+\toprule
+Choix & Description\\
+\midrule
+Cohorte de résultats & Une cohorte représentant les cas (le résultat d'intérêt)\\
+Cohorte cible & Une cohorte représentant le traitement\\
+Temps à risque & À quel moment (souvent par rapport à la date d'indexation) considérons-nous le statut d'exposition ?\\
+Temps de contrôle & La période utilisée comme temps de contrôle\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Les cas servent de leurs propres témoins. En tant que designs auto-contrôlés, ils devraient être robustes pour les biais dus aux différences entre les personnes. Une préoccupation est que, parce que la date de l'événement est toujours postérieure à la date de contrôle, la méthode sera biaisée positivement si la fréquence globale de l'exposition augmente avec le temps (ou biaisée négativement s'il y a une diminution). Pour y remédier, le design de contrôle du temps des cas [@suissa_1995] a été développé, qui ajoute des témoins, appariés par exemple sur l'âge et le sexe, au design de cas-croisés pour ajuster les tendances d'exposition. \index{case-time-control design}
 ## Le Design des Séries de Cas Auto-Contrôlées
 
 \index{self-controlled case series (SCCS) design}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/selfControlledCaseSeries.png" alt="The Self-Controlled Case Series design. The rate of outcomes during exposure is compared to the rate of outcomes when not exposed." width="90%" />
-<p class="caption">(\#fig:selfControlledCaseSeries)The Self-Controlled Case Series design. The rate of outcomes during exposure is compared to the rate of outcomes when not exposed.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/selfControlledCaseSeries} 
+
+}
+
+\caption{The Self-Controlled Case Series design. The rate of outcomes during exposure is compared to the rate of outcomes when not exposed.}(\#fig:selfControlledCaseSeries)
+\end{figure}
 
 Le design des séries de cas auto-contrôlées (SCCS) [@farrington_1995; @whitaker_2006] compare le taux de résultats pendant l'exposition au taux de résultats pendant tout le temps non exposé, y compris avant, entre et après les expositions. Il s'agit d'une régression de Poisson conditionnée sur la personne. Ainsi, il cherche à répondre à la question : « Étant donné qu'un patient a le résultat, est-il plus probable que le résultat se produise pendant le temps exposé par rapport au temps non exposé ? ». Les choix dans le Tableau \@ref(tab:sccsChoices) définissent une question SCCS. \index{outcome cohort!SCCS design} \index{target cohort!SCCS design}
 
-
-Table: (\#tab:sccsChoices)Principaux choix de conception dans un design de séries de cas auto-contrôlées.
-
-|Choice         |Description                                                                                                                                                                                                                                                                                                                                                                   |
-|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Target cohort  |Un cohort représentant le traitement                                                                                                                                                                                                                                                                                                                                          |
-|Outcome cohort |Un cohort représentant le résultat dintérêt            &#124;
-&#124; Time-at-risk      &#124; À quel moment (souvent par rapport aux dates de début et de fin du cohort cible) considérons-nous le risque de résultat ?  &#124;
-&#124; Model             &#124; Le modèle pour estimer leffet, y compris les ajustements pour les facteurs de confusion variables dans le temps |
+\begin{table}
+\centering
+\caption{(\#tab:sccsChoices)Principaux choix de conception dans un design de séries de cas auto-contrôlées.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{9cm}}
+\toprule
+Choice & Description\\
+\midrule
+Target cohort & Un cohort représentant le traitement\\
+Outcome cohort & Un cohort représentant le résultat dintérêt            |
+| Time-at-risk      | À quel moment (souvent par rapport aux dates de début et de fin du cohort cible) considérons-nous le risque de résultat ?  |
+| Model             | Le modèle pour estimer leffet, y compris les ajustements pour les facteurs de confusion variables dans le temps\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Comme d'autres designs auto-contrôlés, le SCCS est robuste aux biais de confusion dus aux différences entre les personnes, mais vulnérable aux biais de confusion dus aux effets variables dans le temps. Plusieurs ajustements sont possibles pour tenter de les prendre en compte, par exemple en incluant l'âge et la saison. Une variante spéciale du SCCS inclut non seulement l'exposition d'intérêt, mais aussi toutes les autres expositions aux médicaments enregistrés dans la base de données [@simpson_2013], ajoutant potentiellement des milliers de variables supplémentaires au modèle. La régularisation L1 avec sélection du paramètre d'hyper-régularisation par validation croisée est appliquée aux coefficients de toutes les expositions sauf l'exposition d'intérêt.
 
@@ -238,10 +286,14 @@ Dans la fonction de design d'Estimation, il y a trois sections : Comparaisons, P
 
 Une étude peut comporter une ou plusieurs comparaisons. Cliquez sur "Ajouter une comparaison", ce qui ouvrira une nouvelle boîte de dialogue. Cliquez sur ![](images/PopulationLevelEstimation/open.png) pour sélectionner les cohortes cibles et comparatives. En cliquant sur "Ajouter un résultat", nous pouvons ajouter nos deux cohortes de résultats. Nous supposons que les cohortes ont déjà été créées dans ATLAS comme décrit dans le Chapitre \@ref(Cohorts). L'Annexe fournit les définitions complètes des cohortes cibles (Annexe \@ref(AceInhibitorsMono)), comparateurs (Annexe \@ref(ThiazidesMono)), et de résultats (Annexe \@ref(Angioedema) et Annexe \@ref(Ami)). Une fois terminé, la boîte de dialogue devrait ressembler à la Figure \@ref(fig:comparisons).
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/comparisons.png" alt="The comparison dialog" width="100%" />
-<p class="caption">(\#fig:comparisons)The comparison dialog</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/comparisons} 
+
+}
+
+\caption{The comparison dialog}(\#fig:comparisons)
+\end{figure}
 
 Notez que nous pouvons sélectionner plusieurs résultats pour une paire cible-comparateur. Chaque résultat sera traité indépendamment et donnera lieu à une analyse séparée.
 
@@ -249,10 +301,14 @@ Notez que nous pouvons sélectionner plusieurs résultats pour une paire cible-c
 
 Les résultats de contrôle négatif sont des résultats qui ne sont pas censés être causés par la cible ou le comparateur, de sorte que le vrai ratio de risque est de 1. Idéalement, nous aurions des définitions de cohorte appropriées pour chaque cohorte de résultat. Cependant, en général, nous avons seulement un ensemble de concepts, avec un concept par résultat de contrôle négatif, et une certaine logique standard pour les convertir en cohortes de résultats. Ici, nous supposons que l'ensemble de concepts a déjà été créé comme décrit dans le Chapitre \@ref(MethodValidity), et peut simplement être sélectionné. L'ensemble de concepts de contrôle négatif devrait contenir un concept par contrôle négatif, et ne pas inclure les descendants. La Figure \@ref(fig:ncConceptSet) montre l'ensemble de concepts de contrôle négatif utilisé pour cette étude.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/ncConceptSet.png" alt="Negative Control concept set." width="100%" />
-<p class="caption">(\#fig:ncConceptSet)Negative Control concept set.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/ncConceptSet} 
+
+}
+
+\caption{Negative Control concept set.}(\#fig:ncConceptSet)
+\end{figure}
 
 #### Concepts à inclure {-}
 
@@ -262,17 +318,25 @@ Lors de la sélection des concepts à inclure, nous pouvons spécifier quelles c
 
 Plutôt que de spécifier quels concepts inclure, nous pouvons spécifier les concepts à *exclure*. Lorsque nous soumettons un ensemble de concepts dans ce champ, nous utilisons toutes les covariables sauf celles que nous avons soumises. Lors de l'utilisation de l'ensemble par défaut de covariables, qui inclut tous les médicaments et procédures survenant le jour de l'initiation du traitement, nous devons exclure le traitement cible et comparateur ainsi que tous les concepts directement liés à ceux-ci. Par exemple, si l'exposition cible est une injection, nous devrions non seulement exclure le médicament, mais aussi la procédure d'injection du modèle de propension. Dans cet exemple, les covariables que nous voulons exclure sont ACEi et THZ. La Figure \@ref(fig:covsToExclude) montre que nous sélectionnons un ensemble de concepts incluant tous ces concepts, y compris leurs descendants.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/covsToExclude.png" alt="The concept set defining the concepts to exclude." width="100%" />
-<p class="caption">(\#fig:covsToExclude)The concept set defining the concepts to exclude.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/covsToExclude} 
+
+}
+
+\caption{The concept set defining the concepts to exclude.}(\#fig:covsToExclude)
+\end{figure}
 
 Après avoir sélectionné les contrôles négatifs et les covariables à exclure, la moitié inférieure de la boîte de dialogue des comparaisons devrait ressembler à la Figure \@ref(fig:comparisons2).
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/comparisons2.png" alt="The comparison window showing concept sets for negative controls and concepts to exclude." width="100%" />
-<p class="caption">(\#fig:comparisons2)The comparison window showing concept sets for negative controls and concepts to exclude.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/comparisons2} 
+
+}
+
+\caption{The comparison window showing concept sets for negative controls and concepts to exclude.}(\#fig:comparisons2)
+\end{figure}
 
 ### Paramètres d'analyse de l'estimation des effets
 
@@ -294,19 +358,27 @@ L'option "**Ne faut-il inclure que la première exposition par sujet ?**" peut �
 
 Si les options "tout garder" ou "garder le premier" sont sélectionnées, nous pourrions vouloir censurer le temps quand une personne est dans les deux cohortes. Cela est illustré à la Figure \@ref(fig:tar). Par défaut, le temps-à-risque est défini par rapport à la date de début et de fin de la cohorte. Dans cet exemple, le temps-à-risque commence un jour après l'entrée dans la cohorte et se termine à la fin de la cohorte. Sans censurer le temps-à-risque, les temps-à-risque des deux cohortes pourraient se chevaucher. Cela est particulièrement problématique si nous choisissons de tout garder, car tout résultat qui se produit pendant ce chevauchement (comme indiqué) sera compté deux fois. Si nous choisissons de censurer, le temps-à-risque de la première cohorte se termine lorsque le temps-à-risque de la deuxième cohorte commence.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/tar.png" alt="Time-at-risk (TAR) for subjects who are in both cohorts, assuming time-at-risk starts the day after treatment initiation, and stops at exposure end." width="90%" />
-<p class="caption">(\#fig:tar)Time-at-risk (TAR) for subjects who are in both cohorts, assuming time-at-risk starts the day after treatment initiation, and stops at exposure end.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/PopulationLevelEstimation/tar} 
+
+}
+
+\caption{Time-at-risk (TAR) for subjects who are in both cohorts, assuming time-at-risk starts the day after treatment initiation, and stops at exposure end.}(\#fig:tar)
+\end{figure}
 
 Nous pouvons choisir de **supprimer les sujets ayant eu le résultat avant le début de la fenêtre de risque**, parce que souvent une deuxième occurrence d'un résultat est la continuation de la première. Par exemple, lorsque quelqu'un développe une insuffisance cardiaque, une deuxième occurrence est probable, ce qui signifie que l'insuffisance cardiaque n'a probablement jamais complètement régressé entre-temps. D'un autre côté, certains résultats sont épisodiques et nous nous attendons à ce que les patients aient plus d'une occurrence indépendante, comme une infection des voies respiratoires supérieures. Si nous choisissons de supprimer les personnes ayant déjà eu le résultat, nous pouvons sélectionner **le nombre de jours à regarder en arrière lors de l'identification des résultats antérieurs**.
 
 Nos choix pour notre étude d'exemple sont montrés dans la Figure \@ref(fig:studyPopulation). Parce que nos définitions de cohortes cibles et comparateurs restreignent déjà à la première exposition et nécessitent une période d'observation avant le début du traitement, nous n'appliquons pas ces critères ici.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/studyPopulation.png" alt="Study population settings." width="100%" />
-<p class="caption">(\#fig:studyPopulation)Study population settings.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/studyPopulation} 
+
+}
+
+\caption{Study population settings.}(\#fig:studyPopulation)
+\end{figure}
 
 #### Paramètres des covariables {-}
 
@@ -316,10 +388,14 @@ Nous pouvons modifier l'ensemble des covariables en spécifiant des concepts à 
 
 La Figure \@ref(fig:covariateSettings) montre nos choix pour cette étude. Notez que nous avons choisi d'ajouter les descendants au concept à exclure, que nous avons défini dans les paramètres de comparaison de la Figure \@ref(fig:comparisons2).
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/covariateSettings.png" alt="Covariate settings." width="100%" />
-<p class="caption">(\#fig:covariateSettings)Covariate settings.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/covariateSettings} 
+
+}
+
+\caption{Covariate settings.}(\#fig:covariateSettings)
+\end{figure}
 
 #### Temps à risque {-}
 
@@ -329,13 +405,19 @@ Nous fixons la fin du temps-à-risque à la fin de la cohorte, donc lorsque l'ex
 
 Un patient avec zéro jours de risque n'ajoute aucune information, donc les **jours minimums de risque** sont normalement fixés à un jour. S'il y a une latence connue pour l'effet secondaire, cela peut être augmenté pour obtenir une proportion plus informative. Cela peut également être utilisé pour créer une cohorte plus similaire à celle d'un essai randomisé à laquelle elle est comparée (par exemple, tous les patients dans l'essai randomisé ont été observés pendant au moins N jours).
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Une règle d'or dans la conception d'une étude de cohorte est de ne jamais utiliser des informations qui tombent après la date de début de la cohorte pour définir la population de l'étude, car cela pourrait introduire des biais. Par exemple, si nous exigeons que tout le monde ait au moins un an de temps-à-risque, nous aurons probablement limité nos analyses à ceux qui tolèrent bien le traitement. Ce paramètre devrait donc être utilisé avec une extrême prudence.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Une règle d'or dans la conception d'une étude de cohorte est de ne jamais utiliser des informations qui tombent après la date de début de la cohorte pour définir la population de l'étude, car cela pourrait introduire des biais. Par exemple, si nous exigeons que tout le monde ait au moins un an de temps-à-risque, nous aurons probablement limité nos analyses à ceux qui tolèrent bien le traitement. Ce paramètre devrait donc être utilisé avec une extrême prudence.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/timeAtRisk.png" alt="Time-at-risk settings." width="100%" />
-<p class="caption">(\#fig:timeAtRisk)Time-at-risk settings.</p>
-</div>
+\EndKnitrBlock{rmdimportant}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/timeAtRisk} 
+
+}
+
+\caption{Time-at-risk settings.}(\#fig:timeAtRisk)
+\end{figure}
 
 #### Ajustement du score de propension {-}
 
@@ -633,10 +715,14 @@ Nos estimations ne sont valides que si plusieurs hypothèses ont été respecté
 
 Nous devons d'abord évaluer si la cohorte cible et la cohorte comparatrice sont dans une certaine mesure comparables. Pour cela, nous pouvons calculer la statistique de l'aire sous la courbe ROC (AUC) pour le modèle de propension. Une AUC de 1 indique que l'assignation du traitement était complètement prévisible en fonction des covariables de base, et que les deux groupes sont donc incomparables. Nous pouvons utiliser la fonction `computePsAuc` pour calculer l'AUC, qui dans notre exemple est de 0.79. En utilisant la fonction `plotPs`, nous pouvons également générer la distribution des scores de préférence comme montré dans la Figure \@ref(fig:ps). Ici, nous voyons que pour de nombreuses personnes, le traitement qu'elles ont reçu était prévisible, mais il y a également une grande quantité de chevauchement, indiquant que l'ajustement peut être utilisé pour sélectionner des groupes comparables. \index{score de préférence!exemple}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/ps.png" alt="Distribution des scores de préférence." width="80%" />
-<p class="caption">(\#fig:ps)Distribution des scores de préférence.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/PopulationLevelEstimation/ps} 
+
+}
+
+\caption{Distribution des scores de préférence.}(\#fig:ps)
+\end{figure}
 
 En général, il est également judicieux d'inspecter le modèle de propension lui-même, et ceci est particulièrement vrai si le modèle est très prédictif. De cette façon, nous pouvons découvrir quelles variables sont les plus prédictives. Le Tableau \@ref(tab:psModel) montre les principaux prédicteurs dans notre modèle de propension. Notez que si une variable est trop prédictive, le package CohortMethod renverra une erreur informative plutôt que d'essayer de s'adapter à un modèle déjà connu pour être parfaitement prédictif. \index{modèle de propension!exemple}
 
@@ -655,44 +741,62 @@ Table : (\#tab:psModel) Les 10 principaux prédicteurs dans le modèle de propen
 | 0.52 | (Intercept) |
 | 0.50 | genre = HOMME |
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Si une variable est trouvée comme étant fortement prédictive, il y a deux conclusions possibles : soit nous trouvons que la variable fait clairement partie de l'exposition elle-même et doit être retirée avant de modéliser, soit nous devons conclure que les deux populations sont vraiment incomparables, et l'analyse doit être arrêtée.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Si une variable est trouvée comme étant fortement prédictive, il y a deux conclusions possibles : soit nous trouvons que la variable fait clairement partie de l'exposition elle-même et doit être retirée avant de modéliser, soit nous devons conclure que les deux populations sont vraiment incomparables, et l'analyse doit être arrêtée.
+
+\EndKnitrBlock{rmdimportant}
 
 ### Équilibre des Covariables
 
 Le but de l'utilisation des PS est de rendre les deux groupes comparables (ou au moins de sélectionner des groupes comparables). Nous devons vérifier si cela est atteint, par exemple en vérifiant si les covariables de base sont effectivement équilibrées après ajustement. Nous pouvons utiliser les fonctions `computeCovariateBalance` et `plotCovariateBalanceScatterPlot` pour générer la Figure \@ref(fig:balance). Une règle empirique à utiliser est qu'aucune covariable ne doit avoir une différence standardisée absolue de moyennes supérieure à 0.1 après ajustement par les scores de propension. Ici, nous voyons que bien qu'il y ait eu un déséquilibre substantiel avant l'appariement, après l'appariement nous respectons ce critère. \index{équilibre des covariables!exemple}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/balance.png" alt="Équilibre des covariables, montrant la différence standardisée absolue des moyennes avant et après l'appariement des scores de propension. Chaque point représente une covariable." width="70%" />
-<p class="caption">(\#fig:balance)Équilibre des covariables, montrant la différence standardisée absolue des moyennes avant et après l'appariement des scores de propension. Chaque point représente une covariable.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/PopulationLevelEstimation/balance} 
+
+}
+
+\caption{Équilibre des covariables, montrant la différence standardisée absolue des moyennes avant et après l'appariement des scores de propension. Chaque point représente une covariable.}(\#fig:balance)
+\end{figure}
 
 ### Suivi et Puissance
 
 Avant de s'ajuster à un modèle de résultat, nous pourrions être intéressés à savoir si nous avons une puissance suffisante pour détecter une taille d'effet particulière. Il est logique d'effectuer ces calculs de puissance une fois que la population d'étude a été entièrement définie, en tenant compte de la perte due aux divers critères d'inclusion et d'exclusion (comme l'absence de résultats antérieurs), et de la perte due à l'appariement et / ou au rognage. Nous pouvons visualiser l'attrition des sujets dans notre étude en utilisant la fonction `drawAttritionDiagram` comme montré dans la Figure \@ref(fig:attrition). \index{diagramme d'attrition}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/attrition.png" alt="Diagramme d'attrition. Les comptes montrés en haut sont ceux qui répondent à nos définitions de cohortes cible et comparatrice. Les comptes en bas sont ceux qui entrent dans notre modèle de résultat, dans ce cas une régression de Cox." width="70%" />
-<p class="caption">(\#fig:attrition)Diagramme d'attrition. Les comptes montrés en haut sont ceux qui répondent à nos définitions de cohortes cible et comparatrice. Les comptes en bas sont ceux qui entrent dans notre modèle de résultat, dans ce cas une régression de Cox.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/PopulationLevelEstimation/attrition} 
+
+}
+
+\caption{Diagramme d'attrition. Les comptes montrés en haut sont ceux qui répondent à nos définitions de cohortes cible et comparatrice. Les comptes en bas sont ceux qui entrent dans notre modèle de résultat, dans ce cas une régression de Cox.}(\#fig:attrition)
+\end{figure}
 
 Puisque la taille de l'échantillon est fixe dans les études rétrospectives (les données ont déjà été collectées), et la véritable taille d'effet est inconnue, il est donc moins significatif de calculer la puissance en fonction d'une taille d'effet attendue. Au lieu de cela, le package CohortMethod fournit la fonction `computeMdrr` pour calculer le risque relatif minimum détectable (MDRR). Dans notre exemple d'étude, le MDRR est de 1.69. \index{risque relatif minimum détectable (MDRR)} \index{puissance}
 
 Pour mieux comprendre la quantité de suivi disponible, nous pouvons également inspecter la distribution du temps de suivi. Nous avons défini le temps de suivi comme le temps à risque, donc non censurée par la survenue de l'événement. La fonction `getFollowUpDistribution` peut fournir un aperçu simple comme montré dans la Figure \@ref(fig:followUp), ce qui suggère que le temps de suivi pour les deux cohortes est comparable.
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/followUp.png" alt="Distribution du temps de suivi pour les cohortes cible et comparatrice." width="80%" />
-<p class="caption">(\#fig:followUp)Distribution du temps de suivi pour les cohortes cible et comparatrice.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/PopulationLevelEstimation/followUp} 
+
+}
+
+\caption{Distribution du temps de suivi pour les cohortes cible et comparatrice.}(\#fig:followUp)
+\end{figure}
 
 ### Kaplan-Meier
 
 Une dernière vérification consiste à examiner le graphique de Kaplan-Meier, montrant la survie au fil du temps dans les deux cohortes. En utilisant la fonction `plotKaplanMeier`, nous pouvons créer la \@ref(fig:kmPlot), que nous pouvons vérifier par exemple si notre hypothèse de proportionnalité des risques est valide. Le graphique de Kaplan-Meier s'ajuste automatiquement pour la stratification ou la pondération par PS. Dans ce cas, parce que l'appariement à ratio variable est utilisé, la courbe de survie pour les groupes comparateurs est ajustée pour imiter ce à quoi la courbe aurait ressemblé pour le groupe cible s'il avait été exposé au comparateur à la place. \index{graphique de Kaplan-Meier} \index{graphique de survie|see {graphique de Kaplan-Meier}}
 
-<div class="figure" style="text-align: center">
-<img src="images/PopulationLevelEstimation/kmPlot.png" alt="Graphique de Kaplan-Meier." width="100%" />
-<p class="caption">(\#fig:kmPlot)Graphique de Kaplan-Meier.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/PopulationLevelEstimation/kmPlot} 
+
+}
+
+\caption{Graphique de Kaplan-Meier.}(\#fig:kmPlot)
+\end{figure}
 
 ### Estimation de la Taille de l'Effet
 
@@ -701,7 +805,8 @@ Nous observons un rapport des risques de 4.32 (intervalle de confiance à 95% : 
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- L'estimation au niveau de la population vise à déduire des effets causaux à partir de données observationnelles.
+\BeginKnitrBlock{rmdsummary}
+- L'estimation au niveau de la population vise à déduire des effets causaux à partir de données observationnelles.
 
 - Le **contrefactuel**, ce qui se serait passé si le sujet avait reçu une exposition alternative ou aucune exposition, ne peut pas être observé.
 
@@ -709,7 +814,8 @@ Nous observons un rapport des risques de 4.32 (intervalle de confiance à 95% : 
 
 - Les diverses conceptions telles qu'implémentées dans la Bibliothèque de méthodes OHDSI fournissent des diagnostics pour évaluer si les hypothèses pour créer un contrefactuel approprié ont été respectées.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 
 ## Exercices

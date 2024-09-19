@@ -303,7 +303,4 @@ hist(data$value,
      breaks=5)
 ```
 
-<div class="figure">
-<img src="Glossary_files/figure-html/unnamed-chunk-5-1.png" alt="Histogramme après imputation des valeurs manquantes" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-5)Histogramme après imputation des valeurs manquantes</p>
-</div>
+![(\#fig:unnamed-chunk-5)Histogramme après imputation des valeurs manquantes](Glossary_files/figure-latex/unnamed-chunk-5-1.pdf) 

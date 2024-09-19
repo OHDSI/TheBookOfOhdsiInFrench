@@ -11,10 +11,14 @@ Dans ce chapitre, nous décrivons d'abord les différentes manières dont nous p
 
 La figure \@ref(fig:implementations) montre les différentes manières dont nous pouvons choisir de mettre en œuvre une étude sur une base de données utilisant le CDM. \index{implémentation de l'analyse}
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/implementations.png" alt="Différentes manières d'implémenter une analyse sur les données du CDM." width="90%" />
-<p class="caption">(\#fig:implementations)Différentes manières d'implémenter une analyse sur les données du CDM.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/OhdsiAnalyticsTools/implementations} 
+
+}
+
+\caption{Différentes manières d'implémenter une analyse sur les données du CDM.}(\#fig:implementations)
+\end{figure}
 
 Il y a principalement trois approches pour mettre en œuvre une étude. La première est d'écrire du code personnalisé qui n'utilise aucun des outils proposés par OHDSI. On pourrait écrire une analyse de novo en R, SAS, ou tout autre langage. Cela offre une flexibilité maximale et peut en fait être la seule option si l'analyse spécifique n'est prise en charge par aucun de nos outils. Cependant, cette voie nécessite beaucoup de compétences techniques, de temps et d'efforts, et à mesure que l'analyse devient plus complexe, il devient plus difficile d'éviter les erreurs dans le code.
 
@@ -29,10 +33,14 @@ ATLAS et la Bibliothèque de Méthodes ne sont pas indépendants. Certaines des 
 
 Outre la stratégie utilisée pour mettre en œuvre notre analyse contre le CDM, par exemple via du codage personnalisé ou l'utilisation de code analytique standard dans la Bibliothèque de Méthodes, il existe également plusieurs stratégies pour utiliser ces techniques analytiques afin de générer des preuves. La figure \@ref(fig:strategies) met en évidence trois stratégies employées chez OHDSI.
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/strategies.png" alt="Stratégies pour générer des preuves pour des questions (cliniques)." width="90%" />
-<p class="caption">(\#fig:strategies)Stratégies pour générer des preuves pour des questions (cliniques).</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/OhdsiAnalyticsTools/strategies} 
+
+}
+
+\caption{Stratégies pour générer des preuves pour des questions (cliniques).}(\#fig:strategies)
+\end{figure}
 
 La première stratégie considère chaque analyse comme une étude individuelle unique. L'analyse doit être pré-spécifiée dans un protocole, mise en œuvre sous forme de code, exécutée sur les données, après quoi le résultat peut être compilé et interprété. Pour chaque question, toutes les étapes doivent être répétées. Un exemple de cette analyse est l'étude d'OHDSI sur le risque d'angioedème associé au lévétiracétam par rapport à la phénytoïne. [@duke_2017] Ici, un protocole a d'abord été rédigé, le code d'analyse utilisant la Bibliothèque de Méthodes d'OHDSI a été développé et exécuté à travers le réseau OHDSI, et les résultats ont été compilés et disséminés dans une publication de journal.
 
@@ -49,10 +57,14 @@ ATLAS est un outil web gratuit et accessible au public, développé par la commu
 [^atlasUrl]: http://www.ohdsi.org/web/atlas
 
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/atlas.png" alt="ATLAS user interface." width="100%" />
-<p class="caption">(\#fig:atlas)ATLAS user interface.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/atlas} 
+
+}
+
+\caption{ATLAS user interface.}(\#fig:atlas)
+\end{figure}
 
 Une capture d'écran d'ATLAS est fournie à la Figure \@ref(fig:atlas). À gauche se trouve une barre de navigation montrant les différentes fonctions fournies par ATLAS :
 
@@ -118,10 +130,14 @@ L'installation d'ATLAS se fait en combinaison avec le WebAPI d'OHDSI. Les guides
 
 La [Bibliothèque de Méthodes OHDSI](https://ohdsi.github.io/MethodsLibrary/) est la collection de packages R open source présentés dans la Figure \@ref(fig:methodsLibrary). \index{bibliothèque de méthodes}
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/methodsLibrary.png" alt="Packages in the OHDSI Methods Library." width="100%" />
-<p class="caption">(\#fig:methodsLibrary)Packages in the OHDSI Methods Library.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/methodsLibrary} 
+
+}
+
+\caption{Packages in the OHDSI Methods Library.}(\#fig:methodsLibrary)
+\end{figure}
 
 Les packages offrent des fonctions R qui, ensemble, peuvent être utilisées pour réaliser une étude observationnelle complète, à partir des données dans le CDM, et aboutissant à des estimations et des statistiques, figures et tableaux de soutien. Les packages interagissent directement avec les données observationnelles dans le CDM, et peuvent être utilisés simplement pour fournir une compatibilité multiplateforme pour des analyses complètement personnalisées comme décrit au Chapitre \@ref(SqlAndR), ou peuvent fournir des analyses standardisées avancées pour la caractérisation de la population (Chapitre \@ref(Characterization)), l'estimation de l'effet au niveau de la population (Chapitre \@ref(PopulationLevelEstimation)), et la prédiction au niveau des patients (Chapitre \@ref(PatientLevelPrediction)). La Bibliothèque de Méthodes soutient les meilleures pratiques pour l'utilisation des données observationnelles et la conception des études observationnelles telles qu'enseignées par des recherches passées et en cours, telles que la transparence, la reproductibilité, ainsi que la mesure des caractéristiques de fonctionnement des méthodes dans un contexte particulier et l'étalonnage empirique des estimations produites par les méthodes.
 
@@ -170,29 +186,43 @@ Voici les étapes pour installer l'environnement requis pour exécuter les packa
 
 Ci-dessous, nous décrivons comment installer chacun de ces éléments dans un environnement Windows.
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Sous Windows, R et Java existent en versions 32 bits et 64 bits. Si vous installez R dans les deux architectures, vous **devez** également installer Java dans les deux architectures. Il est recommandé de n'installer que la version 64 bits de R.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Sous Windows, R et Java existent en versions 32 bits et 64 bits. Si vous installez R dans les deux architectures, vous **devez** également installer Java dans les deux architectures. Il est recommandé de n'installer que la version 64 bits de R.
+
+\EndKnitrBlock{rmdimportant}
 
 #### Installer R {-}
 
 1. Aller sur [https://cran.r-project.org/](https://cran.r-project.org/), cliquez sur "Download R for Windows", puis "base", puis cliquez sur le lien de téléchargement indiqué dans la Figure \@ref(fig:downloadR).
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/downloadR.png" alt="Downloading R from CRAN." width="100%" />
-<p class="caption">(\#fig:downloadR)Downloading R from CRAN.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/downloadR} 
+
+}
+
+\caption{Downloading R from CRAN.}(\#fig:downloadR)
+\end{figure}
 
 2. Après avoir terminé le téléchargement, exécutez le programme d'installation. Utilisez les options par défaut partout, à deux exceptions près : Premièrement, il est préférable de ne pas installer dans les fichiers de programme. Au lieu de cela, faites simplement de R un sous-dossier de votre lecteur C comme montré dans la Figure \@ref(fig:rDestination). Deuxièmement, pour éviter les problèmes dus aux différences d'architectures entre R et Java, désactivez l'architecture 32 bits comme montré dans la Figure \@ref(fig:no32Bits).
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/rDestination.png" alt="Settings the destination folder for R." width="80%" />
-<p class="caption">(\#fig:rDestination)Settings the destination folder for R.</p>
-</div>
+\begin{figure}
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/no32Bits.png" alt="Disabling the 32-bit version of R." width="80%" />
-<p class="caption">(\#fig:no32Bits)Disabling the 32-bit version of R.</p>
-</div>
+{\centering \includegraphics[width=0.8\linewidth]{images/OhdsiAnalyticsTools/rDestination} 
+
+}
+
+\caption{Settings the destination folder for R.}(\#fig:rDestination)
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/OhdsiAnalyticsTools/no32Bits} 
+
+}
+
+\caption{Disabling the 32-bit version of R.}(\#fig:no32Bits)
+\end{figure}
 
 Une fois terminé, vous devriez pouvoir sélectionner R depuis votre menu Démarrer.
 
@@ -206,10 +236,14 @@ Une fois terminé, vous devriez pouvoir sélectionner R depuis votre menu Démar
 
 1. Aller sur [https://www.rstudio.com/](https://www.rstudio.com/), sélectionnez "Download RStudio" (ou le bouton "Download" sous "RStudio"), optez pour la version gratuite, et téléchargez le programme d'installation pour Windows comme montré dans la Figure \@ref(fig:downloadRStudio).
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/downloadRStudio.png" alt="Downloading RStudio." width="100%" />
-<p class="caption">(\#fig:downloadRStudio)Downloading RStudio.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/downloadRStudio} 
+
+}
+
+\caption{Downloading RStudio.}(\#fig:downloadRStudio)
+\end{figure}
 
 2. Après avoir téléchargé, démarrer le programme d'installation, et utilisez les options par défaut partout.
 
@@ -217,10 +251,14 @@ Une fois terminé, vous devriez pouvoir sélectionner R depuis votre menu Démar
 
 1. Aller sur [https://java.com/en/download/manual.jsp](https://java.com/en/download/manual.jsp), et sélectionnez le programme d'installation Windows 64 bits comme montré dans la Figure \@ref(fig:downloadJava). Si vous avez également installé la version 32 bits de R, vous *devez* également installer l'autre version (32 bits) de Java.
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/downloadJava.png" alt="Downloading Java." width="100%" />
-<p class="caption">(\#fig:downloadJava)Downloading Java.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/downloadJava} 
+
+}
+
+\caption{Downloading Java.}(\#fig:downloadJava)
+\end{figure}
 
 2. Après avoir téléchargé, exécutez simplement le programme d'installation.
 
@@ -269,23 +307,32 @@ OHDSI-in-a-Box est spécifiquement créé comme un environnement d'apprentissage
 
 [^ohdsiInaBoxUrl]: https://github.com/OHDSI/OHDSI-in-a-Box
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/OHDSI-in-a-BoxDiagram.png" alt="The Amazon Web Services architecture for OHDSI-in-a-Box." width="100%" />
-<p class="caption">(\#fig:ohdsiinaboxDiagram)The Amazon Web Services architecture for OHDSI-in-a-Box.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/OHDSI-in-a-BoxDiagram} 
+
+}
+
+\caption{The Amazon Web Services architecture for OHDSI-in-a-Box.}(\#fig:ohdsiinaboxDiagram)
+\end{figure}
 
 OHDSIonAWS est une architecture de référence pour des environnements OHDSI de classe entreprise, multi-utilisateurs, évolutifs et tolérants aux pannes qui peuvent être utilisés par les organisations pour effectuer leurs analyses de données. Il comprend plusieurs ensembles de données échantillons et peut également charger automatiquement les données de santé réelles de votre organisation. Les données sont placées sur la plateforme de base de données Amazon Redshift, qui est supportée par les outils OHDSI. Les résultats intermédiaires d'ATLAS sont stockés dans une base de données PostgreSQL. Du côté frontal, les utilisateurs ont accès à ATLAS et à RStudio via une interface web (utilisant RStudio Server). Dans RStudio, la Méthode Bibliothèque OHDSI est déjà installée et peut être utilisée pour se connecter aux bases de données. L'automatisation pour déployer OHDSIonAWS est open-source et peut être personnalisée pour inclure les outils de gestion et les meilleures pratiques de votre organisation. L'architecture de OHDSIonAWS est décrite dans la Figure \@ref(fig:ohdsionawsDiagram).
 
 [^ohdsiOnAwsUrl]: https://github.com/OHDSI/OHDSIonAWS
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiAnalyticsTools/OHDSIonAWSDiagram.png" alt="The Amazon Web Services architecture for OHDSIonAWS." width="100%" />
-<p class="caption">(\#fig:ohdsionawsDiagram)The Amazon Web Services architecture for OHDSIonAWS.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiAnalyticsTools/OHDSIonAWSDiagram} 
+
+}
+
+\caption{The Amazon Web Services architecture for OHDSIonAWS.}(\#fig:ohdsionawsDiagram)
+\end{figure}
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Nous pouvons effectuer des analyses sur les données du CDM en
+\BeginKnitrBlock{rmdsummary}
+- Nous pouvons effectuer des analyses sur les données du CDM en
     - écrivant du code personnalisé
     - écrivant du code qui utilise les packages R dans la Méthode Bibliothèque OHDSI
     - utilisant la plateforme d'analyse interactive ATLAS
@@ -301,4 +348,5 @@ OHDSIonAWS est une architecture de référence pour des environnements OHDSI de 
 
 - Plusieurs stratégies existent pour faciliter le déploiement des outils OHDSI.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

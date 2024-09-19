@@ -10,12 +10,14 @@ La mission d'OHDSI est de générer des preuves de haute qualité grâce à la r
 
 Le réseau de recherche OHDSI est une collaboration internationale de chercheurs visant à faire progresser la recherche sur les données observationnelles en santé. Aujourd'hui, le réseau est composé de plus de 100 bases de données standardisées selon le modèle de données commun OMOP, représentant collectivement plus d'un milliard de dossiers de patients. OHDSI est un réseau ouvert, invitant les institutions de santé du monde entier disposant de données au niveau des patients à rejoindre le réseau en convertissant leurs données au CDM OMOP et en participant aux études de recherche du réseau. Une fois les conversions de données terminées, les collaborateurs sont invités à signaler les informations du site dans le recensement du Réseau de Données tenu par le [Responsable du Programme OHDSI](mailto:contact@ohdsi.org). Chaque site du réseau OHDSI participe volontairement. Il n'y a pas d'obligations strictes. Chaque site choisit de participer à chaque étude du réseau. Dans chaque étude, les données restent sur le site derrière un pare-feu. **Aucun regroupement de données au niveau des patients n'a lieu entre les sites du réseau.** **Seuls les résultats agrégés sont partagés.**
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Avantages pour un Propriétaire de Données de Rejoindre le Réseau OHDSI**
+\BeginKnitrBlock{rmdimportant}
+**Avantages pour un Propriétaire de Données de Rejoindre le Réseau OHDSI**
 
 - **Accès à des outils gratuits :** OHDSI publie des outils gratuits et open source pour la caractérisation des données et les analyses standardisées (par ex. parcourir les concepts cliniques, définir et caractériser des cohortes, mener des études d'Estimation au Niveau de la Population et de Prédiction au Niveau des Patients).
 - **Participer à une communauté de recherche de premier plan :** Rédiger et publier des recherches en réseau, collaborer avec des leaders de divers disciplines et groupes de parties prenantes.
 - **Opportunité de comparer les soins :** Les études de réseau peuvent permettre des benchmarks de caractérisation clinique et d'amélioration de la qualité entre partenaires de données.
-</div>\EndKnitrBlock{rmdimportant}
+
+\EndKnitrBlock{rmdimportant}
 
 ## Études en réseau OHDSI
 
@@ -33,8 +35,10 @@ Les études en réseau offrent donc l'opportunité d'enquêter sur les effets de
 
 ### Définition d'une étude en réseau OHDSI
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Quand une étude est-elle considérée comme une étude en *réseau*?** Une étude OHDSI devient une étude en réseau OHDSI lorsqu'elle est menée sur plusieurs CDM dans différentes institutions.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+**Quand une étude est-elle considérée comme une étude en *réseau*?** Une étude OHDSI devient une étude en réseau OHDSI lorsqu'elle est menée sur plusieurs CDM dans différentes institutions.
+
+\EndKnitrBlock{rmdimportant}
 L'approche OHDSI pour la recherche en réseau utilise le CDM OMOP et des outils et paquets d'étude standardisés qui spécifient entièrement tous les paramètres pour mener une étude. Les analyses standardisées OHDSI sont conçues spécifiquement pour réduire les artefacts et améliorer l'efficacité et l'évolutivité des études en réseau.
 
 Les études en réseau sont une partie importante de la communauté de recherche OHDSI. Cependant, il n'y a aucune obligation pour une étude OHDSI d'être emballée et partagée à travers l'ensemble du réseau OHDSI. Vous pouvez toujours mener des recherches en utilisant le CDM OMOP et la bibliothèque de méthodes OHDSI au sein d'une seule institution ou limiter une étude de recherche à seulement certaines institutions choisies. Ces contributions de recherche sont tout aussi importantes pour la communauté. Il est à la discrétion de chaque chercheur si une étude est conçue pour être menée sur une seule base de données, mener une étude à travers un ensemble limité de partenaires ou ouvrir l'étude à la pleine participation du réseau OHDSI. Ce chapitre vise à parler des études en réseau ouvertes à tous que la communauté OHDSI mène.
@@ -76,8 +80,10 @@ Pour chaque étude, les activités de démarrage sur site peuvent inclure :
 - Examiner le code de l'étude pour toute anomalie technique
 - Travailler avec l'équipe informatique locale pour permettre et installer les packages R dépendants nécessaires pour exécuter le package dans les contraintes techniques
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Qualité des données et études en réseau :** Comme discuté dans le chapitre \@ref(ExtractTransformLoad), le contrôle de qualité est une pièce fondamentale et itérative du processus ETL. Cela doit être fait régulièrement en dehors du processus d'étude en réseau. Pour une étude en réseau, un responsable d'étude peut demander à examiner les rapports de qualité des données des sites participants ou concevoir des requêtes SQL personnalisées pour comprendre les variations potentielles dans les sources de données contributrices. Pour plus de détails sur les efforts de qualité des données en cours au sein d’OHDSI, veuillez consulter le chapitre \@ref(DataQuality).
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+**Qualité des données et études en réseau :** Comme discuté dans le chapitre \@ref(ExtractTransformLoad), le contrôle de qualité est une pièce fondamentale et itérative du processus ETL. Cela doit être fait régulièrement en dehors du processus d'étude en réseau. Pour une étude en réseau, un responsable d'étude peut demander à examiner les rapports de qualité des données des sites participants ou concevoir des requêtes SQL personnalisées pour comprendre les variations potentielles dans les sources de données contributrices. Pour plus de détails sur les efforts de qualité des données en cours au sein d’OHDSI, veuillez consulter le chapitre \@ref(DataQuality).
+
+\EndKnitrBlock{rmdimportant}
 
 Chaque site aura un analyste de données local qui exécute le paquet d'étude. Cet individu doit examiner les résultats du paquet d'étude pour s'assurer qu'aucune information sensible n'est transmise, bien que toutes les données dans le CDM aient déjà été anonymisées. Lorsque vous utilisez des méthodes OHDSI préconstruites telles que l'estimation d'effet à niveau de population (PLE) et la prédiction à niveau de patient (PLP), il existe des paramètres configurables pour le nombre de cellules minimal pour une analyse donnée. L'analyste de données est tenu de revoir ces seuils et de s'assurer qu'ils suivent les politiques locales de gouvernance.
 
@@ -125,9 +131,11 @@ Un responsable de l'étude doit définir des jalons de l'étude dans le protocol
 
 Lors de la phase de diffusion et de publication des résultats, le responsable de l'étude collaborera avec les autres participants sur diverses tâches administratives, telles que le développement de manuscrits et l'optimisation des visualisations de données. Une fois l'étude exécutée et les résultats stockés de manière centralisée pour que le responsable de l'étude puisse les analyser plus en détail, le responsable de l'étude est responsable de la création et de la diffusion des résultats complets de l'étude (par ex. une application Shiny) pour examen par les centres participants. Si le responsable de l'étude utilise un squelette d'étude OHDSI, soit généré par Atlas soit modifié manuellement à partir du code GitHub, l'application Shiny sera créée automatiquement. Dans le cas où un responsable de l'étude crée du code personnalisé, il peut utiliser le Forum OHDSI pour demander de l'aide afin de créer sa propre application Shiny pour son paquet d'étude.
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Vous ne savez pas où publier votre étude en réseau OHDSI ? Consultez JANE (Journal/Author Name Estimator), un outil qui prend votre résumé et scanne les publications pour pertinence et adéquation.[^janeUrl]
+\BeginKnitrBlock{rmdimportant}
+Vous ne savez pas où publier votre étude en réseau OHDSI ? Consultez JANE (Journal/Author Name Estimator), un outil qui prend votre résumé et scanne les publications pour pertinence et adéquation.[^janeUrl]
 
-</div>\EndKnitrBlock{rmdimportant}
+
+\EndKnitrBlock{rmdimportant}
 
 [^janeUrl]: http://jane.biosemantics.org/
 
@@ -140,19 +148,27 @@ Au fur et à mesure que les manuscrits sont rédigés, chaque collaborateur part
 
 Le processus actuel des études en réseau est manuel, avec des membres de l'équipe d'étude utilisant divers mécanismes (y compris Wiki, GitHub et email) pour collaborer sur la conception de l'étude, partager le code et les résultats. Ce processus n'est pas cohérent ni évolutif et pour résoudre ce problème, la communauté OHDSI travaille activement à systématiser les processus d'étude.
 
-<div class="figure" style="text-align: center">
-<img src="images/NetworkStudies/ARACHNE.png" alt="The ARACHNE Network Study Process." width="90%" />
-<p class="caption">(\#fig:arachne)The ARACHNE Network Study Process.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/NetworkStudies/ARACHNE} 
+
+}
+
+\caption{The ARACHNE Network Study Process.}(\#fig:arachne)
+\end{figure}
 
 ARACHNE est une plateforme conçue pour rationaliser et automatiser le processus de réalisation des études en réseau. ARACHNE utilise les standards OHDSI et établit un processus de recherche observationnelle cohérent, transparent, sécurisé et conforme entre plusieurs organisations. ARACHNE standardise le protocole de communication pour accéder aux données et échanger les résultats d'analyse, tout en permettant l'authentification et l'autorisation pour les contenus restreints. Il réunit les organisations participantes - fournisseurs de données, chercheurs, sponsors et data scientists - en une seule équipe d'étude collaborative et facilite une coordination d'étude observationnelle de bout en bout. L'outil permet la création d'un environnement d'exécution complet et basé sur les normes pour R, Python et SQL, y compris des flux de travail d'approbation contrôlés par le responsable des données.
 
 ARACHNE est conçu pour offrir une intégration transparente avec d'autres outils OHDSI, y compris les rapports ACHILLES et la possibilité d'importer des artefacts de conception ATLAS, de créer des packages autonomes et de les exécuter automatiquement sur plusieurs sites. La vision future est de permettre à terme le lien entre plusieurs réseaux afin de mener des recherches non seulement entre organisations au sein d'un même réseau, mais également entre organisations de plusieurs réseaux.
 
-<div class="figure" style="text-align: center">
-<img src="images/NetworkStudies/ARACHNENON.png" alt="The ARACHNE Network of Networks." width="90%" />
-<p class="caption">(\#fig:arachneNon)The ARACHNE Network of Networks.</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{images/NetworkStudies/ARACHNENON} 
+
+}
+
+\caption{The ARACHNE Network of Networks.}(\#fig:arachneNon)
+\end{figure}
 
 
 ## Meilleures pratiques pour les études en réseau OHDSI
@@ -170,9 +186,11 @@ Lorsque vous menez une étude en réseau, la communauté OHDSI est disponible po
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Une étude OHDSI devient une étude en réseau OHDSI lorsqu'elle est réalisée sur plusieurs CDM dans différentes institutions.
+\BeginKnitrBlock{rmdsummary}
+- Une étude OHDSI devient une étude en réseau OHDSI lorsqu'elle est réalisée sur plusieurs CDM dans différentes institutions.
 - Les études en réseau OHDSI sont ouvertes à tous. N'importe qui peut diriger une étude en réseau. Toute personne possédant une base de données conforme au CDM OMOP peut choisir d'y participer et de contribuer aux résultats.
 - Besoin d'aide pour mener une étude en réseau ? Consultez le comité d'encadrement des études OHDSI pour vous aider à concevoir et exécuter votre étude.
 - **Partager c'est se soucier.** Toute la documentation de l'étude, le code et les résultats sont publiés sur le GitHub d'OHDSI ou dans une application R Shiny. Les responsables des études sont invités à présenter leur recherche lors des événements OHDSI.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

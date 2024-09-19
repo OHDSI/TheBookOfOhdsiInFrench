@@ -29,10 +29,14 @@ Dans ce chapitre, nous discuterons des méthodes de validation des définitions 
 
 Une fois que la définition de la cohorte pour l'étude a été déterminée, la validité de la définition peut être évaluée. Une approche courante pour évaluer la validité consiste à comparer certaines ou toutes les personnes d'une cohorte définie à une référence "étalon-or" et à exprimer les résultats dans une matrice de confusion, une table de contingence à deux par deux qui stratifie les personnes selon leur classification étalon-or et leur qualification au sein de la définition de la cohorte. La figure \@ref(fig:matrix) montre les éléments de la matrice de confusion.
 
-<div class="figure" style="text-align: center">
-<img src="images/ClinicalValidity/matrix.png" alt="Matrice de confusion." width="75%" />
-<p class="caption">(\#fig:matrix)Matrice de confusion.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.75\linewidth]{images/ClinicalValidity/matrix} 
+
+}
+
+\caption{Matrice de confusion.}(\#fig:matrix)
+\end{figure}
 
 Les résultats vrais et faux de la définition de la cohorte sont déterminés en appliquant la définition à un groupe de personnes. Celles incluses dans la définition sont considérées comme positives pour la condition de santé et sont étiquetées "Vrais". Les personnes non incluses dans la définition de la cohorte sont considérées comme négatives pour la condition de santé et sont étiquetées "Faux". Bien que la vérité absolue de l'état de santé d'une personne considérée dans la définition de la cohorte soit très difficile à déterminer, il existe plusieurs méthodes pour établir une référence de l’étalon-or, dont deux seront décrites plus loin dans le chapitre. Quelle que soit la méthode utilisée, l'étiquetage de ces personnes est le même que celui décrit pour la définition de la cohorte.
 
@@ -127,19 +131,27 @@ Les étapes suivantes sont destinées à tester les définitions de cohortes pou
 
 Déterminez ceux avec l'IM avec une haute probabilité. Nous avons exigé un enregistrement d'occurrence de condition avec un concept pour l'infarctus du myocarde ou l'un de ses descendants, avec une ou plusieurs occurrences d'IM enregistrées lors d'une visite hospitalière en milieu hospitalier en moins de 5 jours, et 4 ou plus d'occurrences d'IM dans le dossier du patient en moins de 365 jours. La Figure \@ref(fig:xSpec) illustre cette définition de cohorte pour l'IM dans ATLAS. \index{xSpec cohort}
 
-<div class="figure" style="text-align: center">
-<img src="images/ClinicalValidity/xSpec.png" alt="An extremely specific cohort definition (xSpec) for myocardial infarction." width="100%" />
-<p class="caption">(\#fig:xSpec)An extremely specific cohort definition (xSpec) for myocardial infarction.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ClinicalValidity/xSpec} 
+
+}
+
+\caption{An extremely specific cohort definition (xSpec) for myocardial infarction.}(\#fig:xSpec)
+\end{figure}
 
 #### Étape 2 : Définir la Cohorte xSens {-}
 
 Nous développons alors une cohorte extrêmement sensible (xSens). Cette cohorte peut être définie pour l'IM comme ces personnes ayant au moins un enregistrement d'occurrence de condition contenant un concept d'infarctus du myocarde à tout moment dans leur historique médical. La Figure \@ref(fig:xSens) illustre la définition de la cohorte xSens pour l'IM dans ATLAS. \index{xSens cohort}
 
-<div class="figure" style="text-align: center">
-<img src="images/ClinicalValidity/xSens.png" alt="An extremely sensitive cohort definition (xSens) for myocardial infarction." width="100%" />
-<p class="caption">(\#fig:xSens)An extremely sensitive cohort definition (xSens) for myocardial infarction.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ClinicalValidity/xSens} 
+
+}
+
+\caption{An extremely sensitive cohort definition (xSens) for myocardial infarction.}(\#fig:xSens)
+\end{figure}
 
 #### Étape 3 : Ajuster le Modèle Prédictif {-}
 
@@ -226,10 +238,14 @@ Les fichiers de modèle et de la cohorte d'évaluation créés à cette étape s
 
 L'étape suivante est de créer et tester les définitions de cohortes à évaluer. Les caractéristiques de performance souhaitées peuvent dépendre de l'utilisation prévue de la cohorte pour répondre à la question de recherche d'intérêt. Pour certaines questions, un algorithme très sensible peut être nécessaire ; d'autres peuvent nécessiter un algorithme plus spécifique. Le processus de détermination des caractéristiques de performance pour une définition de cohorte en utilisant PheValuator est montré à la Figure \@ref(fig:phevaluatorDiagram).
 
-<div class="figure" style="text-align: center">
-<img src="images/ClinicalValidity/PheValuatorEvaluation.png" alt="Determining the Performance Characteristics of a cohort definition using PheValuator. p(O) = Probability of outcome; TP = True Positive; FN = False Negative; TN = True Negative; FP = False Positive." width="100%" />
-<p class="caption">(\#fig:phevaluatorDiagram)Determining the Performance Characteristics of a cohort definition using PheValuator. p(O) = Probability of outcome; TP = True Positive; FN = False Negative; TN = True Negative; FP = False Positive.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ClinicalValidity/PheValuatorEvaluation} 
+
+}
+
+\caption{Determining the Performance Characteristics of a cohort definition using PheValuator. p(O) = Probability of outcome; TP = True Positive; FN = False Negative; TN = True Negative; FP = False Positive.}(\#fig:phevaluatorDiagram)
+\end{figure}
 
 Dans la partie A de la Figure \@ref(fig:phevaluatorDiagram), nous avons examiné les personnes de la définition de cohorte à tester et trouvé ces personnes de la cohorte d'évaluation (créée à l'étape précédente)
 ## Généralisation des preuves {#GeneralizabilityOfEvidence}
@@ -241,10 +257,12 @@ Bien qu'une cohorte puisse être bien définie et pleinement évaluée dans le c
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La validité clinique peut être établie en comprenant les caractéristiques de la source de données sous-jacente, en évaluant les caractéristiques de performance des cohortes dans une analyse, et en évaluant la généralisabilité de l'étude à la population cible d'intérêt.
+\BeginKnitrBlock{rmdsummary}
+- La validité clinique peut être établie en comprenant les caractéristiques de la source de données sous-jacente, en évaluant les caractéristiques de performance des cohortes dans une analyse, et en évaluant la généralisabilité de l'étude à la population cible d'intérêt.
 - Une définition de la cohorte peut être évaluée sur la mesure dans laquelle les personnes identifiées dans la cohorte sur la base de la définition de la cohorte et des données observationnelles disponibles reflètent avec précision les personnes qui appartiennent véritablement au phénotype.
 - La validation de la définition de la cohorte nécessite d'estimer plusieurs caractéristiques de performance, y compris la sensibilité, la spécificité et la valeur prédictive positive, pour résumer et permettre l'ajustement de l'erreur de mesure.
 - L'adjudication clinique par vérification des dossiers sources et PheValuator représentent deux approches alternatives pour estimer la validation de la définition de la cohorte.
 - Les études du réseau OHDSI fournissent un mécanisme pour examiner l'hétérogénéité des sources de données et étendre la généralisabilité des résultats pour améliorer la validité clinique des preuves du monde réel.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

@@ -39,10 +39,14 @@ Une autre méthode pour caractériser une population est de décrire la séquenc
 
 L'analyse des chemins vise à résumer les traitements (événements) reçus par des personnes diagnostiquées avec une condition spécifique depuis la première prescription/délivrance de médicament. Dans cette étude, les traitements ont été décrits après le diagnostic de diabète de type 2, d'hypertension et de dépression respectivement. Les événements pour chaque personne ont ensuite été agrégés en un ensemble de statistiques sommaires et visualisés pour chaque condition et pour chaque base de données.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/pnasTreatmentPathwaysSunburst.png" alt="Visualisation en 'sunburst' des chemins de traitement d'OHDSI pour l'hypertension" width="100%" />
-<p class="caption">(\#fig:treatmentPathwaysSunburstDataViz)Visualisation en 'sunburst' des chemins de traitement d'OHDSI pour l'hypertension</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/pnasTreatmentPathwaysSunburst} 
+
+}
+
+\caption{Visualisation en 'sunburst' des chemins de traitement d'OHDSI pour l'hypertension}(\#fig:treatmentPathwaysSunburstDataViz)
+\end{figure}
 
 À titre d'exemple, la figure \@ref(fig:treatmentPathwaysSunburstDataViz) représente une population de personnes initiant un traitement pour l'hypertension. Le premier anneau au centre montre la proportion de personnes en fonction de leur traitement de première ligne. Dans cet exemple, l'Hydrochlorothiazide est le traitement de première ligne le plus courant pour cette population. Les boîtes qui s'étendent de la section de l'Hydrochlorothiazide représentent les thérapies de 2ème et 3ème ligne enregistrées pour les personnes de la cohorte.
 
@@ -55,10 +59,14 @@ En terminologie DUS classique, les analyses de chemins de traitement incluent ce
 
 Les taux et proportions d'incidence sont des statistiques utilisées en santé publique pour évaluer la survenue d'un nouvel événement dans une population pendant un temps à risque (TAR). La figure \@ref(fig:incidenceTimeline) vise à montrer les composants d'un calcul d'incidence pour une seule personne : \index{incidence}
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/incidenceTimeline.png" alt="Vue au niveau de la personne des composants du calcul d'incidence. Dans cet exemple, le temps à risque est défini pour commencer un jour après le début de la cohorte et se terminer à la fin de la cohorte." width="100%" />
-<p class="caption">(\#fig:incidenceTimeline)Vue au niveau de la personne des composants du calcul d'incidence. Dans cet exemple, le temps à risque est défini pour commencer un jour après le début de la cohorte et se terminer à la fin de la cohorte.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/incidenceTimeline} 
+
+}
+
+\caption{Vue au niveau de la personne des composants du calcul d'incidence. Dans cet exemple, le temps à risque est défini pour commencer un jour après le début de la cohorte et se terminer à la fin de la cohorte.}(\#fig:incidenceTimeline)
+\end{figure}
 
 Dans la figure \@ref(fig:incidenceTimeline), une personne a une période de temps où elle est observée dans les données, définie par son temps de début et de fin d'observation. Ensuite, la personne a un point dans le temps où elle entre et sort d'une cohorte en répondant à certains critères d'éligibilité. La fenêtre de temps à risque désigne alors quand nous cherchons à comprendre la survenue d'un événement. Si l'événement tombe dans le TAR, nous comptons cela comme une incidence de l'événement.
 
@@ -88,24 +96,36 @@ Les sources de données observationnelles offrent un moyen de caractériser les 
 
 Ici, nous démontrons comment utiliser le module des sources de données dans ATLAS pour explorer les statistiques de caractérisation de base de données créées avec [ACHILLES](https://github.com/OHDSI/Achilles) afin de trouver des caractéristiques au niveau de la base de données relatives aux personnes hypertendues. Commencez par cliquer sur ![](images/Characterization/atlasDataSourcesMenuItem.png) dans la barre de gauche d'ATLAS pour commencer. Dans la première liste déroulante affichée dans ATLAS, sélectionnez la base de données à explorer. Ensuite, utilisez la liste déroulante sous la base de données pour commencer à explorer les rapports. Pour ce faire, sélectionnez le rapport "Condition Occurrence" dans la liste déroulante qui révélera une visualisation en carte arborescente de toutes les conditions présentes dans la base de données :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasDataSourcesConditionTreemap.png" alt="Atlas Data Sources: Condition Occurrence Treemap" width="100%" />
-<p class="caption">(\#fig:atlasDataSourcesConditionTreemap)Atlas Data Sources: Condition Occurrence Treemap</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasDataSourcesConditionTreemap} 
+
+}
+
+\caption{Atlas Data Sources: Condition Occurrence Treemap}(\#fig:atlasDataSourcesConditionTreemap)
+\end{figure}
 
 Pour rechercher une condition spécifique d'intérêt, cliquez sur l'onglet "Table" pour révéler la liste complète des conditions dans la base de données avec le nombre de personnes, la prévalence et les enregistrements par personne. En utilisant la case de filtre en haut, nous pouvons filtrer les entrées dans le tableau en fonction du nom du concept contenant le terme "hypertension":
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasDataSourcesConditionFiltered.png" alt="Atlas Data Sources: Conditions with &quot;hypertension&quot; found in the concept name" width="100%" />
-<p class="caption">(\#fig:atlasDataSourcesConditionFiltered)Atlas Data Sources: Conditions with "hypertension" found in the concept name</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasDataSourcesConditionFiltered} 
+
+}
+
+\caption{Atlas Data Sources: Conditions with "hypertension" found in the concept name}(\#fig:atlasDataSourcesConditionFiltered)
+\end{figure}
 
 Nous pouvons explorer un rapport détaillé sur une condition en cliquant sur une ligne. Dans ce cas, nous sélectionnerons "essential hypertension" pour obtenir une répartition des tendances de la condition sélectionnée au fil du temps et selon le genre, la prévalence de la condition par mois, le type enregistré avec la condition et l'âge à la première occurrence du diagnostic :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasDataSourcesDrillDownReport.png" alt="Atlas Data Sources: Essential hypertension drill down report" width="100%" />
-<p class="caption">(\#fig:atlasDataSourcesDrillDownReport)Atlas Data Sources: Essential hypertension drill down report</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasDataSourcesDrillDownReport} 
+
+}
+
+\caption{Atlas Data Sources: Essential hypertension drill down report}(\#fig:atlasDataSourcesDrillDownReport)
+\end{figure}
 
 Maintenant que nous avons passé en revue les caractéristiques de la base de données pour la présence de concepts d'hypertension et les tendances au fil du temps, nous pouvons également explorer les médicaments utilisés pour traiter les personnes hypertendues. Le processus pour ce faire suit les mêmes étapes, sauf que nous utilisons le rapport "Drug Era" pour examiner les caractéristiques des médicaments résumées à leur ingrédient RxNorm. Une fois que nous avons exploré les caractéristiques de la base de données pour examiner les éléments d'intérêt, nous sommes prêts à aller de l'avant avec la construction de cohortes pour identifier les personnes hypertendues à caractériser.
 ## Caractérisation des Cohortes dans ATLAS
@@ -118,10 +138,14 @@ Une analyse de caractérisation nécessite au moins une cohorte et au moins une 
 
 #### Définitions des Cohortes {-}
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationCohortSelection.png" alt="Onglet de conception de la caractérisation - sélection de la définition de la cohorte" width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationCohortSelection)Onglet de conception de la caractérisation - sélection de la définition de la cohorte</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationCohortSelection} 
+
+}
+
+\caption{Onglet de conception de la caractérisation - sélection de la définition de la cohorte}(\#fig:atlasCharacterizationCohortSelection)
+\end{figure}
 
 Nous supposons que les cohortes ont déjà été créées dans ATLAS comme décrit dans le Chapitre \@ref(Cohorts). Cliquez sur ![](images/Characterization/atlasImportButton.png) et sélectionnez les cohortes comme indiqué dans la figure \@ref(fig:atlasCharacterizationCohortSelection). Ensuite, nous définirons les caractéristiques à utiliser pour caractériser ces deux cohortes.
 
@@ -131,10 +155,14 @@ ATLAS est livré avec près de 100 analyses de caractéristiques prédéfinies q
 
 Cliquez sur ![](images/Characterization/atlasImportButton.png) pour sélectionner la caractéristique à caractériser. Voici une liste des caractéristiques que nous utiliserons pour caractériser ces cohortes :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationFeatureSelection.png" alt="Onglet de conception de la caractérisation - sélection des caractéristiques." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationFeatureSelection)Onglet de conception de la caractérisation - sélection des caractéristiques.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationFeatureSelection} 
+
+}
+
+\caption{Onglet de conception de la caractérisation - sélection des caractéristiques.}(\#fig:atlasCharacterizationFeatureSelection)
+\end{figure}
 
 La figure ci-dessus montre la liste des caractéristiques sélectionnées ainsi qu'une description de ce que chaque caractéristique va caractériser pour chaque cohorte. Les caractéristiques qui commencent par le nom "Démographie" calculeront les informations démographiques pour chaque personne à la date de début de la cohorte. Pour les caractéristiques qui commencent par un nom de domaine (c'est-à-dire Visite, Procédure, Condition, Médicament, etc.), celles-ci caractériseront toutes les observations enregistrées dans ce domaine. Chaque caractéristique de domaine a quatre options de fenêtre temporelle précédant le début de la cohorte, à savoir :
 
@@ -149,62 +177,92 @@ Que faire si nous étions intéressés par la création de différentes caracté
 
 Pour créer un sous-groupe, cliquez et ajoutez vos critères pour l'appartenance au sous-groupe. Cette étape est similaire aux critères utilisés pour identifier l'inscription à la cohorte. Dans cet exemple, nous définirons un ensemble de critères pour identifier les femmes parmi nos cohortes :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationSubgroup.png" alt="Conception de la caractérisation avec analyse du sous-groupe féminin." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationSubgroup)Conception de la caractérisation avec analyse du sous-groupe féminin.</p>
-</div>
+\begin{figure}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Les analyses de sous-groupes dans ATLAS ne sont pas les mêmes que les strates. Les strates sont mutuellement exclusives tandis que les sous-groupes peuvent inclure les mêmes personnes en fonction des critères choisis.
-</div>\EndKnitrBlock{rmdimportant}
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationSubgroup} 
+
+}
+
+\caption{Conception de la caractérisation avec analyse du sous-groupe féminin.}(\#fig:atlasCharacterizationSubgroup)
+\end{figure}
+
+\BeginKnitrBlock{rmdimportant}
+Les analyses de sous-groupes dans ATLAS ne sont pas les mêmes que les strates. Les strates sont mutuellement exclusives tandis que les sous-groupes peuvent inclure les mêmes personnes en fonction des critères choisis.
+
+\EndKnitrBlock{rmdimportant}
 
 ### Exécutions
 Une fois que nous avons conçu notre caractérisation, nous pouvons exécuter cette conception sur une ou plusieurs bases de données dans notre environnement. Rendez-vous sur l'onglet Exécutions et cliquez sur le bouton Générer pour démarrer l'analyse sur une base de données :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationExecutions.png" alt="Exécution de la conception de la caractérisation - sélection de la source CDM." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationExecutions)Exécution de la conception de la caractérisation - sélection de la source CDM.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationExecutions} 
+
+}
+
+\caption{Exécution de la conception de la caractérisation - sélection de la source CDM.}(\#fig:atlasCharacterizationExecutions)
+\end{figure}
 
 Une fois l'analyse terminée, nous pouvons afficher les rapports en cliquant sur le bouton "All Executions" et dans la liste des exécutions, sélectionnez "View Reports". Alternativement, vous pouvez cliquer sur "View latest result" pour voir la dernière exécution effectuée.
 
 ### Résultats
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationResultsSummary.png" alt="Résultats de la caractérisation - occurrence des conditions à long terme." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationResultsSummary)Résultats de la caractérisation - occurrence des conditions à long terme.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationResultsSummary} 
+
+}
+
+\caption{Résultats de la caractérisation - occurrence des conditions à long terme.}(\#fig:atlasCharacterizationResultsSummary)
+\end{figure}
 
 Les résultats fournissent une vue tabulaire des différentes caractéristiques de chaque cohorte sélectionnée dans la conception. Dans la figure \@ref(fig:atlasCharacterizationResultsSummary), un tableau fournit un résumé de toutes les conditions présentes dans les deux cohortes au cours des 365 jours précédant le début de la cohorte. Chaque covariable a un compte et un pourcentage pour chaque cohorte et le sous-groupe féminin que nous avons défini dans chaque cohorte.
 
 Nous avons utilisé la boîte de recherche pour filtrer les résultats afin de voir quelle proportion de personnes ont une `arythmie cardiaque` dans leur historique dans le but de comprendre quels diagnostics liés au cardiovasculaire sont observés dans les populations. Nous pouvons utiliser le lien `Explore` à côté du concept d'arythmie cardiaque pour ouvrir une nouvelle fenêtre avec plus de détails sur le concept pour une seule cohorte comme montré dans la figure \@ref(fig:atlasCharacterizationResultsExplore) :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationResultsExplore.png" alt="Résultats de la caractérisation - exploration d'un concept unique." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationResultsExplore)Résultats de la caractérisation - exploration d'un concept unique.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationResultsExplore} 
+
+}
+
+\caption{Résultats de la caractérisation - exploration d'un concept unique.}(\#fig:atlasCharacterizationResultsExplore)
+\end{figure}
 
 Puisque nous avons caractérisé tous les concepts de conditions pour nos cohortes, l'option d'exploration permet une vue de tous les concepts ancêtres et descendants pour le concept sélectionné, dans ce cas l'arythmie cardiaque. Cette exploration nous permet de naviguer dans la hiérarchie des concepts pour explorer d'autres maladies cardiaques pouvant apparaître chez nos personnes hypertendues. Comme dans la vue récapitulative, le compte et le pourcentage sont affichés.
 
 Nous pouvons également utiliser les mêmes résultats de caractérisation pour trouver des conditions qui sont contre-indiquées pour certains traitements antihypertenseurs tels que l'œdème de Quincke. Pour ce faire, nous suivrons les mêmes étapes ci-dessus, mais cette fois, nous rechercherons ‘œdème’ comme montré dans la figure \@ref(fig:atlasCharacterizationResultsContra) :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationResultsContra.png" alt="Résultats de la caractérisation - exploration d'une condition contre-indiquée." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationResultsContra)Résultats de la caractérisation - exploration d'une condition contre-indiquée.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationResultsContra} 
+
+}
+
+\caption{Résultats de la caractérisation - exploration d'une condition contre-indiquée.}(\#fig:atlasCharacterizationResultsContra)
+\end{figure}
 
 Encore une fois, nous utiliserons la fonctionnalité d'exploration pour voir les caractéristiques de l'œdème dans la population hypertensive afin de trouver la prévalence de l'œdème de Quincke :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationResultsContraExplore.png" alt="Résultats de la caractérisation - exploration des détails d'une condition contre-indiquée." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationResultsContraExplore)Résultats de la caractérisation - exploration des détails d'une condition contre-indiquée.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationResultsContraExplore} 
+
+}
+
+\caption{Résultats de la caractérisation - exploration des détails d'une condition contre-indiquée.}(\#fig:atlasCharacterizationResultsContraExplore)
+\end{figure}
 
 Ici, nous constatons qu'une partie de cette population a un dossier d'œdème de Quincke dans l'année précédant le début d'un médicament antihypertenseur.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationResultsContinuous.png" alt="Résultats de la caractérisation de l'âge pour chaque cohorte et sous-groupe." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationResultsContinuous)Résultats de la caractérisation de l'âge pour chaque cohorte et sous-groupe.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationResultsContinuous} 
+
+}
+
+\caption{Résultats de la caractérisation de l'âge pour chaque cohorte et sous-groupe.}(\#fig:atlasCharacterizationResultsContinuous)
+\end{figure}
 
 Alors que les covariables de domaine sont calculées à l'aide d'un indicateur binaire (c'est-à-dire qu'un dossier du code était présent dans le délai précédent), certaines variables fournissent une valeur continue telle que l'âge des personnes au début de la cohorte. Dans l'exemple ci-dessus, nous montrons l'âge des 2 cohortes caractérisées exprimé par le compte des personnes, l'âge moyen, l'âge médian et l'écart type.
 
@@ -214,17 +272,25 @@ En plus des caractéristiques prédéfinies, ATLAS prend en charge la possibilit
 
 Dans cet exemple, nous définirons une caractéristique personnalisée qui identifiera le nombre de personnes dans chaque cohorte ayant un épisode de médicament inhibiteur de l'ECA dans leur historique après le début de la cohorte :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationCustomFeature.png" alt="Définition d'une caractéristique personnalisée dans ATLAS." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationCustomFeature)Définition d'une caractéristique personnalisée dans ATLAS.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationCustomFeature} 
+
+}
+
+\caption{Définition d'une caractéristique personnalisée dans ATLAS.}(\#fig:atlasCharacterizationCustomFeature)
+\end{figure}
 
 Les critères définis ci-dessus supposent qu'ils seront appliqués à une date de début de la cohorte. Une fois que nous avons défini les critères et que nous les avons sauvegardés, nous pouvons les appliquer à la conception de caractérisation que nous avons créée dans la section précédente. Pour ce faire, ouvrez la conception de caractérisation et accédez à la section Feature Analysis. Cliquez sur le bouton ![](images/Characterization/atlasImportButton.png) et dans le menu, sélectionnez les nouvelles caractéristiques personnalisées. Elles apparaîtront maintenant dans la liste des caractéristiques pour la conception de caractérisation. Comme décrit précédemment, nous pouvons exécuter cette conception sur une base de données pour produire la caractérisation de cette caractéristique personnalisée :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasCharacterizationCustomFeatureResults.png" alt="Affichage des résultats de la caractéristique personnalisée." width="100%" />
-<p class="caption">(\#fig:atlasCharacterizationCustomFeatureResults)Affichage des résultats de la caractéristique personnalisée.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasCharacterizationCustomFeatureResults} 
+
+}
+
+\caption{Affichage des résultats de la caractéristique personnalisée.}(\#fig:atlasCharacterizationCustomFeatureResults)
+\end{figure}
 
 ## Caractérisation des Cohortes en R
 
@@ -311,8 +377,10 @@ settings <- createCovariateSettings(useConditionEraLongTerm = TRUE,
                                     aggregated = TRUE)
 ```
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">L'utilisation de `aggregated = TRUE` pour tous les exemples ci-dessus indique à FeatureExtraction de fournir des statistiques sommaires. Exclure ce drapeau calculera les covariables pour chaque personne dans la cohorte.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+L'utilisation de `aggregated = TRUE` pour tous les exemples ci-dessus indique à FeatureExtraction de fournir des statistiques sommaires. Exclure ce drapeau calculera les covariables pour chaque personne dans la cohorte.
+
+\EndKnitrBlock{rmdimportant}
 
 ### Création de Covariables Agrégées
 
@@ -365,10 +433,14 @@ L'objectif de l'analyse des chemins est de comprendre la séquence des traitemen
 
 Les chemins de cohortes visent à fournir des capacités analytiques pour résumer les événements suivant la date de début de cohorte d'une ou plusieurs cohortes cibles. Pour ce faire, nous créons un ensemble de cohortes pour identifier les événements cliniques d'intérêt pour la population cible, appelées cohortes d'événements. En se concentrant sur ce à quoi cela pourrait ressembler pour une personne dans la cohorte cible :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/pathwaysPersonEventView.png" alt="Analyse des chemins dans le contexte d'une seule personne." width="100%" />
-<p class="caption">(\#fig:pathwaysPersonEventView)Analyse des chemins dans le contexte d'une seule personne.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/pathwaysPersonEventView} 
+
+}
+
+\caption{Analyse des chemins dans le contexte d'une seule personne.}(\#fig:pathwaysPersonEventView)
+\end{figure}
 
 Dans la figure \@ref(fig:pathwaysPersonEventView), la personne fait partie de la cohorte cible avec une date de début et de fin définie. Ensuite, les segments de ligne numérotés représentent où cette personne est également identifiée dans une cohorte d'événements pour une durée déterminée. Les cohortes d'événements nous permettent de décrire tout événement clinique d'intérêt représenté dans le CDM de sorte que nous ne sommes pas contraints de créer un chemin pour un seul domaine ou concept.
 
@@ -378,17 +450,25 @@ Pour commencer, cliquez sur ![](images/Characterization/atlasPathwaysMenuItem.pn
 
 Pour commencer, nous continuerons à utiliser les cohortes initiant une thérapie de première ligne pour l'hypertension avec un suivi de 1 et 3 ans (Appendice \@ref(HTN1yrFO), \@ref(HTN3yrFO)). Utilisez le bouton pour importer les 2 cohortes.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasPathwaysTargetCohorts.png" alt="Analyse des chemins avec des cohortes cibles sélectionnées." width="100%" />
-<p class="caption">(\#fig:atlasPathwaysTargetCohorts)Analyse des chemins avec des cohortes cibles sélectionnées.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasPathwaysTargetCohorts} 
+
+}
+
+\caption{Analyse des chemins avec des cohortes cibles sélectionnées.}(\#fig:atlasPathwaysTargetCohorts)
+\end{figure}
 
 Ensuite, nous définirons les cohortes d'événements en créant une cohorte pour chaque médicament antihypertenseur de première ligne d'intérêt. Pour cela, nous commencerons par créer une cohorte d'utilisateurs d'inhibiteurs de l'ECA et définirons la date de fin de la cohorte comme la fin de l'exposition continue. Nous ferons de même pour 8 autres médicaments antihypertenseurs et noterons que ces définitions se trouvent dans l'Appendice \@ref(ACEiUse)-\@ref(A1BUse). Une fois terminé, utilisez le bouton ![](images/Characterization/atlasImportButton.png) pour les importer dans la section Cohorte d'événements de la conception des chemins :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasPathwaysEventCohorts.png" alt="Cohortes d'événements pour la conception des chemins pour initier une thérapie antihypertensive de première ligne." width="100%" />
-<p class="caption">(\#fig:atlasPathwaysEventCohorts)Cohortes d'événements pour la conception des chemins pour initier une thérapie antihypertensive de première ligne.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasPathwaysEventCohorts} 
+
+}
+
+\caption{Cohortes d'événements pour la conception des chemins pour initier une thérapie antihypertensive de première ligne.}(\#fig:atlasPathwaysEventCohorts)
+\end{figure}
 
 Une fois terminé, votre conception devrait ressembler à celle ci-dessus. Ensuite, nous devrons décider de quelques paramètres d'analyse supplémentaires :
 
@@ -402,19 +482,27 @@ Une fois notre analyse des chemins conçue, nous pouvons exécuter cette concept
 
 ### Visualisation des résultats
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasPathwaysResults.png" alt="Résultats des chemins légende et visualisation sunburst." width="100%" />
-<p class="caption">(\#fig:atlasPathwaysResults)Résultats des chemins légende et visualisation sunburst.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasPathwaysResults} 
+
+}
+
+\caption{Résultats des chemins légende et visualisation sunburst.}(\#fig:atlasPathwaysResults)
+\end{figure}
 
 Les résultats d'une analyse de chemin sont divisés en 3 sections : La section de légende affiche le nombre total de personnes dans la cohorte cible ainsi que le nombre de personnes ayant eu 1 ou plusieurs événements dans l'analyse des chemins. En dessous de ce résumé, les désignations de couleur pour chacune des cohortes apparaissent dans le graphique en anneaux au centre.
 
 Le graphique en anneaux est une visualisation qui représente les différents chemins d'événements empruntés par les personnes au fil du temps. Le centre du graphique représente l'entrée dans la cohorte et le premier anneau coloré montre la proportion de personnes dans chaque cohorte d'événements. Dans notre exemple, le centre du cercle représente les personnes hypertendues initiant une thérapie de première ligne. Ensuite, le premier anneau dans le graphique montre la proportion de personnes ayant initié un type de thérapie de première ligne défini par les cohortes d'événements (c'est-à-dire les inhibiteurs de l'ECA, les bloqueurs des récepteurs de l'angiotensine, etc). Le deuxième ensemble d'anneaux représente la 2ème cohorte d'événements pour les personnes. Dans certaines séquences d'événements, une personne peut ne jamais avoir un 2ème événement observé dans les données et cette proportion est représentée par la partie grise de l'anneau.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasPathwaysResultsPathDetails.png" alt="Résultats des chemins affichant les détails du chemin." width="100%" />
-<p class="caption">(\#fig:atlasPathwaysResultsPathDetails)Résultats des chemins affichant les détails du chemin.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasPathwaysResultsPathDetails} 
+
+}
+
+\caption{Résultats des chemins affichant les détails du chemin.}(\#fig:atlasPathwaysResultsPathDetails)
+\end{figure}
 
 Cliquer sur une section du graphique en anneaux affichera les détails du chemin sur la droite. Ici, nous pouvons voir que la plus grande proportion de personnes dans notre cohorte cible a initié une thérapie de première ligne avec des inhibiteurs de l'ECA et de ce groupe, une proportion plus petite a commencé une thérapie avec des thiazidiques ou des diurétiques thiazidiques.
 
@@ -429,26 +517,38 @@ Pour commencer, cliquez sur ![](images/Characterization/atlasIncidenceMenuItem.p
 
 Nous supposons que les cohortes utilisées dans cet exemple ont déjà été créées dans ATLAS comme décrit au Chapitre \@ref(Cohorts). L'annexe fournit les définitions complètes des cohortes cibles (Annexe \@ref(AceInhibitorsMono), \@ref(ThiazidesMono)), et des résultats (Annexe \@ref(Angioedema), \@ref(Ami), \@ref(ARBUse)).
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceCohortSelection.png" alt="Incidence Rate target and outcome definition." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceCohortSelection)Incidence Rate target and outcome definition.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceCohortSelection} 
+
+}
+
+\caption{Incidence Rate target and outcome definition.}(\#fig:atlasIncidenceCohortSelection)
+\end{figure}
 
 Dans l'onglet de définition, cliquez pour choisir la cohorte *Nouveaux utilisateurs d'inhibiteurs de l'ECA* et la cohorte *Nouveaux utilisateurs de diurétiques thiazidiques ou thiazidiques apparentés*. Fermez la boîte de dialogue pour voir que ces cohortes sont ajoutées à la conception. Ensuite, nous ajoutons nos cohortes de résultats en cliquant et en sélectionnant les cohortes de résultats des événements *infarctus aigu du myocarde*, des événements *d'angioedème* et de *l'utilisation de bloqueurs des récepteurs de l'angiotensine (BRA)*. Encore une fois, fermez la fenêtre pour voir que ces cohortes sont ajoutées à la section des cohortes de résultats de la conception.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceTimeAtRisk.png" alt="Incidence Rate target and outcome definition." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceTimeAtRisk)Incidence Rate target and outcome definition.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceTimeAtRisk} 
+
+}
+
+\caption{Incidence Rate target and outcome definition.}(\#fig:atlasIncidenceTimeAtRisk)
+\end{figure}
 
 Ensuite, nous définirons la fenêtre de temps à risque pour l'analyse. Comme montré ci-dessus, la fenêtre de temps à risque est définie par rapport aux dates de début et de fin de la cohorte. Ici, nous définissons le début du temps à risque comme étant 1 jour après le début de la cohorte pour nos cohortes cibles. Ensuite, nous définirons la fin du temps à risque à la date de fin de la cohorte. Dans ce cas, la définition des cohortes IEC et THZ a une date de fin de cohorte lorsque l'exposition au médicament se termine.
 
 ATLAS offre également un moyen de stratifier les cohortes cibles dans le cadre de la spécification de l'analyse :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceStratifyFemale.png" alt="Incidence Rate strata definition for females." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceStratifyFemale)Incidence Rate strata definition for females.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceStratifyFemale} 
+
+}
+
+\caption{Incidence Rate strata definition for females.}(\#fig:atlasIncidenceStratifyFemale)
+\end{figure}
 
 Pour ce faire, cliquez sur le bouton *Nouveau critère de stratification* et suivez les mêmes étapes décrites au Chapitre 11. Maintenant que nous avons complété la conception, nous pouvons passer à l'exécution de notre conception sur une ou plusieurs bases de données.
 
@@ -456,10 +556,14 @@ Pour ce faire, cliquez sur le bouton *Nouveau critère de stratification* et sui
 
 Cliquez sur l'onglet de Génération puis sur le bouton ![](images/Characterization/atlasIncidenceGenerate.png) pour révéler une liste de bases de données à utiliser pour exécuter l'analyse :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceSourceSelection.png" alt="Incidence Rate analysis execution." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceSourceSelection)Incidence Rate analysis execution.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceSourceSelection} 
+
+}
+
+\caption{Incidence Rate analysis execution.}(\#fig:atlasIncidenceSourceSelection)
+\end{figure}
 
 Sélectionnez une ou plusieurs bases de données et cliquez sur le bouton Générer pour démarrer l'analyse afin d'analyser toutes les combinaisons de cibles et de résultats spécifiés dans la conception.
 
@@ -469,10 +573,14 @@ Dans l'onglet de Génération, la partie supérieure de l'écran vous permet de 
 
 Sélectionnez la cohorte cible des utilisateurs d'IEC et l'infarctus aigu du myocarde (AMI) dans les listes déroulantes respectives. Cliquez sur le bouton ![](images/Characterization/atlasIncidenceReportButton.png) pour révéler les résultats de l'analyse d'incidence :
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceResults.png" alt="Incidence Rate analysis output - New ACEi users with AMI outcome." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceResults)Incidence Rate analysis output - New ACEi users with AMI outcome.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceResults} 
+
+}
+
+\caption{Incidence Rate analysis output - New ACEi users with AMI outcome.}(\#fig:atlasIncidenceResults)
+\end{figure}
 
 Un résumé pour la base de données montre le nombre total de personnes dans la cohorte qui ont été observées pendant le TAR ainsi que le nombre total de cas. La proportion montre le nombre de cas pour 1000 personnes. Le temps à risque, en années, est calculé pour la cohorte cible. Le taux d'incidence est exprimé en nombre de cas pour 1000 personnes-années.
 
@@ -480,16 +588,21 @@ Nous pouvons également visualiser les métriques d'incidence pour les strates q
 
 Nous pouvons obtenir les mêmes informations pour voir l'incidence de la nouvelle utilisation des BRA parmi la population d'IEC. En utilisant la liste déroulante en haut, changez le résultat pour l'utilisation des BRA et cliquez sur le bouton ![](images/Characterization/atlasIncidenceReportButton.png) pour révéler les détails.
 
-<div class="figure" style="text-align: center">
-<img src="images/Characterization/atlasIncidenceResultsARB.png" alt="Incidence Rate - New users of ACEi receiving ARBs treatment during ACEi exposure." width="100%" />
-<p class="caption">(\#fig:atlasIncidenceResultsARB)Incidence Rate - New users of ACEi receiving ARBs treatment during ACEi exposure.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Characterization/atlasIncidenceResultsARB} 
+
+}
+
+\caption{Incidence Rate - New users of ACEi receiving ARBs treatment during ACEi exposure.}(\#fig:atlasIncidenceResultsARB)
+\end{figure}
 
 Comme montré, les métriques calculées sont les mêmes mais l'interprétation est différente puisque l'entrée (utilisation des BRA) se réfère à une estimation de l'utilisation de médicaments au lieu d'un résultat de santé.
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- OHDSI propose des outils pour caractériser une base de données entière ou une cohorte d'intérêt.
+\BeginKnitrBlock{rmdsummary}
+- OHDSI propose des outils pour caractériser une base de données entière ou une cohorte d'intérêt.
 
 - La caractérisation des cohortes décrit une cohorte d'intérêt pendant le temps précédant la date d'index (**baseline**) et le temps après l'index (**post-index**).
 
@@ -497,7 +610,8 @@ Comme montré, les métriques calculées sont les mêmes mais l'interprétation 
 
 - Les modules de parcours et de taux d'incidence d'ATLAS offrent des statistiques descriptives pendant la période post-index.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 ## Exercices
 

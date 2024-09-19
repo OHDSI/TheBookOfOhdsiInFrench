@@ -12,10 +12,14 @@
 Avant d'entreprendre n'importe quel voyage, il peut être utile d'imaginer à quoi pourrait ressembler la destination idéale. Pour soutenir notre voyage des données aux preuves, nous mettons en avant les attributs souhaités qui peuvent sous-tendre ce qui fait la fiabilité de la qualité des preuves.
 
 
-<div class="figure" style="text-align: center">
-<img src="images/EvidenceQuality/reliableevidenceattributes.png" alt="Attributs désirés des preuves fiables" width="100%" />
-<p class="caption">(\#fig:attributesOfEvidence)Attributs désirés des preuves fiables</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/EvidenceQuality/reliableevidenceattributes} 
+
+}
+
+\caption{Attributs désirés des preuves fiables}(\#fig:attributesOfEvidence)
+\end{figure}
 
 Les preuves fiables doivent être **répétables**, ce qui signifie que les chercheurs doivent s'attendre à produire des résultats identiques lorsqu'ils appliquent la même analyse aux mêmes données pour une question donnée. Implicite dans cette exigence minimale est la notion que les preuves sont le résultat de l'exécution d'un processus défini avec une entrée spécifiée, et doivent être exemptes d'intervention manuelle de prises de décisions a posteriori en cours de route. Plus idéalement encore, les preuves fiables devraient être **reproductibles**, de sorte qu'un chercheur différent devrait être capable d'effectuer la même tâche d'exécution d'une analyse donnée sur une base de données donnée et s'attendre à produire un résultat identique au premier chercheur. La reproductibilité exige que le processus soit entièrement spécifié, généralement à la fois sous une forme lisible par l'homme et exécutable par ordinateur, de sorte qu'aucune décision d'étude ne soit laissée à la discrétion de l'enquêteur. La solution la plus efficace pour atteindre la répétabilité et la reproductibilité est d'utiliser des routines analytiques standardisées ayant des entrées et des sorties définies, et d'appliquer ces procédures à des bases de données contrôlées par version.
 
@@ -61,7 +65,8 @@ Un aspect important de la qualité des preuves est la capacité d'exprimer l'inc
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Les preuves que nous générons doivent être **répétables**, **reproductibles**, **répliquables**, **généralisables**, **robustes** et **calibrées**.
+\BeginKnitrBlock{rmdsummary}
+- Les preuves que nous générons doivent être **répétables**, **reproductibles**, **répliquables**, **généralisables**, **robustes** et **calibrées**.
 
 - La qualité des preuves prend en compte plus que la seule qualité des données pour répondre à la question de savoir si les preuves sont fiables :
     - Qualité des données
@@ -71,4 +76,5 @@ Un aspect important de la qualité des preuves est la capacité d'exprimer l'inc
 
 - Lors de la communication des preuves, nous devons exprimer l'incertitude découlant des différents défis liés à la qualité des preuves.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

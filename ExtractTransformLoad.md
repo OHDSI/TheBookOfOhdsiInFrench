@@ -44,10 +44,14 @@ La séquence typique pour utiliser le logiciel afin de scanner les données sour
 
 Après avoir téléchargé et installé l'application White Rabbit, la première chose à faire est de définir un dossier de travail. Tous les fichiers créés par White Rabbit seront exportés dans ce dossier local. Utilisez le bouton "Pick Folder" illustré à la Figure \@ref(fig:WhiteRabbitLocation) pour naviguer dans votre environnement local là où vous souhaitez que le document de scan soit enregistré.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/WhiteRabbitLocation.png" alt="Le bouton &quot;Pick Folder&quot; permet de spécifier un dossier de travail pour l'application White Rabbit." width="100%" />
-<p class="caption">(\#fig:WhiteRabbitLocation)Le bouton "Pick Folder" permet de spécifier un dossier de travail pour l'application White Rabbit.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/WhiteRabbitLocation} 
+
+}
+
+\caption{Le bouton "Pick Folder" permet de spécifier un dossier de travail pour l'application White Rabbit.}(\#fig:WhiteRabbitLocation)
+\end{figure}
 
 #### Connexion à une base de données {-}
 
@@ -57,10 +61,14 @@ White Rabbit prend en charge les fichiers texte délimités et diverses plates-f
 
 Après connexion à une base de données, vous pouvez scanner les tables qu'elle contient. Un scan génère un rapport contenant des informations sur les données sources utilisables pour aider à concevoir l'ETL. En utilisant l'onglet Scan illustré à la Figure \@ref(fig:WhiteRabbitAddTables), vous pouvez soit sélectionner des tables individuelles dans la base de données source sélectionnée en cliquant sur “Add” (Ctrl + clic de souris), ou sélectionner automatiquement toutes les tables de la base de données en cliquant sur “Add all in DB”.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/WhiteRabbitAddTables.png" alt="Onglet de scan de White Rabbit." width="100%" />
-<p class="caption">(\#fig:WhiteRabbitAddTables)Onglet de scan de White Rabbit.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/WhiteRabbitAddTables} 
+
+}
+
+\caption{Onglet de scan de White Rabbit.}(\#fig:WhiteRabbitAddTables)
+\end{figure}
 
 Il y a également quelques options de paramétrage avec le scan :
 
@@ -74,17 +82,25 @@ Une fois tous les paramètres complétés, appuyez sur le bouton “Scan tables�
 
 Une fois le scan terminé, un fichier Excel est généré dans le dossier sélectionné, avec un onglet pour chaque table scannée ainsi qu'un onglet récapitulatif. L'onglet récapitulatif liste toutes les tables scannées, chaque champ dans chaque table, le type de données de chaque champ, la longueur maximale du champ, le nombre de lignes dans la table, le nombre de lignes scannées, et la fréquence à laquelle chaque champ a été trouvé vide. La Figure \@ref(fig:ScanOverviewTab). montre un exemple d'onglet récapitulatif.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/ScanOverviewTab.png" alt="Exemple d'onglet récapitulatif d'un rapport de scan." width="100%" />
-<p class="caption">(\#fig:ScanOverviewTab)Exemple d'onglet récapitulatif d'un rapport de scan.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/ScanOverviewTab} 
+
+}
+
+\caption{Exemple d'onglet récapitulatif d'un rapport de scan.}(\#fig:ScanOverviewTab)
+\end{figure}
 
 Les onglets pour chaque table montrent chaque champ, les valeurs dans chaque champ et la fréquence de chaque valeur. Chaque colonne de la table source générera deux colonnes dans le fichier Excel. Une colonne listera toutes les valeurs distinctes ayant un nombre supérieur au “Min cell count” défini au moment du scan. Si une liste de valeurs uniques était tronquée, la dernière valeur dans la liste sera “List truncated”; cela indique qu'il y a une ou plusieurs valeurs uniques additionnelles apparaissant moins souvent que le nombre saisi dans le “Min cell count”. À côté de chaque valeur distincte se trouve une deuxième colonne contenant la fréquence (le nombre de fois que cette valeur apparaît dans l'échantillon). Ces deux colonnes (valeurs distinctes et fréquence) se répètent pour toutes les colonnes sources de la table profilée dans le classeur.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/ScanSex.png" alt="Exemple de valeurs pour une seule colonne." width="30%" />
-<p class="caption">(\#fig:scanSex)Exemple de valeurs pour une seule colonne.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.3\linewidth]{images/ExtractTransformLoad/ScanSex} 
+
+}
+
+\caption{Exemple de valeurs pour une seule colonne.}(\#fig:scanSex)
+\end{figure}
 
 Le rapport est puissant pour comprendre vos données sources en mettant en évidence ce qui existe. Par exemple, si les résultats illustrés à la Figure \@ref(fig:scanSex) étaient retournés pour la colonne “Sex” dans une des tables scannées, nous pouvons voir qu'il y avait deux valeurs communes (1 et 2) apparaissant 61,491 et 35,401 fois respectivement. White Rabbit ne définira pas 1 comme masculin et 2 comme féminin; le détenteur des données devront généralement définir les codes sources uniques au système source. Cependant, ces deux valeurs (1 & 2) ne sont pas les seules présentes dans les données car nous voyons que cette liste a été tronquée. Ces autres valeurs apparaissent très peu fréquemment (défini par le “Min cell count”) et représentent souvent des valeurs incorrectes ou très suspectes. Lors de la génération d'un ETL, nous devons non seulement planifier pour les concepts de genre haute fréquence 1 et 2 mais aussi pour les autres valeurs basse fréquence existant dans cette colonne. Par exemple, si ces genres basse fréquence étaient “NULL”, nous devons nous assurer que l'ETL peut traiter ces données et sait quoi faire dans cette situation.
 
@@ -116,10 +132,14 @@ Une fois que vous avez ouvert votre rapport de scan White Rabbit dans Rabbit-In-
 
 Étant donné que le CDM est un modèle centré sur la personne, il est toujours judicieux de commencer par mapper la table PERSON. Chaque table d'événement clinique (CONDITION_OCCURRENCE, DRUG_EXPOSURE, PROCEDURE_OCCURRENCE, etc.) se réfère à la table PERSON via le person_id ; élaborer la logique pour la table PERSON en premier rend la tâche plus facile par la suite. Après la table PERSON, une bonne règle de base est de convertir la table OBSERVATION_PERIOD ensuite. Chaque personne dans une base de données CDM doit avoir au moins une OBSERVATION_PERIOD et, en général, la plupart des événements pour une personne se produisent dans ce laps de temps. Une fois les tables PERSON et OBSERVATION_PERIOD terminées, les tables dimensionnelles comme PROVIDER, CARE_SITE et LOCATION sont généralement les suivantes. La logique des tables finale à travailler avant les tables cliniques est VISIT_OCCURRENCE. Cela est souvent la logique la plus compliquée dans tout l'ETL et elle est parmi les plus cruciales car la plupart des événements se produisant au cours du parcours du patient se produiront pendant les visites. Une fois ces tables terminées, il est de votre choix de mapper les tables CDM et dans l'ordre que vous préférez.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/flowOfEtl.png" alt="Flux général d'un ETL et quelles tables mapper en premier." width="100%" />
-<p class="caption">(\#fig:etlFlow)Flux général d'un ETL et quelles tables mapper en premier.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/flowOfEtl} 
+
+}
+
+\caption{Flux général d'un ETL et quelles tables mapper en premier.}(\#fig:etlFlow)
+\end{figure}
 
 Il est souvent nécessaire, lors de la conversion au CDM, de prévoir des tables intermédiaires. Cela pourrait être pour attribuer les bons VISIT_OCCURRENCE_IDs aux événements, ou pour mapper les codes sources aux concepts standard (faire cette étape dynamique est souvent très lent). Les tables intermédiaires sont 100 % autorisées et encouragées. Ce qui est découragé, c'est la persistance et la dépendance à l'égard de ces tables intermédiaires une fois la conversion terminée.
 
@@ -127,10 +147,14 @@ Il est souvent nécessaire, lors de la conversion au CDM, de prévoir des tables
 
 La structure des données Synthea contient 20 colonnes dans la table patients, mais toutes n'étaient pas nécessaires pour peupler la table PERSON, comme illustré à la Figure \@ref(fig:syntheaPerson). Cela est très courant et ne devrait pas être alarmant. Dans cet exemple, de nombreux points de données de la table patients de Synthea qui n'ont pas été utilisés dans la table PERSON du CDM étaient des identifiants supplémentaires tels que le nom du patient, le numéro de permis de conduire et le numéro de passeport.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/syntheaPersonTable.png" alt="Mise en correspondance de la table Patients de Synthea avec la table PERSON du CDM." width="100%" />
-<p class="caption">(\#fig:syntheaPerson)Mise en correspondance de la table Patients de Synthea avec la table PERSON du CDM.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/syntheaPersonTable} 
+
+}
+
+\caption{Mise en correspondance de la table Patients de Synthea avec la table PERSON du CDM.}(\#fig:syntheaPerson)
+\end{figure}
 
 Le tableau \@ref(tab:syntheaEtlPerson) ci-dessous montre la logique qui a été imposée à la table patients de Synthea pour la convertir en table PERSON du CDM. La colonne ‘Destination Field’ discute où dans le CDM les données sont mappées. La colonne ‘Source field’ met en évidence la colonne de la table source (dans ce cas patients) qui sera utilisée pour peupler la colonne CDM. Enfin, la colonne ‘Logic & comments’ donne des explications pour la logique.
 
@@ -211,10 +235,14 @@ Note : les extractions de codes source doivent être divisées par domaine (c'es
 
 Les codes source sont chargés dans Usagi depuis le menu File –> Import codes. De là, un "Import codes ..." s'affichera comme montré dans la Figure \@ref(fig:usagiImport). Dans cette figure, les termes des codes source étaient en néerlandais et ont également été traduits en anglais. Usagi utilisera les traductions anglaises pour mapper au vocabulaire standard.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/usagiImport.png" alt="Usagi source code input screen." width="100%" />
-<p class="caption">(\#fig:usagiImport)Usagi source code input screen.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/usagiImport} 
+
+}
+
+\caption{Usagi source code input screen.}(\#fig:usagiImport)
+\end{figure}
 
 La section "Column mapping" (en bas à gauche) est l'endroit où vous définissez pour Usagi comment utiliser la table importée. Si vous passez la souris sur les menus déroulants, une fenêtre contextuelle apparaîtra définissant chaque colonne. Usagi n'utilisera pas la ou les colonnes "Additional info" comme informations pour associer les codes source aux codes de concept du Vocabulaire ; cependant, ces informations supplémentaires peuvent aider la personne qui révise le mapping des codes source et devraient être incluses.
 
@@ -234,10 +262,14 @@ Une fois tous vos paramètres finalisés, cliquez sur le bouton "Import" pour im
 
 Une fois que vous avez importé votre fichier d'entrée de codes source, le processus de mapping commence. Dans la Figure \@ref(fig:usagiOverview), vous voyez que l'écran d'Usagi est composé de 3 sections principales : un tableau d'aperçu, la section de mapping sélectionnée et un espace pour effectuer des recherches. Notez que dans n'importe lequel des tableaux, vous pouvez faire un clic droit pour sélectionner les colonnes à afficher ou à masquer afin de réduire la complexité visuelle.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/usagiOverview.png" alt="Usagi source code input screen." width="100%" />
-<p class="caption">(\#fig:usagiOverview)Usagi source code input screen.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/usagiOverview} 
+
+}
+
+\caption{Usagi source code input screen.}(\#fig:usagiOverview)
+\end{figure}
 
 #### Approuver un Mapping Suggéré {-}
 
@@ -259,10 +291,14 @@ Lorsque nous appliquons ces critères de recherche, nous trouvons “254761-Coug
 
 Lors de la recherche de concepts appropriés à mapper, il est important de considérer la "vie sociale" d'un concept. La signification d'un concept pourrait dépendre en partie de sa place dans la hiérarchie, et parfois il y a des "concepts orphelins" dans le vocabulaire avec peu ou pas de relations hiérarchiques, qui seraient mal adaptés comme concepts cibles. Usagi rapportera souvent le nombre de parents et d'enfants qu'un concept a, et il est également possible de montrer plus d'informations en appuyant sur ALT + C ou en sélectionnant view –> Concept information dans la barre de menu supérieure.
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/usagiConceptInfo.png" alt="Usagi concept information panel." width="100%" />
-<p class="caption">(\#fig:usagiConceptInfo)Usagi concept information panel.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/usagiConceptInfo} 
+
+}
+
+\caption{Usagi concept information panel.}(\#fig:usagiConceptInfo)
+\end{figure}
 
 La figure \@ref(fig:usagiConceptInfo) montre le panneau d'informations sur le concept. Il montre des informations générales sur un concept, ainsi que ses parents, enfants et autres codes source qui mappent à ce concept. Les utilisateurs peuvent utiliser ce panneau pour naviguer dans la hiérarchie et potentiellement choisir un autre concept cible.
 
@@ -376,7 +412,8 @@ Le processus ETL est difficile pour de nombreuses raisons, dont la moindre n'est
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Il existe un processus généralement accepté pour aborder un ETL, incluant
+\BeginKnitrBlock{rmdsummary}
+- Il existe un processus généralement accepté pour aborder un ETL, incluant
   - Les experts en données et les experts en CDM conçoivent ensemble l'ETL
   - Les personnes ayant des connaissances médicales créent les mappings de codes
   - Une personne technique met en œuvre l'ETL
@@ -386,7 +423,8 @@ Le processus ETL est difficile pour de nombreuses raisons, dont la moindre n'est
 
 - Il existe de nombreux exemples d'ETL et des conventions acceptées que vous pouvez utiliser comme guide
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 
 ## Exercices
@@ -434,9 +472,13 @@ Si vous voyez un ensemble de visites comme montré dans la Figure \@ref(fig:exer
 
 :::
 
-<div class="figure" style="text-align: center">
-<img src="images/ExtractTransformLoad/exerciseSourceData.png" alt="Example source data." width="100%" />
-<p class="caption">(\#fig:exerciseSourceData)Example source data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/ExtractTransformLoad/exerciseSourceData} 
+
+}
+
+\caption{Example source data.}(\#fig:exerciseSourceData)
+\end{figure}
 
 Les réponses suggérées se trouvent dans l'Appendice \@ref(Etlanswers).

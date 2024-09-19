@@ -13,9 +13,11 @@ Le chapitre sert à expliquer ce que signifie créer et partager des définition
 
 Dans les recherches OHDSI, nous définissons une cohorte comme un ensemble de personnes qui satisfont un ou plusieurs critères d'inclusion pendant une durée de temps. Le terme cohorte est souvent utilisé de manière interchangeable avec le terme *phénotype*. Les cohortes sont utilisées dans tous les outils analytiques OHDSI et les études en réseau comme les blocs de construction primaires pour exécuter une question de recherche. Par exemple, dans une étude visant à prédire le risque d'angio-œdème dans un groupe de personnes commençant des inhibiteurs de l'enzyme de conversion de l'angiotensine (ECA), nous définissons deux cohortes : la cohorte d'issue (angio-œdème), et la cohorte cible (personnes commençant des inhibiteurs ECA). Un aspect important des cohortes dans OHDSI est qu'elles sont généralement définies indépendamment des autres cohortes de l'étude, permettant ainsi la réutilisation. Par exemple, dans notre exemple, la cohorte d'angio-œdème identifierait tous les événements d'angio-œdème dans la population, y compris ceux en dehors de la population cible. Nos outils analytiques prendront l'intersection de ces deux cohortes lorsqu'il le faut lors de l'analyse. L'avantage de cela est que la même définition de la cohorte d'angio-œdème peut désormais également être utilisée dans d'autres analyses, par exemple une étude d'estimation comparant les inhibiteurs ECA à une autre exposition. Les définitions de cohortes peuvent varier d'une étude à l'autre en fonction de la question de recherche d'intérêt.
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Une cohorte est un ensemble de personnes qui satisfont un ou plusieurs critères d'inclusion pendant une durée de temps.
+\BeginKnitrBlock{rmdimportant}
+Une cohorte est un ensemble de personnes qui satisfont un ou plusieurs critères d'inclusion pendant une durée de temps.
 
-</div>\EndKnitrBlock{rmdimportant}
+
+\EndKnitrBlock{rmdimportant}
 
 \index{cohorte} \index{définition de cohorte}
 Il est important de comprendre que cette définition d'une cohorte utilisée dans OHDSI pourrait différer de celle utilisée par d'autres dans le domaine. Par exemple, dans de nombreux manuscrits scientifiques évalués par des pairs, une cohorte est suggérée être analogue à un ensemble de codes spécifiques cliniques (par exemple, ICD-9/ICD-10, NDC, HCPCS, etc.). Bien que les ensembles de codes soient une pièce importante dans l'assemblage d'une cohorte, une cohorte n'est pas définie par un ensemble de codes. Une cohorte nécessite une logique spécifique pour utiliser l'ensemble de codes pour les critères (par exemple, est-ce la première occurrence du code ICD-9/ICD-10 ? toute occurrence ?). Une cohorte bien définie spécifie comment un patient entre dans une cohorte et comment un patient sort d'une cohorte.
@@ -51,10 +53,14 @@ Les composants standards que nous utilisons pour assembler ces critères sont :
 
 Lors de la construction de votre définition de cohorte, il peut être utile de penser aux Domaines comme des blocs de construction (voir Figure \@ref(fig:cohortLegos)) représentant les attributs de cohorte. Si vous êtes confus quant au contenu admissible dans chaque domaine, vous pouvez toujours vous référer au chapitre du Modèle de Données Communs (Chapitre \@ref(CommonDataModel)) pour obtenir de l'aide.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/cohort-legos.png" alt="Building Blocks of Cohort definitions." width="50%" />
-<p class="caption">(\#fig:cohortLegos)Building Blocks of Cohort definitions.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{images/Cohorts/cohort-legos} 
+
+}
+
+\caption{Building Blocks of Cohort definitions.}(\#fig:cohortLegos)
+\end{figure}
 
 Lors de la création d'une définition de cohorte, vous devez vous poser les questions suivantes :
 
@@ -68,8 +74,10 @@ Lors de la création d'une définition de cohorte, vous devez vous poser les que
 
 **Critères de sortie de cohorte** : L'événement de sortie de la cohorte signifie lorsque qu'une personne ne satisfait plus aux critères de la cohorte. La sortie de la cohorte peut être définie de plusieurs manières telles que la fin de la période d'observation, un intervalle de temps fixe par rapport à l'événement d'entrée initial, le dernier événement d'une séquence d'observations connexes (par exemple, exposition médicamenteuse persistante) ou par d'autres censures de la période d'observation. La stratégie de sortie de cohorte aura un impact sur le fait qu'une personne peut appartenir à la cohorte plusieurs fois pendant des intervalles de temps différents. \index{cohort!exit criteria}
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Dans les outils OHDSI, il n'y a pas de distinction entre les critères d'inclusion et d'exclusion. Tous les critères sont formulés comme des critères d'inclusion. Par exemple, le critère d'exclusion « Exclure les personnes ayant une hypertension antérieure » peut être formulé comme le critère d'inclusion « Inclure les personnes ayant 0 occurrences d'hypertension antérieure ».
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+Dans les outils OHDSI, il n'y a pas de distinction entre les critères d'inclusion et d'exclusion. Tous les critères sont formulés comme des critères d'inclusion. Par exemple, le critère d'exclusion « Exclure les personnes ayant une hypertension antérieure » peut être formulé comme le critère d'inclusion « Inclure les personnes ayant 0 occurrences d'hypertension antérieure ».
+
+\EndKnitrBlock{rmdimportant}
 
 ## Ensembles de Concepts {#conceptSets}
 
@@ -92,10 +100,14 @@ Tableau : (\#tab:conceptSetExpression) Un exemple d'expression d'ensemble de con
 
 Comme montré dans la Figure \@ref(fig:conceptSet), cela inclura « Infarctus du myocarde » et tous ses descendants sauf « Ancien infarctus du myocarde » et ses descendants. Au total, cette expression d'ensemble de concepts implique près d'une centaine de Concepts Standards. Ces Concepts Standards à leur tour reflètent des centaines de codes sources (par exemple, codes CIM-9 et CIM-10) qui peuvent apparaître dans les différentes bases de données.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/conceptSet.png" alt="A concept set including &quot;Myocardial infarction&quot; (with descendants), but excluding &quot;Old myocardial infarction&quot; (with descendants)." width="100%" />
-<p class="caption">(\#fig:conceptSet)A concept set including "Myocardial infarction" (with descendants), but excluding "Old myocardial infarction" (with descendants).</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/conceptSet} 
+
+}
+
+\caption{A concept set including "Myocardial infarction" (with descendants), but excluding "Old myocardial infarction" (with descendants).}(\#fig:conceptSet)
+\end{figure}
 
 
 ## Définitions de Cohorte Probabilistes
@@ -126,25 +138,35 @@ Nous commençons à pratiquer nos compétences en matière de cohorte en assembl
 
 Avec ce contexte en tête, nous allons maintenant construire notre cohorte. Au fur et à mesure de cet exercice, nous approcherons la construction de notre cohorte de manière similaire à un diagramme d'attrition standard. La Figure \@ref(fig:CohortPractice) montre le cadre logique pour la manière dont nous voulons construire cette cohorte.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/CohortPractice.png" alt="Diagramme Logique de la Cohorte Prévue" width="100%" />
-<p class="caption">(\#fig:CohortPractice)Diagramme Logique de la Cohorte Prévue</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/CohortPractice} 
+
+}
+
+\caption{Diagramme Logique de la Cohorte Prévue}(\#fig:CohortPractice)
+\end{figure}
 
 Vous pouvez construire une cohorte dans l'interface utilisateur d'ATLAS ou vous pouvez écrire directement une requête contre votre CDM. Nous discuterons brièvement des deux dans ce chapitre.
 ## Mise en œuvre d'une Cohorte avec ATLAS
 
 Pour commencer avec ATLAS, cliquez sur le module ![](images/Cohorts/cohortdefinition.png). Lorsque le module se charge, cliquez sur "Nouvelle cohorte". L'écran suivant que vous verrez sera une définition de cohorte vide. La Figure \@ref(fig:ATLASdefineacohort) montre ce que vous verrez sur votre écran.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-defineacohort.png" alt="Définition d'une Nouvelle Cohorte" width="100%" />
-<p class="caption">(\#fig:ATLASdefineacohort)Définition d'une Nouvelle Cohorte</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-defineacohort} 
+
+}
+
+\caption{Définition d'une Nouvelle Cohorte}(\#fig:ATLASdefineacohort)
+\end{figure}
 
 Avant de faire autre chose, il est recommandé de changer le nom de la cohorte de "Nouvelle Définition de Cohorte" à un nom unique pour cette cohorte. Vous pouvez opter pour un nom comme "Nouveaux utilisateurs d'inhibiteurs de l'ECA en monothérapie de première ligne pour l'hypertension".
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">ATLAS ne permet pas à deux cohortes d'avoir exactement les mêmes noms. ATLAS vous donnera un message d'erreur en pop-up si vous choisissez un nom déjà utilisé par une autre cohorte ATLAS.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+ATLAS ne permet pas à deux cohortes d'avoir exactement les mêmes noms. ATLAS vous donnera un message d'erreur en pop-up si vous choisissez un nom déjà utilisé par une autre cohorte ATLAS.
+
+\EndKnitrBlock{rmdimportant}
 
 Une fois que vous avez choisi un nom, vous pouvez enregistrer la cohorte en cliquant sur ![](images/Cohorts/save.png).
 
@@ -152,19 +174,27 @@ Une fois que vous avez choisi un nom, vous pouvez enregistrer la cohorte en cliq
 
 Maintenant nous pouvons procéder à la définition de l'événement initial de la cohorte. Cliquez sur "Ajouter événement initial". Vous devez maintenant choisir quel domaine vous construisez des critères autour. Vous pourriez vous demander, "Comment savoir quel domaine est l'événement initial de la cohorte?" Découvrons-le.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-initialevent.png" alt="Ajout d'un Événement Initial" width="100%" />
-<p class="caption">(\#fig:ATLASinitialevent)Ajout d'un Événement Initial</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-initialevent} 
+
+}
+
+\caption{Ajout d'un Événement Initial}(\#fig:ATLASinitialevent)
+\end{figure}
 
 Comme nous le voyons dans la Figure \@ref(fig:ATLASinitialevent), ATLAS fournit des descriptions sous chaque critère pour vous aider. Si nous construisions des critères basés sur CONDITION_OCCURRENCE, notre question porterait sur les patients avec un diagnostic spécifique. Si nous construisions des critères basés sur DRUG_EXPOSURE, notre question porterait sur les patients prenant un médicament ou une classe de médicaments spécifiques. Puisque nous voulons trouver des patients qui commencent une monothérapie inhibiteurs de l'ECA en tant que traitements de première ligne pour l'hypertension, nous voulons choisir un critère DRUG_EXPOSURE. Vous pourriez dire, "Mais nous nous soucions également de l'hypertension en tant que diagnostic". Vous avez raison. L'hypertension est un autre critère que nous allons construire. Cependant, la date de début de la cohorte est définie par le début du traitement par inhibiteur de l'ECA, qui est donc l'événement initial. Le diagnostic d'hypertension est ce que nous appelons un *critère de qualification supplémentaire*. Nous y reviendrons une fois que nous aurons construit ce critère. Nous cliquerons sur "Ajouter Exposition Médicamenteuse".
 
 L'écran se mettra à jour avec votre critère sélectionné mais vous n'avez pas encore terminé. Comme nous le voyons dans la Figure \@ref(fig:ATLASdrugexposure), ATLAS ne sait pas quel médicament nous recherchons. Nous devons dire à ATLAS quel ensemble de concepts est associé aux inhibiteurs de l'ECA.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-drugexposure.png" alt="Définition d'une Exposition Médicamenteuse" width="100%" />
-<p class="caption">(\#fig:ATLASdrugexposure)Définition d'une Exposition Médicamenteuse</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-drugexposure} 
+
+}
+
+\caption{Définition d'une Exposition Médicamenteuse}(\#fig:ATLASdrugexposure)
+\end{figure}
 
 ### Définir l'Ensemble de Concepts
 
@@ -173,49 +203,71 @@ Vous devrez cliquer sur ![](images/Cohorts/downarrow.png) pour ouvrir la boîte 
 #### Scénario 1 : Vous n'avez pas construit un Ensemble de Concepts{-}
 Si vous n'avez pas assemblé vos ensembles de concepts pour les appliquer à vos critères, vous devrez le faire avant de continuer. Vous pouvez construire un ensemble de concepts dans la définition de la cohorte en naviguant vers l'onglet "Ensemble de concepts" et en cliquant sur "Nouvel Ensemble de Concepts". Vous devrez renommer l'ensemble de concepts de "Ensemble de Concepts non nommé" à un nom de votre choix. De là, vous pouvez utiliser le module ![](images/Cohorts/search-2.png) pour rechercher des concepts cliniques représentant les inhibiteurs de l'ECA (Figure \@ref(fig:aceinhibitors)).
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/aceinhibitors.png" alt="Recherche dans le Vocabulaire - Inhibiteurs de l'ECA" width="100%" />
-<p class="caption">(\#fig:aceinhibitors)Recherche dans le Vocabulaire - Inhibiteurs de l'ECA</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/aceinhibitors} 
+
+}
+
+\caption{Recherche dans le Vocabulaire - Inhibiteurs de l'ECA}(\#fig:aceinhibitors)
+\end{figure}
 
 Lorsque vous avez trouvé les termes que vous souhaitez utiliser pour définir cette exposition médicamenteuse, vous pouvez sélectionner le concept en cliquant sur ![](images/Cohorts/shoppingcart.png). Vous pouvez retourner à votre définition de cohorte en utilisant la flèche gauche en haut à gauche de la Figure \@ref(fig:aceinhibitors). Vous pouvez vous référer au Chapitre \@ref(StandardizedVocabularies) (Vocabulaires Standardisés) pour savoir comment naviguer les vocabulaires pour trouver les concepts cliniques d'intérêt.
 
 La Figure \@ref(fig:aceConceptSetExpression) montre notre expression de l'ensemble de concepts. Nous avons sélectionné tous les ingrédients inhibiteurs de l'ECA qui nous intéressent, et incluons tous leurs descendants, incluant ainsi tous les médicaments contenant l'un de ces ingrédients. Nous pouvons cliquer sur "Concepts inclus" pour voir tous les 21,536 concepts impliqués par cette expression, ou nous pouvons cliquer sur "Codes Sources Inclus" pour explorer tous les codes sources dans les différents systèmes de codage qui sont impliqués.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/aceConceptSetExpression.png" alt="Un ensemble de concepts contenant des médicaments inhibiteurs de l'ECA." width="100%" />
-<p class="caption">(\#fig:aceConceptSetExpression)Un ensemble de concepts contenant des médicaments inhibiteurs de l'ECA.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/aceConceptSetExpression} 
+
+}
+
+\caption{Un ensemble de concepts contenant des médicaments inhibiteurs de l'ECA.}(\#fig:aceConceptSetExpression)
+\end{figure}
 
 #### Scénario 2 : Vous avez déjà construit un Ensemble de Concepts{-}
 Si vous avez déjà créé un ensemble de concepts et l'avez enregistré dans ATLAS, vous pouvez cliquer sur "Importer un Ensemble de Concepts". Une boîte de dialogue s'ouvrira et vous invitera à trouver votre concept dans le référentiel d'ensembles de concepts de votre ATLAS comme montré dans la Figure \@ref(fig:ATLASfindyourconcept). Dans la figure d'exemple, l'utilisateur récupère des ensembles de concepts stockés dans ATLAS. L'utilisateur a tapé le nom donné à cet ensemble de concepts "inhibiteurs de l'ECA" dans la recherche à droite. Cela a réduit la liste des ensembles de concepts uniquement aux concepts correspondants. De là, l'utilisateur peut cliquer sur la ligne de l'ensemble de concepts pour le sélectionner. (Note: La boîte de dialogue disparaîtra une fois que vous aurez sélectionné un ensemble de concepts.) Vous saurez que cette action a réussi lorsque la boîte Any Drug sera mise à jour avec le nom de l'ensemble de concepts que vous avez sélectionné.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-findingyourconcept.png" alt="Importer un Ensemble de Concepts depuis le Référentiel ATLAS" width="100%" />
-<p class="caption">(\#fig:ATLASfindyourconcept)Importer un Ensemble de Concepts depuis le Référentiel ATLAS</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-findingyourconcept} 
+
+}
+
+\caption{Importer un Ensemble de Concepts depuis le Référentiel ATLAS}(\#fig:ATLASfindyourconcept)
+\end{figure}
 
 ### Critères Additionnels de l’Événement Initial
 Maintenant que vous avez attaché un ensemble de concepts, vous n'avez pas encore terminé. Votre question recherche de nouveaux utilisateurs ou la première fois dans l'historique de quelqu'un où ils sont exposés aux inhibiteurs de l'ECA. Cela se traduit par la *première exposition* aux inhibiteurs de l'ECA dans le dossier du patient. Pour spécifier cela, vous devez cliquer sur "+Ajouter attribut". Vous voudrez sélectionner "Ajouter le critère de première exposition". Notez que vous pourriez spécifier d'autres attributs d'un critère que vous construisez. Vous pourriez spécifier un attribut de l'âge à l'occurrence, la date de l'occurrence, le genre ou d'autres attributs liés au médicament. Les critères disponibles à la sélection seront différents pour chaque domaine.
 
 De là, la fenêtre se fermera automatiquement. Une fois sélectionné, cet attribut supplémentaire apparaîtra dans la même case que les critères initiaux (voir Figure \@ref(fig:initialEventAce)).
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">La conception actuelle d'ATLAS peut en tromper certains. Malgré son apparence, le ![](images/Cohorts/redX.png) n'est pas destiné à signifier "Non". C'est une fonctionnalité actionnable qui permet à l'utilisateur de supprimer le critère. Si vous cliquez sur ![](images/Cohorts/redX.png), ce critère disparaitra. Ainsi, vous devez laisser le critère avec le ![](images/Cohorts/redX.png) pour garder le critère actif.
-</div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}
+La conception actuelle d'ATLAS peut en tromper certains. Malgré son apparence, le ![](images/Cohorts/redX.png) n'est pas destiné à signifier "Non". C'est une fonctionnalité actionnable qui permet à l'utilisateur de supprimer le critère. Si vous cliquez sur ![](images/Cohorts/redX.png), ce critère disparaitra. Ainsi, vous devez laisser le critère avec le ![](images/Cohorts/redX.png) pour garder le critère actif.
+
+\EndKnitrBlock{rmdimportant}
 
 Maintenant que vous avez construit un événement de qualification initial. Pour vous assurer que vous capturez la première exposition médicamenteuse observée, vous voudrez ajouter une fenêtre de rétro-observation pour savoir que vous regardez suffisamment de l'historique du patient pour savoir ce qui vient en premier. Il est possible qu'un patient avec une période d'observation courte ait reçu une exposition ailleurs que nous ne voyons pas. Nous ne pouvons pas contrôler cela mais nous pouvons mandater une durée minimale de temps pendant laquelle le patient doit être dans les données avant la date d'index. Vous pouvez le faire en ajustant les listes déroulantes d'observation continue. Vous pouvez également cliquer sur la boîte et taper une valeur pour ces fenêtres. Nous exigerons 365 jours d'observation continue avant l'événement initial. Vous mettrez à jour votre période d'observation à : *avec observation continue de 365 jours avant*, comme montré dans la Figure \@ref(fig:initialEventAce). Cette fenêtre de rétro-observation est à la discrétion de votre équipe d'étude. Vous pouvez choisir différemment pour d'autres cohortes. Cela crée, autant que nous le pouvons, une période minimale de temps où nous voyons le patient pour s'assurer que nous capturons le premier enregistrement. Ce critère concerne l'historique préalable et n'implique pas de temps après l'événement d'index. Par conséquent, nous exigeons 0 jours après l'événement d'index. Notre événement de qualification est l'utilisation pour la première fois des inhibiteurs de l'ECA. Ainsi, nous limitons les événements initiaux au "premier événement" par personne.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/initialEventAce.png" alt="Définir l'observation continue requise avant la date d'index." width="100%" />
-<p class="caption">(\#fig:initialEventAce)Définir l'observation continue requise avant la date d'index.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/initialEventAce} 
+
+}
+
+\caption{Définir l'observation continue requise avant la date d'index.}(\#fig:initialEventAce)
+\end{figure}
 
 Pour mieux expliquer comment cette logique se met en place, vous pouvez penser assembler des chronologies de patients.
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/EarliestEventExplained.png" alt="Explication de l'éligibilité des patients par critères appliqués" width="100%" />
-<p class="caption">(\#fig:EarliestEventExplained)Explication de l'éligibilité des patients par critères appliqués</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/EarliestEventExplained} 
+
+}
+
+\caption{Explication de l'éligibilité des patients par critères appliqués}(\#fig:EarliestEventExplained)
+\end{figure}
 
 Dans la Figure \@ref(fig:EarliestEventExplained), chaque ligne représente un patient unique qui peut être éligible pour rejoindre la cohorte. Les étoiles remplies représentent un moment où le patient remplit les critères spécifiés. Au fur et à mesure que des critères supplémentaires sont appliqués, vous pouvez voir que certaines étoiles sont d'une teinte plus claire. Cela signifie que ces patients ont d'autres enregistrements remplissant les critères mais il y a un autre enregistrement qui précède cela. Au moment où nous arrivons au dernier critère, nous examinons la vue cumulative des patients qui ont des inhibiteurs de l'ECA pour la première fois et ont 365 jours avant la première fois de l'occurrence. Logiquement, limiter à l'événement initial est redondant bien que cela soit utile de maintenir notre logique explicite dans chaque sélection que nous faisons. Lorsque vous construisez vos propres cohortes, vous pouvez choisir de consulter la section Chercheurs du [Forum OHDSI](http://forums.ohdsi.org) pour obtenir un second avis sur la façon de construire votre logique de cohorte.
 
@@ -227,17 +279,25 @@ Vous voudrez maintenant cliquer sur "Nouveaux critères d'inclusion" pour ajoute
 
 Une fois que vous avez annoté ce nouveau critère, vous cliquerez sur le bouton "+Ajouter un critère au groupe" pour construire votre critère réel pour cette règle. Ce bouton fonctionne de manière similaire au bouton "Ajouter événement initial" sauf que nous ne spécifions plus d'événement initial. Nous pourrions ajouter plusieurs critères à cela -- c'est pourquoi il spécifie "ajouter un critère au groupe". Un exemple serait si vous avez plusieurs façons de trouver une maladie (par exemple, une logique pour un CONDITION_OCCURRENCE, une logique utilisant un DRUG_EXPOSURE comme proxy pour cette condition, une logique utilisant une MEASUREMENT comme proxy pour cette condition). Ceux-ci seraient des domaines séparés et nécessiteraient des critères différents mais peuvent être regroupés en un critère recherchant cette condition. Dans ce cas, nous voulons trouver un diagnostic de l'hypertension donc nous "Ajoutons une occurrence de condition". Nous suivrons des étapes similaires à celles de l'événement initial en attachant un ensemble de concepts à cet enregistrement. Nous voulons également spécifier que l'événement commence entre 365 jours avant et 0 jours après la date d'index (l'occurrence de la première utilisation d'un inhibiteur de l'ECA). Vérifiez maintenant votre logique par rapport à la Figure \@ref(fig:ATLASIC1).
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-IC1.png" alt="Critères d'Inclusion Supplémentaires 1" width="100%" />
-<p class="caption">(\#fig:ATLASIC1)Critères d'Inclusion Supplémentaires 1</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-IC1} 
+
+}
+
+\caption{Critères d'Inclusion Supplémentaires 1}(\#fig:ATLASIC1)
+\end{figure}
 
 Vous voudrez ensuite ajouter un autre critère pour rechercher des patients: *avec exactement 0 occurrences de médicaments contre l'hypertension TOUS les jours avant et 1 jour avant la date d'index (aucune exposition à des médicaments anti-hypertensifs avant un inhibiteur de l'ECA)*. Ce processus commence comme avant en cliquant sur le bouton "Nouveaux critères d'inclusion", en ajoutant vos annotations à ce critère, puis en cliquant sur "+Ajouter un critère au groupe". Il s'agit d'une DRUG_EXPOSURE, donc vous cliquerez sur "Ajouter Exposition Médicamenteuse", attacherez un ensemble de concepts pour les médicaments anti-hypertensifs, et spécifierez TOUS les jours avant et 0 jours après (ou "1 jours avant" est équivalent comme vu dans la figure) la date d'index. Assurez-vous de confirmer que vous avez sélectionné *exactement 0* occurrence. Vérifiez maintenant votre logique par rapport à la Figure \@ref(fig:ATLASIC2).
 
-<div class="figure" style="text-align: center">
-<img src="images/Cohorts/ATLAS-IC2.png" alt="Critères d'Inclusion Supplémentaires 2" width="100%" />
-<p class="caption">(\#fig:ATLASIC2)Critères d'Inclusion Supplémentaires 2</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/Cohorts/ATLAS-IC2} 
+
+}
+
+\caption{Critères d'Inclusion Supplémentaires 2}(\#fig:ATLASIC2)
+\end{figure}
 
 Vous pourriez être confus pourquoi "ne pas avoir d'occurrences" est codé comme "exactement 0 occurrences". C'est une nuance de la façon dont ATLAS consomme la connaissance. ATLAS consomme uniquement les critères d'inclusion. Vous devez utiliser des opérateurs logiques pour indiquer quand vous voulez l'absence d'un attribut spécifique comme: "Exactement 0". Au fil du temps, vous vous familiariserez avec les opérateurs logiques disponibles dans les critères ATLAS.
 
@@ -571,7 +631,8 @@ disconnect(conn)
 ```
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Une cohorte est un ensemble de personnes qui satisfont à un ou plusieurs critères d'inclusion pendant une durée de temps.
+\BeginKnitrBlock{rmdsummary}
+- Une cohorte est un ensemble de personnes qui satisfont à un ou plusieurs critères d'inclusion pendant une durée de temps.
 
 - Une définition de cohorte est la description de la logique utilisée pour identifier une cohorte particulière.
 
@@ -581,7 +642,8 @@ disconnect(conn)
 
 - Les définitions de cohortes basées sur des règles peuvent être créées dans ATLAS, ou en utilisant SQL.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
 
 ## Exercices
 

@@ -113,7 +113,8 @@ Pour des fonctionnalités plus complexes, il n'est pas toujours évident quel de
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Une étude observationnelle doit être implémentée comme un script automatisé qui exécute l'analyse complète, des données dans le CDM jusqu'aux résultats, pour garantir la reproductibilité et la transparence.
+\BeginKnitrBlock{rmdsummary}
+- Une étude observationnelle doit être implémentée comme un script automatisé qui exécute l'analyse complète, des données dans le CDM jusqu'aux résultats, pour garantir la reproductibilité et la transparence.
 
 - Le code d'étude personnalisé doit adhérer aux meilleures pratiques de programmation, y compris l'abstraction, l'encapsulation, la dénomination claire et la réutilisation du code.
 
@@ -123,4 +124,5 @@ Pour des fonctionnalités plus complexes, il n'est pas toujours évident quel de
 
 - La Bibliothèque de Méthodes est validée en utilisant un processus de développement de logiciels visant à créer des logiciels valides, et par des tests.
 
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}

@@ -17,10 +17,14 @@ Depuis plus d'une décennie, beaucoup ont plaidé pour la vision d'un **système
 
 Pourquoi ? En partie, parce que le parcours des données au niveau des patients jusqu'à des preuves fiables est ardu. Il n'existe pas de chemin unique défini des données à l'évidence, et aucune carte unique qui puisse aider à naviguer en cours de route. En fait, il n'y a pas de notion unique de "données", tout comme il n'y a pas de notion singulière de "preuve".
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiCommunity/datajourney.png" alt="Le parcours des données à l'évidence" width="100%" />
-<p class="caption">(\#fig:datajourney)Le parcours des données à l'évidence</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiCommunity/datajourney} 
+
+}
+
+\caption{Le parcours des données à l'évidence}(\#fig:datajourney)
+\end{figure}
 
 Il existe différents types de bases de données observationnelles qui capturent des données disparates au niveau des patients dans les systèmes sources. Ces bases de données sont aussi diverses que le système de santé lui-même, reflétant différentes populations, contextes de soins et processus de capture de données. Il existe également différents types de preuves qui pourraient être utiles pour informer la prise de décision, qui peuvent être classifiées par les cas d'utilisation analytiques de la caractérisation clinique, de l'estimation des effets au niveau de la population et de la prédiction au niveau des patients. Indépendamment de l'origine (données sources) et de la destination souhaitée (preuve), le défi est encore compliqué par l'étendue des compétences cliniques, scientifiques et techniques requises pour entreprendre le parcours. Cela nécessite une compréhension approfondie de l'informatique de la santé, y compris la provenance complète des données sources depuis l'interaction au point de soins entre un patient et un fournisseur à travers les systèmes administratifs et cliniques et dans le référentiel final, avec une appréciation des biais qui peuvent survenir dans le cadre des politiques de santé et des incitations comportementales associées aux processus de capture et de conservation des données. Il nécessite une maîtrise des principes épidémiologiques et des méthodes statistiques pour traduire une question clinique en un design d'étude observationnelle convenablement adapté pour produire une réponse pertinente. Il nécessite les compétences techniques pour implémenter et exécuter des algorithmes de science des données performants sur des ensembles de données contenant des millions de patients avec des milliards d'observations cliniques sur des années de suivi longitudinal. Il nécessite des connaissances cliniques pour synthétiser ce qui a été appris à travers un réseau de données observationnelles avec des preuves provenant d'autres sources d'information, et pour déterminer comment cette nouvelle connaissance devrait impacter la politique de santé et la pratique clinique. En conséquence, il est assez rare qu'un seul individu possède les compétences et les ressources requises pour réussir seul le chemin des données à l'évidence. Au lieu de cela, le parcours nécessite souvent une collaboration entre plusieurs individus et organisations pour s'assurer que les meilleures données disponibles sont analysées en utilisant les méthodes les plus appropriées pour produire les preuves que toutes les parties prenantes peuvent avoir confiance et utiliser dans leurs processus de prise de décision.
 
@@ -77,10 +81,14 @@ OHDSI a grandi depuis sa création en 2014 pour inclure plus de 2 500 collaborat
 
 [^collaboratorUrl]: https://www.ohdsi.org/who-we-are/collaborators/
 
-<div class="figure" style="text-align: center">
-<img src="images/OhdsiCommunity/mapOfCollaborators.png" alt="Carte des collaborateurs OHDSI en août 2019" width="100%" />
-<p class="caption">(\#fig:collaboratormap)Carte des collaborateurs OHDSI en août 2019</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/OhdsiCommunity/mapOfCollaborators} 
+
+}
+
+\caption{Carte des collaborateurs OHDSI en août 2019}(\#fig:collaboratormap)
+\end{figure}
 
 En août 2019, OHDSI avait également établi un réseau de données de plus de 100 bases de données de soins de santé provenant de plus de 20 pays, capturant collectivement plus d'un milliard de dossiers de patients en utilisant une approche de réseau distribué appliquant une norme de données ouverte qu'elle maintient, le OMOP CDM. Un réseau distribué signifie que les données au niveau des patients ne sont pas obligées d'être partagées entre les individus ou les organisations. Au lieu de cela, les questions de recherche sont posées par les individus au sein de la communauté sous la forme d'un protocole d'étude accompagné d'un code d'analyse qui génère des preuves sous forme de statistiques sommaires agrégées, et seuls ces statistiques sommaires sont partagés entre les partenaires qui choisissent de collaborer à l'étude. Avec le réseau distribué OHDSI, chaque partenaire de données conserve une autonomie totale sur l'utilisation de leurs données au niveau des patients et continue d'observer les politiques de gouvernance des données au sein de leurs institutions respectives.
 
@@ -96,9 +104,11 @@ Puisque OHDSI est une communauté visant à favoriser la collaboration pour gén
 
 ## Résumé
 
-\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- La mission de l'OHDSI est d’améliorer la santé en permettant à une communauté de générer de manière collaborative des preuves qui favorisent de meilleures décisions de santé et de meilleurs soins.
+\BeginKnitrBlock{rmdsummary}
+- La mission de l'OHDSI est d’améliorer la santé en permettant à une communauté de générer de manière collaborative des preuves qui favorisent de meilleures décisions de santé et de meilleurs soins.
 
 - Notre vision est un monde dans lequel la recherche observationnelle produit une compréhension globale de la santé et des maladies, ce qui sera atteint par nos objectifs d’innovation, de reproductibilité, de communauté, de collaboration, d’ouverture et de bienfaisance.
 
 - Les collaborateurs de l'OHDSI sont concentrés sur les normes de données de la communauté ouverte, la recherche méthodologique, le développement d'analyses open-source, et les applications cliniques pour améliorer le parcours allant des données aux preuves.
-</div>\EndKnitrBlock{rmdsummary}
+
+\EndKnitrBlock{rmdsummary}
