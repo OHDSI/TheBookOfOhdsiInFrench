@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 15 Qualité des données | Le Livre d’OHDSI</title>
+  <meta name="description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 15 Qualité des données | Le Livre d’OHDSI" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+  <meta property="og:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="github-repo" content="OHDSI/TheBookOfOhdsi" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 15 Qualité des données | Le Livre d’OHDSI" />
+  
+  <meta name="twitter:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="twitter:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+
+<meta name="author" content="Observational Health Data Sciences and Informatics" />
+
+
+<meta name="date" content="2024-09-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="EvidenceQuality.html"/>
+<link rel="next" href="ClinicalValidity.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104086677-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104086677-2');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">The Book of OHDSI</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objectifs-de-ce-livre"><i class="fa fa-check"></i>Objectifs de ce Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-du-livre"><i class="fa fa-check"></i>Structure du Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-des-logiciels"><i class="fa fa-check"></i>Versions des Logiciels</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#développement-du-livre"><i class="fa fa-check"></i>Développement du Livre</a></li>
+</ul></li>
+<li class="part"><span><b>I La Communauté OHDSI</b></span></li>
+<li class="chapter" data-level="1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html"><i class="fa fa-check"></i><b>1</b> La Communauté OHDSI</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#le-parcours-des-données-à-lévidence"><i class="fa fa-check"></i><b>1.1</b> Le Parcours des Données à l’Évidence</a></li>
+<li class="chapter" data-level="1.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#observational-medical-outcomes-partnership"><i class="fa fa-check"></i><b>1.2</b> Observational Medical Outcomes Partnership</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-mission"><i class="fa fa-check"></i><b>1.2.1</b> Notre Mission</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-vision"><i class="fa fa-check"></i><b>1.2.2</b> Notre Vision</a></li>
+<li class="chapter" data-level="1.2.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#nos-objectifs"><i class="fa fa-check"></i><b>1.2.3</b> Nos Objectifs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#les-progrès-de-lohdsi"><i class="fa fa-check"></i><b>1.3</b> Les Progrès de l’OHDSI</a></li>
+<li class="chapter" data-level="1.4" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#collaborer-avec-ohdsi"><i class="fa fa-check"></i><b>1.4</b> Collaborer avec OHDSI</a></li>
+<li class="chapter" data-level="1.5" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#résumé"><i class="fa fa-check"></i><b>1.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="WhereToBegin.html"><a href="WhereToBegin.html"><i class="fa fa-check"></i><b>2</b> Par où commencer</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#forums-ohdsi"><i class="fa fa-check"></i><b>2.0.1</b> Forums OHDSI</a></li>
+<li class="chapter" data-level="2.0.2" data-path="WhereToBegin.html"><a href="WhereToBegin.html#événements-ohdsi"><i class="fa fa-check"></i><b>2.0.2</b> Événements OHDSI</a></li>
+<li class="chapter" data-level="2.0.3" data-path="WhereToBegin.html"><a href="WhereToBegin.html#appels-de-la-communauté-ohdsi"><i class="fa fa-check"></i><b>2.0.3</b> Appels de la communauté OHDSI</a></li>
+<li class="chapter" data-level="2.0.4" data-path="WhereToBegin.html"><a href="WhereToBegin.html#groupes-de-travail-ohdsi"><i class="fa fa-check"></i><b>2.0.4</b> Groupes de travail OHDSI</a></li>
+<li class="chapter" data-level="2.0.5" data-path="WhereToBegin.html"><a href="WhereToBegin.html#chapitres-régionaux-ohdsi"><i class="fa fa-check"></i><b>2.0.5</b> Chapitres régionaux OHDSI</a></li>
+<li class="chapter" data-level="2.0.6" data-path="WhereToBegin.html"><a href="WhereToBegin.html#réseau-de-recherche-ohdsi"><i class="fa fa-check"></i><b>2.0.6</b> Réseau de recherche OHDSI</a></li>
+<li class="chapter" data-level="2.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#résumé-1"><i class="fa fa-check"></i><b>2.1</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="OpenScience.html"><a href="OpenScience.html"><i class="fa fa-check"></i><b>3</b> Science ouverte</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="OpenScience.html"><a href="OpenScience.html#science-ouverte"><i class="fa fa-check"></i><b>3.1</b> Science ouverte</a></li>
+<li class="chapter" data-level="3.2" data-path="OpenScience.html"><a href="OpenScience.html#la-science-ouverte-en-action-le-study-a-thon"><i class="fa fa-check"></i><b>3.2</b> La Science Ouverte en Action : le Study-a-Thon</a></li>
+<li class="chapter" data-level="3.3" data-path="OpenScience.html"><a href="OpenScience.html#normes-ouvertes"><i class="fa fa-check"></i><b>3.3</b> Normes Ouvertes</a></li>
+<li class="chapter" data-level="3.4" data-path="OpenScience.html"><a href="OpenScience.html#open-data"><i class="fa fa-check"></i><b>3.4</b> Open Data</a></li>
+<li class="chapter" data-level="3.5" data-path="OpenScience.html"><a href="OpenScience.html#open-discourse"><i class="fa fa-check"></i><b>3.5</b> Open Discourse</a></li>
+<li class="chapter" data-level="3.6" data-path="OpenScience.html"><a href="OpenScience.html#ohdsi-et-les-principes-directeurs-fair"><i class="fa fa-check"></i><b>3.6</b> OHDSI et les Principes Directeurs FAIR</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="OpenScience.html"><a href="OpenScience.html#introduction"><i class="fa fa-check"></i><b>3.6.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.6.2" data-path="OpenScience.html"><a href="OpenScience.html#findability"><i class="fa fa-check"></i><b>3.6.2</b> Findability</a></li>
+<li class="chapter" data-level="3.6.3" data-path="OpenScience.html"><a href="OpenScience.html#accessibility"><i class="fa fa-check"></i><b>3.6.3</b> Accessibility</a></li>
+<li class="chapter" data-level="3.6.4" data-path="OpenScience.html"><a href="OpenScience.html#interoperability"><i class="fa fa-check"></i><b>3.6.4</b> Interoperability</a></li>
+<li class="chapter" data-level="3.6.5" data-path="OpenScience.html"><a href="OpenScience.html#reusability"><i class="fa fa-check"></i><b>3.6.5</b> Reusability</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Représentation Uniforme des Données</b></span></li>
+<li class="chapter" data-level="4" data-path="CommonDataModel.html"><a href="CommonDataModel.html"><i class="fa fa-check"></i><b>4</b> Le Modèle de Données Commun</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#principes-de-conception"><i class="fa fa-check"></i><b>4.1</b> Principes de Conception</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#model-Conv"><i class="fa fa-check"></i><b>4.1.1</b> Conventions Générales du Modèle</a></li>
+<li class="chapter" data-level="4.1.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-schémas"><i class="fa fa-check"></i><b>4.1.2</b> Conventions Générales des Schémas</a></li>
+<li class="chapter" data-level="4.1.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-tables-de-données"><i class="fa fa-check"></i><b>4.1.3</b> Conventions Générales des Tables de Données</a></li>
+<li class="chapter" data-level="4.1.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#domains"><i class="fa fa-check"></i><b>4.1.4</b> Conventions Générales des Domaines</a></li>
+<li class="chapter" data-level="4.1.5" data-path="CommonDataModel.html"><a href="CommonDataModel.html#représentation-du-contenu-par-des-concepts"><i class="fa fa-check"></i><b>4.1.5</b> Représentation du Contenu par des Concepts</a></li>
+<li class="chapter" data-level="4.1.6" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-de-nomination-des-champs"><i class="fa fa-check"></i><b>4.1.6</b> Conventions Générales de Nomination des Champs</a></li>
+<li class="chapter" data-level="4.1.7" data-path="CommonDataModel.html"><a href="CommonDataModel.html#concepts-Sources"><i class="fa fa-check"></i><b>4.1.7</b> Différence Entre Concepts et Valeurs Sources</a></li>
+<li class="chapter" data-level="4.1.8" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exemple-en-cours-endométriose"><i class="fa fa-check"></i><b>4.1.8</b> Exemple en cours : Endométriose</a></li>
+<li class="chapter" data-level="4.1.9" data-path="CommonDataModel.html"><a href="CommonDataModel.html#person"><i class="fa fa-check"></i><b>4.1.9</b> Tableau PERSON</a></li>
+<li class="chapter" data-level="4.1.10" data-path="CommonDataModel.html"><a href="CommonDataModel.html#observationPeriod"><i class="fa fa-check"></i><b>4.1.10</b> Tableau OBSERVATION_PERIOD</a></li>
+<li class="chapter" data-level="4.1.11" data-path="CommonDataModel.html"><a href="CommonDataModel.html#visitOccurrence"><i class="fa fa-check"></i><b>4.1.11</b> VISIT_OCCURRENCE</a></li>
+<li class="chapter" data-level="4.1.12" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conditionOccurrence"><i class="fa fa-check"></i><b>4.1.12</b> CONDITION_OCCURRENCE</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#informations-supplémentaires"><i class="fa fa-check"></i><b>4.2</b> Informations supplémentaires</a></li>
+<li class="chapter" data-level="4.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#résumé-2"><i class="fa fa-check"></i><b>4.3</b> Résumé</a></li>
+<li class="chapter" data-level="4.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exercices"><i class="fa fa-check"></i><b>4.4</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html"><i class="fa fa-check"></i><b>5</b> Vocabulaire normalisé</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#pourquoi-les-vocabulaires-et-pourquoi-les-normaliser"><i class="fa fa-check"></i><b>5.1</b> Pourquoi les vocabulaires, et pourquoi les normaliser</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#construire-les-vocabulaire-normalisé"><i class="fa fa-check"></i><b>5.1.1</b> Construire les Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#accessVocabularies"><i class="fa fa-check"></i><b>5.1.2</b> Accès aux Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#source-des-vocabulaires-adopter-ou-construire"><i class="fa fa-check"></i><b>5.1.3</b> Source des vocabulaires : Adopter ou Construire</a></li>
+<li class="chapter" data-level="5.1.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#identifiants-de-concepts"><i class="fa fa-check"></i><b>5.1.4</b> Identifiants de concepts</a></li>
+<li class="chapter" data-level="5.1.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#noms-de-concepts"><i class="fa fa-check"></i><b>5.1.5</b> Noms de concepts</a></li>
+<li class="chapter" data-level="5.1.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptDomains"><i class="fa fa-check"></i><b>5.1.6</b> Domaines</a></li>
+<li class="chapter" data-level="5.1.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#vocabulaires"><i class="fa fa-check"></i><b>5.1.7</b> Vocabulaires</a></li>
+<li class="chapter" data-level="5.1.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#classes-de-concepts"><i class="fa fa-check"></i><b>5.1.8</b> Classes de concepts</a></li>
+<li class="chapter" data-level="5.1.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#standardConcepts"><i class="fa fa-check"></i><b>5.1.9</b> Concepts standards</a></li>
+<li class="chapter" data-level="5.1.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-non-standards"><i class="fa fa-check"></i><b>5.1.10</b> Concepts non standards</a></li>
+<li class="chapter" data-level="5.1.11" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-de-classification"><i class="fa fa-check"></i><b>5.1.11</b> Concepts de classification</a></li>
+<li class="chapter" data-level="5.1.12" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#codes-de-concepts"><i class="fa fa-check"></i><b>5.1.12</b> Codes de concepts</a></li>
+<li class="chapter" data-level="5.1.13" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptLifeCycle"><i class="fa fa-check"></i><b>5.1.13</b> Cycle de vie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations"><i class="fa fa-check"></i><b>5.2</b> Relations</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptMapping"><i class="fa fa-check"></i><b>5.2.1</b> Relations de Mapping</a></li>
+<li class="chapter" data-level="5.2.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-hiérarchiques"><i class="fa fa-check"></i><b>5.2.2</b> Relations Hiérarchiques</a></li>
+<li class="chapter" data-level="5.2.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-de-différents-vocabulaires"><i class="fa fa-check"></i><b>5.2.3</b> Relations Entre Concepts de Différents Vocabulaires</a></li>
+<li class="chapter" data-level="5.2.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-du-même-vocabulaire"><i class="fa fa-check"></i><b>5.2.4</b> Relations Entre Concepts du Même Vocabulaire</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptAncestor"><i class="fa fa-check"></i><b>5.3</b> Hiérarchie</a></li>
+<li class="chapter" data-level="5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#tables-de-référence-interne"><i class="fa fa-check"></i><b>5.4</b> Tables de Référence Interne</a></li>
+<li class="chapter" data-level="5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#specialSituations"><i class="fa fa-check"></i><b>5.5</b> Situations Spéciales</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#genre"><i class="fa fa-check"></i><b>5.5.1</b> Genre</a></li>
+<li class="chapter" data-level="5.5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#race-et-ethnicité"><i class="fa fa-check"></i><b>5.5.2</b> Race et Ethnicité</a></li>
+<li class="chapter" data-level="5.5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#schémas-de-codage-diagnostique-et-conditions-omop"><i class="fa fa-check"></i><b>5.5.3</b> Schémas de Codage Diagnostique et Conditions OMOP</a></li>
+<li class="chapter" data-level="5.5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#systèmes-de-codage-de-procédures"><i class="fa fa-check"></i><b>5.5.4</b> Systèmes de Codage de Procédures</a></li>
+<li class="chapter" data-level="5.5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#dispositifs"><i class="fa fa-check"></i><b>5.5.5</b> Dispositifs</a></li>
+<li class="chapter" data-level="5.5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#visites-et-services"><i class="fa fa-check"></i><b>5.5.6</b> Visites et Services</a></li>
+<li class="chapter" data-level="5.5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#fournisseurs-et-spécialités"><i class="fa fa-check"></i><b>5.5.7</b> Fournisseurs et Spécialités</a></li>
+<li class="chapter" data-level="5.5.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#domaines-thérapeutiques-aux-besoins-spéciaux"><i class="fa fa-check"></i><b>5.5.8</b> Domaines Thérapeutiques aux Besoins Spéciaux</a></li>
+<li class="chapter" data-level="5.5.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#rxNormExtension"><i class="fa fa-check"></i><b>5.5.9</b> Concepts Standards dans le Domaine des Médicaments</a></li>
+<li class="chapter" data-level="5.5.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#variantes-de-null"><i class="fa fa-check"></i><b>5.5.10</b> Variantes de NULL</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#résumé-3"><i class="fa fa-check"></i><b>5.6</b> Résumé</a></li>
+<li class="chapter" data-level="5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#exercices-1"><i class="fa fa-check"></i><b>5.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html"><i class="fa fa-check"></i><b>6</b> Extraction, Transformation et Chargement</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#white-rabbit"><i class="fa fa-check"></i><b>6.1.1</b> White Rabbit</a></li>
+<li class="chapter" data-level="6.1.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#rabbit-in-a-hat"><i class="fa fa-check"></i><b>6.1.2</b> Rabbit-In-a-Hat</a></li>
+<li class="chapter" data-level="6.1.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#usagi"><i class="fa fa-check"></i><b>6.1.3</b> Usagi</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#étape-4-contrôle-de-qualité"><i class="fa fa-check"></i><b>6.2</b> Étape 4 : Contrôle de Qualité</a></li>
+<li class="chapter" data-level="6.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#conventions-etl-et-themis"><i class="fa fa-check"></i><b>6.3</b> Conventions ETL et THEMIS</a></li>
+<li class="chapter" data-level="6.4" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#CDMandETLMaintenance"><i class="fa fa-check"></i><b>6.4</b> Maintenance du CDM et de l’ETL</a></li>
+<li class="chapter" data-level="6.5" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#réflexions-finales-sur-letl"><i class="fa fa-check"></i><b>6.5</b> Réflexions finales sur l’ETL</a></li>
+<li class="chapter" data-level="6.6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#résumé-4"><i class="fa fa-check"></i><b>6.6</b> Résumé</a></li>
+<li class="chapter" data-level="6.7" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#exercices-2"><i class="fa fa-check"></i><b>6.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>III Analyse des Données</b></span></li>
+<li class="chapter" data-level="7" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html"><i class="fa fa-check"></i><b>7</b> Cas d’utilisation de l’analyse des données</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#caractérisation"><i class="fa fa-check"></i><b>7.1</b> Caractérisation</a></li>
+<li class="chapter" data-level="7.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#estimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.2</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.3</b> Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exemples-de-cas-dutilisation-dans-lhypertension"><i class="fa fa-check"></i><b>7.4</b> Exemples De Cas D’utilisation Dans L’Hypertension</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#questions-de-caractérisation"><i class="fa fa-check"></i><b>7.4.1</b> Questions de Caractérisation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-destimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.4.2</b> Question D’estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.4.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.4.3</b> Question De Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-erronées"><i class="fa fa-check"></i><b>7.4.4</b> Données Erronées</a></li>
+<li class="chapter" data-level="7.4.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-manquantes"><i class="fa fa-check"></i><b>7.4.5</b> Données Manquantes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#résumé-5"><i class="fa fa-check"></i><b>7.5</b> Résumé</a></li>
+<li class="chapter" data-level="7.6" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exercices-3"><i class="fa fa-check"></i><b>7.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html"><i class="fa fa-check"></i><b>8</b> Outils d’analyse d’OHDSI</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#analysisImplementation"><i class="fa fa-check"></i><b>8.1</b> Implémentation de l’analyse</a></li>
+<li class="chapter" data-level="8.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-danalyse"><i class="fa fa-check"></i><b>8.2</b> Stratégies d’analyse</a></li>
+<li class="chapter" data-level="8.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#atlas"><i class="fa fa-check"></i><b>8.3</b> ATLAS</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#sécurité"><i class="fa fa-check"></i><b>8.3.1</b> Sécurité</a></li>
+<li class="chapter" data-level="8.3.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation"><i class="fa fa-check"></i><b>8.3.2</b> Documentation</a></li>
+<li class="chapter" data-level="8.3.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#comment-installer"><i class="fa fa-check"></i><b>8.3.3</b> Comment installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>8.4</b> Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#support-pour-les-analyses-à-grande-échelle"><i class="fa fa-check"></i><b>8.4.1</b> Support pour les Analyses à Grande Échelle</a></li>
+<li class="chapter" data-level="8.4.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#BigDataSupport"><i class="fa fa-check"></i><b>8.4.2</b> Support pour les Big Data</a></li>
+<li class="chapter" data-level="8.4.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Documentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#exigences-systémiques"><i class="fa fa-check"></i><b>8.4.4</b> Exigences Systémiques</a></li>
+<li class="chapter" data-level="8.4.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#installR"><i class="fa fa-check"></i><b>8.4.5</b> Comment Installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-de-déploiement"><i class="fa fa-check"></i><b>8.5</b> Stratégies de déploiement</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#broadsea"><i class="fa fa-check"></i><b>8.5.1</b> Broadsea</a></li>
+<li class="chapter" data-level="8.5.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#amazon-aws"><i class="fa fa-check"></i><b>8.5.2</b> Amazon AWS</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#résumé-6"><i class="fa fa-check"></i><b>8.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="SqlAndR.html"><a href="SqlAndR.html"><i class="fa fa-check"></i><b>9</b> SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="SqlAndR.html"><a href="SqlAndR.html#SqlRender"><i class="fa fa-check"></i><b>9.1</b> SqlRender</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="SqlAndR.html"><a href="SqlAndR.html#paramétrage-sql"><i class="fa fa-check"></i><b>9.1.1</b> Paramétrage SQL</a></li>
+<li class="chapter" data-level="9.1.2" data-path="SqlAndR.html"><a href="SqlAndR.html#traduction-vers-dautres-dialectes-sql"><i class="fa fa-check"></i><b>9.1.2</b> Traduction vers d’Autres Dialectes SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="SqlAndR.html"><a href="SqlAndR.html#DatabaseConnector"><i class="fa fa-check"></i><b>9.2</b> DatabaseConnector</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="SqlAndR.html"><a href="SqlAndR.html#création-dune-connexion"><i class="fa fa-check"></i><b>9.2.1</b> Création d’une Connexion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger"><i class="fa fa-check"></i><b>9.2.2</b> Interroger</a></li>
+<li class="chapter" data-level="9.2.3" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-en-utilisant-les-objets-ffdf"><i class="fa fa-check"></i><b>9.2.3</b> Interroger en Utilisant les Objets Ffdf</a></li>
+<li class="chapter" data-level="9.2.4" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-différentes-plateformes-en-utilisant-le-même-sql"><i class="fa fa-check"></i><b>9.2.4</b> Interroger Différentes Plateformes en Utilisant le Même SQL</a></li>
+<li class="chapter" data-level="9.2.5" data-path="SqlAndR.html"><a href="SqlAndR.html#insérer-des-tables"><i class="fa fa-check"></i><b>9.2.5</b> Insérer des Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="SqlAndR.html"><a href="SqlAndR.html#QueryTheCdm"><i class="fa fa-check"></i><b>9.3</b> Interroger le CDM</a></li>
+<li class="chapter" data-level="9.4" data-path="SqlAndR.html"><a href="SqlAndR.html#utiliser-le-vocabulaire-lors-de-linterrogation"><i class="fa fa-check"></i><b>9.4</b> Utiliser le Vocabulaire Lors de l’Interrogation</a></li>
+<li class="chapter" data-level="9.5" data-path="SqlAndR.html"><a href="SqlAndR.html#querylibrary"><i class="fa fa-check"></i><b>9.5</b> QueryLibrary</a></li>
+<li class="chapter" data-level="9.6" data-path="SqlAndR.html"><a href="SqlAndR.html#concevoir-une-étude-simple"><i class="fa fa-check"></i><b>9.6</b> Concevoir une Étude Simple</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="SqlAndR.html"><a href="SqlAndR.html#définition-du-problème"><i class="fa fa-check"></i><b>9.6.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="9.6.2" data-path="SqlAndR.html"><a href="SqlAndR.html#exposition"><i class="fa fa-check"></i><b>9.6.2</b> Exposition</a></li>
+<li class="chapter" data-level="9.6.3" data-path="SqlAndR.html"><a href="SqlAndR.html#résultat"><i class="fa fa-check"></i><b>9.6.3</b> Résultat</a></li>
+<li class="chapter" data-level="9.6.4" data-path="SqlAndR.html"><a href="SqlAndR.html#temps-à-risque"><i class="fa fa-check"></i><b>9.6.4</b> Temps à Risque</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="SqlAndR.html"><a href="SqlAndR.html#implémenter-létude-en-utilisant-sql-et-r"><i class="fa fa-check"></i><b>9.7</b> Implémenter l’Étude en Utilisant SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-dexposition"><i class="fa fa-check"></i><b>9.7.1</b> Cohorte d’Exposition</a></li>
+<li class="chapter" data-level="9.7.2" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-de-résultat"><i class="fa fa-check"></i><b>9.7.2</b> Cohorte de Résultat</a></li>
+<li class="chapter" data-level="9.7.3" data-path="SqlAndR.html"><a href="SqlAndR.html#calcul-du-taux-dincidence"><i class="fa fa-check"></i><b>9.7.3</b> Calcul du Taux d’Incidence</a></li>
+<li class="chapter" data-level="9.7.4" data-path="SqlAndR.html"><a href="SqlAndR.html#nettoyage"><i class="fa fa-check"></i><b>9.7.4</b> Nettoyage</a></li>
+<li class="chapter" data-level="9.7.5" data-path="SqlAndR.html"><a href="SqlAndR.html#compatibilité"><i class="fa fa-check"></i><b>9.7.5</b> Compatibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="SqlAndR.html"><a href="SqlAndR.html#résumé-7"><i class="fa fa-check"></i><b>9.8</b> Résumé</a></li>
+<li class="chapter" data-level="9.9" data-path="SqlAndR.html"><a href="SqlAndR.html#exercices-4"><i class="fa fa-check"></i><b>9.9</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="Cohortes.html"><a href="Cohortes.html"><i class="fa fa-check"></i><b>10</b> Définir des Cohortes</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="Cohortes.html"><a href="Cohortes.html#quest-ce-quune-cohorte"><i class="fa fa-check"></i><b>10.1</b> Qu’est-ce qu’une Cohorte ?</a></li>
+<li class="chapter" data-level="10.2" data-path="Cohortes.html"><a href="Cohortes.html#conceptSets"><i class="fa fa-check"></i><b>10.2</b> Ensembles de Concepts</a></li>
+<li class="chapter" data-level="10.3" data-path="Cohortes.html"><a href="Cohortes.html#définitions-de-cohorte-probabilistes"><i class="fa fa-check"></i><b>10.3</b> Définitions de Cohorte Probabilistes</a></li>
+<li class="chapter" data-level="10.4" data-path="Cohortes.html"><a href="Cohortes.html#validité-de-la-définition-dune-cohorte"><i class="fa fa-check"></i><b>10.4</b> Validité de la Définition d’une Cohorte</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="Cohortes.html"><a href="Cohortes.html#bibliothèque-de-phénotypes-gold-standard-dohdsi"><i class="fa fa-check"></i><b>10.4.1</b> Bibliothèque de Phénotypes Gold Standard d’OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="Cohortes.html"><a href="Cohortes.html#définir-une-cohorte-pour-lhypertension"><i class="fa fa-check"></i><b>10.5</b> Définir une Cohorte pour l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="Cohortes.html"><a href="Cohortes.html#critères-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.1</b> Critères de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.2" data-path="Cohortes.html"><a href="Cohortes.html#définir-lensemble-de-concepts"><i class="fa fa-check"></i><b>10.5.2</b> Définir l’Ensemble de Concepts</a></li>
+<li class="chapter" data-level="10.5.3" data-path="Cohortes.html"><a href="Cohortes.html#critères-additionnels-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.3</b> Critères Additionnels de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.4" data-path="Cohortes.html"><a href="Cohortes.html#critères-dinclusion"><i class="fa fa-check"></i><b>10.5.4</b> Critères d’Inclusion</a></li>
+<li class="chapter" data-level="10.5.5" data-path="Cohortes.html"><a href="Cohortes.html#connexion-à-la-base-de-données"><i class="fa fa-check"></i><b>10.5.5</b> Connexion à la Base de Données</a></li>
+<li class="chapter" data-level="10.5.6" data-path="Cohortes.html"><a href="Cohortes.html#spécification-des-concepts"><i class="fa fa-check"></i><b>10.5.6</b> Spécification des Concepts</a></li>
+<li class="chapter" data-level="10.5.7" data-path="Cohortes.html"><a href="Cohortes.html#trouver-la-première-utilisation"><i class="fa fa-check"></i><b>10.5.7</b> Trouver la Première Utilisation</a></li>
+<li class="chapter" data-level="10.5.8" data-path="Cohortes.html"><a href="Cohortes.html#exiger-365-jours-dobservation-préalable"><i class="fa fa-check"></i><b>10.5.8</b> Exiger 365 Jours d’Observation Préalable</a></li>
+<li class="chapter" data-level="10.5.9" data-path="Cohortes.html"><a href="Cohortes.html#exiger-une-hypertension-préalable"><i class="fa fa-check"></i><b>10.5.9</b> Exiger une Hypertension Préalable</a></li>
+<li class="chapter" data-level="10.5.10" data-path="Cohortes.html"><a href="Cohortes.html#pas-de-traitement-préalable"><i class="fa fa-check"></i><b>10.5.10</b> Pas de Traitement Préalable</a></li>
+<li class="chapter" data-level="10.5.11" data-path="Cohortes.html"><a href="Cohortes.html#monothérapie"><i class="fa fa-check"></i><b>10.5.11</b> Monothérapie</a></li>
+<li class="chapter" data-level="10.5.12" data-path="Cohortes.html"><a href="Cohortes.html#sortie-de-la-cohorte"><i class="fa fa-check"></i><b>10.5.12</b> Sortie de la Cohorte</a></li>
+<li class="chapter" data-level="10.5.13" data-path="Cohortes.html"><a href="Cohortes.html#nettoyage-1"><i class="fa fa-check"></i><b>10.5.13</b> Nettoyage</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="Cohortes.html"><a href="Cohortes.html#résumé-8"><i class="fa fa-check"></i><b>10.6</b> Résumé</a></li>
+<li class="chapter" data-level="10.7" data-path="Cohortes.html"><a href="Cohortes.html#exercices-5"><i class="fa fa-check"></i><b>10.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Characterization.html"><a href="Characterization.html"><i class="fa fa-check"></i><b>11</b> Characterization</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Characterization.html"><a href="Characterization.html#caractérisation-au-niveau-de-la-base-de-données"><i class="fa fa-check"></i><b>11.1</b> Caractérisation au Niveau de la Base de Données</a></li>
+<li class="chapter" data-level="11.2" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-cohorte"><i class="fa fa-check"></i><b>11.2</b> Caractérisation de la Cohorte</a></li>
+<li class="chapter" data-level="11.3" data-path="Characterization.html"><a href="Characterization.html#chemins-de-traitement"><i class="fa fa-check"></i><b>11.3</b> Chemins de Traitement</a></li>
+<li class="chapter" data-level="11.4" data-path="Characterization.html"><a href="Characterization.html#incidence"><i class="fa fa-check"></i><b>11.4</b> Incidence</a></li>
+<li class="chapter" data-level="11.5" data-path="Characterization.html"><a href="Characterization.html#caractériser-les-personnes-hypertendues"><i class="fa fa-check"></i><b>11.5</b> Caractériser les personnes hypertendues</a></li>
+<li class="chapter" data-level="11.6" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-base-de-données-dans-atlas"><i class="fa fa-check"></i><b>11.6</b> Caractérisation de la base de données dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="Characterization.html"><a href="Characterization.html#conception"><i class="fa fa-check"></i><b>11.6.1</b> Conception</a></li>
+<li class="chapter" data-level="11.6.2" data-path="Characterization.html"><a href="Characterization.html#exécutions"><i class="fa fa-check"></i><b>11.6.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.6.3" data-path="Characterization.html"><a href="Characterization.html#résultats"><i class="fa fa-check"></i><b>11.6.3</b> Résultats</a></li>
+<li class="chapter" data-level="11.6.4" data-path="Characterization.html"><a href="Characterization.html#définir-des-caractéristiques-personnalisées"><i class="fa fa-check"></i><b>11.6.4</b> Définir des Caractéristiques Personnalisées</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="Characterization.html"><a href="Characterization.html#caractérisation-des-cohortes-en-r"><i class="fa fa-check"></i><b>11.7</b> Caractérisation des Cohortes en R</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="Characterization.html"><a href="Characterization.html#instauration-des-cohortes"><i class="fa fa-check"></i><b>11.7.1</b> Instauration des Cohortes</a></li>
+<li class="chapter" data-level="11.7.2" data-path="Characterization.html"><a href="Characterization.html#extraction-des-données"><i class="fa fa-check"></i><b>11.7.2</b> Extraction des Données</a></li>
+<li class="chapter" data-level="11.7.3" data-path="Characterization.html"><a href="Characterization.html#utilisation-des-analyses-prédéfinies"><i class="fa fa-check"></i><b>11.7.3</b> Utilisation des Analyses Prédéfinies</a></li>
+<li class="chapter" data-level="11.7.4" data-path="Characterization.html"><a href="Characterization.html#création-de-covariables-agrégées"><i class="fa fa-check"></i><b>11.7.4</b> Création de Covariables Agrégées</a></li>
+<li class="chapter" data-level="11.7.5" data-path="Characterization.html"><a href="Characterization.html#format-de-sortie"><i class="fa fa-check"></i><b>11.7.5</b> Format de Sortie</a></li>
+<li class="chapter" data-level="11.7.6" data-path="Characterization.html"><a href="Characterization.html#covariables-personnalisées"><i class="fa fa-check"></i><b>11.7.6</b> Covariables Personnalisées</a></li>
+<li class="chapter" data-level="11.7.7" data-path="Characterization.html"><a href="Characterization.html#conception-1"><i class="fa fa-check"></i><b>11.7.7</b> Conception</a></li>
+<li class="chapter" data-level="11.7.8" data-path="Characterization.html"><a href="Characterization.html#exécutions-1"><i class="fa fa-check"></i><b>11.7.8</b> Exécutions</a></li>
+<li class="chapter" data-level="11.7.9" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats"><i class="fa fa-check"></i><b>11.7.9</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="Characterization.html"><a href="Characterization.html#analyse-dincidence-dans-atlas"><i class="fa fa-check"></i><b>11.8</b> Analyse d’incidence dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="Characterization.html"><a href="Characterization.html#conception-2"><i class="fa fa-check"></i><b>11.8.1</b> Conception</a></li>
+<li class="chapter" data-level="11.8.2" data-path="Characterization.html"><a href="Characterization.html#exécutions-2"><i class="fa fa-check"></i><b>11.8.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.8.3" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats-1"><i class="fa fa-check"></i><b>11.8.3</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="Characterization.html"><a href="Characterization.html#résumé-9"><i class="fa fa-check"></i><b>11.9</b> Résumé</a></li>
+<li class="chapter" data-level="11.10" data-path="Characterization.html"><a href="Characterization.html#exercices-6"><i class="fa fa-check"></i><b>11.10</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html"><i class="fa fa-check"></i><b>12</b> Estimation au Niveau de la Population</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#CohortMethod"><i class="fa fa-check"></i><b>12.1</b> La Méthode Cohorte</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension"><i class="fa fa-check"></i><b>12.1.1</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.1.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#VariableSelection"><i class="fa fa-check"></i><b>12.1.2</b> Sélection des Variables</a></li>
+<li class="chapter" data-level="12.1.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#caliper"><i class="fa fa-check"></i><b>12.1.3</b> Caliper</a></li>
+<li class="chapter" data-level="12.1.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#chevauchement-scores-de-préférence"><i class="fa fa-check"></i><b>12.1.4</b> Chevauchement : Scores de Préférence</a></li>
+<li class="chapter" data-level="12.1.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre"><i class="fa fa-check"></i><b>12.1.5</b> Équilibre</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-cas-témoin"><i class="fa fa-check"></i><b>12.2</b> Le Design Cas-Témoin</a></li>
+<li class="chapter" data-level="12.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-de-cas-croisés"><i class="fa fa-check"></i><b>12.3</b> Le Design de Cas-Croisés</a></li>
+<li class="chapter" data-level="12.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#concevoir-une-étude-sur-lhypertension"><i class="fa fa-check"></i><b>12.4</b> Concevoir une Étude sur l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définition-du-problème-1"><i class="fa fa-check"></i><b>12.4.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="12.4.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#cible-et-comparateur"><i class="fa fa-check"></i><b>12.4.2</b> Cible et Comparateur</a></li>
+<li class="chapter" data-level="12.4.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résultat-1"><i class="fa fa-check"></i><b>12.4.3</b> Résultat</a></li>
+<li class="chapter" data-level="12.4.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#temps-à-risque-1"><i class="fa fa-check"></i><b>12.4.4</b> Temps à Risque</a></li>
+<li class="chapter" data-level="12.4.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèle"><i class="fa fa-check"></i><b>12.4.5</b> Modèle</a></li>
+<li class="chapter" data-level="12.4.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-de-létude"><i class="fa fa-check"></i><b>12.4.6</b> Résumé de l’Étude</a></li>
+<li class="chapter" data-level="12.4.7" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#questions-de-contrôle"><i class="fa fa-check"></i><b>12.4.7</b> Questions de Contrôle</a></li>
+<li class="chapter" data-level="12.4.8" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#ComparisonSettings"><i class="fa fa-check"></i><b>12.4.8</b> Paramètres de cohorte comparative</a></li>
+<li class="chapter" data-level="12.4.9" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#paramètres-danalyse-de-lestimation-des-effets"><i class="fa fa-check"></i><b>12.4.9</b> Paramètres d’analyse de l’estimation des effets</a></li>
+<li class="chapter" data-level="12.4.10" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#instanciation-de-la-cohorte"><i class="fa fa-check"></i><b>12.4.10</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="12.4.11" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#extraction-des-données-1"><i class="fa fa-check"></i><b>12.4.11</b> Extraction des Données</a></li>
+<li class="chapter" data-level="12.4.12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définir-la-population-de-létude"><i class="fa fa-check"></i><b>12.4.12</b> Définir la Population de l’Étude</a></li>
+<li class="chapter" data-level="12.4.13" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-1"><i class="fa fa-check"></i><b>12.4.13</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.4.14" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèles-de-résultats"><i class="fa fa-check"></i><b>12.4.14</b> Modèles de Résultats</a></li>
+<li class="chapter" data-level="12.4.15" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#MultipleAnalyses"><i class="fa fa-check"></i><b>12.4.15</b> Exécuter des Analyses Multiples</a></li>
+<li class="chapter" data-level="12.4.16" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-et-modèle"><i class="fa fa-check"></i><b>12.4.16</b> Scores de Propension et Modèle</a></li>
+<li class="chapter" data-level="12.4.17" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre-des-covariables"><i class="fa fa-check"></i><b>12.4.17</b> Équilibre des Covariables</a></li>
+<li class="chapter" data-level="12.4.18" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#suivi-et-puissance"><i class="fa fa-check"></i><b>12.4.18</b> Suivi et Puissance</a></li>
+<li class="chapter" data-level="12.4.19" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#kaplan-meier"><i class="fa fa-check"></i><b>12.4.19</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="12.4.20" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#estimation-de-la-taille-de-leffet"><i class="fa fa-check"></i><b>12.4.20</b> Estimation de la Taille de l’Effet</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-10"><i class="fa fa-check"></i><b>12.5</b> Résumé</a></li>
+<li class="chapter" data-level="12.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#exercices-7"><i class="fa fa-check"></i><b>12.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html"><i class="fa fa-check"></i><b>13</b> Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#le-problème-de-prédiction"><i class="fa fa-check"></i><b>13.1</b> Le Problème de Prédiction</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exemple-dextraction-de-données"><i class="fa fa-check"></i><b>13.1.1</b> Exemple d’extraction de données</a></li>
+<li class="chapter" data-level="13.1.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#négatif-vs-manquant"><i class="fa fa-check"></i><b>13.1.2</b> Négatif vs Manquant</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#modelFitting"><i class="fa fa-check"></i><b>13.2</b> Ajuster le modèle</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#régression-logistique-régularisée"><i class="fa fa-check"></i><b>13.2.1</b> Régression Logistique Régularisée</a></li>
+<li class="chapter" data-level="13.2.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#machines-à-gradient-boosting"><i class="fa fa-check"></i><b>13.2.2</b> Machines à Gradient Boosting</a></li>
+<li class="chapter" data-level="13.2.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#forêt-aléatoire"><i class="fa fa-check"></i><b>13.2.3</b> Forêt Aléatoire</a></li>
+<li class="chapter" data-level="13.2.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>13.2.4</b> K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="13.2.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#naive-bayes"><i class="fa fa-check"></i><b>13.2.5</b> Naive Bayes</a></li>
+<li class="chapter" data-level="13.2.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#adaboost"><i class="fa fa-check"></i><b>13.2.6</b> AdaBoost</a></li>
+<li class="chapter" data-level="13.2.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#arbre-de-décision"><i class="fa fa-check"></i><b>13.2.7</b> Arbre de Décision</a></li>
+<li class="chapter" data-level="13.2.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#perceptron-multi-couches"><i class="fa fa-check"></i><b>13.2.8</b> Perceptron Multi-couches</a></li>
+<li class="chapter" data-level="13.2.9" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#apprentissage-profond"><i class="fa fa-check"></i><b>13.2.9</b> Apprentissage profond</a></li>
+<li class="chapter" data-level="13.2.10" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#autres-algorithmes"><i class="fa fa-check"></i><b>13.2.10</b> Autres Algorithmes</a></li>
+<li class="chapter" data-level="13.2.11" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#types-dévaluation"><i class="fa fa-check"></i><b>13.2.11</b> Types d’Évaluation</a></li>
+<li class="chapter" data-level="13.2.12" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance"><i class="fa fa-check"></i><b>13.2.12</b> Mesures de Performance</a></li>
+<li class="chapter" data-level="13.2.13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-du-problème-3"><i class="fa fa-check"></i><b>13.2.13</b> Définition du problème</a></li>
+<li class="chapter" data-level="13.2.14" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-de-la-population-de-létude"><i class="fa fa-check"></i><b>13.2.14</b> Définition de la population de l’étude</a></li>
+<li class="chapter" data-level="13.2.15" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-de-développement-du-modèle"><i class="fa fa-check"></i><b>13.2.15</b> Paramètres de développement du modèle</a></li>
+<li class="chapter" data-level="13.2.16" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#évaluation-du-modèle"><i class="fa fa-check"></i><b>13.2.16</b> Évaluation du modèle</a></li>
+<li class="chapter" data-level="13.2.17" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-de-létude-1"><i class="fa fa-check"></i><b>13.2.17</b> Résumé de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#mise-en-œuvre-de-létude-dans-atlas"><i class="fa fa-check"></i><b>13.3</b> Mise en œuvre de l’étude dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-du-problème-de-prédiction"><i class="fa fa-check"></i><b>13.3.1</b> Paramètres du problème de prédiction</a></li>
+<li class="chapter" data-level="13.3.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-danalyse"><i class="fa fa-check"></i><b>13.3.2</b> Paramètres d’analyse</a></li>
+<li class="chapter" data-level="13.3.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#instanciation-de-la-cohorte-1"><i class="fa fa-check"></i><b>13.3.3</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="13.3.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#extraction-de-données"><i class="fa fa-check"></i><b>13.3.4</b> Extraction de Données</a></li>
+<li class="chapter" data-level="13.3.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#critères-dinclusion-supplémentaires"><i class="fa fa-check"></i><b>13.3.5</b> Critères d’Inclusion Supplémentaires</a></li>
+<li class="chapter" data-level="13.3.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#développement-du-modèle"><i class="fa fa-check"></i><b>13.3.6</b> Développement du Modèle</a></li>
+<li class="chapter" data-level="13.3.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-interne"><i class="fa fa-check"></i><b>13.3.7</b> Validation Interne</a></li>
+<li class="chapter" data-level="13.3.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-externe"><i class="fa fa-check"></i><b>13.3.8</b> Validation Externe</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#diffusion-des-résultats"><i class="fa fa-check"></i><b>13.4</b> Diffusion des Résultats</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance-du-modèle"><i class="fa fa-check"></i><b>13.4.1</b> Performance du Modèle</a></li>
+<li class="chapter" data-level="13.4.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#comparaison-des-modèles"><i class="fa fa-check"></i><b>13.4.2</b> Comparaison des Modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#fonctionnalités-additionnelles-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>13.5</b> Fonctionnalités Additionnelles de Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#génération-darticle-de-journal"><i class="fa fa-check"></i><b>13.5.1</b> Génération d’Article de Journal</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-11"><i class="fa fa-check"></i><b>13.6</b> Résumé</a></li>
+<li class="chapter" data-level="13.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exercices-8"><i class="fa fa-check"></i><b>13.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>IV Qualité des preuves</b></span></li>
+<li class="chapter" data-level="14" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html"><i class="fa fa-check"></i><b>14</b> Qualité des preuves</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#attributs-des-preuves-fiables"><i class="fa fa-check"></i><b>14.1</b> Attributs des preuves fiables</a></li>
+<li class="chapter" data-level="14.2" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#comprendre-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.2</b> Comprendre la qualité des preuves</a></li>
+<li class="chapter" data-level="14.3" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#communiquer-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.3</b> Communiquer la qualité des preuves</a></li>
+<li class="chapter" data-level="14.4" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#résumé-12"><i class="fa fa-check"></i><b>14.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="DataQuality.html"><a href="DataQuality.html"><i class="fa fa-check"></i><b>15</b> Qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="DataQuality.html"><a href="DataQuality.html#sources-de-problèmes-de-qualité-des-données"><i class="fa fa-check"></i><b>15.1</b> Sources de problèmes de qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-de-la-qualité-des-données"><i class="fa fa-check"></i><b>15.1.1</b> Vérifications de la qualité des données</a></li>
+<li class="chapter" data-level="15.1.2" data-path="DataQuality.html"><a href="DataQuality.html#etlUnitTests"><i class="fa fa-check"></i><b>15.1.2</b> Tests unitaires ETL</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude"><i class="fa fa-check"></i><b>15.2</b> Vérifications Spécifiques à l’Étude</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="DataQuality.html"><a href="DataQuality.html#vérification-des-mappings"><i class="fa fa-check"></i><b>15.2.1</b> Vérification des Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="DataQuality.html"><a href="DataQuality.html#achillesInPractice"><i class="fa fa-check"></i><b>15.3</b> ACHILLES en Pratique</a></li>
+<li class="chapter" data-level="15.4" data-path="DataQuality.html"><a href="DataQuality.html#dqdInPractice"><i class="fa fa-check"></i><b>15.4</b> Tableau de Bord de Qualité des Données en Pratique</a></li>
+<li class="chapter" data-level="15.5" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude-en-pratique"><i class="fa fa-check"></i><b>15.5</b> Vérifications Spécifiques à l’Étude en Pratique</a></li>
+<li class="chapter" data-level="15.6" data-path="DataQuality.html"><a href="DataQuality.html#résumé-13"><i class="fa fa-check"></i><b>15.6</b> Résumé</a></li>
+<li class="chapter" data-level="15.7" data-path="DataQuality.html"><a href="DataQuality.html#exercices-9"><i class="fa fa-check"></i><b>15.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html"><i class="fa fa-check"></i><b>16</b> Validité Clinique</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#CharacteristicsOfDatabase"><i class="fa fa-check"></i><b>16.1</b> Caractéristiques des Bases de Données de Soins de Santé</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#métriques-dévaluation-des-cohortes"><i class="fa fa-check"></i><b>16.1.1</b> Métriques d’évaluation des cohortes</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2</b> Vérification des dossiers sources</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#exemple-de-vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2.1</b> Exemple de vérification des dossiers sources</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#phevaluator"><i class="fa fa-check"></i><b>16.3</b> PheValuator</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#validation-dexemple-avec-phevaluator"><i class="fa fa-check"></i><b>16.3.1</b> Validation d’Exemple avec PheValuator</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#résumé-14"><i class="fa fa-check"></i><b>16.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html"><i class="fa fa-check"></i><b>17</b> Validité du logiciel</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validité-du-code-détude"><i class="fa fa-check"></i><b>17.1</b> Validité du code d’étude</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#automation"><i class="fa fa-check"></i><b>17.1.1</b> L’automatisation comme exigence pour la reproductibilité</a></li>
+<li class="chapter" data-level="17.1.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#meilleures-pratiques-de-programmation"><i class="fa fa-check"></i><b>17.1.2</b> Meilleures pratiques de programmation</a></li>
+<li class="chapter" data-level="17.1.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validation-du-code"><i class="fa fa-check"></i><b>17.1.3</b> Validation du code</a></li>
+<li class="chapter" data-level="17.1.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#utilisation-de-la-methods-library"><i class="fa fa-check"></i><b>17.1.4</b> Utilisation de la Methods Library</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#processus-de-développement-de-logiciels-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.2</b> Processus de Développement de Logiciels de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#gestion-du-code-source"><i class="fa fa-check"></i><b>17.2.1</b> Gestion du Code Source</a></li>
+<li class="chapter" data-level="17.2.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#documentation-2"><i class="fa fa-check"></i><b>17.2.2</b> Documentation</a></li>
+<li class="chapter" data-level="17.2.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#disponibilité-des-versions-actuelles-et-historiques"><i class="fa fa-check"></i><b>17.2.3</b> Disponibilité des Versions Actuelles et Historiques</a></li>
+<li class="chapter" data-level="17.2.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#maintenance-support-et-retraite"><i class="fa fa-check"></i><b>17.2.4</b> Maintenance, Support et Retraite</a></li>
+<li class="chapter" data-level="17.2.5" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#personnel-qualifié"><i class="fa fa-check"></i><b>17.2.5</b> Personnel Qualifié</a></li>
+<li class="chapter" data-level="17.2.6" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#sécurité-physique-et-logique"><i class="fa fa-check"></i><b>17.2.6</b> Sécurité Physique et Logique</a></li>
+<li class="chapter" data-level="17.2.7" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#reprise-après-sinistre"><i class="fa fa-check"></i><b>17.2.7</b> Reprise Après Sinistre</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#tests-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.3</b> Tests de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#test-unitaire"><i class="fa fa-check"></i><b>17.3.1</b> Test Unitaire</a></li>
+<li class="chapter" data-level="17.3.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#simulation"><i class="fa fa-check"></i><b>17.3.2</b> Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#résumé-15"><i class="fa fa-check"></i><b>17.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="MethodValidity.html"><a href="MethodValidity.html"><i class="fa fa-check"></i><b>18</b> Validité de la Méthode</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-spécifiques-au-plan-détude"><i class="fa fa-check"></i><b>18.1</b> Diagnostics Spécifiques au Plan d’Étude</a></li>
+<li class="chapter" data-level="18.2" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-for-all-estimation"><i class="fa fa-check"></i><b>18.2</b> Diagnostics for All Estimation</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="MethodValidity.html"><a href="MethodValidity.html#NegativeControls"><i class="fa fa-check"></i><b>18.2.1</b> Contrôles Négatifs</a></li>
+<li class="chapter" data-level="18.2.2" data-path="MethodValidity.html"><a href="MethodValidity.html#PositiveControls"><i class="fa fa-check"></i><b>18.2.2</b> Contrôles Positifs</a></li>
+<li class="chapter" data-level="18.2.3" data-path="MethodValidity.html"><a href="MethodValidity.html#metrics"><i class="fa fa-check"></i><b>18.2.3</b> Évaluation Empirique</a></li>
+<li class="chapter" data-level="18.2.4" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-valeurs-de-p"><i class="fa fa-check"></i><b>18.2.4</b> Calibration des valeurs de p</a></li>
+<li class="chapter" data-level="18.2.5" data-path="MethodValidity.html"><a href="MethodValidity.html#ConfidenceIntervalCalibration"><i class="fa fa-check"></i><b>18.2.5</b> Calibration des Intervalles de Confiance</a></li>
+<li class="chapter" data-level="18.2.6" data-path="MethodValidity.html"><a href="MethodValidity.html#sélection-des-contrôles-négatifs"><i class="fa fa-check"></i><b>18.2.6</b> Sélection des contrôles négatifs</a></li>
+<li class="chapter" data-level="18.2.7" data-path="MethodValidity.html"><a href="MethodValidity.html#inclusion-des-contrôles"><i class="fa fa-check"></i><b>18.2.7</b> Inclusion des contrôles</a></li>
+<li class="chapter" data-level="18.2.8" data-path="MethodValidity.html"><a href="MethodValidity.html#performance-empirique"><i class="fa fa-check"></i><b>18.2.8</b> Performance empirique</a></li>
+<li class="chapter" data-level="18.2.9" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-de-la-valeur-p"><i class="fa fa-check"></i><b>18.2.9</b> Calibration de la valeur P</a></li>
+<li class="chapter" data-level="18.2.10" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-intervalles-de-confiance"><i class="fa fa-check"></i><b>18.2.10</b> Calibration des intervalles de confiance</a></li>
+<li class="chapter" data-level="18.2.11" data-path="MethodValidity.html"><a href="MethodValidity.html#hétérogénéité-entre-les-bases-de-données"><i class="fa fa-check"></i><b>18.2.11</b> Hétérogénéité entre les bases de données</a></li>
+<li class="chapter" data-level="18.2.12" data-path="MethodValidity.html"><a href="MethodValidity.html#analyses-de-sensibilité"><i class="fa fa-check"></i><b>18.2.12</b> Analyses de sensibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="MethodValidity.html"><a href="MethodValidity.html#résumé-16"><i class="fa fa-check"></i><b>18.3</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="partie-études-ohdsi.html"><a href="partie-études-ohdsi.html"><i class="fa fa-check"></i>(PARTIE) Études OHDSI</a></li>
+<li class="chapter" data-level="19" data-path="StudySteps.html"><a href="StudySteps.html"><i class="fa fa-check"></i><b>19</b> Étapes de l’étude</a>
+<ul>
+<li class="chapter" data-level="19.0.1" data-path="StudySteps.html"><a href="StudySteps.html#définition-de-létude-observatoire"><i class="fa fa-check"></i><b>19.0.1</b> Définition de l’Étude Observatoire</a></li>
+<li class="chapter" data-level="19.0.2" data-path="StudySteps.html"><a href="StudySteps.html#pré-spécification-de-la-conception-de-létude"><i class="fa fa-check"></i><b>19.0.2</b> Pré-Spécification de la Conception de l’Étude</a></li>
+<li class="chapter" data-level="19.0.3" data-path="StudySteps.html"><a href="StudySteps.html#protocole"><i class="fa fa-check"></i><b>19.0.3</b> Protocole</a></li>
+<li class="chapter" data-level="19.0.4" data-path="StudySteps.html"><a href="StudySteps.html#analyses-standardisées"><i class="fa fa-check"></i><b>19.0.4</b> Analyses Standardisées</a></li>
+<li class="chapter" data-level="19.0.5" data-path="StudySteps.html"><a href="StudySteps.html#paquets-détudes"><i class="fa fa-check"></i><b>19.0.5</b> Paquets d’Études</a></li>
+<li class="chapter" data-level="19.0.6" data-path="StudySteps.html"><a href="StudySteps.html#les-données-sous-jacentes-au-cdm"><i class="fa fa-check"></i><b>19.0.6</b> Les Données Sous-Jacentes au CDM</a></li>
+<li class="chapter" data-level="19.1" data-path="StudySteps.html"><a href="StudySteps.html#étapes-de-létude-en-détail"><i class="fa fa-check"></i><b>19.1</b> Étapes de l’Étude en Détail</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="StudySteps.html"><a href="StudySteps.html#définir-la-question"><i class="fa fa-check"></i><b>19.1.1</b> Définir la Question</a></li>
+<li class="chapter" data-level="19.1.2" data-path="StudySteps.html"><a href="StudySteps.html#examiner-la-disponibilité-et-la-qualité-des-données"><i class="fa fa-check"></i><b>19.1.2</b> Examiner la Disponibilité et la Qualité des Données</a></li>
+<li class="chapter" data-level="19.1.3" data-path="StudySteps.html"><a href="StudySteps.html#populations-détude"><i class="fa fa-check"></i><b>19.1.3</b> Populations d’Étude</a></li>
+<li class="chapter" data-level="19.1.4" data-path="StudySteps.html"><a href="StudySteps.html#Feasibility"><i class="fa fa-check"></i><b>19.1.4</b> Faisabilité et Diagnostics</a></li>
+<li class="chapter" data-level="19.1.5" data-path="StudySteps.html"><a href="StudySteps.html#finaliser-le-protocole-et-le-paquet-détude"><i class="fa fa-check"></i><b>19.1.5</b> Finaliser le Protocole et le Paquet d’Étude</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="NetworkResearch.html"><a href="NetworkResearch.html"><i class="fa fa-check"></i><b>20</b> OHDSI Network Research</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#ohdsi-en-tant-que-réseau-de-recherche"><i class="fa fa-check"></i><b>20.1</b> OHDSI en tant que Réseau de Recherche</a></li>
+<li class="chapter" data-level="20.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2</b> Études en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#motivations-pour-mener-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.1</b> Motivations pour mener une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#définition-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.2</b> Définition d’une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-de-conception-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.3</b> Considérations de conception pour une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-logistiques-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.4</b> Considérations logistiques pour une étude en réseau OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.3</b> Exécution d’une étude en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.3.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#conception-et-faisabilité-de-létude"><i class="fa fa-check"></i><b>20.3.1</b> Conception et faisabilité de l’étude</a></li>
+<li class="chapter" data-level="20.3.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-de-létude"><i class="fa fa-check"></i><b>20.3.2</b> Exécution de l’étude</a></li>
+<li class="chapter" data-level="20.3.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#diffusion-et-publication-des-résultats"><i class="fa fa-check"></i><b>20.3.3</b> Diffusion et publication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#meilleures-pratiques-pour-les-études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.4</b> Meilleures pratiques pour les études en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.5" data-path="NetworkResearch.html"><a href="NetworkResearch.html#résumé-17"><i class="fa fa-check"></i><b>20.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Glossary.html"><a href="Glossary.html"><i class="fa fa-check"></i><b>21</b> Glossaire</a>
+<ul>
+<li class="chapter" data-level="21.0.1" data-path="Glossary.html"><a href="Glossary.html#détection-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.1</b> Détection des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.2" data-path="Glossary.html"><a href="Glossary.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.2</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.3" data-path="Glossary.html"><a href="Glossary.html#cas-pratique"><i class="fa fa-check"></i><b>21.0.3</b> Cas pratique</a></li>
+<li class="chapter" data-level="21.0.4" data-path="Glossary.html"><a href="Glossary.html#conclusion"><i class="fa fa-check"></i><b>21.0.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html"><i class="fa fa-check"></i><b>22</b> Définitions de cohortes</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitors"><i class="fa fa-check"></i><b>22.1</b> Inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.2" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitorsMono"><i class="fa fa-check"></i><b>22.2</b> Nouveaux utilisateurs de monothérapie avec des inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.3" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Ami"><i class="fa fa-check"></i><b>22.3</b> Infarctus du myocarde aigu (IMA)</a></li>
+<li class="chapter" data-level="22.4" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Angioedema"><i class="fa fa-check"></i><b>22.4</b> Angioedème</a></li>
+<li class="chapter" data-level="22.5" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ThiazidesMono"><i class="fa fa-check"></i><b>22.5</b> Nouveaux Utilisateurs de Diurétiques de Type Thiazidique en Monothérapie</a></li>
+<li class="chapter" data-level="22.6" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN1yrFO"><i class="fa fa-check"></i><b>22.6</b> Patients Initiating First-Line Therapy for Hypertension</a></li>
+<li class="chapter" data-level="22.7" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN3yrFO"><i class="fa fa-check"></i><b>22.7</b> Patients Initiating First-Line Therapy for Hypertension With &gt;3 Yr Follow-Up</a></li>
+<li class="chapter" data-level="22.8" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ACEiUse"><i class="fa fa-check"></i><b>22.8</b> ACE Inhibitor Use</a></li>
+<li class="chapter" data-level="22.9" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ARBUse"><i class="fa fa-check"></i><b>22.9</b> Angiotensin Receptor Blocker (ARB) Use</a></li>
+<li class="chapter" data-level="22.10" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#THZUse"><i class="fa fa-check"></i><b>22.10</b> Thiazide Or Thiazide-Like Diuretic Use</a></li>
+<li class="chapter" data-level="22.11" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#dCCBUse"><i class="fa fa-check"></i><b>22.11</b> Dihydropyridine Calcium Channel Blocker (dCCB) Use</a></li>
+<li class="chapter" data-level="22.12" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#BBUse"><i class="fa fa-check"></i><b>22.12</b> Utilisation des Bêta-bloquants</a></li>
+<li class="chapter" data-level="22.13" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DLoopUse"><i class="fa fa-check"></i><b>22.13</b> Utilisation des Diurétiques - Anse</a></li>
+<li class="chapter" data-level="22.14" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DPUse"><i class="fa fa-check"></i><b>22.14</b> Utilisation des Diurétiques - Épargneurs de potassium</a></li>
+<li class="chapter" data-level="22.15" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#A1BUse"><i class="fa fa-check"></i><b>22.15</b> Utilisation des Bloqueurs Alpha-1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html"><i class="fa fa-check"></i><b>23</b> Contrôles négatifs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#AceiThzNsc"><i class="fa fa-check"></i><b>23.1</b> ACEi et THZ</a></li>
+<li class="chapter" data-level="23.2" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#ProtocolTemplate"><i class="fa fa-check"></i><b>23.2</b> # Modèle de protocole</a></li>
+<li class="chapter" data-level="23.3" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#na"><i class="fa fa-check"></i><b>23.3</b> NA</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html"><i class="fa fa-check"></i><b>24</b> Réponses suggérées</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cdmanswers"><i class="fa fa-check"></i><b>24.1</b> Le modèle de données commun</a></li>
+<li class="chapter" data-level="24.2" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Vocabanswers"><i class="fa fa-check"></i><b>24.2</b> Vocabulaires standardisés</a></li>
+<li class="chapter" data-level="24.3" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Etlanswers"><i class="fa fa-check"></i><b>24.3</b> Extraction, transformation et chargement</a></li>
+<li class="chapter" data-level="24.4" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#UseCasesanswers"><i class="fa fa-check"></i><b>24.4</b> Cas d’utilisation des analyses de données</a></li>
+<li class="chapter" data-level="24.5" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cohortsanswers"><i class="fa fa-check"></i><b>24.5</b> Définir des Cohortes</a></li>
+<li class="chapter" data-level="24.6" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Characterizationanswers"><i class="fa fa-check"></i><b>24.6</b> Caractérisation</a></li>
+<li class="chapter" data-level="24.7" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Pleanswers"><i class="fa fa-check"></i><b>24.7</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="24.8" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Plpanswers"><i class="fa fa-check"></i><b>24.8</b> Prédiction Au Niveau Des Patients</a></li>
+<li class="chapter" data-level="24.9" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#DataQualityanswers"><i class="fa fa-check"></i><b>24.9</b> Qualité des données</a></li>
+<li class="chapter" data-level="24.10" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#section"><i class="fa fa-check"></i><b>24.10</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a>
+<ul>
+<li class="chapter" data-level="24.11" data-path="références.html"><a href="références.html#non-disponible"><i class="fa fa-check"></i><b>24.11</b> Non disponible</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Livre d’OHDSI</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="DataQuality" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapitre 15</span> Qualité des données<a href="DataQuality.html#DataQuality" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>Responsables du chapitre : Martijn Schuemie, Vojtech Huser &amp; Clair Blacketer</em></p>
+<p>La plupart des données utilisées pour la recherche observationnelle en soins de santé n’ont pas été collectées à des fins de recherche. Par exemple, les dossiers de santé électroniques (DSE) visent à capturer les informations nécessaires pour soutenir les soins aux patients, et les réclamations administratives sont collectées pour allouer les coûts aux payeurs. Beaucoup se sont interrogés sur l’opportunité d’utiliser de telles données pour la recherche clinique, avec <span class="citation">Lei (<a href="#ref-vanDerLei_1991">1991</a>)</span> affirmant même que “Les données ne doivent être utilisées que pour l’objectif pour lequel elles ont été collectées.” La préoccupation est que, parce que les données n’ont pas été collectées pour la recherche que nous souhaitons mener, il n’est pas garanti qu’elles aient une qualité suffisante. Si la qualité des données est mauvaise (garbage in), alors la qualité des résultats de la recherche utilisant ces données doit également être mauvaise (garbage out). Un aspect important de la recherche observationnelle en soins de santé concerne donc l’évaluation de la qualité des données, visant à répondre à la question :</p>
+<blockquote>
+<p>Les données ont-elles une qualité suffisante pour nos objectifs de recherche ?</p>
+</blockquote>
+<p>Nous pouvons définir la qualité des données (DQ) comme <span class="citation">(<a href="#ref-roebuck_2012">Roebuck 2012</a>)</span> : </p>
+<blockquote>
+<p>L’état de complétude, de validité, de cohérence, d’actualité et de précision qui rend les données appropriées pour un usage spécifique.</p>
+</blockquote>
+<p>Notez qu’il est peu probable que nos données soient parfaites, mais elles peuvent être suffisamment bonnes pour nos besoins.</p>
+<p>La DQ ne peut pas être observée directement, mais une méthodologie a été développée pour l’évaluer. Deux types d’évaluations de DQ peuvent être distingués <span class="citation">(<a href="#ref-weiskopf_2013">Weiskopf and Weng 2013</a>)</span> : des évaluations pour évaluer la DQ en général, et des évaluations pour évaluer la DQ dans le contexte d’une étude spécifique.</p>
+<p>Dans ce chapitre, nous examinerons d’abord les sources possibles de problèmes de DQ, puis nous discuterons de la théorie des évaluations de DQ générales et spécifiques à l’étude, suivie d’une description étape par étape de la manière dont ces évaluations peuvent être effectuées à l’aide des outils OHDSI.</p>
+<div id="sources-de-problèmes-de-qualité-des-données" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Sources de problèmes de qualité des données<a href="DataQuality.html#sources-de-problèmes-de-qualité-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il existe de nombreuses menaces à la qualité des données, commençant comme indiqué au Chapitre <a href="EvidenceQuality.html#EvidenceQuality">14</a> lorsque le médecin enregistre ses réflexions. <span class="citation">Dasu and Johnson (<a href="#ref-dasu_2003">2003</a>)</span> distinguent les étapes suivantes dans le cycle de vie des données, recommandant d’intégrer la DQ à chaque étape. Ils appellent cela le continuum de la DQ :</p>
+<ol style="list-style-type: decimal">
+<li><strong>Collecte et intégration des données</strong>. Les problèmes possibles incluent la saisie manuelle faillible, les biais (par exemple, la surcodification dans les réclamations), la jonction erronée de tables dans un DSE, et le remplacement des valeurs manquantes par des valeurs par défaut.</li>
+<li><strong>Stockage des données et partage des connaissances</strong>. Les problèmes potentiels sont le manque de documentation du modèle de données, et le manque de méta-données.</li>
+<li><strong>Analyse des données</strong>. Les problèmes peuvent inclure des transformations de données incorrectes, une interprétation incorrecte des données, et l’utilisation de méthodologies inappropriées.</li>
+<li><strong>Publication des données</strong>. Lors de la publication des données pour une utilisation ultérieure.</li>
+</ol>
+<p>Souvent, les données que nous utilisons ont déjà été collectées et intégrées, il y a donc peu de choses que nous pouvons faire pour améliorer la première étape. Nous avons des moyens de vérifier la DQ produite par cette étape, comme il sera discuté dans les sections suivantes de ce chapitre.</p>
+<p>De même, nous recevons souvent les données sous une forme spécifique, nous avons donc peu d’influence sur une partie de l’étape 2. Cependant, dans OHDSI nous convertissons toutes nos données observationnelles au modèle de données commun (CDM), et nous avons la maîtrise de ce processus. Certains ont exprimé des préoccupations selon lesquelles cette étape spécifique pourrait dégrader la DQ. Mais parce que nous contrôlons ce processus, nous pouvons mettre en place des garde-fous stricts pour préserver la DQ, comme discuté plus loin dans la Section <a href="DataQuality.html#etlUnitTests">15.1.2</a>. Plusieurs études <span class="citation">(<a href="#ref-defalco_2013">Defalco, Ryan, and Soledad Cepeda 2013</a>; <a href="#ref-makadia_2014">Makadia and Ryan 2014</a>; <a href="#ref-matcho_2014">Matcho et al. 2014</a>; <a href="#ref-voss_2015">Voss, Ma, and Ryan 2015</a>; <a href="#ref-voss_2015b">Voss et al. 2015</a>; <a href="#ref-hripcsak_2018">G. Hripcsak et al. 2018</a>)</span> ont montré que, lorsqu’elle est correctement exécutée, peu ou pas d’erreurs sont introduites lors de la conversion au CDM. En fait, avoir un modèle de données bien documenté et partagé par une grande communauté facilite le stockage des données de manière non ambiguë et claire.</p>
+<p>L’étape 3 (analyse des données) relève également de notre contrôle. Dans OHDSI, nous avons tendance à ne pas utiliser le terme DQ pour les problèmes de qualité lors de cette étape, mais plutôt les termes <em>validité clinique</em>, <em>validité logicielle</em> et <em>validité méthodologique</em>, qui sont longuement discutés dans les Chapitres <a href="ClinicalValidity.html#ClinicalValidity">16</a>, <a href="SoftwareValidity.html#SoftwareValidity">17</a> et <a href="MethodValidity.html#MethodValidity">18</a>, respectivement.
+## Qualité des données en général</p>
+<p>Nous pouvons nous demander si nos données sont adaptées à l’objectif général de la recherche observationnelle. <span class="citation">Michael G. Kahn et al. (<a href="#ref-kahn_harmonized_2016">2016</a>)</span> définissent cette qualité des données générique comme composée de trois éléments :</p>
+<ol style="list-style-type: decimal">
+<li><strong>Conformité</strong> : Les valeurs des données respectent-elles les normes et formats spécifiés ? Trois sous-types sont identifiés :
+<ul>
+<li><strong>Valeur</strong> : Les éléments de données enregistrés sont-ils en accord avec les formats spécifiés ? Par exemple, toutes les spécialités médicales des prestataires sont-elles des spécialités valides ?</li>
+<li><strong>Relationnelle</strong> : Les données enregistrées sont-elles en accord avec les contraintes relationnelles spécifiées ? Par exemple, le PROVIDER_ID dans les données DRUG_EXPOSURE possède-t-il un enregistrement correspondant dans la table PROVIDER ?</li>
+<li><strong>Calcul</strong> : Les calculs sur les données donnent-ils les résultats escomptés ? Par exemple, l’IMC calculé à partir de la taille et du poids est-il égal à l’IMC déclaré dans les données ?</li>
+</ul></li>
+<li><strong>Complétude</strong> : Cela fait référence à la présence d’une variable particulière (par exemple, le poids mesuré dans le cabinet du médecin est-il enregistré ?) ainsi qu’à la présence de toutes les valeurs enregistrées pour les variables (par exemple, toutes les personnes ont-elles un sexe connu ?).</li>
+<li><strong>Crédibilité</strong> : Les valeurs des données sont-elles crédibles ? Trois sous-types sont définis :
+<ul>
+<li><strong>Unicité</strong> : Par exemple, chaque PERSON_ID apparaît-il une seule fois dans la table PERSON ?</li>
+<li><strong>Atemporelle</strong> : Les valeurs, distributions ou densités sont-elles en accord avec les valeurs attendues ? Par exemple, la prévalence du diabète indiquée par les données est-elle conforme à la prévalence connue ?</li>
+<li><strong>Temporelle</strong> : Les changements de valeurs sont-ils conformes aux attentes ? Par exemple, les séquences de vaccination sont-elles en ligne avec les recommandations ?</li>
+</ul>
+</li>
+</ol>
+<p>Chaque composant peut être évalué de deux manières :</p>
+<ul>
+<li><strong>Vérification</strong> se concentre sur les contraintes de données du modèle et des métadonnées, les hypothèses du système et la connaissance locale. Elle ne repose pas sur une référence externe. La caractéristique clé de la vérification est la capacité de déterminer les valeurs et distributions attendues en utilisant des ressources au sein de l’environnement local.</li>
+<li><strong>Validation</strong> se concentre sur l’alignement des valeurs de données par rapport à des références externes pertinentes. Une source possible de référence externe peut être de combiner les résultats de plusieurs sites de données.</li>
+</ul>
+<p> </p>
+<div id="vérifications-de-la-qualité-des-données" class="section level3 hasAnchor" number="15.1.1">
+<h3><span class="header-section-number">15.1.1</span> Vérifications de la qualité des données<a href="DataQuality.html#vérifications-de-la-qualité-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p> </p>
+<p>Kahn introduit le terme <em>data quality check</em> (parfois appelé <em>data quality rule</em>) qui teste si les données sont conformes à une exigence donnée (par exemple, signaler un âge improbable de 141 ans pour un patient, potentiellement dû à une année de naissance incorrecte ou à un événement de décès manquant). Nous pouvons implémenter de telles vérifications dans des logiciels en créant des outils DQ automatisés. Un de ces outils est <a href="https://github.com/OHDSI/Achilles">ACHILLES</a> (Automated Characterization of Health Information at Large-scale Longitudinal Evidence Systems) <span class="citation">(<a href="#ref-huser_methods_2018">Huser et al. 2018</a>)</span>. ACHILLES est un outil logiciel qui fournit une caractérisation et une visualisation d’une base de données conforme au CDM. À ce titre, il peut être utilisé pour évaluer la qualité des données dans un réseau de bases de données <span class="citation">(<a href="#ref-huser_multisite_2016">Huser et al. 2016</a>)</span>. ACHILLES est disponible en tant qu’outil autonome, et il est également intégré dans ATLAS en tant que fonction “Sources de données”. </p>
+<p>ACHILLES pré-calculent plus de 170 analyses de caractérisation des données, chacune ayant un ID d’analyse et une courte description de l’analyse ; deux exemples sont “715: Distribution de DAYS_SUPPLY par DRUG_CONCEPT_ID” et “506: Distribution de l’âge au décès par sexe”. Les résultats de ces analyses sont stockés dans une base de données et peuvent être consultés par un visualiseur web ou par ATLAS.</p>
+<p></p>
+<p>Un autre outil créé par la communauté pour évaluer la qualité des données est le <a href="https://github.com/OHDSI/DataQualityDashboard">Data Quality Dashboard (DQD)</a>. Alors que ACHILLES lance des analyses de caractérisation pour fournir une compréhension visuelle globale d’une instance CDM, le DQD va table par table et champ par champ pour quantifier le nombre d’enregistrements dans un CDM qui ne sont pas conformes aux spécifications données. Au total, plus de 1 500 vérifications sont effectuées, chacune organisée selon le cadre de Kahn. Pour chaque vérification, le résultat est comparé à un seuil où un échec est considéré comme tout pourcentage de lignes violant dépassant cette valeur. Le tableau <a href="#tab:dqdExamples">15.1</a> montre quelques exemples de vérifications.</p>
+<p>Tableau : (#tab:dqdExamples) Exemples de règles de qualité des données dans le Tableau de bord de la qualité des données.</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="41%" />
+<col width="8%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Fraction des lignes violées</th>
+<th align="left">Description de la vérification</th>
+<th align="left">Seuil</th>
+<th align="left">Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0.34</td>
+<td align="left">Une valeur oui ou non indiquant si le provider_id dans VISIT_OCCURRENCE est le type de données attendu selon les spécifications.</td>
+<td align="left">0.05</td>
+<td align="left">ÉCHEC</td>
+</tr>
+<tr class="even">
+<td align="left">0.99</td>
+<td align="left">Le nombre et pourcentage de valeurs sources distinctes dans le champ measurement_source_value de la table MEASUREMENT mappées à 0.</td>
+<td align="left">0.30</td>
+<td align="left">ÉCHEC</td>
+</tr>
+<tr class="odd">
+<td align="left">0.09</td>
+<td align="left">Le nombre et pourcentage d’enregistrements ayant une valeur dans le champ drug_concept_id de la table DRUG_ERA qui ne sont pas conformes à la classe des ingrédients.</td>
+<td align="left">0.10</td>
+<td align="left">SUCCÈS</td>
+</tr>
+<tr class="even">
+<td align="left">0.02</td>
+<td align="left">Le nombre et pourcentage d’enregistrements ayant une valeur dans le champ verbatim_end_date de DRUG_EXPOSURE qui survient avant la date dans le champ DRUG_EXPOSURE_START_DATE de la table DRUG_EXPOSURE.</td>
+<td align="left">0.05</td>
+<td align="left">SUCCÈS</td>
+</tr>
+<tr class="odd">
+<td align="left">0.00</td>
+<td align="left">Le nombre et pourcentage d’enregistrements ayant une valeur en double dans le champ procedure_occurrence_id de PROCEDURE_OCCURRENCE.</td>
+<td align="left">0.00</td>
+<td align="left">SUCCÈS</td>
+</tr>
+</tbody>
+</table>
+<p>Dans l’outil, les vérifications sont organisées de plusieurs manières, l’une d’elles étant en vérifications de niveau table, champ et concept. Les vérifications au niveau table sont effectuées à un niveau élevé dans le CDM, par exemple pour déterminer si toutes les tables requises sont présentes. Les vérifications au niveau champ sont effectuées de manière à évaluer chaque champ dans chaque table pour leur conformité aux spécifications CDM. Cela inclut de s’assurer que toutes les clés primaires sont vraiment uniques et que tous les champs de concepts standards contiennent des identifiants de concepts dans le domaine correct, parmi beaucoup d’autres. Les vérifications au niveau concept vont un peu plus loin pour examiner les identifiants de concepts individuels. Beaucoup d’entre elles appartiennent à la catégorie de la plausibilité du cadre de Kahn, comme s’assurer que les concepts spécifiques au genre ne sont pas attribués à des personnes du mauvais genre (par exemple, le cancer de la prostate chez une patiente).</p>
+
+<div class="rmdimportant">
+<p>ACHILLES et DQD sont exécutés contre les données dans le CDM. Les problèmes de qualité des données identifiés de cette manière peuvent être dus à la conversion au CDM, mais peuvent également refléter des problèmes de qualité des données déjà présents dans les données sources. Si la conversion est en cause, il est généralement sous notre contrôle de remédier au problème, mais si les données sous-jacentes sont en cause, la seule solution peut être de supprimer les enregistrements problématiques.</p>
+</div>
+</div>
+<div id="etlUnitTests" class="section level3 hasAnchor" number="15.1.2">
+<h3><span class="header-section-number">15.1.2</span> Tests unitaires ETL<a href="DataQuality.html#etlUnitTests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p></p>
+<p>En plus des vérifications de la qualité des données à un niveau élevé, des vérifications des données au niveau individuel doivent être effectuées. Le processus ETL (Extract-Transform-Load) par lequel les données sont converties en CDM est souvent assez complexe, et avec cette complexité vient le danger de commettre des erreurs qui peuvent passer inaperçues. De plus, au fil du temps, le modèle de données source peut changer, ou le CDM peut être mis à jour, rendant nécessaire la modification du processus ETL. Les changements à un processus aussi complexe qu’un ETL peuvent avoir des conséquences inattendues, nécessitant que tous les aspects de l’ETL soient réexaminés et revus.</p>
+<p>Pour s’assurer que l’ETL fait ce qu’il est censé faire, et continue à le faire, il est fortement recommandé de construire un ensemble de tests unitaires. Un test unitaire est un petit morceau de code qui vérifie automatiquement un seul aspect. L’outil Rabbit-in-a-Hat décrit dans le chapitre <a href="ExtractTransformLoad.html#ExtractTransformLoad">6</a> peut créer un cadre de tests unitaires qui facilite l’écriture de tels tests unitaires. Ce cadre est un ensemble de fonctions R créées spécifiquement pour la base de données source et la version CDM cible de l’ETL. Certaines de ces fonctions servent à créer des entrées de données fictives conformes au schéma des données sources, tandis que d’autres fonctions peuvent être utilisées pour spécifier des attentes sur les données au format CDM. Voici un exemple de test unitaire :</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="DataQuality.html#cb133-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Framework.R&quot;</span>)</span>
+<span id="cb133-2"><a href="DataQuality.html#cb133-2" tabindex="-1"></a><span class="fu">declareTest</span>(<span class="dv">101</span>, <span class="st">&quot;Person gender mappings&quot;</span>)</span>
+<span id="cb133-3"><a href="DataQuality.html#cb133-3" tabindex="-1"></a><span class="fu">add_enrollment</span>(<span class="at">member_id =</span> <span class="st">&quot;M000000102&quot;</span>, <span class="at">gender_of_member =</span> <span class="st">&quot;male&quot;</span>)</span>
+<span id="cb133-4"><a href="DataQuality.html#cb133-4" tabindex="-1"></a><span class="fu">add_enrollment</span>(<span class="at">member_id =</span> <span class="st">&quot;M000000103&quot;</span>, <span class="at">gender_of_member =</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb133-5"><a href="DataQuality.html#cb133-5" tabindex="-1"></a><span class="fu">expect_person</span>(<span class="at">PERSON_ID =</span> <span class="dv">102</span>, <span class="at">GENDER_CONCEPT_ID =</span> <span class="dv">8507</span>)</span>
+<span id="cb133-6"><a href="DataQuality.html#cb133-6" tabindex="-1"></a><span class="fu">expect_person</span>(<span class="at">PERSON_ID =</span> <span class="dv">103</span>, <span class="at">GENDER_CONCEPT_ID =</span> <span class="dv">8532</span>)</span></code></pre></div>
+<p>Dans cet exemple, le cadre généré par Rabbit-in-a-Hat est chargé, important les fonctions utilisées dans le reste du code. Nous déclarons ensuite que nous commencerons à tester les mappages du sexe des personnes. Le schéma source a une table ENROLLMENT, et nous utilisons la fonction add_enrollment créée par Rabbit-in-a-Hat pour créer deux entrées avec des valeurs différentes pour les champs MEMBER_ID et GENDER_OF_MEMBER. Enfin, nous spécifions l’attente qu’après l’ETL, deux entrées doivent exister dans la table PERSON avec diverses valeurs attendues.</p>
+<p>Notez que la table ENROLLMENT a de nombreux autres champs, mais nous ne nous soucions pas beaucoup des valeurs de ces autres champs dans le cadre de ce test. Cependant, laisser ces valeurs (par exemple, la date de naissance) vides pourrait amener l’ETL à ignorer l’enregistrement ou à générer une erreur. Pour surmonter ce problème tout en gardant le code de test facile à lire, la fonction <code>add_enrollment</code> assignera des valeurs par défaut (les valeurs les plus communes observées dans le rapport de scan White Rabbit) aux champs de valeurs non spécifiés par l’utilisateur.</p>
+<p>Des tests unitaires similaires peuvent être créés pour toute autre logique dans un ETL, aboutissant généralement à des centaines de tests. Lorsque nous avons terminé de définir le test, nous pouvons utiliser le cadre pour générer deux ensembles d’instructions SQL, l’un pour créer les données sources fictives et l’autre pour créer les tests sur les données ETL-isées :</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="DataQuality.html#cb134-1" tabindex="-1"></a>insertSql <span class="ot">&lt;-</span> <span class="fu">generateInsertSql</span>(<span class="at">databaseSchema =</span> <span class="st">&quot;source_schema&quot;</span>)</span>
+<span id="cb134-2"><a href="DataQuality.html#cb134-2" tabindex="-1"></a>testSql <span class="ot">&lt;-</span> <span class="fu">generateTestSql</span>(<span class="at">databaseSchema =</span> <span class="st">&quot;cdm_test_schema&quot;</span>)</span></code></pre></div>
+<p>Le processus global est illustré dans la figure <a href="DataQuality.html#fig:testFramework">15.1</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:testFramework"></span>
+<img src="images/DataQuality/testFramework.png" alt="Unit testing an ETL (Extract-Transform-Load) process using the Rabbit-in-a-Hat testing framework." width="90%" />
+<p class="caption">
+Figure 15.1: Unit testing an ETL (Extract-Transform-Load) process using the Rabbit-in-a-Hat testing framework.
+</p>
+</div>
+<p>Le test SQL retourne un tableau qui ressemblera à celui du tableau <a href="#tab:exampleTestResults">15.2</a>. Dans ce tableau, nous voyons que nous avons réussi les deux tests que nous avions définis plus tôt.</p>
+<p>Tableau : (#tab:exampleTestResults) Exemples de résultats de tests unitaires ETL.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">ID</th>
+<th align="left">Description</th>
+<th align="center">Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">101</td>
+<td align="left">Person gender mappings</td>
+<td align="center">SUCCÈS</td>
+</tr>
+<tr class="even">
+<td align="center">101</td>
+<td align="left">Person gender mappings</td>
+<td align="center">SUCCÈS</td>
+</tr>
+</tbody>
+</table>
+<p>La puissance de ces tests unitaires est que nous pouvons facilement les relancer à chaque fois que le processus ETL est modifié.</p>
+</div>
+</div>
+<div id="vérifications-spécifiques-à-létude" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> Vérifications Spécifiques à l’Étude<a href="DataQuality.html#vérifications-spécifiques-à-létude" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<p>Le chapitre s’est jusqu’ici concentré sur des vérifications générales de la qualité des données (DQ). Ces vérifications devraient être effectuées avant d’utiliser les données pour la recherche. Comme ces vérifications sont effectuées indépendamment des questions de recherche, nous recommandons d’effectuer des évaluations de DQ spécifiques à l’étude.</p>
+<p>Certaines de ces évaluations peuvent prendre la forme de règles de DQ spécifiquement pertinentes pour l’étude. Par exemple, on peut souhaiter imposer une règle selon laquelle au moins 90% des enregistrements pour notre exposition d’intérêt précisent la durée de l’exposition.</p>
+<p>Une évaluation standard consiste à passer en revue les concepts les plus pertinents pour l’étude dans ACHILLES, par exemple ceux spécifiés dans les définitions de cohortes de l’étude. Des changements soudains dans le temps du taux d’observation d’un code peuvent indiquer des problèmes de DQ. Quelques exemples seront discutés plus loin dans ce chapitre.</p>
+<p>Une autre évaluation consiste à examiner la prévalence et les changements de prévalence au fil du temps des cohortes résultantes générées en utilisant les définitions de cohortes développées pour l’étude, et à voir si elles sont en accord avec les attentes basées sur des connaissances cliniques externes. Par exemple, l’exposition à un nouveau médicament devrait être absente avant son introduction sur le marché, et augmentera probablement avec le temps après son introduction. De même, la prévalence des résultats devrait être conforme à ce qui est connu de la prévalence de la condition dans la population. Si une étude est exécutée sur un réseau de bases de données, nous pouvons comparer la prévalence des cohortes entre les bases de données. Si une cohorte est très répandue dans une base de données, mais manque dans une autre base de données, il pourrait y avoir un problème de DQ. Notez que cette évaluation chevauche quelque peu la notion de <em>validité clinique</em>, comme discuté dans le Chapitre <a href="ClinicalValidity.html#ClinicalValidity">16</a>; nous pouvons trouver une prévalence inattendue dans certaines bases de données non pas à cause de problèmes de DQ, mais parce que notre définition de cohorte ne capture pas véritablement les états de santé qui nous intéressent, ou parce que ces états de santé varient légitimement entre les bases de données qui capturent différentes populations de patients.</p>
+<div id="vérification-des-mappings" class="section level3 hasAnchor" number="15.2.1">
+<h3><span class="header-section-number">15.2.1</span> Vérification des Mappings<a href="DataQuality.html#vérification-des-mappings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une source possible d’erreur qui relève entièrement de notre contrôle est le mapping des codes sources aux Concepts Standards. Les mappings dans le Vocabulaire sont méticuleusement élaborés, et les erreurs dans le mapping notées par les membres de la communauté sont reportées dans le traqueur de problèmes du Vocabulaire<a href="#fn57" class="footnote-ref" id="fnref57"><sup>57</sup></a> et corrigées dans les versions futures. Néanmoins, il est impossible de vérifier complètement tous les mappings manuellement, et des erreurs subsistent probablement. Lors de l’exécution d’une étude, nous recommandons donc de passer en revue les mappings pour les concepts les plus pertinents pour l’étude. Heureusement, cela peut être réalisé assez facilement car dans le CDM nous stockons non seulement les Concepts Standards, mais aussi les codes sources. Nous pouvons passer en revue à la fois les codes sources qui se mappent aux concepts utilisés dans l’étude, ainsi que ceux qui ne se mappent pas.</p>
+<p>Une façon de passer en revue les codes sources qui se mappent est d’utiliser la fonction <code>checkCohortSourceCodes</code> dans le package R <a href="https://ohdsi.github.io/MethodEvaluation/">MethodEvaluation</a>. Cette fonction utilise une définition de cohorte telle que créée par ATLAS comme entrée, et pour chaque ensemble de concepts utilisé dans la définition de cohorte, elle vérifie quels codes sources se mappent aux concepts de l’ensemble. Elle calcule également la prévalence de ces codes dans le temps pour aider à identifier les problèmes temporels associés à des codes sources spécifiques. La sortie d’exemple dans la Figure <a href="DataQuality.html#fig:sourceCodes">15.2</a> montre une décomposition partielle d’un ensemble de concepts appelé “Trouble dépressif.” Le concept le plus prévalent dans cet ensemble de concepts dans la base de données d’intérêt est le concept <a href="http://athena.ohdsi.org/search-terms/terms/440383">440383</a> (“Trouble dépressif”). Nous voyons que trois codes sources dans la base de données se mappent à ce concept : le code CIM-9 3.11, et les codes CIM-10 F32.8 et F32.89. À gauche, nous voyons que le concept dans son ensemble montre d’abord une augmentation graduelle dans le temps, mais ensuite montre une chute brutale. Si nous regardons les codes individuels, nous voyons que cette chute peut être expliquée par le fait que le code CIM-9 cesse d’être utilisé au moment de la chute. Bien que ce soit le même moment où les codes CIM-10 commencent à être utilisés, la prévalence combinée des codes CIM-10 est bien plus faible que celle du code CIM-9. Cet exemple spécifique était dû au fait que le code CIM-10 F32.9 (“Trouble dépressif majeur, épisode unique, non spécifié”) aurait également dû se mapper au concept. Ce problème a depuis été résolu dans le Vocabulaire.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sourceCodes"></span>
+<img src="images/DataQuality/sourceCodes.png" alt="Example output of the checkCohortSourceCodes function. " width="100%" />
+<p class="caption">
+Figure 15.2: Example output of the checkCohortSourceCodes function.
+</p>
+</div>
+<p>Bien que l’exemple précédent démontre une découverte fortuite d’un code source qui n’était pas mappé, en général l’identification des mappings manquants est plus difficile que la vérification des mappings présents. Cela nécessite de savoir quels codes sources devraient se mapper mais ne le font pas. Une façon semi-automatisée de réaliser cette évaluation est d’utiliser la fonction <code>findOrphanSourceCodes</code> dans le package R <a href="https://ohdsi.github.io/MethodEvaluation/">MethodEvaluation</a>. Cette fonction permet de rechercher le vocabulaire pour des codes sources en utilisant une recherche de texte simple, et elle vérifie si ces codes sources se mappent à un concept spécifique ou à l’un des descendants de ce concept. L’ensemble de codes sources résultant est ensuite restreint à uniquement ceux qui apparaissent dans la base de données CDM en question. Par exemple, dans une étude le concept “Trouble gangreneux” (<a href="http://athena.ohdsi.org/search-terms/terms/439928">439928</a>) et tous ses descendants ont été utilisés pour trouver toutes les occurrences de gangrène. Pour évaluer si cela inclut vraiment tous les codes sources indiquant la gangrène, plusieurs termes (par exemple, “gangrène”) ont été utilisés pour rechercher les descriptions dans les tables CONCEPT et SOURCE_TO_CONCEPT_MAP pour identifier des codes sources. Une recherche automatisée est alors utilisée pour évaluer si chaque code source de gangrène apparaissant dans les données se mappe effectivement directement ou indirectement (via l’ascendance) au concept “Trouble gangreneux.” Le résultat de cette évaluation est montré dans la Figure <a href="DataQuality.html#fig:missingMapping">15.3</a>, révélant que le code CIM-10 J85.0 (“Gangrène et nécrose des poumons”) n’était mappé qu’au concept <a href="http://athena.ohdsi.org/search-terms/terms/4324261">4324261</a> (“Nécrose pulmonaire”), qui n’est pas un descendant de “Trouble gangreneux.” </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:missingMapping"></span>
+<img src="images/DataQuality/missingMapping.png" alt="Example orphan source code. " width="70%" />
+<p class="caption">
+Figure 15.3: Example orphan source code.
+</p>
+</div>
+</div>
+</div>
+<div id="achillesInPractice" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> ACHILLES en Pratique<a href="DataQuality.html#achillesInPractice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ici, nous allons démontrer comment exécuter ACHILLES contre une base de données au format CDM.</p>
+<p>Nous devons d’abord dire à R comment se connecter au serveur. ACHILLES utilise le package <a href="https://ohdsi.github.io/DatabaseConnector/">DatabaseConnector</a>, qui fournit une fonction appelée <code>createConnectionDetails</code>. Tapez <code>?createConnectionDetails</code> pour les paramètres spécifiques requis pour les différents systèmes de gestion de bases de données (SGDB). Par exemple, on peut se connecter à une base de données PostgreSQL en utilisant ce code :</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="DataQuality.html#cb135-1" tabindex="-1"></a><span class="fu">library</span>(Achilles)</span>
+<span id="cb135-2"><a href="DataQuality.html#cb135-2" tabindex="-1"></a>connDetails <span class="ot">&lt;-</span> <span class="fu">createConnectionDetails</span>(<span class="at">dbms =</span> <span class="st">&quot;postgresql&quot;</span>,</span>
+<span id="cb135-3"><a href="DataQuality.html#cb135-3" tabindex="-1"></a>                                       <span class="at">server =</span> <span class="st">&quot;localhost/ohdsi&quot;</span>,</span>
+<span id="cb135-4"><a href="DataQuality.html#cb135-4" tabindex="-1"></a>                                       <span class="at">user =</span> <span class="st">&quot;joe&quot;</span>,</span>
+<span id="cb135-5"><a href="DataQuality.html#cb135-5" tabindex="-1"></a>                                       <span class="at">password =</span> <span class="st">&quot;supersecret&quot;</span>)</span>
+<span id="cb135-6"><a href="DataQuality.html#cb135-6" tabindex="-1"></a></span>
+<span id="cb135-7"><a href="DataQuality.html#cb135-7" tabindex="-1"></a>cdmDbSchema <span class="ot">&lt;-</span> <span class="st">&quot;my_cdm_data&quot;</span></span>
+<span id="cb135-8"><a href="DataQuality.html#cb135-8" tabindex="-1"></a>cdmVersion <span class="ot">&lt;-</span> <span class="st">&quot;5.3.0&quot;</span></span></code></pre></div>
+<p>Les deux dernières lignes définissent la variable <code>cdmDbSchema</code>, ainsi que la version CDM. Nous utiliserons ces informations plus tard pour dire à R où résident les données au format CDM, et quelle version de CDM est utilisée. Notez que pour Microsoft SQL Server, les schémas de base de données doivent spécifier à la fois la base de données et le schéma, donc par exemple <code>cdmDbSchema &lt;- "my_cdm_data.dbo"</code>.</p>
+<p>Ensuite, nous exécutons ACHILLES:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="DataQuality.html#cb136-1" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">achilles</span>(connectionDetails,</span>
+<span id="cb136-2"><a href="DataQuality.html#cb136-2" tabindex="-1"></a>                   <span class="at">cdmDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb136-3"><a href="DataQuality.html#cb136-3" tabindex="-1"></a>                   <span class="at">resultsDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb136-4"><a href="DataQuality.html#cb136-4" tabindex="-1"></a>                   <span class="at">sourceName =</span> <span class="st">&quot;My database&quot;</span>,</span>
+<span id="cb136-5"><a href="DataQuality.html#cb136-5" tabindex="-1"></a>                   <span class="at">cdmVersion =</span> cdmVersion)</span></code></pre></div>
+<p>Cette fonction créera plusieurs tables dans le <code>resultsDatabaseSchema</code>, que nous avons ici défini sur le même schéma de base de données que les données CDM.</p>
+<p>Nous pouvons visualiser la caractérisation de la base de données ACHILLES. Cela peut être fait en pointant ATLAS vers les bases de données de résultats ACHILLES, ou en exportant les résultats ACHILLES vers un ensemble de fichiers JSON :</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="DataQuality.html#cb137-1" tabindex="-1"></a><span class="fu">exportToJson</span>(connectionDetails,</span>
+<span id="cb137-2"><a href="DataQuality.html#cb137-2" tabindex="-1"></a>             <span class="at">cdmDatabaseSchema =</span> cdmDatabaseSchema,</span>
+<span id="cb137-3"><a href="DataQuality.html#cb137-3" tabindex="-1"></a>             <span class="at">resultsDatabaseSchema =</span> cdmDatabaseSchema,</span>
+<span id="cb137-4"><a href="DataQuality.html#cb137-4" tabindex="-1"></a>             <span class="at">outputPath =</span> <span class="st">&quot;achillesOut&quot;</span>)</span></code></pre></div>
+<p>Les fichiers JSON seront écrits dans le sous-dossier achillesOut, et peuvent être utilisés avec l’application web AchillesWeb pour explorer les résultats. Par exemple, la Figure <a href="DataQuality.html#fig:achillesDataDensity">15.4</a> montre le graphique de densité des données ACHILLES. Ce graphique montre que la majorité des données commence en 2005. Cependant, il semble aussi y avoir quelques enregistrements datant de 1961, ce qui est probablement une erreur dans les données.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:achillesDataDensity"></span>
+<img src="images/DataQuality/achillesDataDensity.png" alt="The data density plot in the ACHILLES web viewer." width="100%" />
+<p class="caption">
+Figure 15.4: The data density plot in the ACHILLES web viewer.
+</p>
+</div>
+<p>Un autre exemple est montré dans la Figure <a href="DataQuality.html#fig:achillesCodeChange">15.5</a>, révélant un changement soudain dans la prévalence d’un code de diagnostic de diabète. Ce changement coïncide avec des modifications des règles de remboursement dans ce pays spécifique, entraînant plus de diagnostics mais probablement pas une véritable augmentation de la prévalence dans la population sous-jacente.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:achillesCodeChange"></span>
+<img src="images/DataQuality/achillesCodeChange.png" alt="Monthly rate of diabetes coded in the ACHILLES web viewer." width="100%" />
+<p class="caption">
+Figure 15.5: Monthly rate of diabetes coded in the ACHILLES web viewer.
+</p>
+</div>
+</div>
+<div id="dqdInPractice" class="section level2 hasAnchor" number="15.4">
+<h2><span class="header-section-number">15.4</span> Tableau de Bord de Qualité des Données en Pratique<a href="DataQuality.html#dqdInPractice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ici, nous allons démontrer comment exécuter le Tableau de Bord de Qualité des Données sur une base de données au format CDM. Nous le faisons en exécutant un grand ensemble de vérifications sur la connexion CDM décrite dans la Section <a href="DataQuality.html#achillesInPractice">15.3</a>. Pour l’instant, le DQD ne prend en charge que la version CDM v5.3.1, donc avant de vous connecter, assurez-vous que votre base de données est dans la bonne version. Comme avec ACHILLES, nous devons créer la variable <code>cdmDbSchema</code> pour indiquer à R où chercher les données.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="DataQuality.html#cb138-1" tabindex="-1"></a>cdmDbSchema <span class="ot">&lt;-</span> <span class="st">&quot;my_cdm_data.dbo&quot;</span></span></code></pre></div>
+<p>Ensuite, nous exécutons le Tableau de Bord…</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="DataQuality.html#cb139-1" tabindex="-1"></a>DataQualityDashboard<span class="sc">::</span><span class="fu">executeDqChecks</span>(<span class="at">connectionDetails =</span> connectionDetails,</span>
+<span id="cb139-2"><a href="DataQuality.html#cb139-2" tabindex="-1"></a>                                      <span class="at">cdmDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb139-3"><a href="DataQuality.html#cb139-3" tabindex="-1"></a>                                      <span class="at">resultsDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb139-4"><a href="DataQuality.html#cb139-4" tabindex="-1"></a>                                      <span class="at">cdmSourceName =</span> <span class="st">&quot;My database&quot;</span>,</span>
+<span id="cb139-5"><a href="DataQuality.html#cb139-5" tabindex="-1"></a>                                      <span class="at">outputFolder =</span> <span class="st">&quot;My output&quot;</span>)</span></code></pre></div>
+<p>La fonction ci-dessus exécutera toutes les vérifications de qualité des données disponibles sur le schéma spécifié. Elle écrira ensuite une table dans le <code>resultsDatabaseSchema</code> que nous avons ici défini comme le même schéma que le CDM. Cette table inclura toutes les informations sur chaque vérification effectuée, y compris la table CDM, le champ CDM, le nom de la vérification, la description de la vérification, la catégorie et la sous-catégorie Kahn, le nombre de lignes violées, le niveau de seuil, et si la vérification passe ou échoue, entre autres. En plus d’une table, cette fonction écrit également un fichier JSON à l’emplacement spécifié comme <code>outputFolder</code>. En utilisant ce fichier JSON, nous pouvons lancer un visualiseur web pour inspecter les résultats.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="DataQuality.html#cb140-1" tabindex="-1"></a><span class="fu">viewDqDashboard</span>(jsonPath)</span></code></pre></div>
+<p>La variable <code>jsonPath</code> doit être le chemin vers le fichier JSON contenant les résultats du Tableau de Bord, situé dans le <code>outputFolder</code> spécifié lors de l’appel de la fonction <code>executeDqChecks</code> ci-dessus.</p>
+<p>Lorsque vous ouvrez pour la première fois le Tableau de Bord, vous serez présenté(e) avec la table d’aperçu, comme illustré dans la Figure <a href="DataQuality.html#fig:dqdOverview">15.6</a>. Cela vous montrera le nombre total de vérifications effectuées dans chaque catégorie Kahn, réparties par contexte, le nombre et le pourcentage de succès dans chacune, ainsi que le taux global de réussite.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dqdOverview"></span>
+<img src="images/DataQuality/dqdOverview.png" alt="Overview of Data Quality Checks in the Data Quality Dashboard." width="100%" />
+<p class="caption">
+Figure 15.6: Overview of Data Quality Checks in the Data Quality Dashboard.
+</p>
+</div>
+<p>Cliquer sur <em>Results</em> dans le menu de gauche vous amènera aux résultats détaillés de chaque vérification effectuée (Figure <a href="DataQuality.html#fig:dqdResults">15.7</a>). Dans cet exemple, la table montre une vérification effectuée pour déterminer la complétude des tables individuelles du CDM, ou, le nombre et le pourcentage de personnes dans le CDM avec au moins un enregistrement dans la table spécifiée. Dans ce cas, les cinq tables listées sont toutes vides, ce que le Tableau de Bord considère comme un échec. Cliquer sur l’icône <img src="images/DataQuality/plusIcon.png" /> ouvrira une fenêtre affichant la requête exacte qui a été exécutée sur vos données pour produire les résultats listés. Cela permet d’identifier facilement les lignes considérées comme des échecs par le Tableau de Bord.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dqdResults"></span>
+<img src="images/DataQuality/dqdResults.png" alt="Drilldown into Data Quality Checks in the Data Quality Dashboard." width="100%" />
+<p class="caption">
+Figure 15.7: Drilldown into Data Quality Checks in the Data Quality Dashboard.
+</p>
+</div>
+</div>
+<div id="vérifications-spécifiques-à-létude-en-pratique" class="section level2 hasAnchor" number="15.5">
+<h2><span class="header-section-number">15.5</span> Vérifications Spécifiques à l’Étude en Pratique<a href="DataQuality.html#vérifications-spécifiques-à-létude-en-pratique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ensuite, nous exécuterons plusieurs vérifications spécifiquement pour la définition de cohorte angioedème fournie dans l’Appendice <a href="CohortDefinitions.html#Angioedema">22.4</a>. Nous supposerons que les détails de connexion ont été définis comme décrit dans la Section <a href="DataQuality.html#achillesInPractice">15.3</a>, et que le JSON et le SQL de la définition de la cohorte ont été enregistrés dans les fichiers “cohort.json” et “cohort.sql”, respectivement. Les fichiers JSON et SQL peuvent être obtenus à partir de l’onglet Exporter dans la fonction de définition de cohorte d’ATLAS.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="DataQuality.html#cb141-1" tabindex="-1"></a><span class="fu">library</span>(MethodEvaluation)</span>
+<span id="cb141-2"><a href="DataQuality.html#cb141-2" tabindex="-1"></a>json <span class="ot">&lt;-</span> <span class="fu">readChar</span>(<span class="st">&quot;cohort.json&quot;</span>, <span class="fu">file.info</span>(<span class="st">&quot;cohort.json&quot;</span>)<span class="sc">$</span>size)</span>
+<span id="cb141-3"><a href="DataQuality.html#cb141-3" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">readChar</span>(<span class="st">&quot;cohort.sql&quot;</span>, <span class="fu">file.info</span>(<span class="st">&quot;cohort.sql&quot;</span>)<span class="sc">$</span>size)</span>
+<span id="cb141-4"><a href="DataQuality.html#cb141-4" tabindex="-1"></a><span class="fu">checkCohortSourceCodes</span>(connectionDetails,</span>
+<span id="cb141-5"><a href="DataQuality.html#cb141-5" tabindex="-1"></a>                       <span class="at">cdmDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb141-6"><a href="DataQuality.html#cb141-6" tabindex="-1"></a>                       <span class="at">cohortJson =</span> json,</span>
+<span id="cb141-7"><a href="DataQuality.html#cb141-7" tabindex="-1"></a>                       <span class="at">cohortSql =</span> sql,</span>
+<span id="cb141-8"><a href="DataQuality.html#cb141-8" tabindex="-1"></a>                       <span class="at">outputFile =</span> <span class="st">&quot;output.html&quot;</span>)</span></code></pre></div>
+<p>Nous pouvons ouvrir le fichier de sortie dans un navigateur web comme illustré dans la Figure <a href="DataQuality.html#fig:sourceCodesAngioedema">15.8</a>. Ici, nous voyons que la définition de la cohorte angioedème a deux ensembles de concepts : “Visite en hospitalisation ou aux urgences” et “Angioedème”. Dans cet exemple de base de données, les visites ont été trouvées par des codes sources spécifiques à la base de données “ER” et “IP”, qui ne sont pas dans le Vocabulaire, bien qu’elles aient été mappées lors de l’ETL à des concepts standard. Nous voyons également que l’angioedème est détecté par un code ICD-9 et deux codes ICD-10. Nous voyons clairement le point dans le temps de la transition entre les deux systèmes de codage lorsque nous regardons les mini-graphes pour les codes individuels, mais pour l’ensemble de concepts dans son ensemble, il n’y a pas de discontinuité à ce moment-là.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sourceCodesAngioedema"></span>
+<img src="images/DataQuality/sourceCodesAngioedema.png" alt="Source codes used in the angioedema cohort definition." width="100%" />
+<p class="caption">
+Figure 15.8: Source codes used in the angioedema cohort definition.
+</p>
+</div>
+<p>Ensuite, nous pouvons rechercher des codes sources orphelins, ce qui sont des codes sources qui ne sont pas mappés à des codes de concepts standard. Ici, nous recherchons le Concept Standard “Angioedème”, puis nous recherchons tous les codes et concepts qui ont “Angioedème” ou l’un des synonymes que nous fournissons dans leur nom :</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="DataQuality.html#cb142-1" tabindex="-1"></a>orphans <span class="ot">&lt;-</span> <span class="fu">findOrphanSourceCodes</span>(connectionDetails,</span>
+<span id="cb142-2"><a href="DataQuality.html#cb142-2" tabindex="-1"></a>                                 <span class="at">cdmDatabaseSchema =</span> cdmDbSchema,</span>
+<span id="cb142-3"><a href="DataQuality.html#cb142-3" tabindex="-1"></a>                                 <span class="at">conceptName =</span> <span class="st">&quot;Angioedema&quot;</span>,</span>
+<span id="cb142-4"><a href="DataQuality.html#cb142-4" tabindex="-1"></a>                                 <span class="at">conceptSynonyms =</span> <span class="fu">c</span>(<span class="st">&quot;Angioneurotic edema&quot;</span>,</span>
+<span id="cb142-5"><a href="DataQuality.html#cb142-5" tabindex="-1"></a>                                                     <span class="st">&quot;Giant hives&quot;</span>,</span>
+<span id="cb142-6"><a href="DataQuality.html#cb142-6" tabindex="-1"></a>                                                     <span class="st">&quot;Giant urticaria&quot;</span>,</span>
+<span id="cb142-7"><a href="DataQuality.html#cb142-7" tabindex="-1"></a>                                                     <span class="st">&quot;Periodic edema&quot;</span>))</span>
+<span id="cb142-8"><a href="DataQuality.html#cb142-8" tabindex="-1"></a><span class="fu">View</span>(orphans)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="61%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">code</th>
+<th align="left">description</th>
+<th align="left">vocabularyId</th>
+<th align="right">overallCount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">T78.3XXS</td>
+<td align="left">Angioneurotic edema, sequela</td>
+<td align="left">ICD10CM</td>
+<td align="right">508</td>
+</tr>
+<tr class="even">
+<td align="left">10002425</td>
+<td align="left">Angioedemas</td>
+<td align="left">MedDRA</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">148774</td>
+<td align="left">Angioneurotic Edema of Larynx</td>
+<td align="left">CIEL</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">402383003</td>
+<td align="left">Idiopathic urticaria and/or angioedema</td>
+<td align="left">SNOMED</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">232437009</td>
+<td align="left">Angioneurotic edema of larynx</td>
+<td align="left">SNOMED</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">10002472</td>
+<td align="left">Angioneurotic edema, not elsewhere classified</td>
+<td align="left">MedDRA</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Le seul orphelin potentiel trouvé qui est effectivement utilisé dans les données est “Angioneurotic edema, sequela”, qui ne devrait pas être mappé à angioedème. Cette analyse n’a donc révélé aucun code manquant.</p>
+</div>
+<div id="résumé-13" class="section level2 hasAnchor" number="15.6">
+<h2><span class="header-section-number">15.6</span> Résumé<a href="DataQuality.html#résumé-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+<div class="rmdsummary">
+<ul>
+<li><p>La plupart des données de soins de santé observationnelles n’ont pas été collectées à des fins de recherche.</p></li>
+<li><p>Les contrôles de qualité des données sont une partie intégrante de la recherche. La qualité des données doit être évaluée pour déterminer si les données sont de qualité suffisante pour les besoins de la recherche.</p></li>
+<li><p>Nous devons évaluer la qualité des données à des fins de recherche en général, et de manière critique dans le contexte d’une étude spécifique.</p></li>
+<li><p>Certains aspects de la qualité des données peuvent être évalués automatiquement grâce à de grands ensembles de règles prédéfinies, par exemple celles du Tableau de Bord de Qualité des Données.</p></li>
+<li><p>D’autres outils existent pour évaluer la cartographie des codes pertinents pour une étude particulière.</p></li>
+</ul>
+</div>
+</div>
+<div id="exercices-9" class="section level2 hasAnchor" number="15.7">
+<h2><span class="header-section-number">15.7</span> Exercices<a href="DataQuality.html#exercices-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prérequis-8" class="section level4 unnumbered hasAnchor">
+<h4>Prérequis<a href="DataQuality.html#prérequis-8" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour ces exercices, nous supposons que R, R-Studio et Java ont été installés comme décrit dans la Section <a href="OhdsiAnalyticsTools.html#installR">8.4.5</a>. Sont également nécessaires les packages <a href="https://ohdsi.github.io/SqlRender/">SqlRender</a>, <a href="https://ohdsi.github.io/DatabaseConnector/">DatabaseConnector</a>, <a href="https://github.com/OHDSI/Achilles">ACHILLES</a>, et <a href="https://ohdsi.github.io/Eunomia/">Eunomia</a>, qui peuvent être installés en utilisant :</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="DataQuality.html#cb143-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;SqlRender&quot;</span>, <span class="st">&quot;DatabaseConnector&quot;</span>, <span class="st">&quot;remotes&quot;</span>))</span>
+<span id="cb143-2"><a href="DataQuality.html#cb143-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ohdsi/Achilles&quot;</span>)</span>
+<span id="cb143-3"><a href="DataQuality.html#cb143-3" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ohdsi/DataQualityDashboard&quot;</span>)</span>
+<span id="cb143-4"><a href="DataQuality.html#cb143-4" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ohdsi/Eunomia&quot;</span>, <span class="at">ref =</span> <span class="st">&quot;v1.0.0&quot;</span>)</span></code></pre></div>
+<p>Le package Eunomia fournit un ensemble de données simulé dans le CDM qui s’exécutera dans votre session R locale. Les détails de la connexion peuvent être obtenus à l’aide de :</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="DataQuality.html#cb144-1" tabindex="-1"></a>connectionDetails <span class="ot">&lt;-</span> Eunomia<span class="sc">::</span><span class="fu">getEunomiaConnectionDetails</span>()</span></code></pre></div>
+<p>Le schéma de base de données CDM est “main”.</p>
+<div class="exercise">
+<p><span id="exr:exerciseRunAchilles" class="exercise"><strong>Exercice 15.1  </strong></span>Exécutez ACHILLES sur la base de données Eunomia.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:exerciseRunDQD" class="exercise"><strong>Exercice 15.2  </strong></span>Exécutez le Tableau de Bord de Qualité des Données sur la base de données Eunomia.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:exerciseViewDQD" class="exercise"><strong>Exercice 15.3  </strong></span>Extrayez la liste des vérifications du DQD.</p>
+</div>
+<p>Les réponses suggérées se trouvent dans l’appendice <a href="SuggestedAnswers.html#DataQualityanswers">24.9</a>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-dasu_2003" class="csl-entry">
+Dasu, Tamraparni, and Theodore Johnson. 2003. <em>Exploratory Data Mining and Data Cleaning</em>. Vol. 479. John Wiley &amp; Sons.
+</div>
+<div id="ref-defalco_2013" class="csl-entry">
+Defalco, F. J., P. B. Ryan, and M. Soledad Cepeda. 2013. <span>“<span class="nocase"><span>A</span>pplying standardized drug terminologies to observational healthcare databases: a case study on opioid exposure</span>.”</span> <em>Health Serv Outcomes Res Methodol</em> 13 (1): 58–67.
+</div>
+<div id="ref-hripcsak_2018" class="csl-entry">
+Hripcsak, G., M. E. Levine, N. Shang, and P. B. Ryan. 2018. <span>“<span class="nocase"><span>E</span>ffect of vocabulary mapping for conditions on phenotype cohorts</span>.”</span> <em>J Am Med Inform Assoc</em> 25 (12): 1618–25.
+</div>
+<div id="ref-huser_multisite_2016" class="csl-entry">
+Huser, Vojtech, Frank J. DeFalco, Martijn Schuemie, Patrick B. Ryan, Ning Shang, Mark Velez, Rae Woong Park, et al. 2016. <span>“Multisite <span>Evaluation</span> of a <span>Data</span> <span>Quality</span> <span>Tool</span> for <span>Patient</span>-<span>Level</span> <span>Clinical</span> <span>Data</span> <span>Sets</span>.”</span> <em>EGEMS (Washington, DC)</em> 4 (1): 1239. <a href="https://doi.org/10.13063/2327-9214.1239">https://doi.org/10.13063/2327-9214.1239</a>.
+</div>
+<div id="ref-huser_methods_2018" class="csl-entry">
+Huser, Vojtech, Michael G. Kahn, Jeffrey S. Brown, and Ramkiran Gouripeddi. 2018. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/29218922">Methods for Examining Data Quality in Healthcare Integrated Data Repositories</a>.”</span> <em>Pacific Symposium on Biocomputing. Pacific Symposium on Biocomputing</em> 23: 628–33.
+</div>
+<div id="ref-kahn_harmonized_2016" class="csl-entry">
+Kahn, Michael G., Tiffany J. Callahan, Juliana Barnard, Alan E. Bauck, Jeff Brown, Bruce N. Davidson, Hossein Estiri, et al. 2016. <span>“A <span>Harmonized</span> <span>Data</span> <span>Quality</span> <span>Assessment</span> <span>Terminology</span> and <span>Framework</span> for the <span>Secondary</span> <span>Use</span> of <span>Electronic</span> <span>Health</span> <span>Record</span> <span>Data</span>.”</span> <em>EGEMS (Washington, DC)</em> 4 (1): 1244. <a href="https://doi.org/10.13063/2327-9214.1244">https://doi.org/10.13063/2327-9214.1244</a>.
+</div>
+<div id="ref-vanDerLei_1991" class="csl-entry">
+Lei, Johan van der. 1991. <span>“Use and Abuse of Computer-Stored Medical Records.”</span> <em>Methods of Information in Medicine</em> 30 (02): 79–80.
+</div>
+<div id="ref-makadia_2014" class="csl-entry">
+Makadia, R., and P. B. Ryan. 2014. <span>“<span class="nocase"><span>T</span>ransforming the <span>P</span>remier <span>P</span>erspective <span>H</span>ospital <span>D</span>atabase into the <span>O</span>bservational <span>M</span>edical <span>O</span>utcomes <span>P</span>artnership (<span>O</span><span>M</span><span>O</span><span>P</span>) <span>C</span>ommon <span>D</span>ata <span>M</span>odel</span>.”</span> <em>EGEMS (Wash DC)</em> 2 (1): 1110.
+</div>
+<div id="ref-matcho_2014" class="csl-entry">
+Matcho, A., P. Ryan, D. Fife, and C. Reich. 2014. <span>“<span class="nocase"><span>F</span>idelity assessment of a clinical practice research datalink conversion to the <span>O</span><span>M</span><span>O</span><span>P</span> common data model</span>.”</span> <em>Drug Saf</em> 37 (11): 945–59.
+</div>
+<div id="ref-roebuck_2012" class="csl-entry">
+Roebuck, Kevin. 2012. <em>Data Quality: High-Impact Strategies-What You Need to Know: Definitions, Adoptions, Impact, Benefits, Maturity, Vendors</em>. Emereo Publishing.
+</div>
+<div id="ref-voss_2015" class="csl-entry">
+Voss, E. A., Q. Ma, and P. B. Ryan. 2015. <span>“<span class="nocase"><span>T</span>he impact of standardizing the definition of visits on the consistency of multi-database observational health research</span>.”</span> <em>BMC Med Res Methodol</em> 15 (March): 13.
+</div>
+<div id="ref-voss_2015b" class="csl-entry">
+Voss, E. A., R. Makadia, A. Matcho, Q. Ma, C. Knoll, M. Schuemie, F. J. DeFalco, A. Londhe, V. Zhu, and P. B. Ryan. 2015. <span>“<span class="nocase"><span>F</span>easibility and utility of applications of the common data model to multiple, disparate observational health databases</span>.”</span> <em>J Am Med Inform Assoc</em> 22 (3): 553–64.
+</div>
+<div id="ref-weiskopf_2013" class="csl-entry">
+Weiskopf, Nicole Gray, and Chunhua Weng. 2013. <span>“Methods and Dimensions of Electronic Health Record Data Quality Assessment: Enabling Reuse for Clinical Research.”</span> <em>Journal of the American Medical Informatics Association: JAMIA</em> 20 (1): 144–51. <a href="https://doi.org/10.1136/amiajnl-2011-000681">https://doi.org/10.1136/amiajnl-2011-000681</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="57">
+<li id="fn57"><p><a href="https://github.com/OHDSI/Vocabulary-v5.0/issues" class="uri">https://github.com/OHDSI/Vocabulary-v5.0/issues</a><a href="DataQuality.html#fnref57" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="EvidenceQuality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ClinicalValidity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OHDSI/TheBookOfOhdsi/edit/master/DataQuality.Rmd",
+"text": "Modifier"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TheBookOfOhdsi.pdf", "TheBookOfOhdsi.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

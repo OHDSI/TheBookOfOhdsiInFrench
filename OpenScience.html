@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Science ouverte | Le Livre d’OHDSI</title>
+  <meta name="description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Science ouverte | Le Livre d’OHDSI" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+  <meta property="og:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="github-repo" content="OHDSI/TheBookOfOhdsi" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Science ouverte | Le Livre d’OHDSI" />
+  
+  <meta name="twitter:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="twitter:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+
+<meta name="author" content="Observational Health Data Sciences and Informatics" />
+
+
+<meta name="date" content="2024-09-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="WhereToBegin.html"/>
+<link rel="next" href="CommonDataModel.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104086677-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104086677-2');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">The Book of OHDSI</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objectifs-de-ce-livre"><i class="fa fa-check"></i>Objectifs de ce Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-du-livre"><i class="fa fa-check"></i>Structure du Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-des-logiciels"><i class="fa fa-check"></i>Versions des Logiciels</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#développement-du-livre"><i class="fa fa-check"></i>Développement du Livre</a></li>
+</ul></li>
+<li class="part"><span><b>I La Communauté OHDSI</b></span></li>
+<li class="chapter" data-level="1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html"><i class="fa fa-check"></i><b>1</b> La Communauté OHDSI</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#le-parcours-des-données-à-lévidence"><i class="fa fa-check"></i><b>1.1</b> Le Parcours des Données à l’Évidence</a></li>
+<li class="chapter" data-level="1.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#observational-medical-outcomes-partnership"><i class="fa fa-check"></i><b>1.2</b> Observational Medical Outcomes Partnership</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-mission"><i class="fa fa-check"></i><b>1.2.1</b> Notre Mission</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-vision"><i class="fa fa-check"></i><b>1.2.2</b> Notre Vision</a></li>
+<li class="chapter" data-level="1.2.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#nos-objectifs"><i class="fa fa-check"></i><b>1.2.3</b> Nos Objectifs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#les-progrès-de-lohdsi"><i class="fa fa-check"></i><b>1.3</b> Les Progrès de l’OHDSI</a></li>
+<li class="chapter" data-level="1.4" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#collaborer-avec-ohdsi"><i class="fa fa-check"></i><b>1.4</b> Collaborer avec OHDSI</a></li>
+<li class="chapter" data-level="1.5" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#résumé"><i class="fa fa-check"></i><b>1.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="WhereToBegin.html"><a href="WhereToBegin.html"><i class="fa fa-check"></i><b>2</b> Par où commencer</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#forums-ohdsi"><i class="fa fa-check"></i><b>2.0.1</b> Forums OHDSI</a></li>
+<li class="chapter" data-level="2.0.2" data-path="WhereToBegin.html"><a href="WhereToBegin.html#événements-ohdsi"><i class="fa fa-check"></i><b>2.0.2</b> Événements OHDSI</a></li>
+<li class="chapter" data-level="2.0.3" data-path="WhereToBegin.html"><a href="WhereToBegin.html#appels-de-la-communauté-ohdsi"><i class="fa fa-check"></i><b>2.0.3</b> Appels de la communauté OHDSI</a></li>
+<li class="chapter" data-level="2.0.4" data-path="WhereToBegin.html"><a href="WhereToBegin.html#groupes-de-travail-ohdsi"><i class="fa fa-check"></i><b>2.0.4</b> Groupes de travail OHDSI</a></li>
+<li class="chapter" data-level="2.0.5" data-path="WhereToBegin.html"><a href="WhereToBegin.html#chapitres-régionaux-ohdsi"><i class="fa fa-check"></i><b>2.0.5</b> Chapitres régionaux OHDSI</a></li>
+<li class="chapter" data-level="2.0.6" data-path="WhereToBegin.html"><a href="WhereToBegin.html#réseau-de-recherche-ohdsi"><i class="fa fa-check"></i><b>2.0.6</b> Réseau de recherche OHDSI</a></li>
+<li class="chapter" data-level="2.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#résumé-1"><i class="fa fa-check"></i><b>2.1</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="OpenScience.html"><a href="OpenScience.html"><i class="fa fa-check"></i><b>3</b> Science ouverte</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="OpenScience.html"><a href="OpenScience.html#science-ouverte"><i class="fa fa-check"></i><b>3.1</b> Science ouverte</a></li>
+<li class="chapter" data-level="3.2" data-path="OpenScience.html"><a href="OpenScience.html#la-science-ouverte-en-action-le-study-a-thon"><i class="fa fa-check"></i><b>3.2</b> La Science Ouverte en Action : le Study-a-Thon</a></li>
+<li class="chapter" data-level="3.3" data-path="OpenScience.html"><a href="OpenScience.html#normes-ouvertes"><i class="fa fa-check"></i><b>3.3</b> Normes Ouvertes</a></li>
+<li class="chapter" data-level="3.4" data-path="OpenScience.html"><a href="OpenScience.html#open-data"><i class="fa fa-check"></i><b>3.4</b> Open Data</a></li>
+<li class="chapter" data-level="3.5" data-path="OpenScience.html"><a href="OpenScience.html#open-discourse"><i class="fa fa-check"></i><b>3.5</b> Open Discourse</a></li>
+<li class="chapter" data-level="3.6" data-path="OpenScience.html"><a href="OpenScience.html#ohdsi-et-les-principes-directeurs-fair"><i class="fa fa-check"></i><b>3.6</b> OHDSI et les Principes Directeurs FAIR</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="OpenScience.html"><a href="OpenScience.html#introduction"><i class="fa fa-check"></i><b>3.6.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.6.2" data-path="OpenScience.html"><a href="OpenScience.html#findability"><i class="fa fa-check"></i><b>3.6.2</b> Findability</a></li>
+<li class="chapter" data-level="3.6.3" data-path="OpenScience.html"><a href="OpenScience.html#accessibility"><i class="fa fa-check"></i><b>3.6.3</b> Accessibility</a></li>
+<li class="chapter" data-level="3.6.4" data-path="OpenScience.html"><a href="OpenScience.html#interoperability"><i class="fa fa-check"></i><b>3.6.4</b> Interoperability</a></li>
+<li class="chapter" data-level="3.6.5" data-path="OpenScience.html"><a href="OpenScience.html#reusability"><i class="fa fa-check"></i><b>3.6.5</b> Reusability</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Représentation Uniforme des Données</b></span></li>
+<li class="chapter" data-level="4" data-path="CommonDataModel.html"><a href="CommonDataModel.html"><i class="fa fa-check"></i><b>4</b> Le Modèle de Données Commun</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#principes-de-conception"><i class="fa fa-check"></i><b>4.1</b> Principes de Conception</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#model-Conv"><i class="fa fa-check"></i><b>4.1.1</b> Conventions Générales du Modèle</a></li>
+<li class="chapter" data-level="4.1.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-schémas"><i class="fa fa-check"></i><b>4.1.2</b> Conventions Générales des Schémas</a></li>
+<li class="chapter" data-level="4.1.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-tables-de-données"><i class="fa fa-check"></i><b>4.1.3</b> Conventions Générales des Tables de Données</a></li>
+<li class="chapter" data-level="4.1.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#domains"><i class="fa fa-check"></i><b>4.1.4</b> Conventions Générales des Domaines</a></li>
+<li class="chapter" data-level="4.1.5" data-path="CommonDataModel.html"><a href="CommonDataModel.html#représentation-du-contenu-par-des-concepts"><i class="fa fa-check"></i><b>4.1.5</b> Représentation du Contenu par des Concepts</a></li>
+<li class="chapter" data-level="4.1.6" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-de-nomination-des-champs"><i class="fa fa-check"></i><b>4.1.6</b> Conventions Générales de Nomination des Champs</a></li>
+<li class="chapter" data-level="4.1.7" data-path="CommonDataModel.html"><a href="CommonDataModel.html#concepts-Sources"><i class="fa fa-check"></i><b>4.1.7</b> Différence Entre Concepts et Valeurs Sources</a></li>
+<li class="chapter" data-level="4.1.8" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exemple-en-cours-endométriose"><i class="fa fa-check"></i><b>4.1.8</b> Exemple en cours : Endométriose</a></li>
+<li class="chapter" data-level="4.1.9" data-path="CommonDataModel.html"><a href="CommonDataModel.html#person"><i class="fa fa-check"></i><b>4.1.9</b> Tableau PERSON</a></li>
+<li class="chapter" data-level="4.1.10" data-path="CommonDataModel.html"><a href="CommonDataModel.html#observationPeriod"><i class="fa fa-check"></i><b>4.1.10</b> Tableau OBSERVATION_PERIOD</a></li>
+<li class="chapter" data-level="4.1.11" data-path="CommonDataModel.html"><a href="CommonDataModel.html#visitOccurrence"><i class="fa fa-check"></i><b>4.1.11</b> VISIT_OCCURRENCE</a></li>
+<li class="chapter" data-level="4.1.12" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conditionOccurrence"><i class="fa fa-check"></i><b>4.1.12</b> CONDITION_OCCURRENCE</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#informations-supplémentaires"><i class="fa fa-check"></i><b>4.2</b> Informations supplémentaires</a></li>
+<li class="chapter" data-level="4.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#résumé-2"><i class="fa fa-check"></i><b>4.3</b> Résumé</a></li>
+<li class="chapter" data-level="4.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exercices"><i class="fa fa-check"></i><b>4.4</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html"><i class="fa fa-check"></i><b>5</b> Vocabulaire normalisé</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#pourquoi-les-vocabulaires-et-pourquoi-les-normaliser"><i class="fa fa-check"></i><b>5.1</b> Pourquoi les vocabulaires, et pourquoi les normaliser</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#construire-les-vocabulaire-normalisé"><i class="fa fa-check"></i><b>5.1.1</b> Construire les Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#accessVocabularies"><i class="fa fa-check"></i><b>5.1.2</b> Accès aux Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#source-des-vocabulaires-adopter-ou-construire"><i class="fa fa-check"></i><b>5.1.3</b> Source des vocabulaires : Adopter ou Construire</a></li>
+<li class="chapter" data-level="5.1.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#identifiants-de-concepts"><i class="fa fa-check"></i><b>5.1.4</b> Identifiants de concepts</a></li>
+<li class="chapter" data-level="5.1.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#noms-de-concepts"><i class="fa fa-check"></i><b>5.1.5</b> Noms de concepts</a></li>
+<li class="chapter" data-level="5.1.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptDomains"><i class="fa fa-check"></i><b>5.1.6</b> Domaines</a></li>
+<li class="chapter" data-level="5.1.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#vocabulaires"><i class="fa fa-check"></i><b>5.1.7</b> Vocabulaires</a></li>
+<li class="chapter" data-level="5.1.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#classes-de-concepts"><i class="fa fa-check"></i><b>5.1.8</b> Classes de concepts</a></li>
+<li class="chapter" data-level="5.1.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#standardConcepts"><i class="fa fa-check"></i><b>5.1.9</b> Concepts standards</a></li>
+<li class="chapter" data-level="5.1.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-non-standards"><i class="fa fa-check"></i><b>5.1.10</b> Concepts non standards</a></li>
+<li class="chapter" data-level="5.1.11" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-de-classification"><i class="fa fa-check"></i><b>5.1.11</b> Concepts de classification</a></li>
+<li class="chapter" data-level="5.1.12" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#codes-de-concepts"><i class="fa fa-check"></i><b>5.1.12</b> Codes de concepts</a></li>
+<li class="chapter" data-level="5.1.13" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptLifeCycle"><i class="fa fa-check"></i><b>5.1.13</b> Cycle de vie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations"><i class="fa fa-check"></i><b>5.2</b> Relations</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptMapping"><i class="fa fa-check"></i><b>5.2.1</b> Relations de Mapping</a></li>
+<li class="chapter" data-level="5.2.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-hiérarchiques"><i class="fa fa-check"></i><b>5.2.2</b> Relations Hiérarchiques</a></li>
+<li class="chapter" data-level="5.2.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-de-différents-vocabulaires"><i class="fa fa-check"></i><b>5.2.3</b> Relations Entre Concepts de Différents Vocabulaires</a></li>
+<li class="chapter" data-level="5.2.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-du-même-vocabulaire"><i class="fa fa-check"></i><b>5.2.4</b> Relations Entre Concepts du Même Vocabulaire</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptAncestor"><i class="fa fa-check"></i><b>5.3</b> Hiérarchie</a></li>
+<li class="chapter" data-level="5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#tables-de-référence-interne"><i class="fa fa-check"></i><b>5.4</b> Tables de Référence Interne</a></li>
+<li class="chapter" data-level="5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#specialSituations"><i class="fa fa-check"></i><b>5.5</b> Situations Spéciales</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#genre"><i class="fa fa-check"></i><b>5.5.1</b> Genre</a></li>
+<li class="chapter" data-level="5.5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#race-et-ethnicité"><i class="fa fa-check"></i><b>5.5.2</b> Race et Ethnicité</a></li>
+<li class="chapter" data-level="5.5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#schémas-de-codage-diagnostique-et-conditions-omop"><i class="fa fa-check"></i><b>5.5.3</b> Schémas de Codage Diagnostique et Conditions OMOP</a></li>
+<li class="chapter" data-level="5.5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#systèmes-de-codage-de-procédures"><i class="fa fa-check"></i><b>5.5.4</b> Systèmes de Codage de Procédures</a></li>
+<li class="chapter" data-level="5.5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#dispositifs"><i class="fa fa-check"></i><b>5.5.5</b> Dispositifs</a></li>
+<li class="chapter" data-level="5.5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#visites-et-services"><i class="fa fa-check"></i><b>5.5.6</b> Visites et Services</a></li>
+<li class="chapter" data-level="5.5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#fournisseurs-et-spécialités"><i class="fa fa-check"></i><b>5.5.7</b> Fournisseurs et Spécialités</a></li>
+<li class="chapter" data-level="5.5.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#domaines-thérapeutiques-aux-besoins-spéciaux"><i class="fa fa-check"></i><b>5.5.8</b> Domaines Thérapeutiques aux Besoins Spéciaux</a></li>
+<li class="chapter" data-level="5.5.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#rxNormExtension"><i class="fa fa-check"></i><b>5.5.9</b> Concepts Standards dans le Domaine des Médicaments</a></li>
+<li class="chapter" data-level="5.5.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#variantes-de-null"><i class="fa fa-check"></i><b>5.5.10</b> Variantes de NULL</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#résumé-3"><i class="fa fa-check"></i><b>5.6</b> Résumé</a></li>
+<li class="chapter" data-level="5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#exercices-1"><i class="fa fa-check"></i><b>5.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html"><i class="fa fa-check"></i><b>6</b> Extraction, Transformation et Chargement</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#white-rabbit"><i class="fa fa-check"></i><b>6.1.1</b> White Rabbit</a></li>
+<li class="chapter" data-level="6.1.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#rabbit-in-a-hat"><i class="fa fa-check"></i><b>6.1.2</b> Rabbit-In-a-Hat</a></li>
+<li class="chapter" data-level="6.1.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#usagi"><i class="fa fa-check"></i><b>6.1.3</b> Usagi</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#étape-4-contrôle-de-qualité"><i class="fa fa-check"></i><b>6.2</b> Étape 4 : Contrôle de Qualité</a></li>
+<li class="chapter" data-level="6.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#conventions-etl-et-themis"><i class="fa fa-check"></i><b>6.3</b> Conventions ETL et THEMIS</a></li>
+<li class="chapter" data-level="6.4" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#CDMandETLMaintenance"><i class="fa fa-check"></i><b>6.4</b> Maintenance du CDM et de l’ETL</a></li>
+<li class="chapter" data-level="6.5" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#réflexions-finales-sur-letl"><i class="fa fa-check"></i><b>6.5</b> Réflexions finales sur l’ETL</a></li>
+<li class="chapter" data-level="6.6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#résumé-4"><i class="fa fa-check"></i><b>6.6</b> Résumé</a></li>
+<li class="chapter" data-level="6.7" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#exercices-2"><i class="fa fa-check"></i><b>6.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>III Analyse des Données</b></span></li>
+<li class="chapter" data-level="7" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html"><i class="fa fa-check"></i><b>7</b> Cas d’utilisation de l’analyse des données</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#caractérisation"><i class="fa fa-check"></i><b>7.1</b> Caractérisation</a></li>
+<li class="chapter" data-level="7.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#estimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.2</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.3</b> Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exemples-de-cas-dutilisation-dans-lhypertension"><i class="fa fa-check"></i><b>7.4</b> Exemples De Cas D’utilisation Dans L’Hypertension</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#questions-de-caractérisation"><i class="fa fa-check"></i><b>7.4.1</b> Questions de Caractérisation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-destimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.4.2</b> Question D’estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.4.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.4.3</b> Question De Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-erronées"><i class="fa fa-check"></i><b>7.4.4</b> Données Erronées</a></li>
+<li class="chapter" data-level="7.4.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-manquantes"><i class="fa fa-check"></i><b>7.4.5</b> Données Manquantes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#résumé-5"><i class="fa fa-check"></i><b>7.5</b> Résumé</a></li>
+<li class="chapter" data-level="7.6" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exercices-3"><i class="fa fa-check"></i><b>7.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html"><i class="fa fa-check"></i><b>8</b> Outils d’analyse d’OHDSI</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#analysisImplementation"><i class="fa fa-check"></i><b>8.1</b> Implémentation de l’analyse</a></li>
+<li class="chapter" data-level="8.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-danalyse"><i class="fa fa-check"></i><b>8.2</b> Stratégies d’analyse</a></li>
+<li class="chapter" data-level="8.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#atlas"><i class="fa fa-check"></i><b>8.3</b> ATLAS</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#sécurité"><i class="fa fa-check"></i><b>8.3.1</b> Sécurité</a></li>
+<li class="chapter" data-level="8.3.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation"><i class="fa fa-check"></i><b>8.3.2</b> Documentation</a></li>
+<li class="chapter" data-level="8.3.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#comment-installer"><i class="fa fa-check"></i><b>8.3.3</b> Comment installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>8.4</b> Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#support-pour-les-analyses-à-grande-échelle"><i class="fa fa-check"></i><b>8.4.1</b> Support pour les Analyses à Grande Échelle</a></li>
+<li class="chapter" data-level="8.4.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#BigDataSupport"><i class="fa fa-check"></i><b>8.4.2</b> Support pour les Big Data</a></li>
+<li class="chapter" data-level="8.4.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Documentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#exigences-systémiques"><i class="fa fa-check"></i><b>8.4.4</b> Exigences Systémiques</a></li>
+<li class="chapter" data-level="8.4.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#installR"><i class="fa fa-check"></i><b>8.4.5</b> Comment Installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-de-déploiement"><i class="fa fa-check"></i><b>8.5</b> Stratégies de déploiement</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#broadsea"><i class="fa fa-check"></i><b>8.5.1</b> Broadsea</a></li>
+<li class="chapter" data-level="8.5.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#amazon-aws"><i class="fa fa-check"></i><b>8.5.2</b> Amazon AWS</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#résumé-6"><i class="fa fa-check"></i><b>8.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="SqlAndR.html"><a href="SqlAndR.html"><i class="fa fa-check"></i><b>9</b> SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="SqlAndR.html"><a href="SqlAndR.html#SqlRender"><i class="fa fa-check"></i><b>9.1</b> SqlRender</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="SqlAndR.html"><a href="SqlAndR.html#paramétrage-sql"><i class="fa fa-check"></i><b>9.1.1</b> Paramétrage SQL</a></li>
+<li class="chapter" data-level="9.1.2" data-path="SqlAndR.html"><a href="SqlAndR.html#traduction-vers-dautres-dialectes-sql"><i class="fa fa-check"></i><b>9.1.2</b> Traduction vers d’Autres Dialectes SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="SqlAndR.html"><a href="SqlAndR.html#DatabaseConnector"><i class="fa fa-check"></i><b>9.2</b> DatabaseConnector</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="SqlAndR.html"><a href="SqlAndR.html#création-dune-connexion"><i class="fa fa-check"></i><b>9.2.1</b> Création d’une Connexion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger"><i class="fa fa-check"></i><b>9.2.2</b> Interroger</a></li>
+<li class="chapter" data-level="9.2.3" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-en-utilisant-les-objets-ffdf"><i class="fa fa-check"></i><b>9.2.3</b> Interroger en Utilisant les Objets Ffdf</a></li>
+<li class="chapter" data-level="9.2.4" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-différentes-plateformes-en-utilisant-le-même-sql"><i class="fa fa-check"></i><b>9.2.4</b> Interroger Différentes Plateformes en Utilisant le Même SQL</a></li>
+<li class="chapter" data-level="9.2.5" data-path="SqlAndR.html"><a href="SqlAndR.html#insérer-des-tables"><i class="fa fa-check"></i><b>9.2.5</b> Insérer des Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="SqlAndR.html"><a href="SqlAndR.html#QueryTheCdm"><i class="fa fa-check"></i><b>9.3</b> Interroger le CDM</a></li>
+<li class="chapter" data-level="9.4" data-path="SqlAndR.html"><a href="SqlAndR.html#utiliser-le-vocabulaire-lors-de-linterrogation"><i class="fa fa-check"></i><b>9.4</b> Utiliser le Vocabulaire Lors de l’Interrogation</a></li>
+<li class="chapter" data-level="9.5" data-path="SqlAndR.html"><a href="SqlAndR.html#querylibrary"><i class="fa fa-check"></i><b>9.5</b> QueryLibrary</a></li>
+<li class="chapter" data-level="9.6" data-path="SqlAndR.html"><a href="SqlAndR.html#concevoir-une-étude-simple"><i class="fa fa-check"></i><b>9.6</b> Concevoir une Étude Simple</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="SqlAndR.html"><a href="SqlAndR.html#définition-du-problème"><i class="fa fa-check"></i><b>9.6.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="9.6.2" data-path="SqlAndR.html"><a href="SqlAndR.html#exposition"><i class="fa fa-check"></i><b>9.6.2</b> Exposition</a></li>
+<li class="chapter" data-level="9.6.3" data-path="SqlAndR.html"><a href="SqlAndR.html#résultat"><i class="fa fa-check"></i><b>9.6.3</b> Résultat</a></li>
+<li class="chapter" data-level="9.6.4" data-path="SqlAndR.html"><a href="SqlAndR.html#temps-à-risque"><i class="fa fa-check"></i><b>9.6.4</b> Temps à Risque</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="SqlAndR.html"><a href="SqlAndR.html#implémenter-létude-en-utilisant-sql-et-r"><i class="fa fa-check"></i><b>9.7</b> Implémenter l’Étude en Utilisant SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-dexposition"><i class="fa fa-check"></i><b>9.7.1</b> Cohorte d’Exposition</a></li>
+<li class="chapter" data-level="9.7.2" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-de-résultat"><i class="fa fa-check"></i><b>9.7.2</b> Cohorte de Résultat</a></li>
+<li class="chapter" data-level="9.7.3" data-path="SqlAndR.html"><a href="SqlAndR.html#calcul-du-taux-dincidence"><i class="fa fa-check"></i><b>9.7.3</b> Calcul du Taux d’Incidence</a></li>
+<li class="chapter" data-level="9.7.4" data-path="SqlAndR.html"><a href="SqlAndR.html#nettoyage"><i class="fa fa-check"></i><b>9.7.4</b> Nettoyage</a></li>
+<li class="chapter" data-level="9.7.5" data-path="SqlAndR.html"><a href="SqlAndR.html#compatibilité"><i class="fa fa-check"></i><b>9.7.5</b> Compatibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="SqlAndR.html"><a href="SqlAndR.html#résumé-7"><i class="fa fa-check"></i><b>9.8</b> Résumé</a></li>
+<li class="chapter" data-level="9.9" data-path="SqlAndR.html"><a href="SqlAndR.html#exercices-4"><i class="fa fa-check"></i><b>9.9</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="Cohortes.html"><a href="Cohortes.html"><i class="fa fa-check"></i><b>10</b> Définir des Cohortes</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="Cohortes.html"><a href="Cohortes.html#quest-ce-quune-cohorte"><i class="fa fa-check"></i><b>10.1</b> Qu’est-ce qu’une Cohorte ?</a></li>
+<li class="chapter" data-level="10.2" data-path="Cohortes.html"><a href="Cohortes.html#conceptSets"><i class="fa fa-check"></i><b>10.2</b> Ensembles de Concepts</a></li>
+<li class="chapter" data-level="10.3" data-path="Cohortes.html"><a href="Cohortes.html#définitions-de-cohorte-probabilistes"><i class="fa fa-check"></i><b>10.3</b> Définitions de Cohorte Probabilistes</a></li>
+<li class="chapter" data-level="10.4" data-path="Cohortes.html"><a href="Cohortes.html#validité-de-la-définition-dune-cohorte"><i class="fa fa-check"></i><b>10.4</b> Validité de la Définition d’une Cohorte</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="Cohortes.html"><a href="Cohortes.html#bibliothèque-de-phénotypes-gold-standard-dohdsi"><i class="fa fa-check"></i><b>10.4.1</b> Bibliothèque de Phénotypes Gold Standard d’OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="Cohortes.html"><a href="Cohortes.html#définir-une-cohorte-pour-lhypertension"><i class="fa fa-check"></i><b>10.5</b> Définir une Cohorte pour l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="Cohortes.html"><a href="Cohortes.html#critères-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.1</b> Critères de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.2" data-path="Cohortes.html"><a href="Cohortes.html#définir-lensemble-de-concepts"><i class="fa fa-check"></i><b>10.5.2</b> Définir l’Ensemble de Concepts</a></li>
+<li class="chapter" data-level="10.5.3" data-path="Cohortes.html"><a href="Cohortes.html#critères-additionnels-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.3</b> Critères Additionnels de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.4" data-path="Cohortes.html"><a href="Cohortes.html#critères-dinclusion"><i class="fa fa-check"></i><b>10.5.4</b> Critères d’Inclusion</a></li>
+<li class="chapter" data-level="10.5.5" data-path="Cohortes.html"><a href="Cohortes.html#connexion-à-la-base-de-données"><i class="fa fa-check"></i><b>10.5.5</b> Connexion à la Base de Données</a></li>
+<li class="chapter" data-level="10.5.6" data-path="Cohortes.html"><a href="Cohortes.html#spécification-des-concepts"><i class="fa fa-check"></i><b>10.5.6</b> Spécification des Concepts</a></li>
+<li class="chapter" data-level="10.5.7" data-path="Cohortes.html"><a href="Cohortes.html#trouver-la-première-utilisation"><i class="fa fa-check"></i><b>10.5.7</b> Trouver la Première Utilisation</a></li>
+<li class="chapter" data-level="10.5.8" data-path="Cohortes.html"><a href="Cohortes.html#exiger-365-jours-dobservation-préalable"><i class="fa fa-check"></i><b>10.5.8</b> Exiger 365 Jours d’Observation Préalable</a></li>
+<li class="chapter" data-level="10.5.9" data-path="Cohortes.html"><a href="Cohortes.html#exiger-une-hypertension-préalable"><i class="fa fa-check"></i><b>10.5.9</b> Exiger une Hypertension Préalable</a></li>
+<li class="chapter" data-level="10.5.10" data-path="Cohortes.html"><a href="Cohortes.html#pas-de-traitement-préalable"><i class="fa fa-check"></i><b>10.5.10</b> Pas de Traitement Préalable</a></li>
+<li class="chapter" data-level="10.5.11" data-path="Cohortes.html"><a href="Cohortes.html#monothérapie"><i class="fa fa-check"></i><b>10.5.11</b> Monothérapie</a></li>
+<li class="chapter" data-level="10.5.12" data-path="Cohortes.html"><a href="Cohortes.html#sortie-de-la-cohorte"><i class="fa fa-check"></i><b>10.5.12</b> Sortie de la Cohorte</a></li>
+<li class="chapter" data-level="10.5.13" data-path="Cohortes.html"><a href="Cohortes.html#nettoyage-1"><i class="fa fa-check"></i><b>10.5.13</b> Nettoyage</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="Cohortes.html"><a href="Cohortes.html#résumé-8"><i class="fa fa-check"></i><b>10.6</b> Résumé</a></li>
+<li class="chapter" data-level="10.7" data-path="Cohortes.html"><a href="Cohortes.html#exercices-5"><i class="fa fa-check"></i><b>10.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Characterization.html"><a href="Characterization.html"><i class="fa fa-check"></i><b>11</b> Characterization</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Characterization.html"><a href="Characterization.html#caractérisation-au-niveau-de-la-base-de-données"><i class="fa fa-check"></i><b>11.1</b> Caractérisation au Niveau de la Base de Données</a></li>
+<li class="chapter" data-level="11.2" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-cohorte"><i class="fa fa-check"></i><b>11.2</b> Caractérisation de la Cohorte</a></li>
+<li class="chapter" data-level="11.3" data-path="Characterization.html"><a href="Characterization.html#chemins-de-traitement"><i class="fa fa-check"></i><b>11.3</b> Chemins de Traitement</a></li>
+<li class="chapter" data-level="11.4" data-path="Characterization.html"><a href="Characterization.html#incidence"><i class="fa fa-check"></i><b>11.4</b> Incidence</a></li>
+<li class="chapter" data-level="11.5" data-path="Characterization.html"><a href="Characterization.html#caractériser-les-personnes-hypertendues"><i class="fa fa-check"></i><b>11.5</b> Caractériser les personnes hypertendues</a></li>
+<li class="chapter" data-level="11.6" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-base-de-données-dans-atlas"><i class="fa fa-check"></i><b>11.6</b> Caractérisation de la base de données dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="Characterization.html"><a href="Characterization.html#conception"><i class="fa fa-check"></i><b>11.6.1</b> Conception</a></li>
+<li class="chapter" data-level="11.6.2" data-path="Characterization.html"><a href="Characterization.html#exécutions"><i class="fa fa-check"></i><b>11.6.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.6.3" data-path="Characterization.html"><a href="Characterization.html#résultats"><i class="fa fa-check"></i><b>11.6.3</b> Résultats</a></li>
+<li class="chapter" data-level="11.6.4" data-path="Characterization.html"><a href="Characterization.html#définir-des-caractéristiques-personnalisées"><i class="fa fa-check"></i><b>11.6.4</b> Définir des Caractéristiques Personnalisées</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="Characterization.html"><a href="Characterization.html#caractérisation-des-cohortes-en-r"><i class="fa fa-check"></i><b>11.7</b> Caractérisation des Cohortes en R</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="Characterization.html"><a href="Characterization.html#instauration-des-cohortes"><i class="fa fa-check"></i><b>11.7.1</b> Instauration des Cohortes</a></li>
+<li class="chapter" data-level="11.7.2" data-path="Characterization.html"><a href="Characterization.html#extraction-des-données"><i class="fa fa-check"></i><b>11.7.2</b> Extraction des Données</a></li>
+<li class="chapter" data-level="11.7.3" data-path="Characterization.html"><a href="Characterization.html#utilisation-des-analyses-prédéfinies"><i class="fa fa-check"></i><b>11.7.3</b> Utilisation des Analyses Prédéfinies</a></li>
+<li class="chapter" data-level="11.7.4" data-path="Characterization.html"><a href="Characterization.html#création-de-covariables-agrégées"><i class="fa fa-check"></i><b>11.7.4</b> Création de Covariables Agrégées</a></li>
+<li class="chapter" data-level="11.7.5" data-path="Characterization.html"><a href="Characterization.html#format-de-sortie"><i class="fa fa-check"></i><b>11.7.5</b> Format de Sortie</a></li>
+<li class="chapter" data-level="11.7.6" data-path="Characterization.html"><a href="Characterization.html#covariables-personnalisées"><i class="fa fa-check"></i><b>11.7.6</b> Covariables Personnalisées</a></li>
+<li class="chapter" data-level="11.7.7" data-path="Characterization.html"><a href="Characterization.html#conception-1"><i class="fa fa-check"></i><b>11.7.7</b> Conception</a></li>
+<li class="chapter" data-level="11.7.8" data-path="Characterization.html"><a href="Characterization.html#exécutions-1"><i class="fa fa-check"></i><b>11.7.8</b> Exécutions</a></li>
+<li class="chapter" data-level="11.7.9" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats"><i class="fa fa-check"></i><b>11.7.9</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="Characterization.html"><a href="Characterization.html#analyse-dincidence-dans-atlas"><i class="fa fa-check"></i><b>11.8</b> Analyse d’incidence dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="Characterization.html"><a href="Characterization.html#conception-2"><i class="fa fa-check"></i><b>11.8.1</b> Conception</a></li>
+<li class="chapter" data-level="11.8.2" data-path="Characterization.html"><a href="Characterization.html#exécutions-2"><i class="fa fa-check"></i><b>11.8.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.8.3" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats-1"><i class="fa fa-check"></i><b>11.8.3</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="Characterization.html"><a href="Characterization.html#résumé-9"><i class="fa fa-check"></i><b>11.9</b> Résumé</a></li>
+<li class="chapter" data-level="11.10" data-path="Characterization.html"><a href="Characterization.html#exercices-6"><i class="fa fa-check"></i><b>11.10</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html"><i class="fa fa-check"></i><b>12</b> Estimation au Niveau de la Population</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#CohortMethod"><i class="fa fa-check"></i><b>12.1</b> La Méthode Cohorte</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension"><i class="fa fa-check"></i><b>12.1.1</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.1.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#VariableSelection"><i class="fa fa-check"></i><b>12.1.2</b> Sélection des Variables</a></li>
+<li class="chapter" data-level="12.1.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#caliper"><i class="fa fa-check"></i><b>12.1.3</b> Caliper</a></li>
+<li class="chapter" data-level="12.1.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#chevauchement-scores-de-préférence"><i class="fa fa-check"></i><b>12.1.4</b> Chevauchement : Scores de Préférence</a></li>
+<li class="chapter" data-level="12.1.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre"><i class="fa fa-check"></i><b>12.1.5</b> Équilibre</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-cas-témoin"><i class="fa fa-check"></i><b>12.2</b> Le Design Cas-Témoin</a></li>
+<li class="chapter" data-level="12.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-de-cas-croisés"><i class="fa fa-check"></i><b>12.3</b> Le Design de Cas-Croisés</a></li>
+<li class="chapter" data-level="12.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#concevoir-une-étude-sur-lhypertension"><i class="fa fa-check"></i><b>12.4</b> Concevoir une Étude sur l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définition-du-problème-1"><i class="fa fa-check"></i><b>12.4.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="12.4.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#cible-et-comparateur"><i class="fa fa-check"></i><b>12.4.2</b> Cible et Comparateur</a></li>
+<li class="chapter" data-level="12.4.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résultat-1"><i class="fa fa-check"></i><b>12.4.3</b> Résultat</a></li>
+<li class="chapter" data-level="12.4.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#temps-à-risque-1"><i class="fa fa-check"></i><b>12.4.4</b> Temps à Risque</a></li>
+<li class="chapter" data-level="12.4.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèle"><i class="fa fa-check"></i><b>12.4.5</b> Modèle</a></li>
+<li class="chapter" data-level="12.4.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-de-létude"><i class="fa fa-check"></i><b>12.4.6</b> Résumé de l’Étude</a></li>
+<li class="chapter" data-level="12.4.7" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#questions-de-contrôle"><i class="fa fa-check"></i><b>12.4.7</b> Questions de Contrôle</a></li>
+<li class="chapter" data-level="12.4.8" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#ComparisonSettings"><i class="fa fa-check"></i><b>12.4.8</b> Paramètres de cohorte comparative</a></li>
+<li class="chapter" data-level="12.4.9" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#paramètres-danalyse-de-lestimation-des-effets"><i class="fa fa-check"></i><b>12.4.9</b> Paramètres d’analyse de l’estimation des effets</a></li>
+<li class="chapter" data-level="12.4.10" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#instanciation-de-la-cohorte"><i class="fa fa-check"></i><b>12.4.10</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="12.4.11" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#extraction-des-données-1"><i class="fa fa-check"></i><b>12.4.11</b> Extraction des Données</a></li>
+<li class="chapter" data-level="12.4.12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définir-la-population-de-létude"><i class="fa fa-check"></i><b>12.4.12</b> Définir la Population de l’Étude</a></li>
+<li class="chapter" data-level="12.4.13" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-1"><i class="fa fa-check"></i><b>12.4.13</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.4.14" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèles-de-résultats"><i class="fa fa-check"></i><b>12.4.14</b> Modèles de Résultats</a></li>
+<li class="chapter" data-level="12.4.15" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#MultipleAnalyses"><i class="fa fa-check"></i><b>12.4.15</b> Exécuter des Analyses Multiples</a></li>
+<li class="chapter" data-level="12.4.16" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-et-modèle"><i class="fa fa-check"></i><b>12.4.16</b> Scores de Propension et Modèle</a></li>
+<li class="chapter" data-level="12.4.17" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre-des-covariables"><i class="fa fa-check"></i><b>12.4.17</b> Équilibre des Covariables</a></li>
+<li class="chapter" data-level="12.4.18" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#suivi-et-puissance"><i class="fa fa-check"></i><b>12.4.18</b> Suivi et Puissance</a></li>
+<li class="chapter" data-level="12.4.19" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#kaplan-meier"><i class="fa fa-check"></i><b>12.4.19</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="12.4.20" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#estimation-de-la-taille-de-leffet"><i class="fa fa-check"></i><b>12.4.20</b> Estimation de la Taille de l’Effet</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-10"><i class="fa fa-check"></i><b>12.5</b> Résumé</a></li>
+<li class="chapter" data-level="12.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#exercices-7"><i class="fa fa-check"></i><b>12.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html"><i class="fa fa-check"></i><b>13</b> Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#le-problème-de-prédiction"><i class="fa fa-check"></i><b>13.1</b> Le Problème de Prédiction</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exemple-dextraction-de-données"><i class="fa fa-check"></i><b>13.1.1</b> Exemple d’extraction de données</a></li>
+<li class="chapter" data-level="13.1.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#négatif-vs-manquant"><i class="fa fa-check"></i><b>13.1.2</b> Négatif vs Manquant</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#modelFitting"><i class="fa fa-check"></i><b>13.2</b> Ajuster le modèle</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#régression-logistique-régularisée"><i class="fa fa-check"></i><b>13.2.1</b> Régression Logistique Régularisée</a></li>
+<li class="chapter" data-level="13.2.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#machines-à-gradient-boosting"><i class="fa fa-check"></i><b>13.2.2</b> Machines à Gradient Boosting</a></li>
+<li class="chapter" data-level="13.2.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#forêt-aléatoire"><i class="fa fa-check"></i><b>13.2.3</b> Forêt Aléatoire</a></li>
+<li class="chapter" data-level="13.2.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>13.2.4</b> K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="13.2.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#naive-bayes"><i class="fa fa-check"></i><b>13.2.5</b> Naive Bayes</a></li>
+<li class="chapter" data-level="13.2.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#adaboost"><i class="fa fa-check"></i><b>13.2.6</b> AdaBoost</a></li>
+<li class="chapter" data-level="13.2.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#arbre-de-décision"><i class="fa fa-check"></i><b>13.2.7</b> Arbre de Décision</a></li>
+<li class="chapter" data-level="13.2.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#perceptron-multi-couches"><i class="fa fa-check"></i><b>13.2.8</b> Perceptron Multi-couches</a></li>
+<li class="chapter" data-level="13.2.9" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#apprentissage-profond"><i class="fa fa-check"></i><b>13.2.9</b> Apprentissage profond</a></li>
+<li class="chapter" data-level="13.2.10" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#autres-algorithmes"><i class="fa fa-check"></i><b>13.2.10</b> Autres Algorithmes</a></li>
+<li class="chapter" data-level="13.2.11" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#types-dévaluation"><i class="fa fa-check"></i><b>13.2.11</b> Types d’Évaluation</a></li>
+<li class="chapter" data-level="13.2.12" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance"><i class="fa fa-check"></i><b>13.2.12</b> Mesures de Performance</a></li>
+<li class="chapter" data-level="13.2.13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-du-problème-3"><i class="fa fa-check"></i><b>13.2.13</b> Définition du problème</a></li>
+<li class="chapter" data-level="13.2.14" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-de-la-population-de-létude"><i class="fa fa-check"></i><b>13.2.14</b> Définition de la population de l’étude</a></li>
+<li class="chapter" data-level="13.2.15" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-de-développement-du-modèle"><i class="fa fa-check"></i><b>13.2.15</b> Paramètres de développement du modèle</a></li>
+<li class="chapter" data-level="13.2.16" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#évaluation-du-modèle"><i class="fa fa-check"></i><b>13.2.16</b> Évaluation du modèle</a></li>
+<li class="chapter" data-level="13.2.17" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-de-létude-1"><i class="fa fa-check"></i><b>13.2.17</b> Résumé de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#mise-en-œuvre-de-létude-dans-atlas"><i class="fa fa-check"></i><b>13.3</b> Mise en œuvre de l’étude dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-du-problème-de-prédiction"><i class="fa fa-check"></i><b>13.3.1</b> Paramètres du problème de prédiction</a></li>
+<li class="chapter" data-level="13.3.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-danalyse"><i class="fa fa-check"></i><b>13.3.2</b> Paramètres d’analyse</a></li>
+<li class="chapter" data-level="13.3.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#instanciation-de-la-cohorte-1"><i class="fa fa-check"></i><b>13.3.3</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="13.3.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#extraction-de-données"><i class="fa fa-check"></i><b>13.3.4</b> Extraction de Données</a></li>
+<li class="chapter" data-level="13.3.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#critères-dinclusion-supplémentaires"><i class="fa fa-check"></i><b>13.3.5</b> Critères d’Inclusion Supplémentaires</a></li>
+<li class="chapter" data-level="13.3.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#développement-du-modèle"><i class="fa fa-check"></i><b>13.3.6</b> Développement du Modèle</a></li>
+<li class="chapter" data-level="13.3.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-interne"><i class="fa fa-check"></i><b>13.3.7</b> Validation Interne</a></li>
+<li class="chapter" data-level="13.3.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-externe"><i class="fa fa-check"></i><b>13.3.8</b> Validation Externe</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#diffusion-des-résultats"><i class="fa fa-check"></i><b>13.4</b> Diffusion des Résultats</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance-du-modèle"><i class="fa fa-check"></i><b>13.4.1</b> Performance du Modèle</a></li>
+<li class="chapter" data-level="13.4.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#comparaison-des-modèles"><i class="fa fa-check"></i><b>13.4.2</b> Comparaison des Modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#fonctionnalités-additionnelles-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>13.5</b> Fonctionnalités Additionnelles de Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#génération-darticle-de-journal"><i class="fa fa-check"></i><b>13.5.1</b> Génération d’Article de Journal</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-11"><i class="fa fa-check"></i><b>13.6</b> Résumé</a></li>
+<li class="chapter" data-level="13.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exercices-8"><i class="fa fa-check"></i><b>13.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>IV Qualité des preuves</b></span></li>
+<li class="chapter" data-level="14" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html"><i class="fa fa-check"></i><b>14</b> Qualité des preuves</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#attributs-des-preuves-fiables"><i class="fa fa-check"></i><b>14.1</b> Attributs des preuves fiables</a></li>
+<li class="chapter" data-level="14.2" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#comprendre-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.2</b> Comprendre la qualité des preuves</a></li>
+<li class="chapter" data-level="14.3" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#communiquer-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.3</b> Communiquer la qualité des preuves</a></li>
+<li class="chapter" data-level="14.4" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#résumé-12"><i class="fa fa-check"></i><b>14.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="DataQuality.html"><a href="DataQuality.html"><i class="fa fa-check"></i><b>15</b> Qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="DataQuality.html"><a href="DataQuality.html#sources-de-problèmes-de-qualité-des-données"><i class="fa fa-check"></i><b>15.1</b> Sources de problèmes de qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-de-la-qualité-des-données"><i class="fa fa-check"></i><b>15.1.1</b> Vérifications de la qualité des données</a></li>
+<li class="chapter" data-level="15.1.2" data-path="DataQuality.html"><a href="DataQuality.html#etlUnitTests"><i class="fa fa-check"></i><b>15.1.2</b> Tests unitaires ETL</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude"><i class="fa fa-check"></i><b>15.2</b> Vérifications Spécifiques à l’Étude</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="DataQuality.html"><a href="DataQuality.html#vérification-des-mappings"><i class="fa fa-check"></i><b>15.2.1</b> Vérification des Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="DataQuality.html"><a href="DataQuality.html#achillesInPractice"><i class="fa fa-check"></i><b>15.3</b> ACHILLES en Pratique</a></li>
+<li class="chapter" data-level="15.4" data-path="DataQuality.html"><a href="DataQuality.html#dqdInPractice"><i class="fa fa-check"></i><b>15.4</b> Tableau de Bord de Qualité des Données en Pratique</a></li>
+<li class="chapter" data-level="15.5" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude-en-pratique"><i class="fa fa-check"></i><b>15.5</b> Vérifications Spécifiques à l’Étude en Pratique</a></li>
+<li class="chapter" data-level="15.6" data-path="DataQuality.html"><a href="DataQuality.html#résumé-13"><i class="fa fa-check"></i><b>15.6</b> Résumé</a></li>
+<li class="chapter" data-level="15.7" data-path="DataQuality.html"><a href="DataQuality.html#exercices-9"><i class="fa fa-check"></i><b>15.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html"><i class="fa fa-check"></i><b>16</b> Validité Clinique</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#CharacteristicsOfDatabase"><i class="fa fa-check"></i><b>16.1</b> Caractéristiques des Bases de Données de Soins de Santé</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#métriques-dévaluation-des-cohortes"><i class="fa fa-check"></i><b>16.1.1</b> Métriques d’évaluation des cohortes</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2</b> Vérification des dossiers sources</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#exemple-de-vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2.1</b> Exemple de vérification des dossiers sources</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#phevaluator"><i class="fa fa-check"></i><b>16.3</b> PheValuator</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#validation-dexemple-avec-phevaluator"><i class="fa fa-check"></i><b>16.3.1</b> Validation d’Exemple avec PheValuator</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#résumé-14"><i class="fa fa-check"></i><b>16.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html"><i class="fa fa-check"></i><b>17</b> Validité du logiciel</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validité-du-code-détude"><i class="fa fa-check"></i><b>17.1</b> Validité du code d’étude</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#automation"><i class="fa fa-check"></i><b>17.1.1</b> L’automatisation comme exigence pour la reproductibilité</a></li>
+<li class="chapter" data-level="17.1.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#meilleures-pratiques-de-programmation"><i class="fa fa-check"></i><b>17.1.2</b> Meilleures pratiques de programmation</a></li>
+<li class="chapter" data-level="17.1.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validation-du-code"><i class="fa fa-check"></i><b>17.1.3</b> Validation du code</a></li>
+<li class="chapter" data-level="17.1.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#utilisation-de-la-methods-library"><i class="fa fa-check"></i><b>17.1.4</b> Utilisation de la Methods Library</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#processus-de-développement-de-logiciels-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.2</b> Processus de Développement de Logiciels de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#gestion-du-code-source"><i class="fa fa-check"></i><b>17.2.1</b> Gestion du Code Source</a></li>
+<li class="chapter" data-level="17.2.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#documentation-2"><i class="fa fa-check"></i><b>17.2.2</b> Documentation</a></li>
+<li class="chapter" data-level="17.2.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#disponibilité-des-versions-actuelles-et-historiques"><i class="fa fa-check"></i><b>17.2.3</b> Disponibilité des Versions Actuelles et Historiques</a></li>
+<li class="chapter" data-level="17.2.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#maintenance-support-et-retraite"><i class="fa fa-check"></i><b>17.2.4</b> Maintenance, Support et Retraite</a></li>
+<li class="chapter" data-level="17.2.5" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#personnel-qualifié"><i class="fa fa-check"></i><b>17.2.5</b> Personnel Qualifié</a></li>
+<li class="chapter" data-level="17.2.6" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#sécurité-physique-et-logique"><i class="fa fa-check"></i><b>17.2.6</b> Sécurité Physique et Logique</a></li>
+<li class="chapter" data-level="17.2.7" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#reprise-après-sinistre"><i class="fa fa-check"></i><b>17.2.7</b> Reprise Après Sinistre</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#tests-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.3</b> Tests de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#test-unitaire"><i class="fa fa-check"></i><b>17.3.1</b> Test Unitaire</a></li>
+<li class="chapter" data-level="17.3.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#simulation"><i class="fa fa-check"></i><b>17.3.2</b> Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#résumé-15"><i class="fa fa-check"></i><b>17.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="MethodValidity.html"><a href="MethodValidity.html"><i class="fa fa-check"></i><b>18</b> Validité de la Méthode</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-spécifiques-au-plan-détude"><i class="fa fa-check"></i><b>18.1</b> Diagnostics Spécifiques au Plan d’Étude</a></li>
+<li class="chapter" data-level="18.2" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-for-all-estimation"><i class="fa fa-check"></i><b>18.2</b> Diagnostics for All Estimation</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="MethodValidity.html"><a href="MethodValidity.html#NegativeControls"><i class="fa fa-check"></i><b>18.2.1</b> Contrôles Négatifs</a></li>
+<li class="chapter" data-level="18.2.2" data-path="MethodValidity.html"><a href="MethodValidity.html#PositiveControls"><i class="fa fa-check"></i><b>18.2.2</b> Contrôles Positifs</a></li>
+<li class="chapter" data-level="18.2.3" data-path="MethodValidity.html"><a href="MethodValidity.html#metrics"><i class="fa fa-check"></i><b>18.2.3</b> Évaluation Empirique</a></li>
+<li class="chapter" data-level="18.2.4" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-valeurs-de-p"><i class="fa fa-check"></i><b>18.2.4</b> Calibration des valeurs de p</a></li>
+<li class="chapter" data-level="18.2.5" data-path="MethodValidity.html"><a href="MethodValidity.html#ConfidenceIntervalCalibration"><i class="fa fa-check"></i><b>18.2.5</b> Calibration des Intervalles de Confiance</a></li>
+<li class="chapter" data-level="18.2.6" data-path="MethodValidity.html"><a href="MethodValidity.html#sélection-des-contrôles-négatifs"><i class="fa fa-check"></i><b>18.2.6</b> Sélection des contrôles négatifs</a></li>
+<li class="chapter" data-level="18.2.7" data-path="MethodValidity.html"><a href="MethodValidity.html#inclusion-des-contrôles"><i class="fa fa-check"></i><b>18.2.7</b> Inclusion des contrôles</a></li>
+<li class="chapter" data-level="18.2.8" data-path="MethodValidity.html"><a href="MethodValidity.html#performance-empirique"><i class="fa fa-check"></i><b>18.2.8</b> Performance empirique</a></li>
+<li class="chapter" data-level="18.2.9" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-de-la-valeur-p"><i class="fa fa-check"></i><b>18.2.9</b> Calibration de la valeur P</a></li>
+<li class="chapter" data-level="18.2.10" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-intervalles-de-confiance"><i class="fa fa-check"></i><b>18.2.10</b> Calibration des intervalles de confiance</a></li>
+<li class="chapter" data-level="18.2.11" data-path="MethodValidity.html"><a href="MethodValidity.html#hétérogénéité-entre-les-bases-de-données"><i class="fa fa-check"></i><b>18.2.11</b> Hétérogénéité entre les bases de données</a></li>
+<li class="chapter" data-level="18.2.12" data-path="MethodValidity.html"><a href="MethodValidity.html#analyses-de-sensibilité"><i class="fa fa-check"></i><b>18.2.12</b> Analyses de sensibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="MethodValidity.html"><a href="MethodValidity.html#résumé-16"><i class="fa fa-check"></i><b>18.3</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="partie-études-ohdsi.html"><a href="partie-études-ohdsi.html"><i class="fa fa-check"></i>(PARTIE) Études OHDSI</a></li>
+<li class="chapter" data-level="19" data-path="StudySteps.html"><a href="StudySteps.html"><i class="fa fa-check"></i><b>19</b> Étapes de l’étude</a>
+<ul>
+<li class="chapter" data-level="19.0.1" data-path="StudySteps.html"><a href="StudySteps.html#définition-de-létude-observatoire"><i class="fa fa-check"></i><b>19.0.1</b> Définition de l’Étude Observatoire</a></li>
+<li class="chapter" data-level="19.0.2" data-path="StudySteps.html"><a href="StudySteps.html#pré-spécification-de-la-conception-de-létude"><i class="fa fa-check"></i><b>19.0.2</b> Pré-Spécification de la Conception de l’Étude</a></li>
+<li class="chapter" data-level="19.0.3" data-path="StudySteps.html"><a href="StudySteps.html#protocole"><i class="fa fa-check"></i><b>19.0.3</b> Protocole</a></li>
+<li class="chapter" data-level="19.0.4" data-path="StudySteps.html"><a href="StudySteps.html#analyses-standardisées"><i class="fa fa-check"></i><b>19.0.4</b> Analyses Standardisées</a></li>
+<li class="chapter" data-level="19.0.5" data-path="StudySteps.html"><a href="StudySteps.html#paquets-détudes"><i class="fa fa-check"></i><b>19.0.5</b> Paquets d’Études</a></li>
+<li class="chapter" data-level="19.0.6" data-path="StudySteps.html"><a href="StudySteps.html#les-données-sous-jacentes-au-cdm"><i class="fa fa-check"></i><b>19.0.6</b> Les Données Sous-Jacentes au CDM</a></li>
+<li class="chapter" data-level="19.1" data-path="StudySteps.html"><a href="StudySteps.html#étapes-de-létude-en-détail"><i class="fa fa-check"></i><b>19.1</b> Étapes de l’Étude en Détail</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="StudySteps.html"><a href="StudySteps.html#définir-la-question"><i class="fa fa-check"></i><b>19.1.1</b> Définir la Question</a></li>
+<li class="chapter" data-level="19.1.2" data-path="StudySteps.html"><a href="StudySteps.html#examiner-la-disponibilité-et-la-qualité-des-données"><i class="fa fa-check"></i><b>19.1.2</b> Examiner la Disponibilité et la Qualité des Données</a></li>
+<li class="chapter" data-level="19.1.3" data-path="StudySteps.html"><a href="StudySteps.html#populations-détude"><i class="fa fa-check"></i><b>19.1.3</b> Populations d’Étude</a></li>
+<li class="chapter" data-level="19.1.4" data-path="StudySteps.html"><a href="StudySteps.html#Feasibility"><i class="fa fa-check"></i><b>19.1.4</b> Faisabilité et Diagnostics</a></li>
+<li class="chapter" data-level="19.1.5" data-path="StudySteps.html"><a href="StudySteps.html#finaliser-le-protocole-et-le-paquet-détude"><i class="fa fa-check"></i><b>19.1.5</b> Finaliser le Protocole et le Paquet d’Étude</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="NetworkResearch.html"><a href="NetworkResearch.html"><i class="fa fa-check"></i><b>20</b> OHDSI Network Research</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#ohdsi-en-tant-que-réseau-de-recherche"><i class="fa fa-check"></i><b>20.1</b> OHDSI en tant que Réseau de Recherche</a></li>
+<li class="chapter" data-level="20.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2</b> Études en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#motivations-pour-mener-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.1</b> Motivations pour mener une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#définition-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.2</b> Définition d’une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-de-conception-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.3</b> Considérations de conception pour une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-logistiques-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.4</b> Considérations logistiques pour une étude en réseau OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.3</b> Exécution d’une étude en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.3.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#conception-et-faisabilité-de-létude"><i class="fa fa-check"></i><b>20.3.1</b> Conception et faisabilité de l’étude</a></li>
+<li class="chapter" data-level="20.3.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-de-létude"><i class="fa fa-check"></i><b>20.3.2</b> Exécution de l’étude</a></li>
+<li class="chapter" data-level="20.3.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#diffusion-et-publication-des-résultats"><i class="fa fa-check"></i><b>20.3.3</b> Diffusion et publication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#meilleures-pratiques-pour-les-études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.4</b> Meilleures pratiques pour les études en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.5" data-path="NetworkResearch.html"><a href="NetworkResearch.html#résumé-17"><i class="fa fa-check"></i><b>20.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Glossary.html"><a href="Glossary.html"><i class="fa fa-check"></i><b>21</b> Glossaire</a>
+<ul>
+<li class="chapter" data-level="21.0.1" data-path="Glossary.html"><a href="Glossary.html#détection-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.1</b> Détection des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.2" data-path="Glossary.html"><a href="Glossary.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.2</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.3" data-path="Glossary.html"><a href="Glossary.html#cas-pratique"><i class="fa fa-check"></i><b>21.0.3</b> Cas pratique</a></li>
+<li class="chapter" data-level="21.0.4" data-path="Glossary.html"><a href="Glossary.html#conclusion"><i class="fa fa-check"></i><b>21.0.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html"><i class="fa fa-check"></i><b>22</b> Définitions de cohortes</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitors"><i class="fa fa-check"></i><b>22.1</b> Inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.2" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitorsMono"><i class="fa fa-check"></i><b>22.2</b> Nouveaux utilisateurs de monothérapie avec des inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.3" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Ami"><i class="fa fa-check"></i><b>22.3</b> Infarctus du myocarde aigu (IMA)</a></li>
+<li class="chapter" data-level="22.4" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Angioedema"><i class="fa fa-check"></i><b>22.4</b> Angioedème</a></li>
+<li class="chapter" data-level="22.5" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ThiazidesMono"><i class="fa fa-check"></i><b>22.5</b> Nouveaux Utilisateurs de Diurétiques de Type Thiazidique en Monothérapie</a></li>
+<li class="chapter" data-level="22.6" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN1yrFO"><i class="fa fa-check"></i><b>22.6</b> Patients Initiating First-Line Therapy for Hypertension</a></li>
+<li class="chapter" data-level="22.7" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN3yrFO"><i class="fa fa-check"></i><b>22.7</b> Patients Initiating First-Line Therapy for Hypertension With &gt;3 Yr Follow-Up</a></li>
+<li class="chapter" data-level="22.8" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ACEiUse"><i class="fa fa-check"></i><b>22.8</b> ACE Inhibitor Use</a></li>
+<li class="chapter" data-level="22.9" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ARBUse"><i class="fa fa-check"></i><b>22.9</b> Angiotensin Receptor Blocker (ARB) Use</a></li>
+<li class="chapter" data-level="22.10" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#THZUse"><i class="fa fa-check"></i><b>22.10</b> Thiazide Or Thiazide-Like Diuretic Use</a></li>
+<li class="chapter" data-level="22.11" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#dCCBUse"><i class="fa fa-check"></i><b>22.11</b> Dihydropyridine Calcium Channel Blocker (dCCB) Use</a></li>
+<li class="chapter" data-level="22.12" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#BBUse"><i class="fa fa-check"></i><b>22.12</b> Utilisation des Bêta-bloquants</a></li>
+<li class="chapter" data-level="22.13" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DLoopUse"><i class="fa fa-check"></i><b>22.13</b> Utilisation des Diurétiques - Anse</a></li>
+<li class="chapter" data-level="22.14" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DPUse"><i class="fa fa-check"></i><b>22.14</b> Utilisation des Diurétiques - Épargneurs de potassium</a></li>
+<li class="chapter" data-level="22.15" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#A1BUse"><i class="fa fa-check"></i><b>22.15</b> Utilisation des Bloqueurs Alpha-1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html"><i class="fa fa-check"></i><b>23</b> Contrôles négatifs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#AceiThzNsc"><i class="fa fa-check"></i><b>23.1</b> ACEi et THZ</a></li>
+<li class="chapter" data-level="23.2" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#ProtocolTemplate"><i class="fa fa-check"></i><b>23.2</b> # Modèle de protocole</a></li>
+<li class="chapter" data-level="23.3" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#na"><i class="fa fa-check"></i><b>23.3</b> NA</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html"><i class="fa fa-check"></i><b>24</b> Réponses suggérées</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cdmanswers"><i class="fa fa-check"></i><b>24.1</b> Le modèle de données commun</a></li>
+<li class="chapter" data-level="24.2" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Vocabanswers"><i class="fa fa-check"></i><b>24.2</b> Vocabulaires standardisés</a></li>
+<li class="chapter" data-level="24.3" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Etlanswers"><i class="fa fa-check"></i><b>24.3</b> Extraction, transformation et chargement</a></li>
+<li class="chapter" data-level="24.4" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#UseCasesanswers"><i class="fa fa-check"></i><b>24.4</b> Cas d’utilisation des analyses de données</a></li>
+<li class="chapter" data-level="24.5" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cohortsanswers"><i class="fa fa-check"></i><b>24.5</b> Définir des Cohortes</a></li>
+<li class="chapter" data-level="24.6" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Characterizationanswers"><i class="fa fa-check"></i><b>24.6</b> Caractérisation</a></li>
+<li class="chapter" data-level="24.7" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Pleanswers"><i class="fa fa-check"></i><b>24.7</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="24.8" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Plpanswers"><i class="fa fa-check"></i><b>24.8</b> Prédiction Au Niveau Des Patients</a></li>
+<li class="chapter" data-level="24.9" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#DataQualityanswers"><i class="fa fa-check"></i><b>24.9</b> Qualité des données</a></li>
+<li class="chapter" data-level="24.10" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#section"><i class="fa fa-check"></i><b>24.10</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a>
+<ul>
+<li class="chapter" data-level="24.11" data-path="références.html"><a href="références.html#non-disponible"><i class="fa fa-check"></i><b>24.11</b> Non disponible</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Livre d’OHDSI</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="OpenScience" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> Science ouverte<a href="OpenScience.html#OpenScience" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p></p>
+<p><em>Responsable du chapitre : Kees van Bochove</em></p>
+<p>Depuis la création de la communauté OHDSI, l’objectif était de former une collaboration internationale en s’appuyant sur les valeurs de la science ouverte, telles que l’utilisation de logiciels open-source, la disponibilité publique de toutes les conférences et du matériel, et la publication transparente en accès libre des preuves médicales générées. Mais qu’est-ce que la science ouverte exactement ? Et comment l’OHDSI pourrait-il construire une stratégie de science ouverte ou de données ouvertes autour de données médicales, qui sont très sensibles en matière de confidentialité et généralement non ouvertes pour de bonnes raisons ? Pourquoi est-il si important d’avoir une reproductibilité de l’analyse, et comment la communauté OHDSI vise-t-elle à y parvenir ? Ce sont là quelques-unes des questions abordées dans ce chapitre.</p>
+<div id="science-ouverte" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Science ouverte<a href="OpenScience.html#science-ouverte" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le terme “science ouverte” est utilisé depuis les années 90, mais il a véritablement gagné en popularité dans les années 2010, période durant laquelle OHDSI est né. Wikipédia <span class="citation">(<a href="#ref-wiki:Open_science">Wikipedia 2019a</a>)</span> le définit comme “le mouvement visant à rendre la recherche scientifique (y compris les publications, les données, les échantillons physiques et les logiciels) et sa diffusion accessible à tous les niveaux d’une société en quête de connaissances, amateur ou professionnel”, et précise qu’il se développe généralement au sein de réseaux collaboratifs. Bien que la communauté OHDSI ne se soit jamais explicitement proclamée comme un collectif ou un réseau de “science ouverte”, le terme est fréquemment utilisé pour expliquer les concepts et principes directeurs d’OHDSI. Par exemple, en 2015, Jon Duke a présenté OHDSI comme “Une approche de science ouverte pour la génération de preuves médicales,”<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> et en 2019, le webinaire introductif du consortium EHDEN a salué l’approche du réseau OHDSI comme “Science ouverte du monde réel au 21e siècle.”<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> En effet, comme nous le verrons dans ce chapitre, de nombreuses pratiques de la science ouverte se retrouvent aujourd’hui dans la communauté OHDSI. On pourrait dire que la communauté OHDSI est un collectif de science ouverte piloté par un désir partagé d’améliorer la transparence et la fiabilité de la génération de preuves médicales.</p>
+<p>Les approches de science ouverte ou “Science 2.0” <span class="citation">(<a href="#ref-wiki:Science_2.0">Wikipedia 2019b</a>)</span> entendent répondre à un certain nombre de problèmes perçus dans la pratique scientifique actuelle. La technologie de l’information a conduit à une explosion de la génération de données et des méthodes d’analyse, et pour les chercheurs individuels, il est très difficile de suivre toute la littérature publiée dans leur domaine d’expertise. Cela est encore plus vrai pour les médecins qui doivent gérer une pratique au quotidien, mais qui ont besoin de se tenir au courant des dernières preuves médicales. En outre, on s’inquiète de plus en plus du fait que de nombreuses expériences pourraient souffrir de conceptions statistiques pauvres, de biais de publication, de p-hacking et de problèmes statistiques similaires, et qu’elles sont difficiles à reproduire. La méthode traditionnelle de correction de ces préoccupations, l’examen par les pairs des articles publiés, échoue souvent à identifier et à traiter ces problèmes. L’édition spéciale de Nature en 2018 sur les “Challenges in irreproducible research” <a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> comprend plusieurs exemples de cela. Un groupe d’auteurs tentant d’appliquer une revue systématique par des pairs sur les articles dans leur domaine a constaté que, pour diverses raisons, il était très difficile de faire rectifier les erreurs qu’ils avaient identifiées. Les expériences qui ont un design défectueux dès le départ sont particulièrement difficiles à corriger. Comme l’a dit Ronald Fisher : “Consulter le statisticien après une expérience revient souvent à lui demander de réaliser une autopsie. Il peut peut-être dire de quoi est mort l’expérience.” <span class="citation">(<a href="#ref-wikiquote:Ronald_Fisher">Wikiquote 2019</a>)</span> Les auteurs ont rencontré des problèmes statistiques courants tels que de faibles conceptions de randomisation conduisant à de fausses conclusions sur la signification statistique, des erreurs de calcul dans les méta-analyses et des comparaisons de base inappropriées. <span class="citation">(<a href="#ref-allison_2016">Allison et al. 2016</a>)</span> Un autre article de la même collection, prenant des expériences en physique comme exemple, affirme qu’il est crucial de non seulement fournir un accès aux données sous-jacentes, mais aussi de publier et documenter correctement les scripts de traitement et d’analyse des données pour atteindre une pleine reproductibilité. <span class="citation">(<a href="#ref-Chen2018">Chen et al. 2018</a>)</span></p>
+<p>La communauté OHDSI aborde ces défis à sa manière et accorde une importance significative à la génération de preuves médicales à grande échelle. Comme indiqué dans <span class="citation">Schuemie, Ryan, et al. (<a href="#ref-schuemie_2018b">2018</a>)</span>, alors que le paradigme actuel “se concentre sur la génération d’une estimation à la fois en utilisant un design d’étude unique dont la fiabilité est inconnue et la publication (ou non) d’une estimation à la fois,” la communauté OHDSI “prône des études observationnelles à haut débit utilisant des méthodes cohérentes et standardisées, permettant l’évaluation, la calibration et la diffusion impartiale pour générer une base de preuves plus fiable et complète.” Cela est réalisé par une combinaison d’un réseau de sources de données médicales qui mappent leurs données sur le modèle de données commun OMOP, de code d’analyse open-source pouvant être utilisé et vérifié par tous, et de données de référence à grande échelle telles que les occurrences de conditions publiées sur howoften.org. Dans les paragraphes suivants, des exemples concrets sont fournis et l’approche de science ouverte d’OHDSI est détaillée davantage en utilisant les quatre principes des Normes Ouvertes, du Code Source Ouvert, des Données Ouvertes et du Discours Ouvert comme guide. Le chapitre se termine par une brève référence aux principes FAIR et des perspectives pour OHDSI du point de vue de la science ouverte.</p>
+</div>
+<div id="la-science-ouverte-en-action-le-study-a-thon" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> La Science Ouverte en Action : le Study-a-Thon<a href="OpenScience.html#la-science-ouverte-en-action-le-study-a-thon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<p>Un développement récent au sein de la communauté est l’émergence des “study-a-thons” : des réunions brèves et intensives en face-à-face d’un groupe multidisciplinaire de scientifiques visant à répondre à une question de recherche clinique pertinente en utilisant le modèle de données OMOP et les outils OHDSI. Un bel exemple est le study-a-thon d’Oxford en 2018, qui est expliqué dans un webinaire EHDEN <a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> qui fournit une vue d’ensemble du processus et met également en évidence les résultats disponibles librement. Dans la période précédant le study-a-thon, les participants proposent des questions de recherche médicales pertinentes à étudier, et une ou plusieurs questions de recherche sont sélectionnées pour être étudiées durant le study-a-thon lui-même. Les données sont fournies par les participants ayant accès à des données de patients en format OMOP et pouvant exécuter des requêtes sur ces sources de données. Une grande partie du temps du study-a-thon est consacrée à discuter de l’approche statistique (voir aussi le chapitre <a href="WhereToBegin.html#WhereToBegin">2</a>), de l’adéquation des sources de données, des résultats produits de manière interactive et des questions de suivi qui ne manquent pas de se poser face à ces résultats. Dans le cas du study-a-thon d’Oxford, les questions portaient sur l’étude des effets indésirables post-opératoires de différentes méthodes de remplacement du genou, et les résultats ont été publiés de manière interactive pendant le study-a-thon en utilisant les forums et outils OHDSI (voir le chapitre <a href="OhdsiAnalyticsTools.html#OhdsiAnalyticsTools">8</a>). Les outils OHDSI tels qu’ATLAS facilitent la création rapide, l’échange, la discussion et les tests de définitions de cohortes, ce qui accélère grandement le processus initial de définition du problème et de choix des méthodes. Grâce à l’utilisation du modèle de données commun OMOP par les sources de données impliquées et à la disponibilité des packages de prédiction au niveau des patients en open-source OHDSI <a href="PatientLevelPrediction.html#PatientLevelPrediction">13</a>, il a été possible de créer un modèle de prédiction pour la mortalité post-opératoire à 90 jours en une journée, et de valider le modèle de manière externe dans plusieurs grandes sources de données dès le lendemain. Le study-a-thon a également abouti à un article scientifique traditionnel (Development and validation of patient-level prediction models for adverse outcomes following total knee arthroplasty, Ross Williams, Daniel Prieto-Alhambra et al., manuscrit en préparation), qui a mis des mois à être traité par l’examen par les pairs. Mais le fait que les scripts d’analyse et les résultats pour plusieurs bases de données de santé couvrant des centaines de millions de dossiers de patients aient été conçus, produits et publiés de zéro en une semaine illustre les améliorations fondamentales que l’OHDSI peut apporter à la science médicale, réduisant le délai pour que les preuves deviennent disponibles de plusieurs mois à quelques jours.</p>
+</div>
+<div id="normes-ouvertes" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Normes Ouvertes<a href="OpenScience.html#normes-ouvertes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<p>Une ressource communautaire très significative maintenue dans la communauté OHDSI est le modèle de données commun OMOP (voir chapitre <a href="CommonDataModel.html#CommonDataModel">4</a>) et les Vocabularies Standardisés associés (voir chapitre <a href="StandardizedVocabularies.html#StandardizedVocabularies">5</a>). Le modèle lui-même est conçu pour capturer des données de santé observationnelles et visait initialement à analyser les associations entre les expositions telles que les médicaments, les procédures, les dispositifs, etc., et les résultats tels que les conditions et les mesures. Il a été étendu pour divers cas d’utilisation d’analyse (voir aussi <a href="DataAnalyticsUseCases.html#DataAnalyticsUseCases">7</a>). Cependant, harmoniser les données de santé mondiales provenant d’une grande variété de systèmes de codage, de paradigmes de santé et de différents types de sources de soins de santé nécessite une quantité massive de “mappages” entre les codes sources et leurs homologues standardisés les plus proches. Le Vocabulaire Standardisé OMOP est décrit plus en détail dans le chapitre <a href="DataAnalyticsUseCases.html#DataAnalyticsUseCases">7</a> et inclut des mappages de centaines de systèmes de codage médical utilisés dans le monde entier, et est consultable via l’outil OHDSI Athena. En fournissant ces vocabulaires et mappages comme une ressource communautaire librement disponible, OMOP et la communauté OHDSI apportent une contribution significative à l’analyse des données de santé et est, selon plusieurs comptes, le modèle le plus complet à cette fin, représentant environ 1,2 milliard de dossiers de santé dans le monde. <a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> <span class="citation">(<a href="#ref-garza_2016">Garza et al. 2016</a>)</span>
+## Open Source</p>
+<p></p>
+<p>Une autre ressource clé que la communauté OHDSI fournit est constituée par les programmes open source. Ceux-ci peuvent être divisés en plusieurs catégories, telles que les outils auxiliaires pour mapper les données à OMOP (voir chapitre <a href="ExtractTransformLoad.html#ExtractTransformLoad">6</a>), la bibliothèque de méthodes OHDSI qui contient une suite puissante de méthodes statistiques couramment utilisées, le code open source pour les études observationnelles publiées, et ATLAS, Athena et autres logiciels liés à l’infrastructure qui sous-tendent l’écosystème OHDSI (voir chapitre <a href="OhdsiAnalyticsTools.html#OhdsiAnalyticsTools">8</a>). Du point de vue de la science ouverte, l’une des ressources les plus importantes est le code pour l’exécution réelle des études, telles que les études du réseau de recherche OHDSI (voir chapitre <a href="NetworkResearch.html#NetworkResearch">20</a>). En retour, ces programmes exploitent la pile entièrement open source OHDSI, qui peut être inspectée, revue et à laquelle on peut contribuer via GitHub. Par exemple, les études de réseau s’appuient souvent sur la bibliothèque de méthodes, ce qui assure une réutilisation cohérente des méthodes statistiques dans divers cas d’usage analytique. Voir le chapitre <a href="SoftwareValidity.html#SoftwareValidity">17</a> pour un aperçu plus détaillé de la manière dont l’utilisation et la collaboration sur le logiciel open source au sein d’OHDSI sous-tendent finalement la qualité et la fiabilité des preuves générées.</p>
+</div>
+<div id="open-data" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Open Data<a href="OpenScience.html#open-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<p>En raison de la nature sensible des données de santé en termes de vie privée, des ensembles de données de niveau patient entièrement ouverts et complets ne sont généralement pas disponibles. Cependant, il est possible d’exploiter les ensembles de données mappés à OMOP pour publier des données agrégées et des ensembles de résultats importants, comme mentionné précédemment <a href="http://howoften.org" class="uri">http://howoften.org</a> et d’autres ensembles de résultats publics qui sont publiés sur <a href="http://data.ohdsi.org" class="uri">http://data.ohdsi.org</a>. De plus, la communauté OHDSI fournit des ensembles de données simulés tels que SynPUF à des fins de test et de développement, et le Réseau de recherche OHDSI (voir <a href="NetworkResearch.html#NetworkResearch">20</a>) peut être exploité pour effectuer des études dans un réseau de sources de données disponibles ayant mappé leurs données à OMOP. Afin de rendre transparent le mappage entre les données sources et le modèle de données OMOP (OMOP CDM), il est encouragé pour les sources de données de réutiliser les outils ETL ou de ‘mappage’ d’OHDSI et de publier leur code de mappage en open source également.</p>
+</div>
+<div id="open-discourse" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Open Discourse<a href="OpenScience.html#open-discourse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<p>Les standards ouverts, les sources ouvertes et les données ouvertes sont de grands atouts, mais laissés à eux-mêmes, ils n’auront pas d’impact sur la pratique médicale. La clé de la pratique de la science ouverte et de l’impact d’OHDSI est la mise en œuvre de la génération de preuves médicales et la traduction de la science en pratique médicale. La communauté OHDSI organise plusieurs symposiums annuels OHDSI, tenus aux États-Unis, en Europe et en Asie, ainsi que des communautés de pratique dédiées, entre autres, en Chine et en Corée. Ces symposiums discutent des avancées dans les méthodes statistiques, les outils de données et de logiciels, les vocabulaires standardisés, et tous les autres aspects de la communauté open source OHDSI. Les forums<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> et le wiki<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> OHDSI facilitent des milliers de chercheurs dans le monde entier dans la pratique de la recherche observationnelle. Les appels communautaires<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> et le code, les problèmes et les demandes de tirage sur Github<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> font constamment évoluer les actifs de la communauté ouverte tels que le code et le CDM, et dans les études de réseau OHDSI, la recherche observationnelle mondiale est pratiquée de manière ouverte et transparente en utilisant des centaines de millions de dossiers de patients dans le monde entier. L’ouverture et le discours ouvert sont encouragés dans toute la communauté, et ce livre même est écrit via un processus ouvert facilité par le wiki OHDSI, les appels communautaires et un dépôt GitHub<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>. Il est cependant important de souligner que sans tous les collaborateurs OHDSI, les processus et les outils seraient des coquilles vides. En effet, on pourrait dire que la véritable valeur de la communauté OHDSI réside chez ses membres, qui partagent une vision d’amélioration de la santé grâce à la collaboration et à la science ouverte, comme discuté dans le chapitre <a href="OhdsiCommunity.html#OhdsiCommunity">1</a>.</p>
+</div>
+<div id="ohdsi-et-les-principes-directeurs-fair" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> OHDSI et les Principes Directeurs FAIR<a href="OpenScience.html#ohdsi-et-les-principes-directeurs-fair" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p></p>
+<div id="introduction" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Introduction<a href="OpenScience.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ce dernier paragraphe du chapitre examine l’état actuel de la communauté et des outils OHDSI, en utilisant les Principes Directeurs FAIR publiés dans <span class="citation">Wilkinson et al. (<a href="#ref-wilkinson2016">2016</a>)</span>.</p>
+</div>
+<div id="findability" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Findability<a href="OpenScience.html#findability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Toute base de données de santé mappée à OMOP et utilisée pour les analyses devrait, d’un point de vue scientifique, persister à des fins de référence et de reproductibilité futures. L’utilisation d’identifiants persistants pour les bases de données OMOP n’est pas encore répandue, en partie parce que ces bases de données sont souvent contenues derrière des pare-feu et sur des réseaux internes et pas nécessairement connectées à Internet. Cependant, il est tout à fait possible de publier des résumés des bases de données sous forme de fiches descriptives qui peuvent être référencées par exemple à des fins de citation. Cette méthode est suivie par exemple dans le catalogue EMIF<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>, qui fournit un enregistrement complet de la base de données en termes d’objectif de collecte de données, sources, vocabulaires et termes, mécanismes de contrôle d’accès, licence, consentements, etc. <span class="citation">(<a href="#ref-Oliveira2019">Oliveira, Trifan, and Silva 2019</a>)</span> Cette approche est développée plus avant dans le projet IMI EHDEN.</p>
+</div>
+<div id="accessibility" class="section level3 hasAnchor" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> Accessibility<a href="OpenScience.html#accessibility" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’accessibilité des données mappées à OMOP via un protocole ouvert est généralement réalisée via l’interface SQL, qui, combinée au CDM OMOP, fournit une méthode standardisée et bien documentée pour accéder aux données OMOP. Cependant, comme discuté plus haut, les sources OMOP ne sont souvent pas directement disponibles sur Internet pour des raisons de sécurité. La création d’un réseau mondial sécurisé de données de santé accessible aux chercheurs est un sujet de recherche actif et un objectif opérationnel de projets comme IMI EHDEN. Cependant, les résultats des analyses dans plusieurs bases de données OMOP, comme montré par les initiatives OHDSI telles que LEGEND et <a href="http://howoften.org" class="uri">http://howoften.org</a>, peuvent être publiés ouvertement.</p>
+</div>
+<div id="interoperability" class="section level3 hasAnchor" number="3.6.4">
+<h3><span class="header-section-number">3.6.4</span> Interoperability<a href="OpenScience.html#interoperability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’interopérabilité est sans doute le point fort du modèle de données OMOP et des outils OHDSI. Afin de construire un réseau solide de sources de données médicales dans le monde entier qui peut être exploité pour la génération de preuves, atteindre l’interopérabilité entre les sources de données de santé est essentiel, et cela est réalisé grâce au modèle OMOP et aux vocabulaires standardisés. Cependant, en partageant les définitions de cohortes et les approches statistiques, la communauté OHDSI va au-delà du mappage de code et fournit également une plateforme pour construire une compréhension interopérable des méthodes d’analyse des données de santé.
+Étant donné que les systèmes de santé tels que les hôpitaux sont souvent la source des données OMOP, l’interopérabilité de l’approche OHDSI pourrait être davantage améliorée par l’alignement avec les standards d’interopérabilité des soins de santé opérationnels tels que HL7 FHIR, HL7 CIMI et openEHR. Il en va de même pour l’alignement avec les standards d’interopérabilité clinique tels que CDISC et les ontologies biomédicales. Surtout dans des domaines tels que l’oncologie, c’est un sujet important, et le Groupe de travail sur l’oncologie et le Groupe de travail sur les essais cliniques de la communauté OHDSI sont de bons exemples de forums où ces questions sont activement discutées.
+En termes de références à d’autres données et notamment aux termes d’ontologies, ATLAS et OHDSI Athena sont des outils importants, car ils permettent l’exploration des vocabulaires standardisés OMOP dans le contexte d’autres systèmes de codage médical disponibles.</p>
+</div>
+<div id="reusability" class="section level3 hasAnchor" number="3.6.5">
+<h3><span class="header-section-number">3.6.5</span> Reusability<a href="OpenScience.html#reusability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les principes FAIR autour de la réutilisabilité se concentrent sur des questions importantes telles que la licence des données, la provenance (clarifiant comment les données ont été créées) et le lien avec les standards communautaires pertinents.
+La licence des données est un sujet compliqué, surtout entre juridictions, et il serait hors de portée de ce livre de le couvrir de manière exhaustive. Cependant, il est important de dire que si vous envisagez que vos données (par exemple, les résultats d’analyse) soient librement utilisées par d’autres, il est de bonne pratique de fournir explicitement ces autorisations via une licence de données. Ce n’est pas encore une pratique courante pour la plupart des données que l’on peut trouver sur Internet, et la communauté OHDSI n’est malheureusement pas une exception ici.
+En ce qui concerne la provenance des données des bases de données OMOP, des améliorations potentielles existent pour rendre les méta-données disponibles de manière automatisée, y compris, par exemple, la version du CDM, la version des vocabulaires standardisés, les listes de codes personnalisées, etc. Les outils ETL OHDSI ne produisent pas actuellement cette information automatiquement, mais des groupes de travail tels que le Groupe de travail sur la qualité des données et le Groupe de travail sur les méta-données y travaillent activement. Un autre aspect important est la provenance des bases de données sous-jacentes elles-mêmes; il est important de savoir si un hôpital ou un système d’information de GP a été remplacé ou modifié, et quand des omissions de données connues ou d’autres problèmes de données ont eu lieu historiquement. Explorer les moyens d’attacher systématiquement ces métadonnées dans le OMOP CDM est le domaine du Groupe de travail sur les méta-données.</p>
+
+<div class="rmdsummary">
+<ul>
+<li><p>La communauté OHDSI peut être vue comme une communauté scientifique ouverte qui poursuit activement l’interopérabilité et la reproductibilité de la génération de preuves médicales.</p></li>
+<li><p>Elle plaide également pour un changement de paradigme allant d’une recherche médicale monétude et mono-estimation à une génération de preuves systématiques à grande échelle, où des faits tels que l’occurrence de base sont connus et où les preuves se concentrent sur l’estimation statistique des effets des interventions et des traitements à partir de sources de soins de santé du monde réel.</p></li>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-allison_2016" class="csl-entry">
+Allison, D. B., A. W. Brown, B. J. George, and K. A. Kaiser. 2016. <span>“<span class="nocase"><span>R</span>eproducibility: <span>A</span> tragedy of errors</span>.”</span> <em>Nature</em> 530 (7588): 27–29.
+</div>
+<div id="ref-Chen2018" class="csl-entry">
+Chen, Xiaoli, Sünje Dallmeier-Tiessen, Robin Dasler, Sebastian Feger, Pamfilos Fokianos, Jose Benito Gonzalez, Harri Hirvonsalo, et al. 2018. <span>“Open Is Not Enough.”</span> <em>Nature Physics</em> 15 (2): 113–19. <a href="https://doi.org/10.1038/s41567-018-0342-2">https://doi.org/10.1038/s41567-018-0342-2</a>.
+</div>
+<div id="ref-garza_2016" class="csl-entry">
+Garza, M., G. Del Fiol, J. Tenenbaum, A. Walden, and M. N. Zozus. 2016. <span>“<span class="nocase"><span>E</span>valuating common data models for use with a longitudinal community registry</span>.”</span> <em>J Biomed Inform</em> 64 (December): 333–41.
+</div>
+<div id="ref-Oliveira2019" class="csl-entry">
+Oliveira, José Luı́s, Alina Trifan, and Luı́s A. Bastião Silva. 2019. <span>“<span>EMIF</span> Catalogue: A Collaborative Platform for Sharing and Reusing Biomedical Data.”</span> <em>International Journal of Medical Informatics</em> 126 (June): 35–45. <a href="https://doi.org/10.1016/j.ijmedinf.2019.02.006">https://doi.org/10.1016/j.ijmedinf.2019.02.006</a>.
+</div>
+<div id="ref-schuemie_2018b" class="csl-entry">
+Schuemie, M. J., P. B. Ryan, G. Hripcsak, D. Madigan, and M. A. Suchard. 2018. <span>“<span class="nocase"><span>I</span>mproving reproducibility by using high-throughput observational studies with empirical calibration</span>.”</span> <em>Philos Trans A Math Phys Eng Sci</em> 376 (2128).
+</div>
+<div id="ref-wiki:Open_science" class="csl-entry">
+Wikipedia. 2019a. <span>“<span class="nocase">Open science</span> — <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="http://en.wikipedia.org/w/index.php?title=Open%20science&amp;oldid=900178688" class="uri">http://en.wikipedia.org/w/index.php?title=Open%20science&amp;oldid=900178688</a>.
+</div>
+<div id="ref-wiki:Science_2.0" class="csl-entry">
+———. 2019b. <span>“<span>Science 2.0</span> — <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="http://en.wikipedia.org/w/index.php?title=Science%202.0&amp;oldid=887565958" class="uri">http://en.wikipedia.org/w/index.php?title=Science%202.0&amp;oldid=887565958</a>.
+</div>
+<div id="ref-wikiquote:Ronald_Fisher" class="csl-entry">
+Wikiquote. 2019. <span>“Ronald Fisher — Wikiquote<span>,</span>”</span> <a href="\url{https://en.wikiquote.org/w/index.php?title=Ronald_Fisher&amp;oldid=2638030}">\url{https://en.wikiquote.org/w/index.php?title=Ronald_Fisher&amp;oldid=2638030}</a>.
+</div>
+<div id="ref-wilkinson2016" class="csl-entry">
+Wilkinson, M. D., M. Dumontier, I. J. Aalbersberg, G. Appleton, M. Axton, A. Baak, N. Blomberg, et al. 2016. <span>“<span class="nocase"><span>T</span>he <span>F</span><span>A</span><span>I</span><span>R</span> <span>G</span>uiding <span>P</span>rinciples for scientific data management and stewardship</span>.”</span> <em>Sci Data</em> 3 (March): 160018.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p><a href="https://www.ohdsi.org/wp-content/uploads/2014/07/ARM-OHDSI_Duke.pdf" class="uri">https://www.ohdsi.org/wp-content/uploads/2014/07/ARM-OHDSI_Duke.pdf</a><a href="OpenScience.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p><a href="https://www.ehden.eu/webinars/" class="uri">https://www.ehden.eu/webinars/</a><a href="OpenScience.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p><a href="https://www.nature.com/collections/prbfkwmwvz" class="uri">https://www.nature.com/collections/prbfkwmwvz</a><a href="OpenScience.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><a href="https://youtu.be/X5yuoJoL6xs" class="uri">https://youtu.be/X5yuoJoL6xs</a><a href="OpenScience.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p><a href="https://www.ema.europa.eu/en/events/common-data-model-europe-why-which-how" class="uri">https://www.ema.europa.eu/en/events/common-data-model-europe-why-which-how</a><a href="OpenScience.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p><a href="https://forums.ohdsi.org" class="uri">https://forums.ohdsi.org</a><a href="OpenScience.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p><a href="https://www.ohdsi.org/web/wiki" class="uri">https://www.ohdsi.org/web/wiki</a><a href="OpenScience.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p><a href="https://www.ohdsi.org/web/wiki/doku.php?id=projects:overview" class="uri">https://www.ohdsi.org/web/wiki/doku.php?id=projects:overview</a><a href="OpenScience.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p><a href="https://github.com/ohdsi" class="uri">https://github.com/ohdsi</a><a href="OpenScience.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p><a href="https://github.com/OHDSI/TheBookOfOhdsi" class="uri">https://github.com/OHDSI/TheBookOfOhdsi</a><a href="OpenScience.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p><a href="https://emif-catalogue.eu" class="uri">https://emif-catalogue.eu</a><a href="OpenScience.html#fnref17" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="WhereToBegin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="CommonDataModel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OHDSI/TheBookOfOhdsi/edit/master/OpenScience.Rmd",
+"text": "Modifier"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TheBookOfOhdsi.pdf", "TheBookOfOhdsi.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 5 Vocabulaire normalisé | Le Livre d’OHDSI</title>
+  <meta name="description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 5 Vocabulaire normalisé | Le Livre d’OHDSI" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+  <meta property="og:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="github-repo" content="OHDSI/TheBookOfOhdsi" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 5 Vocabulaire normalisé | Le Livre d’OHDSI" />
+  
+  <meta name="twitter:description" content="Un livre sur les sciences et l’informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source." />
+  <meta name="twitter:image" content="https://ohdsi.github.io/TheBookOfOhdsi/images/Cover/Cover.png" />
+
+<meta name="author" content="Observational Health Data Sciences and Informatics" />
+
+
+<meta name="date" content="2024-09-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="CommonDataModel.html"/>
+<link rel="next" href="ExtractTransformLoad.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104086677-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104086677-2');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">The Book of OHDSI</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objectifs-de-ce-livre"><i class="fa fa-check"></i>Objectifs de ce Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-du-livre"><i class="fa fa-check"></i>Structure du Livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-des-logiciels"><i class="fa fa-check"></i>Versions des Logiciels</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#développement-du-livre"><i class="fa fa-check"></i>Développement du Livre</a></li>
+</ul></li>
+<li class="part"><span><b>I La Communauté OHDSI</b></span></li>
+<li class="chapter" data-level="1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html"><i class="fa fa-check"></i><b>1</b> La Communauté OHDSI</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#le-parcours-des-données-à-lévidence"><i class="fa fa-check"></i><b>1.1</b> Le Parcours des Données à l’Évidence</a></li>
+<li class="chapter" data-level="1.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#observational-medical-outcomes-partnership"><i class="fa fa-check"></i><b>1.2</b> Observational Medical Outcomes Partnership</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-mission"><i class="fa fa-check"></i><b>1.2.1</b> Notre Mission</a></li>
+<li class="chapter" data-level="1.2.2" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#notre-vision"><i class="fa fa-check"></i><b>1.2.2</b> Notre Vision</a></li>
+<li class="chapter" data-level="1.2.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#nos-objectifs"><i class="fa fa-check"></i><b>1.2.3</b> Nos Objectifs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#les-progrès-de-lohdsi"><i class="fa fa-check"></i><b>1.3</b> Les Progrès de l’OHDSI</a></li>
+<li class="chapter" data-level="1.4" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#collaborer-avec-ohdsi"><i class="fa fa-check"></i><b>1.4</b> Collaborer avec OHDSI</a></li>
+<li class="chapter" data-level="1.5" data-path="OhdsiCommunity.html"><a href="OhdsiCommunity.html#résumé"><i class="fa fa-check"></i><b>1.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="WhereToBegin.html"><a href="WhereToBegin.html"><i class="fa fa-check"></i><b>2</b> Par où commencer</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#forums-ohdsi"><i class="fa fa-check"></i><b>2.0.1</b> Forums OHDSI</a></li>
+<li class="chapter" data-level="2.0.2" data-path="WhereToBegin.html"><a href="WhereToBegin.html#événements-ohdsi"><i class="fa fa-check"></i><b>2.0.2</b> Événements OHDSI</a></li>
+<li class="chapter" data-level="2.0.3" data-path="WhereToBegin.html"><a href="WhereToBegin.html#appels-de-la-communauté-ohdsi"><i class="fa fa-check"></i><b>2.0.3</b> Appels de la communauté OHDSI</a></li>
+<li class="chapter" data-level="2.0.4" data-path="WhereToBegin.html"><a href="WhereToBegin.html#groupes-de-travail-ohdsi"><i class="fa fa-check"></i><b>2.0.4</b> Groupes de travail OHDSI</a></li>
+<li class="chapter" data-level="2.0.5" data-path="WhereToBegin.html"><a href="WhereToBegin.html#chapitres-régionaux-ohdsi"><i class="fa fa-check"></i><b>2.0.5</b> Chapitres régionaux OHDSI</a></li>
+<li class="chapter" data-level="2.0.6" data-path="WhereToBegin.html"><a href="WhereToBegin.html#réseau-de-recherche-ohdsi"><i class="fa fa-check"></i><b>2.0.6</b> Réseau de recherche OHDSI</a></li>
+<li class="chapter" data-level="2.1" data-path="WhereToBegin.html"><a href="WhereToBegin.html#résumé-1"><i class="fa fa-check"></i><b>2.1</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="OpenScience.html"><a href="OpenScience.html"><i class="fa fa-check"></i><b>3</b> Science ouverte</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="OpenScience.html"><a href="OpenScience.html#science-ouverte"><i class="fa fa-check"></i><b>3.1</b> Science ouverte</a></li>
+<li class="chapter" data-level="3.2" data-path="OpenScience.html"><a href="OpenScience.html#la-science-ouverte-en-action-le-study-a-thon"><i class="fa fa-check"></i><b>3.2</b> La Science Ouverte en Action : le Study-a-Thon</a></li>
+<li class="chapter" data-level="3.3" data-path="OpenScience.html"><a href="OpenScience.html#normes-ouvertes"><i class="fa fa-check"></i><b>3.3</b> Normes Ouvertes</a></li>
+<li class="chapter" data-level="3.4" data-path="OpenScience.html"><a href="OpenScience.html#open-data"><i class="fa fa-check"></i><b>3.4</b> Open Data</a></li>
+<li class="chapter" data-level="3.5" data-path="OpenScience.html"><a href="OpenScience.html#open-discourse"><i class="fa fa-check"></i><b>3.5</b> Open Discourse</a></li>
+<li class="chapter" data-level="3.6" data-path="OpenScience.html"><a href="OpenScience.html#ohdsi-et-les-principes-directeurs-fair"><i class="fa fa-check"></i><b>3.6</b> OHDSI et les Principes Directeurs FAIR</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="OpenScience.html"><a href="OpenScience.html#introduction"><i class="fa fa-check"></i><b>3.6.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.6.2" data-path="OpenScience.html"><a href="OpenScience.html#findability"><i class="fa fa-check"></i><b>3.6.2</b> Findability</a></li>
+<li class="chapter" data-level="3.6.3" data-path="OpenScience.html"><a href="OpenScience.html#accessibility"><i class="fa fa-check"></i><b>3.6.3</b> Accessibility</a></li>
+<li class="chapter" data-level="3.6.4" data-path="OpenScience.html"><a href="OpenScience.html#interoperability"><i class="fa fa-check"></i><b>3.6.4</b> Interoperability</a></li>
+<li class="chapter" data-level="3.6.5" data-path="OpenScience.html"><a href="OpenScience.html#reusability"><i class="fa fa-check"></i><b>3.6.5</b> Reusability</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Représentation Uniforme des Données</b></span></li>
+<li class="chapter" data-level="4" data-path="CommonDataModel.html"><a href="CommonDataModel.html"><i class="fa fa-check"></i><b>4</b> Le Modèle de Données Commun</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#principes-de-conception"><i class="fa fa-check"></i><b>4.1</b> Principes de Conception</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="CommonDataModel.html"><a href="CommonDataModel.html#model-Conv"><i class="fa fa-check"></i><b>4.1.1</b> Conventions Générales du Modèle</a></li>
+<li class="chapter" data-level="4.1.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-schémas"><i class="fa fa-check"></i><b>4.1.2</b> Conventions Générales des Schémas</a></li>
+<li class="chapter" data-level="4.1.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-des-tables-de-données"><i class="fa fa-check"></i><b>4.1.3</b> Conventions Générales des Tables de Données</a></li>
+<li class="chapter" data-level="4.1.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#domains"><i class="fa fa-check"></i><b>4.1.4</b> Conventions Générales des Domaines</a></li>
+<li class="chapter" data-level="4.1.5" data-path="CommonDataModel.html"><a href="CommonDataModel.html#représentation-du-contenu-par-des-concepts"><i class="fa fa-check"></i><b>4.1.5</b> Représentation du Contenu par des Concepts</a></li>
+<li class="chapter" data-level="4.1.6" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conventions-générales-de-nomination-des-champs"><i class="fa fa-check"></i><b>4.1.6</b> Conventions Générales de Nomination des Champs</a></li>
+<li class="chapter" data-level="4.1.7" data-path="CommonDataModel.html"><a href="CommonDataModel.html#concepts-Sources"><i class="fa fa-check"></i><b>4.1.7</b> Différence Entre Concepts et Valeurs Sources</a></li>
+<li class="chapter" data-level="4.1.8" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exemple-en-cours-endométriose"><i class="fa fa-check"></i><b>4.1.8</b> Exemple en cours : Endométriose</a></li>
+<li class="chapter" data-level="4.1.9" data-path="CommonDataModel.html"><a href="CommonDataModel.html#person"><i class="fa fa-check"></i><b>4.1.9</b> Tableau PERSON</a></li>
+<li class="chapter" data-level="4.1.10" data-path="CommonDataModel.html"><a href="CommonDataModel.html#observationPeriod"><i class="fa fa-check"></i><b>4.1.10</b> Tableau OBSERVATION_PERIOD</a></li>
+<li class="chapter" data-level="4.1.11" data-path="CommonDataModel.html"><a href="CommonDataModel.html#visitOccurrence"><i class="fa fa-check"></i><b>4.1.11</b> VISIT_OCCURRENCE</a></li>
+<li class="chapter" data-level="4.1.12" data-path="CommonDataModel.html"><a href="CommonDataModel.html#conditionOccurrence"><i class="fa fa-check"></i><b>4.1.12</b> CONDITION_OCCURRENCE</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="CommonDataModel.html"><a href="CommonDataModel.html#informations-supplémentaires"><i class="fa fa-check"></i><b>4.2</b> Informations supplémentaires</a></li>
+<li class="chapter" data-level="4.3" data-path="CommonDataModel.html"><a href="CommonDataModel.html#résumé-2"><i class="fa fa-check"></i><b>4.3</b> Résumé</a></li>
+<li class="chapter" data-level="4.4" data-path="CommonDataModel.html"><a href="CommonDataModel.html#exercices"><i class="fa fa-check"></i><b>4.4</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html"><i class="fa fa-check"></i><b>5</b> Vocabulaire normalisé</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#pourquoi-les-vocabulaires-et-pourquoi-les-normaliser"><i class="fa fa-check"></i><b>5.1</b> Pourquoi les vocabulaires, et pourquoi les normaliser</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#construire-les-vocabulaire-normalisé"><i class="fa fa-check"></i><b>5.1.1</b> Construire les Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#accessVocabularies"><i class="fa fa-check"></i><b>5.1.2</b> Accès aux Vocabulaire normalisé</a></li>
+<li class="chapter" data-level="5.1.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#source-des-vocabulaires-adopter-ou-construire"><i class="fa fa-check"></i><b>5.1.3</b> Source des vocabulaires : Adopter ou Construire</a></li>
+<li class="chapter" data-level="5.1.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#identifiants-de-concepts"><i class="fa fa-check"></i><b>5.1.4</b> Identifiants de concepts</a></li>
+<li class="chapter" data-level="5.1.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#noms-de-concepts"><i class="fa fa-check"></i><b>5.1.5</b> Noms de concepts</a></li>
+<li class="chapter" data-level="5.1.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptDomains"><i class="fa fa-check"></i><b>5.1.6</b> Domaines</a></li>
+<li class="chapter" data-level="5.1.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#vocabulaires"><i class="fa fa-check"></i><b>5.1.7</b> Vocabulaires</a></li>
+<li class="chapter" data-level="5.1.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#classes-de-concepts"><i class="fa fa-check"></i><b>5.1.8</b> Classes de concepts</a></li>
+<li class="chapter" data-level="5.1.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#standardConcepts"><i class="fa fa-check"></i><b>5.1.9</b> Concepts standards</a></li>
+<li class="chapter" data-level="5.1.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-non-standards"><i class="fa fa-check"></i><b>5.1.10</b> Concepts non standards</a></li>
+<li class="chapter" data-level="5.1.11" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#concepts-de-classification"><i class="fa fa-check"></i><b>5.1.11</b> Concepts de classification</a></li>
+<li class="chapter" data-level="5.1.12" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#codes-de-concepts"><i class="fa fa-check"></i><b>5.1.12</b> Codes de concepts</a></li>
+<li class="chapter" data-level="5.1.13" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptLifeCycle"><i class="fa fa-check"></i><b>5.1.13</b> Cycle de vie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations"><i class="fa fa-check"></i><b>5.2</b> Relations</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptMapping"><i class="fa fa-check"></i><b>5.2.1</b> Relations de Mapping</a></li>
+<li class="chapter" data-level="5.2.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-hiérarchiques"><i class="fa fa-check"></i><b>5.2.2</b> Relations Hiérarchiques</a></li>
+<li class="chapter" data-level="5.2.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-de-différents-vocabulaires"><i class="fa fa-check"></i><b>5.2.3</b> Relations Entre Concepts de Différents Vocabulaires</a></li>
+<li class="chapter" data-level="5.2.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#relations-entre-concepts-du-même-vocabulaire"><i class="fa fa-check"></i><b>5.2.4</b> Relations Entre Concepts du Même Vocabulaire</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#conceptAncestor"><i class="fa fa-check"></i><b>5.3</b> Hiérarchie</a></li>
+<li class="chapter" data-level="5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#tables-de-référence-interne"><i class="fa fa-check"></i><b>5.4</b> Tables de Référence Interne</a></li>
+<li class="chapter" data-level="5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#specialSituations"><i class="fa fa-check"></i><b>5.5</b> Situations Spéciales</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#genre"><i class="fa fa-check"></i><b>5.5.1</b> Genre</a></li>
+<li class="chapter" data-level="5.5.2" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#race-et-ethnicité"><i class="fa fa-check"></i><b>5.5.2</b> Race et Ethnicité</a></li>
+<li class="chapter" data-level="5.5.3" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#schémas-de-codage-diagnostique-et-conditions-omop"><i class="fa fa-check"></i><b>5.5.3</b> Schémas de Codage Diagnostique et Conditions OMOP</a></li>
+<li class="chapter" data-level="5.5.4" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#systèmes-de-codage-de-procédures"><i class="fa fa-check"></i><b>5.5.4</b> Systèmes de Codage de Procédures</a></li>
+<li class="chapter" data-level="5.5.5" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#dispositifs"><i class="fa fa-check"></i><b>5.5.5</b> Dispositifs</a></li>
+<li class="chapter" data-level="5.5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#visites-et-services"><i class="fa fa-check"></i><b>5.5.6</b> Visites et Services</a></li>
+<li class="chapter" data-level="5.5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#fournisseurs-et-spécialités"><i class="fa fa-check"></i><b>5.5.7</b> Fournisseurs et Spécialités</a></li>
+<li class="chapter" data-level="5.5.8" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#domaines-thérapeutiques-aux-besoins-spéciaux"><i class="fa fa-check"></i><b>5.5.8</b> Domaines Thérapeutiques aux Besoins Spéciaux</a></li>
+<li class="chapter" data-level="5.5.9" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#rxNormExtension"><i class="fa fa-check"></i><b>5.5.9</b> Concepts Standards dans le Domaine des Médicaments</a></li>
+<li class="chapter" data-level="5.5.10" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#variantes-de-null"><i class="fa fa-check"></i><b>5.5.10</b> Variantes de NULL</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#résumé-3"><i class="fa fa-check"></i><b>5.6</b> Résumé</a></li>
+<li class="chapter" data-level="5.7" data-path="StandardizedVocabularies.html"><a href="StandardizedVocabularies.html#exercices-1"><i class="fa fa-check"></i><b>5.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html"><i class="fa fa-check"></i><b>6</b> Extraction, Transformation et Chargement</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#white-rabbit"><i class="fa fa-check"></i><b>6.1.1</b> White Rabbit</a></li>
+<li class="chapter" data-level="6.1.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#rabbit-in-a-hat"><i class="fa fa-check"></i><b>6.1.2</b> Rabbit-In-a-Hat</a></li>
+<li class="chapter" data-level="6.1.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#usagi"><i class="fa fa-check"></i><b>6.1.3</b> Usagi</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#étape-4-contrôle-de-qualité"><i class="fa fa-check"></i><b>6.2</b> Étape 4 : Contrôle de Qualité</a></li>
+<li class="chapter" data-level="6.3" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#conventions-etl-et-themis"><i class="fa fa-check"></i><b>6.3</b> Conventions ETL et THEMIS</a></li>
+<li class="chapter" data-level="6.4" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#CDMandETLMaintenance"><i class="fa fa-check"></i><b>6.4</b> Maintenance du CDM et de l’ETL</a></li>
+<li class="chapter" data-level="6.5" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#réflexions-finales-sur-letl"><i class="fa fa-check"></i><b>6.5</b> Réflexions finales sur l’ETL</a></li>
+<li class="chapter" data-level="6.6" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#résumé-4"><i class="fa fa-check"></i><b>6.6</b> Résumé</a></li>
+<li class="chapter" data-level="6.7" data-path="ExtractTransformLoad.html"><a href="ExtractTransformLoad.html#exercices-2"><i class="fa fa-check"></i><b>6.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>III Analyse des Données</b></span></li>
+<li class="chapter" data-level="7" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html"><i class="fa fa-check"></i><b>7</b> Cas d’utilisation de l’analyse des données</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#caractérisation"><i class="fa fa-check"></i><b>7.1</b> Caractérisation</a></li>
+<li class="chapter" data-level="7.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#estimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.2</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.3</b> Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exemples-de-cas-dutilisation-dans-lhypertension"><i class="fa fa-check"></i><b>7.4</b> Exemples De Cas D’utilisation Dans L’Hypertension</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#questions-de-caractérisation"><i class="fa fa-check"></i><b>7.4.1</b> Questions de Caractérisation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-destimation-au-niveau-de-la-population"><i class="fa fa-check"></i><b>7.4.2</b> Question D’estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="7.4.3" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#question-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>7.4.3</b> Question De Prédiction Au Niveau Du Patient</a></li>
+<li class="chapter" data-level="7.4.4" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-erronées"><i class="fa fa-check"></i><b>7.4.4</b> Données Erronées</a></li>
+<li class="chapter" data-level="7.4.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#données-manquantes"><i class="fa fa-check"></i><b>7.4.5</b> Données Manquantes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#résumé-5"><i class="fa fa-check"></i><b>7.5</b> Résumé</a></li>
+<li class="chapter" data-level="7.6" data-path="DataAnalyticsUseCases.html"><a href="DataAnalyticsUseCases.html#exercices-3"><i class="fa fa-check"></i><b>7.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html"><i class="fa fa-check"></i><b>8</b> Outils d’analyse d’OHDSI</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#analysisImplementation"><i class="fa fa-check"></i><b>8.1</b> Implémentation de l’analyse</a></li>
+<li class="chapter" data-level="8.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-danalyse"><i class="fa fa-check"></i><b>8.2</b> Stratégies d’analyse</a></li>
+<li class="chapter" data-level="8.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#atlas"><i class="fa fa-check"></i><b>8.3</b> ATLAS</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#sécurité"><i class="fa fa-check"></i><b>8.3.1</b> Sécurité</a></li>
+<li class="chapter" data-level="8.3.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation"><i class="fa fa-check"></i><b>8.3.2</b> Documentation</a></li>
+<li class="chapter" data-level="8.3.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#comment-installer"><i class="fa fa-check"></i><b>8.3.3</b> Comment installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>8.4</b> Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#support-pour-les-analyses-à-grande-échelle"><i class="fa fa-check"></i><b>8.4.1</b> Support pour les Analyses à Grande Échelle</a></li>
+<li class="chapter" data-level="8.4.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#BigDataSupport"><i class="fa fa-check"></i><b>8.4.2</b> Support pour les Big Data</a></li>
+<li class="chapter" data-level="8.4.3" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#documentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Documentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#exigences-systémiques"><i class="fa fa-check"></i><b>8.4.4</b> Exigences Systémiques</a></li>
+<li class="chapter" data-level="8.4.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#installR"><i class="fa fa-check"></i><b>8.4.5</b> Comment Installer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#stratégies-de-déploiement"><i class="fa fa-check"></i><b>8.5</b> Stratégies de déploiement</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#broadsea"><i class="fa fa-check"></i><b>8.5.1</b> Broadsea</a></li>
+<li class="chapter" data-level="8.5.2" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#amazon-aws"><i class="fa fa-check"></i><b>8.5.2</b> Amazon AWS</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="OhdsiAnalyticsTools.html"><a href="OhdsiAnalyticsTools.html#résumé-6"><i class="fa fa-check"></i><b>8.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="SqlAndR.html"><a href="SqlAndR.html"><i class="fa fa-check"></i><b>9</b> SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="SqlAndR.html"><a href="SqlAndR.html#SqlRender"><i class="fa fa-check"></i><b>9.1</b> SqlRender</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="SqlAndR.html"><a href="SqlAndR.html#paramétrage-sql"><i class="fa fa-check"></i><b>9.1.1</b> Paramétrage SQL</a></li>
+<li class="chapter" data-level="9.1.2" data-path="SqlAndR.html"><a href="SqlAndR.html#traduction-vers-dautres-dialectes-sql"><i class="fa fa-check"></i><b>9.1.2</b> Traduction vers d’Autres Dialectes SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="SqlAndR.html"><a href="SqlAndR.html#DatabaseConnector"><i class="fa fa-check"></i><b>9.2</b> DatabaseConnector</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="SqlAndR.html"><a href="SqlAndR.html#création-dune-connexion"><i class="fa fa-check"></i><b>9.2.1</b> Création d’une Connexion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger"><i class="fa fa-check"></i><b>9.2.2</b> Interroger</a></li>
+<li class="chapter" data-level="9.2.3" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-en-utilisant-les-objets-ffdf"><i class="fa fa-check"></i><b>9.2.3</b> Interroger en Utilisant les Objets Ffdf</a></li>
+<li class="chapter" data-level="9.2.4" data-path="SqlAndR.html"><a href="SqlAndR.html#interroger-différentes-plateformes-en-utilisant-le-même-sql"><i class="fa fa-check"></i><b>9.2.4</b> Interroger Différentes Plateformes en Utilisant le Même SQL</a></li>
+<li class="chapter" data-level="9.2.5" data-path="SqlAndR.html"><a href="SqlAndR.html#insérer-des-tables"><i class="fa fa-check"></i><b>9.2.5</b> Insérer des Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="SqlAndR.html"><a href="SqlAndR.html#QueryTheCdm"><i class="fa fa-check"></i><b>9.3</b> Interroger le CDM</a></li>
+<li class="chapter" data-level="9.4" data-path="SqlAndR.html"><a href="SqlAndR.html#utiliser-le-vocabulaire-lors-de-linterrogation"><i class="fa fa-check"></i><b>9.4</b> Utiliser le Vocabulaire Lors de l’Interrogation</a></li>
+<li class="chapter" data-level="9.5" data-path="SqlAndR.html"><a href="SqlAndR.html#querylibrary"><i class="fa fa-check"></i><b>9.5</b> QueryLibrary</a></li>
+<li class="chapter" data-level="9.6" data-path="SqlAndR.html"><a href="SqlAndR.html#concevoir-une-étude-simple"><i class="fa fa-check"></i><b>9.6</b> Concevoir une Étude Simple</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="SqlAndR.html"><a href="SqlAndR.html#définition-du-problème"><i class="fa fa-check"></i><b>9.6.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="9.6.2" data-path="SqlAndR.html"><a href="SqlAndR.html#exposition"><i class="fa fa-check"></i><b>9.6.2</b> Exposition</a></li>
+<li class="chapter" data-level="9.6.3" data-path="SqlAndR.html"><a href="SqlAndR.html#résultat"><i class="fa fa-check"></i><b>9.6.3</b> Résultat</a></li>
+<li class="chapter" data-level="9.6.4" data-path="SqlAndR.html"><a href="SqlAndR.html#temps-à-risque"><i class="fa fa-check"></i><b>9.6.4</b> Temps à Risque</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="SqlAndR.html"><a href="SqlAndR.html#implémenter-létude-en-utilisant-sql-et-r"><i class="fa fa-check"></i><b>9.7</b> Implémenter l’Étude en Utilisant SQL et R</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-dexposition"><i class="fa fa-check"></i><b>9.7.1</b> Cohorte d’Exposition</a></li>
+<li class="chapter" data-level="9.7.2" data-path="SqlAndR.html"><a href="SqlAndR.html#cohorte-de-résultat"><i class="fa fa-check"></i><b>9.7.2</b> Cohorte de Résultat</a></li>
+<li class="chapter" data-level="9.7.3" data-path="SqlAndR.html"><a href="SqlAndR.html#calcul-du-taux-dincidence"><i class="fa fa-check"></i><b>9.7.3</b> Calcul du Taux d’Incidence</a></li>
+<li class="chapter" data-level="9.7.4" data-path="SqlAndR.html"><a href="SqlAndR.html#nettoyage"><i class="fa fa-check"></i><b>9.7.4</b> Nettoyage</a></li>
+<li class="chapter" data-level="9.7.5" data-path="SqlAndR.html"><a href="SqlAndR.html#compatibilité"><i class="fa fa-check"></i><b>9.7.5</b> Compatibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="SqlAndR.html"><a href="SqlAndR.html#résumé-7"><i class="fa fa-check"></i><b>9.8</b> Résumé</a></li>
+<li class="chapter" data-level="9.9" data-path="SqlAndR.html"><a href="SqlAndR.html#exercices-4"><i class="fa fa-check"></i><b>9.9</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="Cohortes.html"><a href="Cohortes.html"><i class="fa fa-check"></i><b>10</b> Définir des Cohortes</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="Cohortes.html"><a href="Cohortes.html#quest-ce-quune-cohorte"><i class="fa fa-check"></i><b>10.1</b> Qu’est-ce qu’une Cohorte ?</a></li>
+<li class="chapter" data-level="10.2" data-path="Cohortes.html"><a href="Cohortes.html#conceptSets"><i class="fa fa-check"></i><b>10.2</b> Ensembles de Concepts</a></li>
+<li class="chapter" data-level="10.3" data-path="Cohortes.html"><a href="Cohortes.html#définitions-de-cohorte-probabilistes"><i class="fa fa-check"></i><b>10.3</b> Définitions de Cohorte Probabilistes</a></li>
+<li class="chapter" data-level="10.4" data-path="Cohortes.html"><a href="Cohortes.html#validité-de-la-définition-dune-cohorte"><i class="fa fa-check"></i><b>10.4</b> Validité de la Définition d’une Cohorte</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="Cohortes.html"><a href="Cohortes.html#bibliothèque-de-phénotypes-gold-standard-dohdsi"><i class="fa fa-check"></i><b>10.4.1</b> Bibliothèque de Phénotypes Gold Standard d’OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="Cohortes.html"><a href="Cohortes.html#définir-une-cohorte-pour-lhypertension"><i class="fa fa-check"></i><b>10.5</b> Définir une Cohorte pour l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="Cohortes.html"><a href="Cohortes.html#critères-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.1</b> Critères de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.2" data-path="Cohortes.html"><a href="Cohortes.html#définir-lensemble-de-concepts"><i class="fa fa-check"></i><b>10.5.2</b> Définir l’Ensemble de Concepts</a></li>
+<li class="chapter" data-level="10.5.3" data-path="Cohortes.html"><a href="Cohortes.html#critères-additionnels-de-lévénement-initial"><i class="fa fa-check"></i><b>10.5.3</b> Critères Additionnels de l’Événement Initial</a></li>
+<li class="chapter" data-level="10.5.4" data-path="Cohortes.html"><a href="Cohortes.html#critères-dinclusion"><i class="fa fa-check"></i><b>10.5.4</b> Critères d’Inclusion</a></li>
+<li class="chapter" data-level="10.5.5" data-path="Cohortes.html"><a href="Cohortes.html#connexion-à-la-base-de-données"><i class="fa fa-check"></i><b>10.5.5</b> Connexion à la Base de Données</a></li>
+<li class="chapter" data-level="10.5.6" data-path="Cohortes.html"><a href="Cohortes.html#spécification-des-concepts"><i class="fa fa-check"></i><b>10.5.6</b> Spécification des Concepts</a></li>
+<li class="chapter" data-level="10.5.7" data-path="Cohortes.html"><a href="Cohortes.html#trouver-la-première-utilisation"><i class="fa fa-check"></i><b>10.5.7</b> Trouver la Première Utilisation</a></li>
+<li class="chapter" data-level="10.5.8" data-path="Cohortes.html"><a href="Cohortes.html#exiger-365-jours-dobservation-préalable"><i class="fa fa-check"></i><b>10.5.8</b> Exiger 365 Jours d’Observation Préalable</a></li>
+<li class="chapter" data-level="10.5.9" data-path="Cohortes.html"><a href="Cohortes.html#exiger-une-hypertension-préalable"><i class="fa fa-check"></i><b>10.5.9</b> Exiger une Hypertension Préalable</a></li>
+<li class="chapter" data-level="10.5.10" data-path="Cohortes.html"><a href="Cohortes.html#pas-de-traitement-préalable"><i class="fa fa-check"></i><b>10.5.10</b> Pas de Traitement Préalable</a></li>
+<li class="chapter" data-level="10.5.11" data-path="Cohortes.html"><a href="Cohortes.html#monothérapie"><i class="fa fa-check"></i><b>10.5.11</b> Monothérapie</a></li>
+<li class="chapter" data-level="10.5.12" data-path="Cohortes.html"><a href="Cohortes.html#sortie-de-la-cohorte"><i class="fa fa-check"></i><b>10.5.12</b> Sortie de la Cohorte</a></li>
+<li class="chapter" data-level="10.5.13" data-path="Cohortes.html"><a href="Cohortes.html#nettoyage-1"><i class="fa fa-check"></i><b>10.5.13</b> Nettoyage</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="Cohortes.html"><a href="Cohortes.html#résumé-8"><i class="fa fa-check"></i><b>10.6</b> Résumé</a></li>
+<li class="chapter" data-level="10.7" data-path="Cohortes.html"><a href="Cohortes.html#exercices-5"><i class="fa fa-check"></i><b>10.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Characterization.html"><a href="Characterization.html"><i class="fa fa-check"></i><b>11</b> Characterization</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="Characterization.html"><a href="Characterization.html#caractérisation-au-niveau-de-la-base-de-données"><i class="fa fa-check"></i><b>11.1</b> Caractérisation au Niveau de la Base de Données</a></li>
+<li class="chapter" data-level="11.2" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-cohorte"><i class="fa fa-check"></i><b>11.2</b> Caractérisation de la Cohorte</a></li>
+<li class="chapter" data-level="11.3" data-path="Characterization.html"><a href="Characterization.html#chemins-de-traitement"><i class="fa fa-check"></i><b>11.3</b> Chemins de Traitement</a></li>
+<li class="chapter" data-level="11.4" data-path="Characterization.html"><a href="Characterization.html#incidence"><i class="fa fa-check"></i><b>11.4</b> Incidence</a></li>
+<li class="chapter" data-level="11.5" data-path="Characterization.html"><a href="Characterization.html#caractériser-les-personnes-hypertendues"><i class="fa fa-check"></i><b>11.5</b> Caractériser les personnes hypertendues</a></li>
+<li class="chapter" data-level="11.6" data-path="Characterization.html"><a href="Characterization.html#caractérisation-de-la-base-de-données-dans-atlas"><i class="fa fa-check"></i><b>11.6</b> Caractérisation de la base de données dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="Characterization.html"><a href="Characterization.html#conception"><i class="fa fa-check"></i><b>11.6.1</b> Conception</a></li>
+<li class="chapter" data-level="11.6.2" data-path="Characterization.html"><a href="Characterization.html#exécutions"><i class="fa fa-check"></i><b>11.6.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.6.3" data-path="Characterization.html"><a href="Characterization.html#résultats"><i class="fa fa-check"></i><b>11.6.3</b> Résultats</a></li>
+<li class="chapter" data-level="11.6.4" data-path="Characterization.html"><a href="Characterization.html#définir-des-caractéristiques-personnalisées"><i class="fa fa-check"></i><b>11.6.4</b> Définir des Caractéristiques Personnalisées</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="Characterization.html"><a href="Characterization.html#caractérisation-des-cohortes-en-r"><i class="fa fa-check"></i><b>11.7</b> Caractérisation des Cohortes en R</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="Characterization.html"><a href="Characterization.html#instauration-des-cohortes"><i class="fa fa-check"></i><b>11.7.1</b> Instauration des Cohortes</a></li>
+<li class="chapter" data-level="11.7.2" data-path="Characterization.html"><a href="Characterization.html#extraction-des-données"><i class="fa fa-check"></i><b>11.7.2</b> Extraction des Données</a></li>
+<li class="chapter" data-level="11.7.3" data-path="Characterization.html"><a href="Characterization.html#utilisation-des-analyses-prédéfinies"><i class="fa fa-check"></i><b>11.7.3</b> Utilisation des Analyses Prédéfinies</a></li>
+<li class="chapter" data-level="11.7.4" data-path="Characterization.html"><a href="Characterization.html#création-de-covariables-agrégées"><i class="fa fa-check"></i><b>11.7.4</b> Création de Covariables Agrégées</a></li>
+<li class="chapter" data-level="11.7.5" data-path="Characterization.html"><a href="Characterization.html#format-de-sortie"><i class="fa fa-check"></i><b>11.7.5</b> Format de Sortie</a></li>
+<li class="chapter" data-level="11.7.6" data-path="Characterization.html"><a href="Characterization.html#covariables-personnalisées"><i class="fa fa-check"></i><b>11.7.6</b> Covariables Personnalisées</a></li>
+<li class="chapter" data-level="11.7.7" data-path="Characterization.html"><a href="Characterization.html#conception-1"><i class="fa fa-check"></i><b>11.7.7</b> Conception</a></li>
+<li class="chapter" data-level="11.7.8" data-path="Characterization.html"><a href="Characterization.html#exécutions-1"><i class="fa fa-check"></i><b>11.7.8</b> Exécutions</a></li>
+<li class="chapter" data-level="11.7.9" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats"><i class="fa fa-check"></i><b>11.7.9</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="Characterization.html"><a href="Characterization.html#analyse-dincidence-dans-atlas"><i class="fa fa-check"></i><b>11.8</b> Analyse d’incidence dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="Characterization.html"><a href="Characterization.html#conception-2"><i class="fa fa-check"></i><b>11.8.1</b> Conception</a></li>
+<li class="chapter" data-level="11.8.2" data-path="Characterization.html"><a href="Characterization.html#exécutions-2"><i class="fa fa-check"></i><b>11.8.2</b> Exécutions</a></li>
+<li class="chapter" data-level="11.8.3" data-path="Characterization.html"><a href="Characterization.html#visualisation-des-résultats-1"><i class="fa fa-check"></i><b>11.8.3</b> Visualisation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="Characterization.html"><a href="Characterization.html#résumé-9"><i class="fa fa-check"></i><b>11.9</b> Résumé</a></li>
+<li class="chapter" data-level="11.10" data-path="Characterization.html"><a href="Characterization.html#exercices-6"><i class="fa fa-check"></i><b>11.10</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html"><i class="fa fa-check"></i><b>12</b> Estimation au Niveau de la Population</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#CohortMethod"><i class="fa fa-check"></i><b>12.1</b> La Méthode Cohorte</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension"><i class="fa fa-check"></i><b>12.1.1</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.1.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#VariableSelection"><i class="fa fa-check"></i><b>12.1.2</b> Sélection des Variables</a></li>
+<li class="chapter" data-level="12.1.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#caliper"><i class="fa fa-check"></i><b>12.1.3</b> Caliper</a></li>
+<li class="chapter" data-level="12.1.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#chevauchement-scores-de-préférence"><i class="fa fa-check"></i><b>12.1.4</b> Chevauchement : Scores de Préférence</a></li>
+<li class="chapter" data-level="12.1.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre"><i class="fa fa-check"></i><b>12.1.5</b> Équilibre</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-cas-témoin"><i class="fa fa-check"></i><b>12.2</b> Le Design Cas-Témoin</a></li>
+<li class="chapter" data-level="12.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#le-design-de-cas-croisés"><i class="fa fa-check"></i><b>12.3</b> Le Design de Cas-Croisés</a></li>
+<li class="chapter" data-level="12.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#concevoir-une-étude-sur-lhypertension"><i class="fa fa-check"></i><b>12.4</b> Concevoir une Étude sur l’Hypertension</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définition-du-problème-1"><i class="fa fa-check"></i><b>12.4.1</b> Définition du Problème</a></li>
+<li class="chapter" data-level="12.4.2" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#cible-et-comparateur"><i class="fa fa-check"></i><b>12.4.2</b> Cible et Comparateur</a></li>
+<li class="chapter" data-level="12.4.3" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résultat-1"><i class="fa fa-check"></i><b>12.4.3</b> Résultat</a></li>
+<li class="chapter" data-level="12.4.4" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#temps-à-risque-1"><i class="fa fa-check"></i><b>12.4.4</b> Temps à Risque</a></li>
+<li class="chapter" data-level="12.4.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèle"><i class="fa fa-check"></i><b>12.4.5</b> Modèle</a></li>
+<li class="chapter" data-level="12.4.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-de-létude"><i class="fa fa-check"></i><b>12.4.6</b> Résumé de l’Étude</a></li>
+<li class="chapter" data-level="12.4.7" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#questions-de-contrôle"><i class="fa fa-check"></i><b>12.4.7</b> Questions de Contrôle</a></li>
+<li class="chapter" data-level="12.4.8" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#ComparisonSettings"><i class="fa fa-check"></i><b>12.4.8</b> Paramètres de cohorte comparative</a></li>
+<li class="chapter" data-level="12.4.9" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#paramètres-danalyse-de-lestimation-des-effets"><i class="fa fa-check"></i><b>12.4.9</b> Paramètres d’analyse de l’estimation des effets</a></li>
+<li class="chapter" data-level="12.4.10" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#instanciation-de-la-cohorte"><i class="fa fa-check"></i><b>12.4.10</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="12.4.11" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#extraction-des-données-1"><i class="fa fa-check"></i><b>12.4.11</b> Extraction des Données</a></li>
+<li class="chapter" data-level="12.4.12" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#définir-la-population-de-létude"><i class="fa fa-check"></i><b>12.4.12</b> Définir la Population de l’Étude</a></li>
+<li class="chapter" data-level="12.4.13" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-1"><i class="fa fa-check"></i><b>12.4.13</b> Scores de Propension</a></li>
+<li class="chapter" data-level="12.4.14" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#modèles-de-résultats"><i class="fa fa-check"></i><b>12.4.14</b> Modèles de Résultats</a></li>
+<li class="chapter" data-level="12.4.15" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#MultipleAnalyses"><i class="fa fa-check"></i><b>12.4.15</b> Exécuter des Analyses Multiples</a></li>
+<li class="chapter" data-level="12.4.16" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#scores-de-propension-et-modèle"><i class="fa fa-check"></i><b>12.4.16</b> Scores de Propension et Modèle</a></li>
+<li class="chapter" data-level="12.4.17" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#équilibre-des-covariables"><i class="fa fa-check"></i><b>12.4.17</b> Équilibre des Covariables</a></li>
+<li class="chapter" data-level="12.4.18" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#suivi-et-puissance"><i class="fa fa-check"></i><b>12.4.18</b> Suivi et Puissance</a></li>
+<li class="chapter" data-level="12.4.19" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#kaplan-meier"><i class="fa fa-check"></i><b>12.4.19</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="12.4.20" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#estimation-de-la-taille-de-leffet"><i class="fa fa-check"></i><b>12.4.20</b> Estimation de la Taille de l’Effet</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#résumé-10"><i class="fa fa-check"></i><b>12.5</b> Résumé</a></li>
+<li class="chapter" data-level="12.6" data-path="PopulationLevelEstimation.html"><a href="PopulationLevelEstimation.html#exercices-7"><i class="fa fa-check"></i><b>12.6</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html"><i class="fa fa-check"></i><b>13</b> Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#le-problème-de-prédiction"><i class="fa fa-check"></i><b>13.1</b> Le Problème de Prédiction</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exemple-dextraction-de-données"><i class="fa fa-check"></i><b>13.1.1</b> Exemple d’extraction de données</a></li>
+<li class="chapter" data-level="13.1.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#négatif-vs-manquant"><i class="fa fa-check"></i><b>13.1.2</b> Négatif vs Manquant</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#modelFitting"><i class="fa fa-check"></i><b>13.2</b> Ajuster le modèle</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#régression-logistique-régularisée"><i class="fa fa-check"></i><b>13.2.1</b> Régression Logistique Régularisée</a></li>
+<li class="chapter" data-level="13.2.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#machines-à-gradient-boosting"><i class="fa fa-check"></i><b>13.2.2</b> Machines à Gradient Boosting</a></li>
+<li class="chapter" data-level="13.2.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#forêt-aléatoire"><i class="fa fa-check"></i><b>13.2.3</b> Forêt Aléatoire</a></li>
+<li class="chapter" data-level="13.2.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>13.2.4</b> K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="13.2.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#naive-bayes"><i class="fa fa-check"></i><b>13.2.5</b> Naive Bayes</a></li>
+<li class="chapter" data-level="13.2.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#adaboost"><i class="fa fa-check"></i><b>13.2.6</b> AdaBoost</a></li>
+<li class="chapter" data-level="13.2.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#arbre-de-décision"><i class="fa fa-check"></i><b>13.2.7</b> Arbre de Décision</a></li>
+<li class="chapter" data-level="13.2.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#perceptron-multi-couches"><i class="fa fa-check"></i><b>13.2.8</b> Perceptron Multi-couches</a></li>
+<li class="chapter" data-level="13.2.9" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#apprentissage-profond"><i class="fa fa-check"></i><b>13.2.9</b> Apprentissage profond</a></li>
+<li class="chapter" data-level="13.2.10" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#autres-algorithmes"><i class="fa fa-check"></i><b>13.2.10</b> Autres Algorithmes</a></li>
+<li class="chapter" data-level="13.2.11" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#types-dévaluation"><i class="fa fa-check"></i><b>13.2.11</b> Types d’Évaluation</a></li>
+<li class="chapter" data-level="13.2.12" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance"><i class="fa fa-check"></i><b>13.2.12</b> Mesures de Performance</a></li>
+<li class="chapter" data-level="13.2.13" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-du-problème-3"><i class="fa fa-check"></i><b>13.2.13</b> Définition du problème</a></li>
+<li class="chapter" data-level="13.2.14" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#définition-de-la-population-de-létude"><i class="fa fa-check"></i><b>13.2.14</b> Définition de la population de l’étude</a></li>
+<li class="chapter" data-level="13.2.15" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-de-développement-du-modèle"><i class="fa fa-check"></i><b>13.2.15</b> Paramètres de développement du modèle</a></li>
+<li class="chapter" data-level="13.2.16" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#évaluation-du-modèle"><i class="fa fa-check"></i><b>13.2.16</b> Évaluation du modèle</a></li>
+<li class="chapter" data-level="13.2.17" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-de-létude-1"><i class="fa fa-check"></i><b>13.2.17</b> Résumé de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#mise-en-œuvre-de-létude-dans-atlas"><i class="fa fa-check"></i><b>13.3</b> Mise en œuvre de l’étude dans ATLAS</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-du-problème-de-prédiction"><i class="fa fa-check"></i><b>13.3.1</b> Paramètres du problème de prédiction</a></li>
+<li class="chapter" data-level="13.3.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#paramètres-danalyse"><i class="fa fa-check"></i><b>13.3.2</b> Paramètres d’analyse</a></li>
+<li class="chapter" data-level="13.3.3" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#instanciation-de-la-cohorte-1"><i class="fa fa-check"></i><b>13.3.3</b> Instanciation de la Cohorte</a></li>
+<li class="chapter" data-level="13.3.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#extraction-de-données"><i class="fa fa-check"></i><b>13.3.4</b> Extraction de Données</a></li>
+<li class="chapter" data-level="13.3.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#critères-dinclusion-supplémentaires"><i class="fa fa-check"></i><b>13.3.5</b> Critères d’Inclusion Supplémentaires</a></li>
+<li class="chapter" data-level="13.3.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#développement-du-modèle"><i class="fa fa-check"></i><b>13.3.6</b> Développement du Modèle</a></li>
+<li class="chapter" data-level="13.3.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-interne"><i class="fa fa-check"></i><b>13.3.7</b> Validation Interne</a></li>
+<li class="chapter" data-level="13.3.8" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#validation-externe"><i class="fa fa-check"></i><b>13.3.8</b> Validation Externe</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#diffusion-des-résultats"><i class="fa fa-check"></i><b>13.4</b> Diffusion des Résultats</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#performance-du-modèle"><i class="fa fa-check"></i><b>13.4.1</b> Performance du Modèle</a></li>
+<li class="chapter" data-level="13.4.2" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#comparaison-des-modèles"><i class="fa fa-check"></i><b>13.4.2</b> Comparaison des Modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#fonctionnalités-additionnelles-de-prédiction-au-niveau-du-patient"><i class="fa fa-check"></i><b>13.5</b> Fonctionnalités Additionnelles de Prédiction au Niveau du Patient</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#génération-darticle-de-journal"><i class="fa fa-check"></i><b>13.5.1</b> Génération d’Article de Journal</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#résumé-11"><i class="fa fa-check"></i><b>13.6</b> Résumé</a></li>
+<li class="chapter" data-level="13.7" data-path="PatientLevelPrediction.html"><a href="PatientLevelPrediction.html#exercices-8"><i class="fa fa-check"></i><b>13.7</b> Exercices</a></li>
+</ul></li>
+<li class="part"><span><b>IV Qualité des preuves</b></span></li>
+<li class="chapter" data-level="14" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html"><i class="fa fa-check"></i><b>14</b> Qualité des preuves</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#attributs-des-preuves-fiables"><i class="fa fa-check"></i><b>14.1</b> Attributs des preuves fiables</a></li>
+<li class="chapter" data-level="14.2" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#comprendre-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.2</b> Comprendre la qualité des preuves</a></li>
+<li class="chapter" data-level="14.3" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#communiquer-la-qualité-des-preuves"><i class="fa fa-check"></i><b>14.3</b> Communiquer la qualité des preuves</a></li>
+<li class="chapter" data-level="14.4" data-path="EvidenceQuality.html"><a href="EvidenceQuality.html#résumé-12"><i class="fa fa-check"></i><b>14.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="DataQuality.html"><a href="DataQuality.html"><i class="fa fa-check"></i><b>15</b> Qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="DataQuality.html"><a href="DataQuality.html#sources-de-problèmes-de-qualité-des-données"><i class="fa fa-check"></i><b>15.1</b> Sources de problèmes de qualité des données</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-de-la-qualité-des-données"><i class="fa fa-check"></i><b>15.1.1</b> Vérifications de la qualité des données</a></li>
+<li class="chapter" data-level="15.1.2" data-path="DataQuality.html"><a href="DataQuality.html#etlUnitTests"><i class="fa fa-check"></i><b>15.1.2</b> Tests unitaires ETL</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude"><i class="fa fa-check"></i><b>15.2</b> Vérifications Spécifiques à l’Étude</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="DataQuality.html"><a href="DataQuality.html#vérification-des-mappings"><i class="fa fa-check"></i><b>15.2.1</b> Vérification des Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="DataQuality.html"><a href="DataQuality.html#achillesInPractice"><i class="fa fa-check"></i><b>15.3</b> ACHILLES en Pratique</a></li>
+<li class="chapter" data-level="15.4" data-path="DataQuality.html"><a href="DataQuality.html#dqdInPractice"><i class="fa fa-check"></i><b>15.4</b> Tableau de Bord de Qualité des Données en Pratique</a></li>
+<li class="chapter" data-level="15.5" data-path="DataQuality.html"><a href="DataQuality.html#vérifications-spécifiques-à-létude-en-pratique"><i class="fa fa-check"></i><b>15.5</b> Vérifications Spécifiques à l’Étude en Pratique</a></li>
+<li class="chapter" data-level="15.6" data-path="DataQuality.html"><a href="DataQuality.html#résumé-13"><i class="fa fa-check"></i><b>15.6</b> Résumé</a></li>
+<li class="chapter" data-level="15.7" data-path="DataQuality.html"><a href="DataQuality.html#exercices-9"><i class="fa fa-check"></i><b>15.7</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html"><i class="fa fa-check"></i><b>16</b> Validité Clinique</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#CharacteristicsOfDatabase"><i class="fa fa-check"></i><b>16.1</b> Caractéristiques des Bases de Données de Soins de Santé</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#métriques-dévaluation-des-cohortes"><i class="fa fa-check"></i><b>16.1.1</b> Métriques d’évaluation des cohortes</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2</b> Vérification des dossiers sources</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#exemple-de-vérification-des-dossiers-sources"><i class="fa fa-check"></i><b>16.2.1</b> Exemple de vérification des dossiers sources</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#phevaluator"><i class="fa fa-check"></i><b>16.3</b> PheValuator</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#validation-dexemple-avec-phevaluator"><i class="fa fa-check"></i><b>16.3.1</b> Validation d’Exemple avec PheValuator</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="ClinicalValidity.html"><a href="ClinicalValidity.html#résumé-14"><i class="fa fa-check"></i><b>16.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html"><i class="fa fa-check"></i><b>17</b> Validité du logiciel</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validité-du-code-détude"><i class="fa fa-check"></i><b>17.1</b> Validité du code d’étude</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#automation"><i class="fa fa-check"></i><b>17.1.1</b> L’automatisation comme exigence pour la reproductibilité</a></li>
+<li class="chapter" data-level="17.1.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#meilleures-pratiques-de-programmation"><i class="fa fa-check"></i><b>17.1.2</b> Meilleures pratiques de programmation</a></li>
+<li class="chapter" data-level="17.1.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#validation-du-code"><i class="fa fa-check"></i><b>17.1.3</b> Validation du code</a></li>
+<li class="chapter" data-level="17.1.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#utilisation-de-la-methods-library"><i class="fa fa-check"></i><b>17.1.4</b> Utilisation de la Methods Library</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#processus-de-développement-de-logiciels-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.2</b> Processus de Développement de Logiciels de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#gestion-du-code-source"><i class="fa fa-check"></i><b>17.2.1</b> Gestion du Code Source</a></li>
+<li class="chapter" data-level="17.2.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#documentation-2"><i class="fa fa-check"></i><b>17.2.2</b> Documentation</a></li>
+<li class="chapter" data-level="17.2.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#disponibilité-des-versions-actuelles-et-historiques"><i class="fa fa-check"></i><b>17.2.3</b> Disponibilité des Versions Actuelles et Historiques</a></li>
+<li class="chapter" data-level="17.2.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#maintenance-support-et-retraite"><i class="fa fa-check"></i><b>17.2.4</b> Maintenance, Support et Retraite</a></li>
+<li class="chapter" data-level="17.2.5" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#personnel-qualifié"><i class="fa fa-check"></i><b>17.2.5</b> Personnel Qualifié</a></li>
+<li class="chapter" data-level="17.2.6" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#sécurité-physique-et-logique"><i class="fa fa-check"></i><b>17.2.6</b> Sécurité Physique et Logique</a></li>
+<li class="chapter" data-level="17.2.7" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#reprise-après-sinistre"><i class="fa fa-check"></i><b>17.2.7</b> Reprise Après Sinistre</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#tests-de-la-bibliothèque-de-méthodes"><i class="fa fa-check"></i><b>17.3</b> Tests de la Bibliothèque de Méthodes</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#test-unitaire"><i class="fa fa-check"></i><b>17.3.1</b> Test Unitaire</a></li>
+<li class="chapter" data-level="17.3.2" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#simulation"><i class="fa fa-check"></i><b>17.3.2</b> Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="SoftwareValidity.html"><a href="SoftwareValidity.html#résumé-15"><i class="fa fa-check"></i><b>17.4</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="MethodValidity.html"><a href="MethodValidity.html"><i class="fa fa-check"></i><b>18</b> Validité de la Méthode</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-spécifiques-au-plan-détude"><i class="fa fa-check"></i><b>18.1</b> Diagnostics Spécifiques au Plan d’Étude</a></li>
+<li class="chapter" data-level="18.2" data-path="MethodValidity.html"><a href="MethodValidity.html#diagnostics-for-all-estimation"><i class="fa fa-check"></i><b>18.2</b> Diagnostics for All Estimation</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="MethodValidity.html"><a href="MethodValidity.html#NegativeControls"><i class="fa fa-check"></i><b>18.2.1</b> Contrôles Négatifs</a></li>
+<li class="chapter" data-level="18.2.2" data-path="MethodValidity.html"><a href="MethodValidity.html#PositiveControls"><i class="fa fa-check"></i><b>18.2.2</b> Contrôles Positifs</a></li>
+<li class="chapter" data-level="18.2.3" data-path="MethodValidity.html"><a href="MethodValidity.html#metrics"><i class="fa fa-check"></i><b>18.2.3</b> Évaluation Empirique</a></li>
+<li class="chapter" data-level="18.2.4" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-valeurs-de-p"><i class="fa fa-check"></i><b>18.2.4</b> Calibration des valeurs de p</a></li>
+<li class="chapter" data-level="18.2.5" data-path="MethodValidity.html"><a href="MethodValidity.html#ConfidenceIntervalCalibration"><i class="fa fa-check"></i><b>18.2.5</b> Calibration des Intervalles de Confiance</a></li>
+<li class="chapter" data-level="18.2.6" data-path="MethodValidity.html"><a href="MethodValidity.html#sélection-des-contrôles-négatifs"><i class="fa fa-check"></i><b>18.2.6</b> Sélection des contrôles négatifs</a></li>
+<li class="chapter" data-level="18.2.7" data-path="MethodValidity.html"><a href="MethodValidity.html#inclusion-des-contrôles"><i class="fa fa-check"></i><b>18.2.7</b> Inclusion des contrôles</a></li>
+<li class="chapter" data-level="18.2.8" data-path="MethodValidity.html"><a href="MethodValidity.html#performance-empirique"><i class="fa fa-check"></i><b>18.2.8</b> Performance empirique</a></li>
+<li class="chapter" data-level="18.2.9" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-de-la-valeur-p"><i class="fa fa-check"></i><b>18.2.9</b> Calibration de la valeur P</a></li>
+<li class="chapter" data-level="18.2.10" data-path="MethodValidity.html"><a href="MethodValidity.html#calibration-des-intervalles-de-confiance"><i class="fa fa-check"></i><b>18.2.10</b> Calibration des intervalles de confiance</a></li>
+<li class="chapter" data-level="18.2.11" data-path="MethodValidity.html"><a href="MethodValidity.html#hétérogénéité-entre-les-bases-de-données"><i class="fa fa-check"></i><b>18.2.11</b> Hétérogénéité entre les bases de données</a></li>
+<li class="chapter" data-level="18.2.12" data-path="MethodValidity.html"><a href="MethodValidity.html#analyses-de-sensibilité"><i class="fa fa-check"></i><b>18.2.12</b> Analyses de sensibilité</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="MethodValidity.html"><a href="MethodValidity.html#résumé-16"><i class="fa fa-check"></i><b>18.3</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="partie-études-ohdsi.html"><a href="partie-études-ohdsi.html"><i class="fa fa-check"></i>(PARTIE) Études OHDSI</a></li>
+<li class="chapter" data-level="19" data-path="StudySteps.html"><a href="StudySteps.html"><i class="fa fa-check"></i><b>19</b> Étapes de l’étude</a>
+<ul>
+<li class="chapter" data-level="19.0.1" data-path="StudySteps.html"><a href="StudySteps.html#définition-de-létude-observatoire"><i class="fa fa-check"></i><b>19.0.1</b> Définition de l’Étude Observatoire</a></li>
+<li class="chapter" data-level="19.0.2" data-path="StudySteps.html"><a href="StudySteps.html#pré-spécification-de-la-conception-de-létude"><i class="fa fa-check"></i><b>19.0.2</b> Pré-Spécification de la Conception de l’Étude</a></li>
+<li class="chapter" data-level="19.0.3" data-path="StudySteps.html"><a href="StudySteps.html#protocole"><i class="fa fa-check"></i><b>19.0.3</b> Protocole</a></li>
+<li class="chapter" data-level="19.0.4" data-path="StudySteps.html"><a href="StudySteps.html#analyses-standardisées"><i class="fa fa-check"></i><b>19.0.4</b> Analyses Standardisées</a></li>
+<li class="chapter" data-level="19.0.5" data-path="StudySteps.html"><a href="StudySteps.html#paquets-détudes"><i class="fa fa-check"></i><b>19.0.5</b> Paquets d’Études</a></li>
+<li class="chapter" data-level="19.0.6" data-path="StudySteps.html"><a href="StudySteps.html#les-données-sous-jacentes-au-cdm"><i class="fa fa-check"></i><b>19.0.6</b> Les Données Sous-Jacentes au CDM</a></li>
+<li class="chapter" data-level="19.1" data-path="StudySteps.html"><a href="StudySteps.html#étapes-de-létude-en-détail"><i class="fa fa-check"></i><b>19.1</b> Étapes de l’Étude en Détail</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="StudySteps.html"><a href="StudySteps.html#définir-la-question"><i class="fa fa-check"></i><b>19.1.1</b> Définir la Question</a></li>
+<li class="chapter" data-level="19.1.2" data-path="StudySteps.html"><a href="StudySteps.html#examiner-la-disponibilité-et-la-qualité-des-données"><i class="fa fa-check"></i><b>19.1.2</b> Examiner la Disponibilité et la Qualité des Données</a></li>
+<li class="chapter" data-level="19.1.3" data-path="StudySteps.html"><a href="StudySteps.html#populations-détude"><i class="fa fa-check"></i><b>19.1.3</b> Populations d’Étude</a></li>
+<li class="chapter" data-level="19.1.4" data-path="StudySteps.html"><a href="StudySteps.html#Feasibility"><i class="fa fa-check"></i><b>19.1.4</b> Faisabilité et Diagnostics</a></li>
+<li class="chapter" data-level="19.1.5" data-path="StudySteps.html"><a href="StudySteps.html#finaliser-le-protocole-et-le-paquet-détude"><i class="fa fa-check"></i><b>19.1.5</b> Finaliser le Protocole et le Paquet d’Étude</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="NetworkResearch.html"><a href="NetworkResearch.html"><i class="fa fa-check"></i><b>20</b> OHDSI Network Research</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#ohdsi-en-tant-que-réseau-de-recherche"><i class="fa fa-check"></i><b>20.1</b> OHDSI en tant que Réseau de Recherche</a></li>
+<li class="chapter" data-level="20.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2</b> Études en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#motivations-pour-mener-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.1</b> Motivations pour mener une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#définition-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.2</b> Définition d’une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-de-conception-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.3</b> Considérations de conception pour une étude en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.2.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#considérations-logistiques-pour-une-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.2.4</b> Considérations logistiques pour une étude en réseau OHDSI</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-dune-étude-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.3</b> Exécution d’une étude en réseau OHDSI</a>
+<ul>
+<li class="chapter" data-level="20.3.1" data-path="NetworkResearch.html"><a href="NetworkResearch.html#conception-et-faisabilité-de-létude"><i class="fa fa-check"></i><b>20.3.1</b> Conception et faisabilité de l’étude</a></li>
+<li class="chapter" data-level="20.3.2" data-path="NetworkResearch.html"><a href="NetworkResearch.html#exécution-de-létude"><i class="fa fa-check"></i><b>20.3.2</b> Exécution de l’étude</a></li>
+<li class="chapter" data-level="20.3.3" data-path="NetworkResearch.html"><a href="NetworkResearch.html#diffusion-et-publication-des-résultats"><i class="fa fa-check"></i><b>20.3.3</b> Diffusion et publication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="NetworkResearch.html"><a href="NetworkResearch.html#meilleures-pratiques-pour-les-études-en-réseau-ohdsi"><i class="fa fa-check"></i><b>20.4</b> Meilleures pratiques pour les études en réseau OHDSI</a></li>
+<li class="chapter" data-level="20.5" data-path="NetworkResearch.html"><a href="NetworkResearch.html#résumé-17"><i class="fa fa-check"></i><b>20.5</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Glossary.html"><a href="Glossary.html"><i class="fa fa-check"></i><b>21</b> Glossaire</a>
+<ul>
+<li class="chapter" data-level="21.0.1" data-path="Glossary.html"><a href="Glossary.html#détection-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.1</b> Détection des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.2" data-path="Glossary.html"><a href="Glossary.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>21.0.2</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="21.0.3" data-path="Glossary.html"><a href="Glossary.html#cas-pratique"><i class="fa fa-check"></i><b>21.0.3</b> Cas pratique</a></li>
+<li class="chapter" data-level="21.0.4" data-path="Glossary.html"><a href="Glossary.html#conclusion"><i class="fa fa-check"></i><b>21.0.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html"><i class="fa fa-check"></i><b>22</b> Définitions de cohortes</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitors"><i class="fa fa-check"></i><b>22.1</b> Inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.2" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#AceInhibitorsMono"><i class="fa fa-check"></i><b>22.2</b> Nouveaux utilisateurs de monothérapie avec des inhibiteurs de l’ECA</a></li>
+<li class="chapter" data-level="22.3" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Ami"><i class="fa fa-check"></i><b>22.3</b> Infarctus du myocarde aigu (IMA)</a></li>
+<li class="chapter" data-level="22.4" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#Angioedema"><i class="fa fa-check"></i><b>22.4</b> Angioedème</a></li>
+<li class="chapter" data-level="22.5" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ThiazidesMono"><i class="fa fa-check"></i><b>22.5</b> Nouveaux Utilisateurs de Diurétiques de Type Thiazidique en Monothérapie</a></li>
+<li class="chapter" data-level="22.6" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN1yrFO"><i class="fa fa-check"></i><b>22.6</b> Patients Initiating First-Line Therapy for Hypertension</a></li>
+<li class="chapter" data-level="22.7" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#HTN3yrFO"><i class="fa fa-check"></i><b>22.7</b> Patients Initiating First-Line Therapy for Hypertension With &gt;3 Yr Follow-Up</a></li>
+<li class="chapter" data-level="22.8" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ACEiUse"><i class="fa fa-check"></i><b>22.8</b> ACE Inhibitor Use</a></li>
+<li class="chapter" data-level="22.9" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#ARBUse"><i class="fa fa-check"></i><b>22.9</b> Angiotensin Receptor Blocker (ARB) Use</a></li>
+<li class="chapter" data-level="22.10" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#THZUse"><i class="fa fa-check"></i><b>22.10</b> Thiazide Or Thiazide-Like Diuretic Use</a></li>
+<li class="chapter" data-level="22.11" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#dCCBUse"><i class="fa fa-check"></i><b>22.11</b> Dihydropyridine Calcium Channel Blocker (dCCB) Use</a></li>
+<li class="chapter" data-level="22.12" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#BBUse"><i class="fa fa-check"></i><b>22.12</b> Utilisation des Bêta-bloquants</a></li>
+<li class="chapter" data-level="22.13" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DLoopUse"><i class="fa fa-check"></i><b>22.13</b> Utilisation des Diurétiques - Anse</a></li>
+<li class="chapter" data-level="22.14" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#DPUse"><i class="fa fa-check"></i><b>22.14</b> Utilisation des Diurétiques - Épargneurs de potassium</a></li>
+<li class="chapter" data-level="22.15" data-path="CohortDefinitions.html"><a href="CohortDefinitions.html#A1BUse"><i class="fa fa-check"></i><b>22.15</b> Utilisation des Bloqueurs Alpha-1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html"><i class="fa fa-check"></i><b>23</b> Contrôles négatifs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#AceiThzNsc"><i class="fa fa-check"></i><b>23.1</b> ACEi et THZ</a></li>
+<li class="chapter" data-level="23.2" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#ProtocolTemplate"><i class="fa fa-check"></i><b>23.2</b> # Modèle de protocole</a></li>
+<li class="chapter" data-level="23.3" data-path="NegativeControlsAppendix.html"><a href="NegativeControlsAppendix.html#na"><i class="fa fa-check"></i><b>23.3</b> NA</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html"><i class="fa fa-check"></i><b>24</b> Réponses suggérées</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cdmanswers"><i class="fa fa-check"></i><b>24.1</b> Le modèle de données commun</a></li>
+<li class="chapter" data-level="24.2" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Vocabanswers"><i class="fa fa-check"></i><b>24.2</b> Vocabulaires standardisés</a></li>
+<li class="chapter" data-level="24.3" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Etlanswers"><i class="fa fa-check"></i><b>24.3</b> Extraction, transformation et chargement</a></li>
+<li class="chapter" data-level="24.4" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#UseCasesanswers"><i class="fa fa-check"></i><b>24.4</b> Cas d’utilisation des analyses de données</a></li>
+<li class="chapter" data-level="24.5" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Cohortsanswers"><i class="fa fa-check"></i><b>24.5</b> Définir des Cohortes</a></li>
+<li class="chapter" data-level="24.6" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Characterizationanswers"><i class="fa fa-check"></i><b>24.6</b> Caractérisation</a></li>
+<li class="chapter" data-level="24.7" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Pleanswers"><i class="fa fa-check"></i><b>24.7</b> Estimation Au Niveau De La Population</a></li>
+<li class="chapter" data-level="24.8" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#Plpanswers"><i class="fa fa-check"></i><b>24.8</b> Prédiction Au Niveau Des Patients</a></li>
+<li class="chapter" data-level="24.9" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#DataQualityanswers"><i class="fa fa-check"></i><b>24.9</b> Qualité des données</a></li>
+<li class="chapter" data-level="24.10" data-path="SuggestedAnswers.html"><a href="SuggestedAnswers.html#section"><i class="fa fa-check"></i><b>24.10</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a>
+<ul>
+<li class="chapter" data-level="24.11" data-path="références.html"><a href="références.html#non-disponible"><i class="fa fa-check"></i><b>24.11</b> Non disponible</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Livre d’OHDSI</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="StandardizedVocabularies" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapitre 5</span> Vocabulaire normalisé<a href="StandardizedVocabularies.html#StandardizedVocabularies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p></p>
+<p><em>Chefs de chapitre : Christian Reich &amp; Anna Ostropolets</em></p>
+<p>Les Vocabulaire normalisé OMOP, souvent désignés simplement sous le terme « le Vocabulaire », sont une partie fondamentale du réseau de recherche OHDSI, et une partie intégrante du Modèle de Données Commun (CDM). Ils permettent la standardisation des méthodes, des définitions et des résultats en définissant le contenu des données, ouvrant la voie à une véritable recherche et analyse en réseau à distance (derrière le pare-feu). Habituellement, trouver et interpréter le contenu des données de santé observationnelles, qu’il s’agisse de données structurées en utilisant des systèmes de codage ou consignées dans du texte libre, est complètement laissé aux chercheurs, qui doivent faire face à une myriade de façons différentes de décrire les événements cliniques. OHDSI nécessite une harmonisation non seulement à un format standardisé, mais aussi à un contenu standard rigoureux.</p>
+<p>Dans ce chapitre, nous décrivons d’abord les principaux principes des Vocabulaire normalisé, leurs composantes, et les règles, conventions et quelques situations typiques, qui sont toutes nécessaires pour comprendre et utiliser cette ressource fondamentale. Nous pointons également les domaines où le support de la communauté est nécessaire pour l’améliorer continuellement.</p>
+<div id="pourquoi-les-vocabulaires-et-pourquoi-les-normaliser" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Pourquoi les vocabulaires, et pourquoi les normaliser<a href="StandardizedVocabularies.html#pourquoi-les-vocabulaires-et-pourquoi-les-normaliser" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les vocabulaires médicaux remontent aux Bills of Mortality dans le Londres médiéval pour gérer les épidémies de peste et d’autres maladies (voir Figure <a href="StandardizedVocabularies.html#fig:bill">5.1</a>). </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bill"></span>
+<img src="images/StandardizedVocabularies/bill.jpg" alt="1660 London Bill of Mortality, showing the cause of death for deceased inhabitants using a classification system of 62 diseases known at the time." width="100%" />
+<p class="caption">
+Figure 5.1: 1660 London Bill of Mortality, showing the cause of death for deceased inhabitants using a classification system of 62 diseases known at the time.
+</p>
+</div>
+<p>Depuis lors, les classifications ont considérablement augmenté en taille et en complexité et se sont étendues à d’autres aspects des soins de santé, tels que les procédures et services, les médicaments, les dispositifs médicaux, etc. Les principes de base sont restés les mêmes : ce sont des vocabulaires contrôlés, des terminologies, des hiérarchies ou des ontologies qu’une certaine communauté de soins de santé accepte dans le but de capturer, de classer et d’analyser les données des patients. Bon nombre de ces vocabulaires sont maintenus par des agences publiques et gouvernementales ayant un mandat à long terme pour ce faire. Par exemple, l’Organisation mondiale de la Santé (OMS) produit la Classification Internationale des Maladies (ICD) avec l’ajout récent de sa 11e révision (ICD11). Les gouvernements locaux créent des versions spécifiques à chaque pays, telles que ICD10CM (États-Unis), ICD10GM (Allemagne), etc. Les gouvernements contrôlent également la commercialisation et la vente de médicaments et maintiennent des répertoires nationaux de ces médicaments certifiés. Les vocabulaires sont également utilisés dans le secteur privé, soit comme produits commerciaux, soit pour un usage interne, tels que les systèmes de dossiers de santé électroniques (EHR) ou pour les déclarations de sinistres d’assurance maladie.</p>
+<p>En conséquence, chaque pays, région, système de soins de santé et institution tend à avoir ses propres classifications qui ne seraient probablement pertinentes que là où elles sont utilisées. Cette myriade de vocabulaires empêche l’interopérabilité des systèmes dans lesquels ils sont utilisés. La standardisation est la clé qui permet l’échange de données des patients, ouvre l’analyse des données de santé à un niveau mondial et permet une recherche systématique et standardisée, y compris la caractérisation des performances et l’évaluation de la qualité. Pour résoudre ce problème, des organisations multinationales ont vu le jour et ont commencé à créer des normes étendues, telles que l’OMS mentionnée ci-dessus et la Nomenclature standard de la médecine (SNOMED) ou les Identifiants et codes logiques d’observation (LOINC). Aux États-Unis, le Comité des normes informatiques de santé (HITAC) recommande l’utilisation de SNOMED, LOINC et du vocabulaire des médicaments RxNorm comme normes au Coordinateur national de l’informatique de santé (ONC) pour utilisation dans une plate-forme commune pour l’échange d’informations sanitaires à l’échelle nationale entre divers organismes.</p>
+<p>OHDSI a développé le CDM OMOP, une norme mondiale pour la recherche observationnelle. Dans le cadre du CDM, les Vocabulaire normalisé OMOP sont disponibles à deux fins principales :</p>
+<ul>
+<li>Référentiel commun de tous les vocabulaires utilisés dans la communauté</li>
+<li>Standardisation et cartographie pour une utilisation en recherche</li>
+</ul>
+<p>Les Vocabulaire normalisé sont disponibles pour la communauté gratuitement et <strong>doivent être utilisés</strong> pour l’instance CDM OMOP <strong>comme sa table de référence obligatoire</strong>.</p>
+<div id="construire-les-vocabulaire-normalisé" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Construire les Vocabulaire normalisé<a href="StandardizedVocabularies.html#construire-les-vocabulaire-normalisé" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tous les vocabulaires des Vocabulaire normalisé sont consolidés dans le même format commun. Cela soulage les chercheurs de la nécessité de comprendre et de manipuler plusieurs formats différents et des conventions de cycle de vie des vocabulaires d’origine. Tous les vocabulaires sont régulièrement rafraîchis et incorporés en utilisant le système Pallas.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Il est construit et géré par l’équipe des vocabulaires OHDSI, qui fait partie du groupe de travail général CDM OMOP. Si vous trouvez des erreurs, veuillez les signaler et aider à améliorer notre ressource en postant sur les forums OHDSI<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> ou sur la page Github du CDM.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> </p>
+</div>
+<div id="accessVocabularies" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Accès aux Vocabulaire normalisé<a href="StandardizedVocabularies.html#accessVocabularies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour obtenir les Vocabulaire normalisé, vous n’avez pas besoin d’exécuter Pallas vous-même. Au lieu de cela, vous pouvez télécharger la dernière version d’ATHENA<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> et la charger dans votre base de données locale. ATHENA permet également une recherche facettée des Vocabulaires. </p>
+<p>Pour télécharger un fichier zip contenant toutes les tables des Vocabulaire normalisé, sélectionnez tous les vocabulaires dont vous avez besoin pour votre CDM OMOP. Les vocabulaires avec Concepts standard (voir Section <a href="StandardizedVocabularies.html#standardConcepts">5.1.9</a>) et utilisation très courante sont pré-sélectionnés. Ajoutez les vocabulaires utilisés dans vos données sources. Les vocabulaires propriétaires n’ont pas de bouton de sélection. Cliquez sur le bouton « Licence requise » pour incorporer un tel vocabulaire dans votre liste. L’équipe de vocabulaire vous contactera, vous demandera de démontrer votre licence ou vous aidera à prendre contact avec les bonnes personnes pour en obtenir une.</p>
+</div>
+<div id="source-des-vocabulaires-adopter-ou-construire" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Source des vocabulaires : Adopter ou Construire<a href="StandardizedVocabularies.html#source-des-vocabulaires-adopter-ou-construire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OHDSI préfère généralement adopter des vocabulaires existants, plutôt que de les construire de novo, car (i) de nombreux vocabulaires ont déjà été utilisés dans des données observationnelles dans la communauté, et (ii) la construction et la maintenance de vocabulaires est complexe et nécessite l’apport de nombreuses parties prenantes sur de longues périodes pour arriver à maturité. Pour cette raison, des organisations dédiées fournissent des vocabulaires, qui sont soumis à un cycle de vie de génération, dépréciation, fusion et scission (voir Section <a href="StandardizedVocabularies.html#conceptLifeCycle">5.1.13</a>). Actuellement, OHDSI ne produit que des vocabulaires administratifs internes comme les Types de Concepts (par ex. concepts de type de condition). La seule exception est l’Extension RxNorm, un vocabulaire couvrant les médicaments qui ne sont utilisés qu’en dehors des États-Unis (voir Section <a href="StandardizedVocabularies.html#rxNormExtension">5.5.9</a>).
+## Concepts</p>
+<p>Tous les événements cliniques dans le CDM OMOP sont exprimés sous forme de concepts, qui représentent la notion sémantique de chaque événement. Ils constituent les éléments de base des enregistrements de données, rendant presque toutes les tables entièrement normalisées avec quelques exceptions. Les concepts sont stockés dans la table CONCEPT (voir Figure <a href="StandardizedVocabularies.html#fig:concept">5.2</a>). </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:concept"></span>
+<img src="images/StandardizedVocabularies/concept.png" alt="Standard representation of vocabulary concepts in the OMOP CDM. The example provided is the CONCEPT table record for the SNOMED code for Atrial Fibrillation." width="90%" />
+<p class="caption">
+Figure 5.2: Standard representation of vocabulary concepts in the OMOP CDM. The example provided is the CONCEPT table record for the SNOMED code for Atrial Fibrillation.
+</p>
+</div>
+<p>Ce système se veut <strong>complet</strong>, c’est-à-dire qu’il existe suffisamment de concepts pour couvrir tout événement pertinent à l’expérience de soins de santé du patient (par exemple, conditions, procédures, expositions aux médicaments, etc.) ainsi que certaines informations administratives du système de santé (par exemple, visites, sites de soins, etc.).</p>
+</div>
+<div id="identifiants-de-concepts" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Identifiants de concepts<a href="StandardizedVocabularies.html#identifiants-de-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque concept se voit attribuer un identifiant de concept à utiliser comme clé primaire. Cet identifiant entier sans signification, plutôt que le code original du vocabulaire, est utilisé pour enregistrer des données dans les tables d’événements du CDM. </p>
+</div>
+<div id="noms-de-concepts" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Noms de concepts<a href="StandardizedVocabularies.html#noms-de-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque concept a un nom. Les noms sont toujours en anglais. Ils sont importés de la source du vocabulaire. Si le vocabulaire source a plus d’un nom, le plus expressif est sélectionné et les autres sont stockés dans la table CONCEPT_SYNONYM sous la même clé CONCEPT_ID. Les noms non anglais sont également enregistrés dans CONCEPT_SYNONYM, avec l’identifiant de concept linguistique approprié dans le champ LANGUAGE_CONCEPT_ID. Le nom mesure 255 caractères de long, ce qui signifie que les noms très longs sont tronqués et la version complète est enregistrée comme un autre synonyme, pouvant contenir jusqu’à 1000 caractères.</p>
+</div>
+<div id="conceptDomains" class="section level3 hasAnchor" number="5.1.6">
+<h3><span class="header-section-number">5.1.6</span> Domaines<a href="StandardizedVocabularies.html#conceptDomains" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque concept se voit attribuer un domaine dans le champ DOMAIN_ID, qui contrairement à l’identifiant numérique CONCEPT_ID, est un identifiant alphanumérique court, sensible à la casse et unique pour le domaine. Des exemples de ces identifiants de domaine sont “Condition”, “Drug”, “Procedure”, “Visit”, “Device”, “Specimen”, etc. Les concepts ambigus ou pré-coordonnés (combinaison) peuvent appartenir à un domaine combiné, mais les Concepts Standards (voir Section <a href="StandardizedVocabularies.html#standardConcepts">5.1.9</a>) sont toujours assignés à un domaine unique. Les domaines indiquent également dans quelle table et champ du CDM un événement clinique ou un attribut d’événement est enregistré. Les affectations de domaine sont une caractéristique spécifique à OMOP effectuée lors de l’ingestion de vocabulaire en utilisant une heuristique décrite dans <a href="https://github.com/ohDSI/vocabulary-v5.0">Pallas</a>. Les vocabulaires sources tendent à combiner des codes de domaines mixtes, mais à des degrés divers (voir Figure <a href="StandardizedVocabularies.html#fig:domains">5.3</a>). </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:domains"></span>
+<img src="images/StandardizedVocabularies/domains.png" alt="Domain assignment in procedure vocabularies CPT4 and HCPCS. By intuition, these vocabularies should contain codes and concepts of a single domain, but in reality they are mixed." width="70%" />
+<p class="caption">
+Figure 5.3: Domain assignment in procedure vocabularies CPT4 and HCPCS. By intuition, these vocabularies should contain codes and concepts of a single domain, but in reality they are mixed.
+</p>
+</div>
+<p>L’heuristique de domaine suit les définitions des domaines. Ces définitions sont dérivées des définitions des tables et des champs dans le CDM (voir Chapitre <a href="CommonDataModel.html#CommonDataModel">4</a>). L’heuristique n’est pas parfaite ; il y a des zones grises (voir Section <a href="StandardizedVocabularies.html#specialSituations">5.5</a> “Situations spéciales”). Si vous trouvez des domaines de concepts assignés incorrectement, veuillez le signaler et aider à améliorer le processus via un post sur le <a href="https://forums.ohdsi.org">Forums</a> ou un <a href="https://github.com/OHDSI/CommonDataModel/issues">CDM issue</a>.</p>
+</div>
+<div id="vocabulaires" class="section level3 hasAnchor" number="5.1.7">
+<h3><span class="header-section-number">5.1.7</span> Vocabulaires<a href="StandardizedVocabularies.html#vocabulaires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque vocabulaire a un identifiant alphanumérique court, sensible à la casse et unique, qui suit généralement le nom abrégé du vocabulaire, en omettant les tirets. Par exemple, ICD-9-CM a l’identifiant de vocabulaire “ICD9CM”. Il y a actuellement 111 vocabulaires pris en charge par OHDSI, dont 78 sont adoptés de sources externes, tandis que le reste sont des vocabulaires internes OMOP. Ces vocabulaires sont généralement mis à jour selon un calendrier trimestriel. La source et la version des vocabulaires sont définies dans le fichier de référence VOCABULARY. </p>
+</div>
+<div id="classes-de-concepts" class="section level3 hasAnchor" number="5.1.8">
+<h3><span class="header-section-number">5.1.8</span> Classes de concepts<a href="StandardizedVocabularies.html#classes-de-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Certains vocabulaires classifient leurs codes ou concepts, indiqués par leurs identifiants alphanumériques uniques et sensibles à la casse. Par exemple, SNOMED a 33 de ces classes de concepts, que SNOMED appelle “balises sémantiques” : constatation clinique, contexte social, structure corporelle, etc. Ce sont des divisions verticales des concepts. D’autres, tels que MedDRA ou RxNorm, ont des classes de concepts classifiant les niveaux horizontaux dans leurs hiérarchies stratifiées. Les vocabulaires sans aucune classe de concepts, comme HCPCS, utilisent l’identifiant de vocabulaire comme identifiant de classe de concepts. </p>
+<table>
+<caption><span id="tab:sublassification">Table 5.1: </span> Vocabulaires avec ou sans principes de sous-classement horizontal et vertical dans la classe de concepts.</caption>
+<colgroup>
+<col width="20%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Principe de subdivision de la classe de concepts</th>
+<th align="left">Vocabulaire</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Horizontal</td>
+<td align="left">tous les vocabulaires de médicaments, ATC, CDT, épisode, HCPCS, HemOnc, ICDs, MedDRA, OSM, Recensement</td>
+</tr>
+<tr class="even">
+<td align="left">Vertical</td>
+<td align="left">CIEL, HES Specialty, ICDO3, MeSH, NAACCR, NDFRT, OPCS4, PCORNET, Plan, PPI, Fournisseur, SNOMED, SPL, UCUM</td>
+</tr>
+<tr class="odd">
+<td align="left">Mixte</td>
+<td align="left">CPT4, ISBT, LOINC</td>
+</tr>
+<tr class="even">
+<td align="left">Aucun</td>
+<td align="left">APC, tous les concepts de type, Ethnicity, OXMIS, Race, Revenue Code, Sponsor, Supplier, UB04s, Visit</td>
+</tr>
+</tbody>
+</table>
+<p>Les classes de concepts horizontales vous permettent de déterminer un niveau hiérarchique spécifique. Par exemple, dans le vocabulaire des médicaments RxNorm, la classe de concepts “Ingrédient” définit le niveau supérieur de la hiérarchie. Dans le modèle vertical, les membres d’une classe de concepts peuvent être de n’importe quel niveau hiérarchique du haut vers le bas.</p>
+</div>
+<div id="standardConcepts" class="section level3 hasAnchor" number="5.1.9">
+<h3><span class="header-section-number">5.1.9</span> Concepts standards<a href="StandardizedVocabularies.html#standardConcepts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un concept représentant le sens de chaque événement clinique est désigné Standard. Par exemple, le code MESH D001281, le code CIEL 148203, le code SNOMED 49436004, le code ICD9CM 427.31 et le code Read G573000 définissent tous “fibrillation auriculaire” dans le domaine de la condition, mais uniquement le concept SNOMED est Standard et représente la condition dans les données. Les autres sont désignés concepts non standards ou sources et mappés aux concepts standards. Les concepts standards sont indiqués par un “S” dans le champ STANDARD_CONCEPT. Et seuls ces Concepts Standards sont utilisés pour enregistrer des données dans les champs CDM se terminant par “_CONCEPT_ID”. </p>
+</div>
+<div id="concepts-non-standards" class="section level3 hasAnchor" number="5.1.10">
+<h3><span class="header-section-number">5.1.10</span> Concepts non standards<a href="StandardizedVocabularies.html#concepts-non-standards" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les concepts non standards ne sont pas utilisés pour représenter les événements cliniques, mais ils font toujours partie des vocabulaires standardisés, et se trouvent souvent dans les données sources. Pour cette raison, ils sont également appelés “concepts sources”. La conversion des concepts sources en Concepts Standards est un processus appelé “mapping” (voir Section <a href="StandardizedVocabularies.html#conceptMapping">5.2.1</a>). Les concepts non standards n’ont aucune valeur (NULL) dans le champ STANDARD_CONCEPT.</p>
+</div>
+<div id="concepts-de-classification" class="section level3 hasAnchor" number="5.1.11">
+<h3><span class="header-section-number">5.1.11</span> Concepts de classification<a href="StandardizedVocabularies.html#concepts-de-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ces concepts ne sont pas standards et ne peuvent donc pas être utilisés pour représenter les données. Mais ils participent à la hiérarchie avec les Concepts Standards, et peuvent donc être utilisés pour effectuer des requêtes hiérarchiques. Par exemple, interroger tous les descendants du code MedDRA 10037908 (non visible pour les utilisateurs qui n’ont pas obtenu une licence MedDRA, voir Section <a href="StandardizedVocabularies.html#accessVocabularies">5.1.2</a> pour les restrictions d’accès) récupérera le concept SNOMED standard pour la fibrillation auriculaire (voir Section <a href="StandardizedVocabularies.html#conceptAncestor">5.3</a> pour des requêtes hiérarchiques utilisant la table CONCEPT_ANCESTOR) - voir Figure <a href="StandardizedVocabularies.html#fig:hierarchy">5.4</a>. </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hierarchy"></span>
+<img src="images/StandardizedVocabularies/hierarchy.png" alt="Standard, non-standard source and classification concepts and their hierarchical relationships in the condition domain. SNOMED is used for most standard condition concepts (with some oncology-related concepts derived from ICDO3), MedDRA concepts are used for hierarchical classification concepts, and all other vocabularies contain non-standard or source concepts, which do not participate in the hierarchy." width="100%" />
+<p class="caption">
+Figure 5.4: Standard, non-standard source and classification concepts and their hierarchical relationships in the condition domain. SNOMED is used for most standard condition concepts (with some oncology-related concepts derived from ICDO3), MedDRA concepts are used for hierarchical classification concepts, and all other vocabularies contain non-standard or source concepts, which do not participate in the hierarchy.
+</p>
+</div>
+<p>Le choix de la désignation des concepts en tant que Standard, non standard et classification est généralement fait pour chaque domaine séparément au niveau du vocabulaire. Cela est basé sur la qualité des concepts, la hiérarchie intégrée et le but déclaré du vocabulaire. De plus, tous les concepts d’un vocabulaire ne sont pas utilisés comme Concepts Standards. La désignation est séparée pour chaque domaine, chaque concept doit être actif (voir Section <a href="StandardizedVocabularies.html#conceptLifeCycle">5.1.13</a>) et il peut y avoir un ordre de préséance si plus d’un concept de différents vocabulaires sont en concurrence pour le même sens. En d’autres termes, il n’existe pas de “vocabulaire standard”. Voir Table <a href="StandardizedVocabularies.html#tab:vocabList">5.2</a> pour des exemples.</p>
+<table style="width:100%;">
+<caption><span id="tab:vocabList">Table 5.2: </span> Liste des vocabulaires à utiliser pour les affectations de concepts standards/non standards/de classification.</caption>
+<colgroup>
+<col width="16%" />
+<col width="29%" />
+<col width="29%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Domaine</th>
+<th align="left">pour Concepts Standards</th>
+<th align="left">pour concepts sources</th>
+<th align="left">pour concepts de classification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Condition</td>
+<td align="left">SNOMED, ICDO3</td>
+<td align="left">SNOMED Veterinary</td>
+<td align="left">MedDRA</td>
+</tr>
+<tr class="even">
+<td align="left">Procédure</td>
+<td align="left">SNOMED, CPT4, HCPCS, ICD10PCS, ICD9Proc, OPCS4</td>
+<td align="left">SNOMED Veterinary, HemOnc, NAACCR</td>
+<td align="left">Aucun pour le moment</td>
+</tr>
+<tr class="odd">
+<td align="left">Mesure</td>
+<td align="left">SNOMED, LOINC</td>
+<td align="left">SNOMED Veterinary, NAACCR, CPT4, HCPCS, OPCS4, PPI</td>
+<td align="left">Aucun pour le moment</td>
+</tr>
+<tr class="even">
+<td align="left">Médicament</td>
+<td align="left">RxNorm, RxNorm Extension, CVX</td>
+<td align="left">HCPCS, CPT4, HemOnc, NAAACCR</td>
+<td align="left">ATC</td>
+</tr>
+<tr class="odd">
+<td align="left">Dispositif</td>
+<td align="left">SNOMED</td>
+<td align="left">Autres, actuellement non normalisés</td>
+<td align="left">Aucun pour le moment</td>
+</tr>
+<tr class="even">
+<td align="left">Observation</td>
+<td align="left">SNOMED</td>
+<td align="left">Autres</td>
+<td align="left">Aucun pour le moment</td>
+</tr>
+<tr class="odd">
+<td align="left">Visite</td>
+<td align="left">CMS Place of Service, ABMT, NUCC</td>
+<td align="left">SNOMED, HCPCS, CPT4, UB04</td>
+<td align="left">Aucun pour le moment</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="codes-de-concepts" class="section level3 hasAnchor" number="5.1.12">
+<h3><span class="header-section-number">5.1.12</span> Codes de concepts<a href="StandardizedVocabularies.html#codes-de-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les codes de concepts sont les identifiants utilisés dans les vocabulaires sources. Par exemple, les codes ICD9CM ou NDC sont stockés dans ce champ, tandis que les tables OMOP utilisent l’identifiant de concept comme clé étrangère dans la table CONCEPT. La raison est que l’espace de noms chevauche les vocabulaires, c’est-à-dire que le même code peut exister dans différents vocabulaires avec des significations complètement différentes (voir Table <a href="StandardizedVocabularies.html#tab:code1001">5.3</a>) </p>
+<table style="width:100%;">
+<caption><span id="tab:code1001">Table 5.3: </span> Concepts avec un code de concept identique 1001, mais des vocabulaires, des domaines et des classes de concepts différents.</caption>
+<colgroup>
+<col width="16%" />
+<col width="8%" />
+<col width="21%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Concept ID</th>
+<th align="left">Concept Code</th>
+<th align="left">Concept Name</th>
+<th align="left">Domain ID</th>
+<th align="left">Vocabulary ID</th>
+<th align="left">Concept Class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">35803438</td>
+<td align="left">1001</td>
+<td align="left">Granulocyte colony-stimulating factors</td>
+<td align="left">Drug</td>
+<td align="left">HemOnc</td>
+<td align="left">Component Class</td>
+</tr>
+<tr class="even">
+<td align="left">35942070</td>
+<td align="left">1001</td>
+<td align="left">AJCC TNM Clin T</td>
+<td align="left">Measurement</td>
+<td align="left">NAACCR</td>
+<td align="left">NAACCR Variable</td>
+</tr>
+<tr class="odd">
+<td align="left">1036059</td>
+<td align="left">1001</td>
+<td align="left">Antipyrine</td>
+<td align="left">Drug</td>
+<td align="left">RxNorm</td>
+<td align="left">Ingredient</td>
+</tr>
+<tr class="even">
+<td align="left">38003544</td>
+<td align="left">1001</td>
+<td align="left">Residential Treatment - Psychiatric</td>
+<td align="left">Revenue Code</td>
+<td align="left">Revenue Code</td>
+<td align="left">Revenue Code</td>
+</tr>
+<tr class="odd">
+<td align="left">43228317</td>
+<td align="left">1001</td>
+<td align="left">Aceprometazine maleate</td>
+<td align="left">Drug</td>
+<td align="left">BDPM</td>
+<td align="left">Ingredient</td>
+</tr>
+<tr class="even">
+<td align="left">45417187</td>
+<td align="left">1001</td>
+<td align="left">Brompheniramine Maleate, 10 mg/mL injectable solution</td>
+<td align="left">Drug</td>
+<td align="left">Multum</td>
+<td align="left">Multum</td>
+</tr>
+<tr class="odd">
+<td align="left">45912144</td>
+<td align="left">1001</td>
+<td align="left">Serum</td>
+<td align="left">Specimen</td>
+<td align="left">CIEL</td>
+<td align="left">Specimen</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conceptLifeCycle" class="section level3 hasAnchor" number="5.1.13">
+<h3><span class="header-section-number">5.1.13</span> Cycle de vie<a href="StandardizedVocabularies.html#conceptLifeCycle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les vocabulaires sont rarement des corpus permanents avec un ensemble fixe de codes. Au contraire, des codes et des concepts sont ajoutés et sont dépréciés. Le CDM OMOP est un modèle pour soutenir les données patient longitudinales, ce qui signifie qu’il doit prendre en charge les concepts qui étaient utilisés dans le passé et qui peuvent ne plus être actifs, ainsi que prendre en charge de nouveaux concepts et les replacer dans leur contexte. Il existe trois champs dans la table CONCEPT qui décrivent les statuts possibles du cycle de vie : VALID_START_DATE, VALID_END_DATE, et INVALID_REASON. Leurs valeurs diffèrent selon le statut du cycle de vie du concept :</p>
+<ul>
+<li><strong>Concept actif ou nouveau</strong>
+<ul>
+<li>Description : Concept utilisé.</li>
+<li>VALID_START_DATE : Jour de l’instanciation du concept, si cela n’est pas connu jour d’incorporation du concept dans les Vocabulaires, si cela n’est pas connu 1970-1-1.</li>
+<li>VALID_END_DATE : Fixé au 2099-12-31 comme convention pour indiquer “Peut devenir invalide dans un futur indéfini, mais actif pour le moment”.</li>
+<li>INVALID_REASON : NULL</li>
+</ul></li>
+<li><strong>Concept déprécié sans successeur</strong>
+<ul>
+<li>Description : Concept inactif et ne peut pas être utilisé comme Standard (voir Section <a href="StandardizedVocabularies.html#standardConcepts">5.1.9</a>).</li>
+<li>VALID_START_DATE : Jour de l’instanciation du concept, si cela n’est pas connu jour d’incorporation du concept dans les Vocabulaires, si cela n’est pas connu 1970-1-1.</li>
+<li>VALID_END_DATE : Jour dans le passé indiquant la dépréciation, ou si cela n’est pas connu jour de mise à jour du vocabulaire où le concept dans le vocabulaire a disparu ou a été mis à inactif.</li>
+<li>INVALID_REASON : “D”</li>
+</ul></li>
+<li><strong>Concept mis à jour avec successeur</strong>
+<ul>
+<li>Description : Concept inactif, mais a un successeur défini. Il s’agit généralement de concepts qui ont subi une déduplication.</li>
+<li>VALID_START_DATE : Jour de l’instanciation du concept, si cela n’est pas connu jour d’incorporation du concept dans les Vocabulaires, si cela n’est pas connu 1970-1-1.</li>
+<li>VALID_END_DATE : Jour dans le passé indiquant une mise à jour, ou si cela n’est pas connu jour de mise à jour du vocabulaire où la mise à jour a été incluse.</li>
+<li>INVALID_REASON : “U”</li>
+</ul></li>
+<li><strong>Code réutilisé pour un autre nouveau concept</strong>
+<ul>
+<li>Description : Le vocabulaire a réutilisé le code de concept de ce concept déprécié pour un nouveau concept.</li>
+<li>VALID_START_DATE : Jour de l’instanciation du concept, si cela n’est pas connu jour d’incorporation du concept dans les Vocabulaires, si cela n’est pas connu 1970-1-1.</li>
+<li>VALID_END_DATE : Jour dans le passé indiquant la dépréciation, ou si cela n’est pas connu jour de mise à jour du vocabulaire où le concept dans le vocabulaire a disparu ou a été mis à inactif.</li>
+<li>INVALID_REASON : “R”</li>
+</ul></li>
+</ul>
+<p>En général, les codes de concepts ne sont pas réutilisés. Mais il y a quelques vocabulaires qui dévient de cette règle, en particulier HCPCS, NDC et DRG. Pour ceux-ci, le même code de concept apparaît dans plus d’un concept du même vocabulaire. Leur valeur CONCEPT_ID reste unique. Ces codes de concepts réutilisés sont marqués par un “R” dans le champ INVALID_REASON, et la période VALID_START_DATE à VALID_END_DATE doit être utilisée pour distinguer les concepts avec les mêmes codes de concepts.</p>
+</div>
+</div>
+<div id="relations" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Relations<a href="StandardizedVocabularies.html#relations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Deux concepts quelconques peuvent avoir une relation définie, que les deux concepts appartiennent ou non au même domaine ou vocabulaire. La nature des relations est indiquée par son identifiant alphanumérique unique, sensible à la casse et court, dans le champ RELATIONSHIP_ID de la table CONCEPT_RELATIONSHIP. Les relations sont symétriques, c’est-à-dire que pour chaque relation existe une relation équivalente, où le contenu des champs CONCEPT_ID_1 et CONCEPT_ID_2 est échangé et le RELATIONSHIP_ID est changé en son opposé. Par exemple, la relation “Maps to” a une relation opposée “Mapped from.” </p>
+<p>Les enregistrements de la table CONCEPT_RELATIONSHIP ont également des champs de cycle de vie RELATIONSHIP_START_DATE, RELATIONSHIP_END_DATE et INVALID_REASON. Cependant, seuls les enregistrements actifs avec INVALID_REASON = NULL sont disponibles via ATHENA. Les relations inactives sont maintenues dans le système Pallas pour un traitement interne uniquement. La table RELATIONSHIP sert de référence avec la liste complète des identifiants de relation et leurs équivalents inversés.</p>
+<div id="conceptMapping" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Relations de Mapping<a href="StandardizedVocabularies.html#conceptMapping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ces relations fournissent des traductions de concepts non standard à des concepts standard, soutenues par deux paires d’identifiants de relation (voir le Tableau <a href="#tab:mappingRelationships">5.4</a>). </p>
+<p>Tableau : (#tab:mappingRelationships) Type de relations de montage.</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Paire d’identifiant de relation</th>
+<th align="left">Objectif</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">“Maps to” et “Mapped from”</td>
+<td align="left">Mapping vers les concepts standard. Les concepts standard sont mappés à eux-mêmes, les concepts non standard aux concepts standard. La plupart des concepts non standard et tous les concepts standard ont cette relation à un concept standard. Les premiers sont stockés dans les champs *_SOURCE_CONCEPT_ID, et les seconds dans les champs *_CONCEPT_ID. Les concepts de classification ne sont pas mappés.</td>
+</tr>
+<tr class="even">
+<td align="left">“Maps to value” et “Value mapped from”</td>
+<td align="left">Mapping vers un concept qui représente une Valeur à placer dans les champs VALUE_AS_CONCEPT_ID des tables MEASUREMENT et OBSERVATION.</td>
+</tr>
+</tbody>
+</table>
+<p>Le but de ces relations de mapping est de permettre un rapprochement entre des concepts équivalents pour harmoniser la représentation des événements cliniques dans l’OMOP CDM. C’est une réalisation importante des vocabulaires standardisés.</p>
+<p>“Concepts équivalents” signifie qu’ils portent la même signification et, ce qui est important, que les descendants hiérarchiques couvrent le même espace sémantique. Si un concept équivalent n’est pas disponible et que le concept n’est pas standard, il est toujours mappé, mais vers un concept légèrement plus large (appelés “mappings en montée”). Par exemple, l’ICD10CM W61.51 “Mordu par une oie” n’a pas d’équivalent dans le vocabulaire SNOMED, qui est généralement utilisé pour les concepts de condition standard. Il est donc mappé à SNOMED 217716004 “Picoté par un oiseau,” perdant ainsi le contexte de l’oiseau étant une oie. Les mappings en montée ne sont utilisés que si la perte d’information est jugée négligeable pour les cas d’utilisation de recherche standard.</p>
+<p>Certains mappings connectent un concept source à plus d’un concept standard. Par exemple, ICD9CM 070.43 “Hépatite E avec coma hépatique” est mappé à la fois à SNOMED 235867002 “Hépatite aiguë E” et à SNOMED 72836002 “Coma hépatique.” La raison en est que le concept source original est une combinaison pré-coordonnée de deux conditions, l’hépatite et le coma. SNOMED n’a pas cette combinaison, ce qui entraîne deux enregistrements écrits pour l’enregistrement ICD9CM, chacun avec un concept standard mappé.</p>
+<p>Les relations “Maps to value” ont pour objectif de diviser une valeur pour les tables OMOP CDM suivant un modèle entité-attribut-valeur (EAV). C’est typiquement le cas dans les situations suivantes :</p>
+<ul>
+<li>Mesures consistant en un test et un résultat</li>
+<li>Antécédents personnels ou familiaux de maladie</li>
+<li>Allergie à une substance</li>
+<li>Besoin de vaccination</li>
+</ul>
+<p>Dans ces situations, le concept source est une combinaison de l’attribut (test ou antécédent) et de la valeur (résultat du test ou maladie). La relation “Maps to” mappe cette source au concept d’attribut, et la “Maps to value” au concept de valeur. Voir la Figure <a href="StandardizedVocabularies.html#fig:conceptValue">5.5</a> pour un exemple.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:conceptValue"></span>
+<img src="images/StandardizedVocabularies/conceptValue.png" alt="One-to-many mapping between source concept and Standard Concepts. A pre-coordinated concept is split into two concepts, one of which is the attribute (here history of clinical finding) and the other one is the value (peptic ulcer). While 'Maps to' relationship will map to concepts of the measurement or observation domains, the 'Maps to value' concepts have no domain restriction." width="100%" />
+<p class="caption">
+Figure 5.5: One-to-many mapping between source concept and Standard Concepts. A pre-coordinated concept is split into two concepts, one of which is the attribute (here history of clinical finding) and the other one is the value (peptic ulcer). While ‘Maps to’ relationship will map to concepts of the measurement or observation domains, the ‘Maps to value’ concepts have no domain restriction.
+</p>
+</div>
+<p>Le mapping des concepts est une autre caractéristique centrale des vocabulaires standardisés OMOP fournis gratuitement et soutenant les efforts de la communauté menant des études en réseau. Les relations de mapping sont dérivées de sources externes ou maintenues manuellement par l’équipe des vocabulaires. Cela signifie qu’elles ne sont pas parfaites. Si vous trouvez des relations de mapping incorrectes ou contestables, il est crucial de les signaler et d’aider à améliorer le processus via un post sur les <a href="https://forums.ohdsi.org">Forums</a> ou un <a href="https://github.com/OHDSI/CommonDataModel/issues">problème de CDM</a>.</p>
+<p>Une description plus détaillée des conventions de mapping peut être trouvée dans le Wiki de l’OHDSI.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
+</div>
+<div id="relations-hiérarchiques" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Relations Hiérarchiques<a href="StandardizedVocabularies.html#relations-hiérarchiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les relations qui indiquent une hiérarchie sont définies par la paire de relations “Is a” - “Subsumes.” Les relations hiérarchiques sont définies de telle sorte que le concept enfant a tous les attributs du concept parent, plus un ou plusieurs attributs supplémentaires ou un attribut plus précisément défini. Par exemple, SNOMED 49436004 “Fibrillation auriculaire” est lié à SNOMED 17366009 “Arythmie auriculaire” par une relation “Is a.” Les deux concepts ont un ensemble d’attributs identiques, sauf le type d’arythmie, défini comme être une fibrillation dans l’un mais pas dans l’autre. Les concepts peuvent avoir plus d’un parent et plus d’un enfant. Dans cet exemple, SNOMED 49436004 “Fibrillation auriculaire” est également un “Is a” de SNOMED 40593004 “Fibrillation.” </p>
+</div>
+<div id="relations-entre-concepts-de-différents-vocabulaires" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Relations Entre Concepts de Différents Vocabulaires<a href="StandardizedVocabularies.html#relations-entre-concepts-de-différents-vocabulaires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ces relations sont typiquement du type “Vocabulaires A - Vocabulaires B équivalents,” soit fournies par la source originale du vocabulaire, soit construites par l’équipe des vocabulaires OHDSI. Elles peuvent servir de mappings approximatifs mais sont souvent moins précises que les relations de mapping mieux gérées. Les relations d’équivalence de haute qualité (telles que “Source - équivalent RxNorm”) sont toujours dupliquées par la relation “Maps to.”</p>
+</div>
+<div id="relations-entre-concepts-du-même-vocabulaire" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Relations Entre Concepts du Même Vocabulaire<a href="StandardizedVocabularies.html#relations-entre-concepts-du-même-vocabulaire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les relations internes au vocabulaire sont généralement fournies par le fournisseur du vocabulaire. Des descriptions complètes peuvent être trouvées dans la documentation du vocabulaire sous le vocabulaire individuel sur le Wiki de l’OHDSI.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
+<p>Beaucoup d’entre elles définissent des relations entre des événements cliniques et peuvent être utilisées pour la recherche d’informations. Par exemple, les troubles de l’urètre peuvent être trouvés en suivant la relation “Finding site of” (voir Table <a href="#tab:findingSite">5.5</a>):</p>
+<p>Tableau : (#tab:findingSite) Relation “Finding site of” de l’“Urètre,” indiquant les conditions situées toutes dans cette structure anatomique.</p>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">CONCEPT_ID_1</th>
+<th align="left">CONCEPT_ID_2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">4000504 “Partie de l’urètre”</td>
+<td align="left">36713433 “Duplication partielle de l’urètre”</td>
+</tr>
+<tr class="even">
+<td align="left">4000504 “Partie de l’urètre”</td>
+<td align="left">433583 “Épispadias”</td>
+</tr>
+<tr class="odd">
+<td align="left">4000504 “Partie de l’urètre”</td>
+<td align="left">443533 “Épispadias, masculin”</td>
+</tr>
+<tr class="even">
+<td align="left">4000504 “Partie de l’urètre”</td>
+<td align="left">4005956 “Épispadias, féminin”</td>
+</tr>
+</tbody>
+</table>
+<p>La qualité et l’exhaustivité de ces relations varient en fonction de la qualité du vocabulaire original. En général, les vocabulaires utilisés pour extraire des concepts standard, tels que SNOMED, sont choisis en raison de leur meilleure gestion et tendent donc à avoir des relations internes de meilleure qualité également.</p>
+</div>
+</div>
+<div id="conceptAncestor" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Hiérarchie<a href="StandardizedVocabularies.html#conceptAncestor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Au sein d’un domaine, les concepts standard et de classification sont organisés dans une structure hiérarchique et stockés dans la table CONCEPT_ANCESTOR. Cela permet d’interroger et de récupérer des concepts et tous leurs descendants hiérarchiques. Ces descendants ont les mêmes attributs que leur ancêtre, mais également des attributs supplémentaires ou plus définis.</p>
+<p>La table CONCEPT_ANCESTOR est construite automatiquement à partir de la table CONCEPT_RELATIONSHIP en parcourant tous les concepts possibles connectés par des relations hiérarchiques. Ce sont les paires “Est un” - “Subsume” (voir Figure <a href="StandardizedVocabularies.html#fig:conceptAncestor">5.6</a>) et d’autres relations connectant les hiérarchies entre les vocabulaires. Le choix qu’une relation participe ou non à la construction de la hiérarchie est défini pour chaque ID de relation par l’indicateur DEFINES_ANCESTRY dans la table de référence RELATIONSHIP.</p>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:conceptAncestor"></span>
+<img src="images/StandardizedVocabularies/conceptAncestor.png" alt="Hiérarchie de la condition “Fibrillation auriculaire.” La parenté de premier degré est définie par les relations “Est un” et “Subsume”, tandis que toutes les relations de degré supérieur sont déduites et stockées dans la table CONCEPT_ANCESTOR. Chaque concept est également son propre descendant avec les deux niveaux de séparation égaux à 0. " width="100%" />
+<p class="caption">
+Figure 5.6: Hiérarchie de la condition “Fibrillation auriculaire.” La parenté de premier degré est définie par les relations “Est un” et “Subsume”, tandis que toutes les relations de degré supérieur sont déduites et stockées dans la table CONCEPT_ANCESTOR. Chaque concept est également son propre descendant avec les deux niveaux de séparation égaux à 0. 
+</p>
+</div>
+<p>Le degré d’ascendance, ou le nombre d’étapes entre l’ancêtre et le descendant, est capturé dans les champs MIN_LEVELS_OF_SEPARATION et MAX_LEVELS_OF_SEPARATION, définissant la connexion la plus courte ou la plus longue possible. Toutes les relations hiérarchiques ne contribuent pas de manière égale au calcul des niveaux de séparation. Une étape comptée pour le degré est déterminée par le drapeau IS_HIERARCHICAL dans la table de référence RELATIONSHIP pour chaque ID de relation.</p>
+<p>Actuellement, une hiérarchie complète et de haute qualité n’existe que pour deux domaines : médicament et condition. Les domaines de procédure, mesure et observation ne sont que partiellement couverts et en cours de construction. L’ascendance est particulièrement utile pour le domaine des médicaments car elle permet de parcourir tous les médicaments avec un ingrédient donné ou membres de classes médicamenteuses indépendamment du pays d’origine, du nom de marque ou d’autres attributs.</p>
+</div>
+<div id="tables-de-référence-interne" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Tables de Référence Interne<a href="StandardizedVocabularies.html#tables-de-référence-interne" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>DOMAIN_ID, VOCABULARY_ID, CONCEPT_CLASS_ID (tous dans les enregistrements CONCEPT) et CONCEPT_RELATIONSHIP_ID (dans CONCEPT_RELATIONSHIP) sont tous contrôlés par leurs propres vocabulaires. Ils sont définis dans les quatre tables de référence DOMAIN, VOCABULARY, CONCEPT_CLASS et RELATIONSHIP, contenant les champs *_ID en tant que clés primaires, un champ *_NAME plus détaillé et un champ *_CONCEPT_ID avec une référence à la table CONCEPT, qui contient un concept pour chaque enregistrement des tables de référence. Le but de ces enregistrements en double est de soutenir un modèle d’information permettant des moteurs de navigation automatiques.</p>
+<p>La table VOCABULARY contient également les champs VOCABULARY_REFERENCE et VOCABULARY_VERSION se référant à la source et à la version du vocabulaire original. La table RELATIONSHIP comprend les champs supplémentaires DEFINES_ANCESTRY, IS_HIERARCHICAL et REVERSE_RELATIONSHIP_ID. Ce dernier définit l’ID de relation contrepartie pour une paire de relations.</p>
+</div>
+<div id="specialSituations" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Situations Spéciales<a href="StandardizedVocabularies.html#specialSituations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="genre" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Genre<a href="StandardizedVocabularies.html#genre" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le genre dans le CDM OMOP et les Vocabularies Standardisés désigne le sexe biologique à la naissance. Souvent, des questions sont posées sur comment définir des genres alternatifs. Ces cas d’utilisation doivent être couverts par des enregistrements dans la table OBSERVATION, où le genre autodéclaré d’une personne est stocké (si l’ensemble de données contient de telles informations).</p>
+</div>
+<div id="race-et-ethnicité" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Race et Ethnicité<a href="StandardizedVocabularies.html#race-et-ethnicité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ces termes suivent les définitions de la façon dont le gouvernement américain les définit. L’ethnicité est une différenciation des populations hispaniques ou non hispaniques, qui peuvent être de n’importe quelle race. La race est divisée en 5 principales races, qui ont des ethnicités comme descendants hiérarchiques. Les races mixtes ne sont pas incluses.</p>
+</div>
+<div id="schémas-de-codage-diagnostique-et-conditions-omop" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Schémas de Codage Diagnostique et Conditions OMOP<a href="StandardizedVocabularies.html#schémas-de-codage-diagnostique-et-conditions-omop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les schémas de codage couramment utilisés, tels que l’ICD-9 ou l’ICD-10, définissent des diagnostics plus ou moins bien définis basés sur une démarche diagnostique appropriée. Le domaine des conditions n’est pas identique à cet espace sémantique, mais en partie se chevauche. Par exemple, les conditions incluent également des signes et symptômes enregistrés avant qu’un diagnostic soit établi, et les codes ICD contiennent des concepts appartenant à d’autres domaines (par exemple, les procédures).</p>
+</div>
+<div id="systèmes-de-codage-de-procédures" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Systèmes de Codage de Procédures<a href="StandardizedVocabularies.html#systèmes-de-codage-de-procédures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De même, les schémas de codage comme HCPCS et CPT4 sont censés être des listes de procédures médicales. En réalité, ils sont plus comme un menu de justifications pour le paiement des services médicaux. Bon nombre de ces services sont regroupés sous le domaine des procédures, mais de nombreux concepts échappent à ce domaine.</p>
+</div>
+<div id="dispositifs" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> Dispositifs<a href="StandardizedVocabularies.html#dispositifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les concepts de dispositifs n’ont pas de schéma de codage standardisé pouvant être utilisé pour sourcer les Concepts Standard. Dans de nombreuses données sources, les dispositifs ne sont même pas codés ou contenus dans un schéma de codage externe. Pour cette même raison, il n’y a actuellement pas de système hiérarchique disponible.</p>
+</div>
+<div id="visites-et-services" class="section level3 hasAnchor" number="5.5.6">
+<h3><span class="header-section-number">5.5.6</span> Visites et Services<a href="StandardizedVocabularies.html#visites-et-services" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les concepts de visites définissent la nature des rencontres de soins de santé. Dans de nombreux systèmes sources, ils sont appelés Lieu de Service, désignant une organisation ou une structure physique, telle qu’un hôpital. Dans d’autres, ils sont appelés services. Ceux-ci diffèrent également selon les pays, et leur définition est difficile à obtenir. Les sites de soins se spécialisent souvent dans une ou quelques visites (Hôpital XYZ), mais ne doivent pas être définis par elles (même à l’hôpital XYZ, les patients peuvent rencontrer des visites non hospitalières).</p>
+</div>
+<div id="fournisseurs-et-spécialités" class="section level3 hasAnchor" number="5.5.7">
+<h3><span class="header-section-number">5.5.7</span> Fournisseurs et Spécialités<a href="StandardizedVocabularies.html#fournisseurs-et-spécialités" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tout fournisseur humain est défini dans le domaine des fournisseurs. Ceux-ci peuvent être des professionnels de santé tels que des médecins et infirmiers, mais aussi des fournisseurs non médicaux comme des optométristes ou des cordonniers. Les spécialités sont des descendants du fournisseur “Médecin.” Les sites de soins ne peuvent pas porter une spécialité, même s’ils sont souvent définis par la spécialité de leur personnel principal (“Département de Chirurgie”).</p>
+</div>
+<div id="domaines-thérapeutiques-aux-besoins-spéciaux" class="section level3 hasAnchor" number="5.5.8">
+<h3><span class="header-section-number">5.5.8</span> Domaines Thérapeutiques aux Besoins Spéciaux<a href="StandardizedVocabularies.html#domaines-thérapeutiques-aux-besoins-spéciaux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les Vocabulaires Standardisés couvrent tous les aspects des soins de santé de manière exhaustive. Cependant, certains domaines thérapeutiques ont des besoins particuliers et nécessitent des vocabulaires spécifiques. Des exemples incluent l’oncologie, la radiologie et la génomique. Des Groupes de Travail OHDSI spécials développent ces extensions. En conséquence, les Vocabulaires Standardisés OMOP constituent un système intégré, où les concepts de différentes origines et objectifs résident tous dans les mêmes hiérarchies spécifiques aux domaines.</p>
+</div>
+<div id="rxNormExtension" class="section level3 hasAnchor" number="5.5.9">
+<h3><span class="header-section-number">5.5.9</span> Concepts Standards dans le Domaine des Médicaments<a href="StandardizedVocabularies.html#rxNormExtension" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De nombreux concepts du domaine des médicaments sont issus de RxNorm, un vocabulaire disponible publiquement produit par la US National Library of Medicine. Cependant, les médicaments en dehors des États-Unis peuvent ou non être couverts, en fonction de la commercialisation ou non de la combinaison ingrédient, forme et concentration aux États-Unis. Les médicaments qui ne sont pas sur le marché américain sont ajoutés par l’équipe de vocabulaire OHDSI sous un vocabulaire appelé <a href="https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:rxnorm_extension">RxNorm Extension</a>, qui est le seul grand vocabulaire de domaine produit par OHDSI.</p>
+</div>
+<div id="variantes-de-null" class="section level3 hasAnchor" number="5.5.10">
+<h3><span class="header-section-number">5.5.10</span> Variantes de NULL<a href="StandardizedVocabularies.html#variantes-de-null" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De nombreux vocabulaires contiennent des codes concernant l’absence d’information. Par exemple, parmi les cinq concepts de genre 8507 “Homme,” 8532 “Femme,” 8570 “Ambigu,” 8551 “Inconnu,” et 8521 “Autre”, seuls les deux premiers sont Standards, et les trois autres sont des concepts sources sans mappage. Dans les Vocabulaires Standardisés, il n’y a aucune distinction faite sur la raison pour laquelle une information est indisponible ; cela peut être dû à un retrait actif de l’information par le patient, une valeur manquante, une valeur non définie ou standardisée de quelque manière que ce soit, ou l’absence d’un enregistrement de mappage dans CONCEPT_RELATIONSHIP. Tout concept ainsi désigné n’est pas mappé, ce qui correspond à un mappage par défaut vers le Concept Standard avec l’ID de concept = 0.</p>
+</div>
+</div>
+<div id="résumé-3" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Résumé<a href="StandardizedVocabularies.html#résumé-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+<div class="rmdsummary">
+<ul>
+<li>Tous les événements et les faits administratifs sont représentés dans les Vocabulaires Standardisés OMOP comme des concepts, des relations de concepts, et une hiérarchie d’ancêtres de concepts.</li>
+<li>La plupart de ceux-ci sont adoptés à partir de schémas de codage ou de vocabulaires existants, bien que certains d’entre eux soient créés de novo par l’équipe de vocabulaire OHDSI.</li>
+<li>Tous les concepts se voient attribuer un domaine, lequel contrôle où le fait représenté par le concept est stocké dans le CDM.</li>
+<li>Les concepts de signification équivalente dans différents vocabulaires sont mappés à l’un d’eux, lequel est désigné comme le Concept Standard. Les autres sont des concepts sources.</li>
+<li>Le mappage est effectué par les relations de concepts “Maps to” et “Maps to value”.</li>
+<li>Il existe une classe supplémentaire de concepts appelés concepts de classification, qui ne sont pas standards, mais contrairement aux concepts sources, ils participent à la hiérarchie.</li>
+<li>Les concepts ont un cycle de vie dans le temps.</li>
+<li>Les concepts au sein d’un domaine sont organisés en hiérarchies. La qualité de la hiérarchie diffère entre les domaines, et l’achèvement du système hiérarchique est une tâche en cours.</li>
+<li>Vous êtes vivement encouragé à contacter la communauté si vous pensez avoir trouvé une erreur ou une inexactitude.</li>
+</ul>
+</div>
+</div>
+<div id="exercices-1" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Exercices<a href="StandardizedVocabularies.html#exercices-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prérequis-2" class="section level4 unnumbered hasAnchor">
+<h4>Prérequis<a href="StandardizedVocabularies.html#prérequis-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour ces premiers exercices, vous devrez rechercher des concepts dans les Vocabulaires Standardisés, ce qui peut être fait via ATHENA<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a> ou ATLAS.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a></p>
+<div class="exercise">
+<p><span id="exr:exerciseVocab1" class="exercise"><strong>Exercice 5.1  </strong></span>Quel est l’ID de Concept Standard pour “Hémorragie gastro-intestinale” ?</p>
+</div>
+<div class="exercise">
+<p><span id="exr:exerciseVocab2" class="exercise"><strong>Exercice 5.2  </strong></span>Quels codes ICD-10CM sont mappés au Concept Standard pour “Hémorragie gastro-intestinale” ? Quels codes ICD-9CM sont mappés à ce Concept Standard ?</p>
+</div>
+<div class="exercise">
+<p><span id="exr:exerciseVocab3" class="exercise"><strong>Exercice 5.3  </strong></span>Quels sont les termes préférés MedDRA équivalents au Concept Standard pour “Hémorragie gastro-intestinale” ?</p>
+</div>
+<p>Les réponses suggérées peuvent être trouvées en Annexe <a href="SuggestedAnswers.html#Vocabanswers">24.2</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="22">
+<li id="fn22"><p><a href="https://github.com/OHDSI/Vocabulary-v5.0" class="uri">https://github.com/OHDSI/Vocabulary-v5.0</a><a href="StandardizedVocabularies.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p><a href="https://forums.ohdsi.org" class="uri">https://forums.ohdsi.org</a><a href="StandardizedVocabularies.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p><a href="https://github.com/OHDSI/CommonDataModel/issues" class="uri">https://github.com/OHDSI/CommonDataModel/issues</a><a href="StandardizedVocabularies.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p><a href="http://athena.ohdsi.org" class="uri">http://athena.ohdsi.org</a><a href="StandardizedVocabularies.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p><a href="https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:mapping" class="uri">https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:mapping</a><a href="StandardizedVocabularies.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p><a href="https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary" class="uri">https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary</a><a href="StandardizedVocabularies.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p><a href="http://athena.ohdsi.org/" class="uri">http://athena.ohdsi.org/</a><a href="StandardizedVocabularies.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p><a href="http://atlas-demo.ohdsi.org" class="uri">http://atlas-demo.ohdsi.org</a><a href="StandardizedVocabularies.html#fnref29" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="CommonDataModel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ExtractTransformLoad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OHDSI/TheBookOfOhdsi/edit/master/StandardizedVocabularies.Rmd",
+"text": "Modifier"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TheBookOfOhdsi.pdf", "TheBookOfOhdsi.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

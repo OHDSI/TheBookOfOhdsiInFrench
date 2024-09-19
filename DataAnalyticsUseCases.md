@@ -1,0 +1,204 @@
+# (PART) Analyse des Données {-}
+
+# Cas d'utilisation de l'analyse des données {#DataAnalyticsUseCases}
+
+*Responsable du chapitre : David Madigan*
+
+La collaboration OHDSI se concentre sur la génération de preuves fiables à partir des données réelles de soins de santé, généralement sous forme de bases de données de réclamations ou de dossiers de santé électroniques. Les cas d'utilisation sur lesquels OHDSI se concentre se répartissent en trois grandes catégories :
+
+- Caractérisation
+- Estimation au niveau de la population
+- Prédiction au niveau du patient
+
+Nous décrivons ces éléments en détail ci-dessous. Notez que pour tous les cas d'utilisation, les preuves que nous générons héritent des limitations des données ; nous discutons de ces limitations en détail dans la section du livre sur la qualité des preuves (Chapitres \@ref(EvidenceQuality) - \@ref(MethodValidity)).
+
+
+## Caractérisation
+
+\index{caractérisation}
+
+La caractérisation tente de répondre à la question :
+
+> Qu'est-ce qui leur est arrivé ?
+
+Nous pouvons utiliser les données pour répondre à des questions sur les caractéristiques des personnes dans une cohorte ou l'ensemble de la base de données, la pratique des soins de santé, et étudier comment ces choses changent au fil du temps.
+
+Les données peuvent fournir des réponses à des questions telles que :
+
+- Pour les patients nouvellement diagnostiqués avec fibrillation auriculaire, combien reçoivent une prescription de warfarine ?
+- Quel est l'âge moyen des patients qui subissent une arthroplastie de la hanche ?
+- Quel est le taux d'incidence de la pneumonie chez les patients de plus de 65 ans ?
+
+Les questions typiques de caractérisation sont formulées comme suit :
+
+- Combien de patients... ?
+- À quelle fréquence... ?
+- Quelle proportion de patients... ?
+- Quelle est la distribution des valeurs pour le laboratoire... ?
+- Quels sont les niveaux d'HbA1c pour les patients avec... ?
+- Quelles sont les valeurs de laboratoire pour les patients... ?
+- Quelle est la durée médiane d'exposition pour les patients sous... ?
+- Quelles sont les tendances au fil du temps dans... ?
+- Quels sont les autres médicaments que ces patients utilisent ?
+- Quelles sont les thérapies concomitantes ?
+- Avons-nous suffisamment de cas de... ?
+- Serait-il faisable d'étudier X... ?
+- Quelles sont les caractéristiques démographiques de... ?
+- Quels sont les facteurs de risque de... ? (si identifiant un facteur de risque spécifique, peut-être estimation, pas prédiction)
+- Quels sont les prédicteurs de... ?
+
+Et la sortie désirée est :
+
+- Nombre ou pourcentage
+- Moyennes
+- Statistiques descriptives
+- Taux d'incidence
+- Prévalence
+- Cohorte
+- Phénotype basé sur des règles
+- Utilisation des médicaments
+- Histoire naturelle de la maladie
+- Adhérence
+- Profil de comorbidités
+- Voies de traitement
+- Ligne de thérapie
+
+
+## Estimation Au Niveau De La Population
+
+\index{estimation au niveau de la population}
+
+Dans une certaine mesure, les données peuvent soutenir des inférences causales sur les effets des interventions de santé, en répondant à la question
+
+> Quels sont les effets causaux ?
+
+Nous aimerions comprendre les effets causaux pour comprendre les conséquences des actions. Par exemple, si nous décidons de prendre un traitement, comment cela change-t-il ce qui nous arrive à l'avenir ?
+
+Les données peuvent fournir des réponses à des questions telles que :
+
+- Pour les patients nouvellement diagnostiqués avec fibrillation auriculaire, dans la première année après le début de la thérapie, la warfarine provoque-t-elle plus d'hémorragies majeures que le dabigatran ?
+- L'effet causal de la metformine sur la diarrhée varie-t-il en fonction de l'âge ?
+
+Les questions typiques de l'estimation des effets au niveau de la population sont formulées comme suit :
+
+- Quel est l'effet de... ?
+- Que se passe-t-il si je fais l'intervention... ?
+- Quel traitement fonctionne mieux ?
+- Quel est le risque de X sur Y ?
+- Quel est le délai avant l'événement de... ?
+
+Et la sortie désirée est :
+
+- Risque relatif
+- Ratio de hasards
+- Ratio de cotes
+- Effet moyen du traitement
+- Effet causal
+- Association
+- Corrélation
+- Surveillance de la sécurité
+- Efficacité comparative
+
+
+## Prédiction Au Niveau Du Patient
+
+\index{prédiction au niveau du patient}
+
+Basé sur les antécédents de santé du patient collectés dans la base de données, nous pouvons faire des prédictions au niveau du patient sur de futurs événements de santé, répondant à la question
+
+> Que va-t-il m'arriver ?
+
+Les données peuvent fournir des réponses à des questions telles que :
+
+- Pour un patient spécifique nouvellement diagnostiqué avec un trouble dépressif majeur, quelle est la probabilité que le patient tente de se suicider dans la première année suivant le diagnostic ?
+- Pour un patient spécifique nouvellement diagnostiqué avec fibrillation auriculaire, dans la première année après le début de la thérapie à la warfarine, quelle est la probabilité que le patient souffre d'un accident vasculaire cérébral ischémique ?
+
+Les questions typiques de la prédiction au niveau du patient sont formulées comme suit :
+
+- Quelle est la chance que ce patient... ?
+- Qui sont les candidats pour... ?
+
+Et la sortie désirée est :
+
+- Probabilité pour un individu
+- Modèle de prédiction
+- Groupes à haut/bas risque
+- Phénotype probabiliste
+
+L'estimation au niveau de la population et la prédiction au niveau du patient se chevauchent dans une certaine mesure. Par exemple, un cas d'utilisation important pour la prédiction est de prédire un résultat pour un patient spécifique si le médicament A avait été prescrit et également prédire le même résultat si le médicament B avait été prescrit. Supposons qu'en réalité, l'un de ces médicaments est prescrit (disons le médicament A) donc nous voyons si le résultat après le traitement avec A se produit effectivement. Puisque le médicament B n'a pas été prescrit, le résultat après le traitement B, bien que prévisible, est "contrefactuel" car il n'est jamais observé. Chacune de ces tâches de prédiction relève de la prédiction au niveau du patient. Cependant, la différence (ou le ratio) entre les deux résultats est un effet *causal* au niveau de l'unité, et doit être estimé en utilisant des méthodes d'estimation des effets causaux à la place.
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">Les gens ont une tendance naturelle à interpréter à tort les modèles prédictifs comme s'ils étaient des modèles causaux. Mais un modèle prédictif ne peut montrer que la corrélation, jamais la causalité. Par exemple, l'utilisation de médicaments pour diabétiques pourrait être un fort prédicteur de l'infarctus du myocarde (IM) parce que le diabète est un fort facteur de risque pour l'IM. Cependant, cela ne signifie pas que l'arrêt des médicaments pour diabétiques empêchera l'IM !
+</div>\EndKnitrBlock{rmdimportant}
+
+
+## Exemples De Cas D'utilisation Dans L'Hypertension
+
+Vous êtes un chercheur intéressé par l'étude des effets de la monothérapie par inhibiteur de l'ECA vs. la monothérapie par diurétique thiazidique sur les résultats de l'infarctus aigu du myocarde et de l'angioedème en tant que traitement de première ligne de l'hypertension. Vous comprenez que d'après la littérature OHDSI, vous posez une question d'estimation d'effet au niveau de la population mais d'abord, vous devez faire quelques devoirs sur la caractérisation de ce traitement particulier d'intérêt.
+
+### Questions de Caractérisation
+
+L'infarctus aigu du myocarde est une complication cardiovasculaire qui peut survenir chez les patients présentant une hypertension artérielle, de sorte qu'un traitement efficace de l'hypertension devrait réduire le risque. L'angioedème est un effet secondaire bien connu des inhibiteurs de l'ECA, qui est rare mais potentiellement grave. Vous commencez par créer des cohortes (voir Chapitre \@ref(Cohorts)) pour les expositions d'intérêt (nouveaux utilisateurs d'inhibiteurs de l'ECA et nouveaux utilisateurs de diurétiques thiazidiques). Vous effectuez une analyse de caractérisation (voir Chapitre \@ref(Characterization)) pour résumer les caractéristiques de base de ces populations d'exposition, y compris les conditions comorbides, et les médicaments concomitants. Vous effectuez une autre analyse de caractérisation pour estimer l'incidence de certains résultats au sein de ces populations d'exposition. Ici, vous demandez « à quelle fréquence se produisent 1) l'infarctus aigu du myocarde et 2) l'angioedème pendant la période d'exposition aux inhibiteurs de l'ECA et aux diurétiques thiazidiques ? » Ces caractérisations nous permettent d'évaluer la faisabilité de mener une étude d'estimation au niveau de la population, d'évaluer si les deux groupes de traitement sont comparables, et d'identifier les « facteurs de risque » qui pourraient prédire le choix de traitement fait par les patients.
+
+### Question D'estimation Au Niveau De La Population
+
+L'étude d'estimation des effets au niveau de la population (voir Chapitre \@ref(PopulationLevelEstimation)) estime le risque relatif de l'utilisation des inhibiteurs de l'ECA vs. des diurétiques thiazidiques pour les résultats d'IMA et d'angioedème. Ici, vous évaluez également à l'aide des diagnostics d'étude et des témoins négatifs si nous pouvons produire une estimation fiable de l'effet moyen du traitement.
+
+### Question De Prédiction Au Niveau Du Patient
+
+Indépendamment de l'existence d'un effet causal des expositions, vous êtes également intéressé à essayer de déterminer quels patients sont les plus à risque des résultats. Il s'agit d'un problème de prédiction au niveau du patient (voir Chapitre \@ref(PatientLevelPrediction)). Ici, vous développez un modèle de prédiction qui évalue : parmi les patients qui sont nouveaux utilisateurs d'inhibiteurs de l'ECA, quels patients sont les plus à risque de développer un infarctus aigu du myocarde au cours de la première année après le début du traitement. Le modèle nous permet de prédire, pour un patient qui vient de se voir prescrire un inhibiteur de l'ECA pour la première fois, en se basant sur les événements observés dans son dossier médical, quelle est la chance qu'il connaisse un IMA au cours de la prochaine année.
+## Limitations de la Recherche Observationnelle
+
+\index{limitations de la recherche observationnelle}
+
+Il y a de nombreuses questions importantes en matière de soins de santé pour lesquelles les bases de données OHDSI ne peuvent pas fournir de réponses. Celles-ci incluent :
+
+- Les effets causaux des interventions comparées au placebo. Il est parfois possible de considérer l'effet causal d'un traitement par rapport à l'absence de traitement, mais pas au traitement placebo.
+- Tout ce qui est lié aux médicaments en vente libre.
+- De nombreux résultats et autres variables sont rarement enregistrés, voire pas du tout. Ceux-ci incluent la mortalité, les résultats comportementaux, le style de vie et le statut socio-économique.
+- Étant donné que les patients ont tendance à consulter le système de santé uniquement lorsqu'ils sont malades, il peut être difficile de mesurer les bénéfices des traitements.
+
+### Données Erronées
+
+Les données cliniques enregistrées dans les bases de données OHDSI peuvent dévier de la réalité clinique. Par exemple, le dossier d'un patient peut inclure un code pour infarctus du myocarde alors que le patient n'a jamais subi un infarctus du myocarde. De même, une valeur de laboratoire peut être erronée ou un code incorrect pour une procédure peut apparaître dans la base de données. Les chapitres \@ref(DataQuality) et \@ref(ClinicalValidity) discutent de plusieurs de ces problèmes et des bonnes pratiques visant à identifier et corriger autant que possible ces types de problèmes. Néanmoins, des données erronées persistent inévitablement dans une certaine mesure et peuvent nuire à la validité des analyses ultérieures. Une littérature extensive se concentre sur l'ajustement des inférences statistiques pour tenir compte des erreurs dans les données - voir, par exemple, @fuller2009measurement.
+
+### Données Manquantes
+
+\index{données manquantes}
+
+L'absence de données dans les bases de données OHDSI présente des défis subtils. Un événement de santé (par exemple, une ordonnance, une valeur de laboratoire, etc.) qui devrait être enregistré dans une base de données, mais ne l'est pas, est "manquant." La littérature statistique distingue entre différents types de données manquantes comme "manquantes complètement aléatoirement," "manquantes aléatoirement," et "manquantes non aléatoirement" et des méthodes de complexité croissante tentent de traiter ces types. @perkins2017principled fournissent une introduction utile sur ce sujet.
+
+## Résumé
+
+\BeginKnitrBlock{rmdsummary}<div class="rmdsummary">- Dans la recherche observationnelle, nous distinguons trois grandes catégories d'études de cas.
+
+- **Caractérisation** vise à répondre à la question "Que leur est-il arrivé ?"
+
+- **Estimation à l'échelle de la population** tente de répondre à la question "Quels sont les effets causaux ?"
+
+- **Prédiction au niveau du patient** essaye de répondre "Que va-t-il m'arriver ?"
+
+- Les modèles de prédiction ne sont pas des modèles causaux ; Il n'y a aucune raison de croire qu'intervenir sur un fort prédicteur impactera le résultat.
+
+- Il y a des questions qui ne peuvent pas être résolues en utilisant des données de santé observationnelles.
+
+</div>\EndKnitrBlock{rmdsummary}
+
+## Exercices
+
+::: {.exercise #exerciseUseCases1}
+A quelles catégories de cas d'utilisation appartiennent ces questions ?
+
+1. Calculer le taux de saignement gastro-intestinal (GI) chez les patients récemment exposés aux AINS.
+
+2. Calculer la probabilité qu'un patient spécifique présente un saignement GI dans l'année à venir, en fonction de ses caractéristiques initiales.
+
+3. Estimer le risque accru de saignement GI dû au diclofénac comparé au célécoxib.
+
+:::
+
+::: {.exercise #exerciseUseCases2}
+Vous souhaitez estimer le risque accru de saignement GI dû au diclofénac comparé à l'absence d'exposition (placebo). Cela peut-il être fait en utilisant des données de santé observationnelles ?
+
+:::
+
+Les réponses suggérées se trouvent dans l'Appendice \@ref(UseCasesanswers).
