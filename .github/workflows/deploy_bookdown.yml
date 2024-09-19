@@ -42,8 +42,10 @@ jobs:
          # Destination path
          path: _book # optional
      - name: Deploy to GitHub Pages
-       uses: Cecilapp/GitHub-Pages-deploy@master
+       uses: Cecilapp/GitHub-Pages-deploy@v3
        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          BUILD_DIR: _book/
+         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+       with:
+         email: ${{ secrets.EMAIL }}
+         build_dir: _book
+         branch: gh-pages
