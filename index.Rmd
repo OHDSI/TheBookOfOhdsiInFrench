@@ -18,12 +18,12 @@ bibliography:
 description: Un livre sur les sciences et l'informatique des données de santé observationnelles (OHDSI). Il décrit la communauté OHDSI, les standards ouverts et les logiciels open-source.
 documentclass: book
 favicon: images/favicon.ico
-github-repo: OHDSI/TheBookOfOhdsi
+github-repo: OHDSI/TheBookOfOhdsiInFrench
 link-citations: yes
 cover-image: images/Cover/Cover.png
 site: bookdown::bookdown_site
 biblio-style: apalike
-url: https://ohdsi.github.io/TheBookOfOhdsi/
+url: https://ohdsi.github.io/TheBookOfOhdsiInFrench/
 ---
 
 ```{r setup, include=FALSE}
