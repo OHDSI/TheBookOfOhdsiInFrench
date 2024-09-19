@@ -120,7 +120,9 @@ for (rmdFile in rmdFiles) {
   add_empty_line_before_final_backticks(rmdFile)
 }
 
-# Fix |see link for back of the book index ----------------------------------------------
+# Fix |see link for back of the book index ---------------------------------------------------------
+# Index entries tagged as 'see...' where nicely translated to 'voir...', but the 'see' is a special
+# LaTeX control sequence.ß
 fixSeeLink <- function(fileName) {
   lines <- paste(readLines(fileName), collapse = "\n")
   lines <- gsub("\\|voir", "|see", lines)
